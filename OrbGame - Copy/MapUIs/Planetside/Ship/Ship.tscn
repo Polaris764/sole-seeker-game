@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://MapUIs/Planetside/Ship/Player.gd" type="Script" id=1]
+[ext_resource path="res://MapUIs/Planetside/Ship/SpaceshipSimple.png" type="Texture" id=2]
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.4, 0.4 )
+z_index = 1
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+polygon = PoolVector2Array( 52, -6, 52, -8, 38, -14, 34, -14, 24, -20, 8, -28, -6, -30, -10, -32, -18, -32, -52, -22, -52, -20, -34, -18, -26, -12, -36, -10, -36, -2, -26, -2, -26, 0, -34, 4, -46, 6, -52, 8, -52, 10, -14, 20, -8, 20, 0, 18, 36, 2, 52, -4 )

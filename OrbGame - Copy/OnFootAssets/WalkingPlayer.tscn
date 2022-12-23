@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://OnFootAssets/Assets/player.png" type="Texture" id=1]
+[ext_resource path="res://OnFootAssets/WalkingPlayer.gd" type="Script" id=2]
+
+[node name="Player" type="KinematicBody2D"]
+scale = Vector2( 0.6, 0.6 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( 0, -32 )
+
+[node name="WalkingHitbox" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -31.6667 )
+polygon = PoolVector2Array( 3.33333, 20, 3.33333, 31.6667, 11.6667, 31.6667, 11.6667, 20 )

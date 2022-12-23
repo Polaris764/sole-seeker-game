@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://OnFootAssets/ShipLander.gd" type="Script" id=2]
+[ext_resource path="res://OnFootAssets/Assets/Spaceship.png" type="Texture" id=3]
+[ext_resource path="res://OnFootAssets/Assets/SpaceshipOnLand.png" type="Texture" id=4]
+[ext_resource path="res://OnFootAssets/InteractionButton.tscn" type="PackedScene" id=5]
+
+[node name="VisitingPlanet" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 8, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Spaceship" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Spaceship"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spaceship/Area2D"]
+polygon = PoolVector2Array( -70, -21.5, -15, -40, 0.5, -39, 76.5, -6, 76.5, 8, 2.5, 38, -17.5, 40.5, -71, 22, -71.5, 5.5 )
+
+[node name="InteractionButton" parent="." instance=ExtResource( 5 )]
+
+[connection signal="body_entered" from="Spaceship/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Spaceship/Area2D" to="." method="_on_Area2D_body_exited"]
