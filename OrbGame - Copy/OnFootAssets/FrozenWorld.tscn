@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://OnFootAssets/Assets/FrozenTileMap.png" type="Texture" id=1]
-[ext_resource path="res://FrozenWorld.gd" type="Script" id=2]
+[ext_resource path="res://OnFootAssets/FrozenWorld.gd" type="Script" id=2]
 [ext_resource path="res://OnFootAssets/Assets/FrozenWater.png" type="Texture" id=3]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://OnFootAssets/Assets/SnowTileMap.png" type="Texture" id=5]
