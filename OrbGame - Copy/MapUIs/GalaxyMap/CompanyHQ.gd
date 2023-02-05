@@ -1,4 +1,5 @@
 extends Node2D
+export var CompanyStation = true
 
 func growSprite(spriteName):
 	spriteName.set_scale(Vector2(2,2))

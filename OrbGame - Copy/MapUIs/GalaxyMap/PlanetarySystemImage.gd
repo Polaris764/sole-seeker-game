@@ -1,4 +1,5 @@
 extends Node2D
+export var CompanyStation = false
 
 func _on_TextureButton_pressed():
 	#GalaxySave.setLastStarClicked(self.global_position.x)

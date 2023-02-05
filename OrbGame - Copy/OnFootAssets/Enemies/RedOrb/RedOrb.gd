@@ -1,18 +1,148 @@
 extends KinematicBody2D
 
+export var ACCELERATION = 300
+
+export var MAX_SPEED = 50
+
+var current_max_speed : int
+
+export var FRICTION = 200
+
+export var WANDER_TARGET_RANGE = 4
+
+enum{
+	IDLE,
+	WANDER,
+	CHASE,
+	TRAPPED,
+	DEAD
+}
+
+var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 
+var state = IDLE
+
 onready var stats = $Stats
+onready var playerDetectionZone = $PlayerDetectionZone
+onready var hurtbox = $Hurtbox
+onready var soft_collision = $SoftCollision
+onready var wander_controller = $WanderController
+
+func _ready():
+	$Sprite.scale = Vector2(1,1)
+	current_max_speed = MAX_SPEED
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO,200*delta)
 	knockback = move_and_slide(knockback)
+	
+	match state:
+		IDLE:
+			velocity = velocity.move_toward(Vector2.ZERO, 200*delta)
+			seek_player()
+			if wander_controller.get_time_left() == 0:
+				state = pick_random_state([IDLE,WANDER])
+				wander_controller.start_wander_timer(rand_range(1,3))
+		WANDER:
+			seek_player()
+			if wander_controller.get_time_left() == 0:
+				state = pick_random_state([IDLE,WANDER])
+				wander_controller.start_wander_timer(rand_range(1,3))
+			var direction = global_position.direction_to(wander_controller.target_position)
+			velocity = velocity.move_toward(direction*current_max_speed,ACCELERATION*delta)
+			
+			if global_position.distance_to(wander_controller.target_position) <= 4:
+				state = pick_random_state([IDLE,WANDER])
+				wander_controller.start_wander_timer(rand_range(1,3))
+		CHASE:
+			var player = playerDetectionZone.player
+			if player != null:
+				var direction = global_position.direction_to(player.get_node("Hurtbox/CollisionShape2D").global_position)
+				velocity = velocity.move_toward(direction*current_max_speed,ACCELERATION*delta)
+			else:
+				state = IDLE
+		TRAPPED:
+			current_max_speed = 1
+			seek_player()
+			if wander_controller.get_time_left() == 0:
+				state = pick_random_state([IDLE,WANDER])
+				wander_controller.start_wander_timer(rand_range(1,3))
+			var direction = global_position.direction_to(wander_controller.target_position)
+			velocity = velocity.move_toward(direction*current_max_speed,ACCELERATION*delta)
+			
+			if global_position.distance_to(wander_controller.target_position) <= 4:
+				state = pick_random_state([IDLE,WANDER])
+				wander_controller.start_wander_timer(rand_range(1,3))
+		DEAD:
+			velocity = Vector2.ZERO
+			MAX_SPEED = 0
+	if soft_collision.is_colliding():
+		velocity += soft_collision.get_push_vector()*delta*400
+	velocity = move_and_slide(velocity)
 
-func _on_Hurtbox_area_entered(area):
-	stats.health -= area.damage
-	print(stats.health)
-	knockback = area.knockback_vector * 30
+var seen_player = false
+func seek_player():
+	if playerDetectionZone.can_see_player():
+		state = CHASE
+		if not seen_player:
+			seen_player = true
+			$AnimationPlayer.play("Agro")
+			$AnimationPlayer.queue("Aggressive")
 
+func pick_random_state(state_list):
+	state_list.shuffle()
+	return state_list.pop_front()
+
+var harvest_area = null
+func _on_Hurtbox_area_entered(area): # needle entered hitbox
+	if stats.health > 0: # if still alive
+		stats.health -= area.damage
+		print(stats.health)
+		knockback = area.knockback_vector * 30
+		hurtbox.create_hit_effect()
+	elif area.harvesting_tool == true: # harvest
+		area.harvesting = true
+		area.harvest_wait_time = stats.harvest_duration
+		harvest_area = area
+		$Hurtbox.queue_free()
+		$AnimationPlayer.play("Harvest")
 
 func _on_Stats_no_health():
-	queue_free()
+	death_animation()
+
+func death_animation():
+	state = DEAD
+	$Hitbox.queue_free()
+	$AnimationPlayer.play_backwards("Agro")
+	var tween = $Sprite/DeathTween
+	tween.interpolate_property($Sprite, "offset",
+			$Sprite.offset, Vector2(0,0), 2,
+			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
+	tween.interpolate_property($ShadowSprite, "scale",
+			$Sprite.scale, Vector2(0,0), 2,
+			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
+	tween.interpolate_property($Hurtbox/CollisionShape2D, "position",
+			$Hurtbox/CollisionShape2D.position, Vector2(0,0), 2,
+			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
+
+func completed_harvest():
+	harvest_area.harvesting = false
+	GalaxySave.game_data["backpackBlood"]["red"] += 1
+	print(GalaxySave.game_data["backpackBlood"])
+	GalaxySave.save_data()
+
+# Trapped Functions #
+
+func _on_TrappedTimer_timeout():
+	current_max_speed = MAX_SPEED
+	state = WANDER
+
+func entity_trapped(duration):
+	state = TRAPPED
+	velocity = Vector2.ZERO
+	$TrappedTimer.wait_time = duration
+	$TrappedTimer.start()

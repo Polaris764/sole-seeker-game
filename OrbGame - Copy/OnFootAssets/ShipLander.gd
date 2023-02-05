@@ -15,7 +15,7 @@ func _on_Area2D_body_exited(body):
 	if body.name == "Player":
 		$InteractionButton.areaLeft(self)
 
-export var scene : NodePath = "res://OnFootAssets/InsideShip.tscn"
+export var scene : NodePath = "res://OnFootAssets/InsideShip/InsideShip.tscn"
 func custom_interaction():
 	var relevantButtons = []
 	for i in InputMap.get_action_list('Interact'):
@@ -41,7 +41,7 @@ func create_planet():
 	move_child(planet,0)
 	#print("landing ship at " + str(ship_position))
 	$Spaceship.global_position = ship_position
-	$Shadow.global_position = ship_position + Vector2(8,16)
+	$Shadow.global_position = ship_position
 	var path = planet.name + "/Player" if planet.has_node("Player") else planet.name + "/YSort/Player"
 	get_node(path).global_position = ship_position + Vector2(83,37)
 	if chosen_planet_type == WetWorld:

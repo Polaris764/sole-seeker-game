@@ -15,11 +15,24 @@ func getLastStarClickedName():
 	return lastStarClickedName
 	
 # holding planet coordinates for galaxy map
-var lastPlanetClicked
+var lastPlanetClicked = 1
 func setLastPlanetClicked(starPos,planetPos):
 	lastPlanetClicked = pow(starPos*planetPos,2)*cos(pow(starPos*planetPos,3))
 func getLastPlanetClicked():
 	return lastPlanetClicked
+
+# getting building data of planet
+var building_data = {} # all building data
+func set_building_data(data_table):
+	building_data[lastPlanetClicked] = data_table
+	game_data["buildingData"] = building_data
+	print(building_data[lastPlanetClicked].size())
+func get_planet_building_data():
+	building_data = game_data["buildingData"]
+	if not game_data["buildingData"].has(lastPlanetClicked):
+		building_data[lastPlanetClicked] = {}
+	print(building_data)
+	return building_data[lastPlanetClicked]
 
 # saving data
 func _ready():
@@ -37,7 +50,9 @@ func load_data():
 		randomize()
 		game_data = {
 			"galaxySeed": randi(),
-			"playerLevel": 1
+			"backpackBlood": {"red":0,"blue":0},
+			"storedBlood": {"red":0,"blue":0},
+			"buildingData": {}
 		}
 		save_data()
 	file.open(SAVE_FILE,File.READ)

@@ -6,7 +6,7 @@ func _on_Area2D_body_entered(body):
 
 func _on_Area2D_body_exited(body):
 	if body.name == "Player":
-		get_node("../InteractionButton").areaLeft(self)
+		get_node("../Player/InteractionButton").areaLeft(self)
 	
 #door destination
 export var scene : NodePath = "res://OnFootAssets/VisitingPlanet.tscn"
@@ -15,7 +15,7 @@ func custom_interaction():
 	for i in InputMap.get_action_list('Interact'):
 		if i is InputEventKey:
 			relevantButtons.append(i.as_text())
-	get_node("../InteractionButton").updateButton(relevantButtons,"Exit Ship",self,"Interact")
+	get_node("../Player/InteractionButton").updateButton(relevantButtons,"Exit Ship",self,"Interact")
 
 func interacted():
 	get_tree().change_scene(scene)

@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://OnFootAssets/Assets/floor2.png" type="Texture" id=1]
+[ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://OnFootAssets/CompanyHQ/HealStation.gd" type="Script" id=3]
+[ext_resource path="res://OnFootAssets/Interactable.tscn" type="PackedScene" id=4]
+[ext_resource path="res://OnFootAssets/CompanyHQ/HealStation.png" type="Texture" id=5]
+
+[sub_resource type="TileSet" id=1]
+0/name = "floor2.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 17, 18 )
+
+[node name="CompanyHQInside" type="Node2D"]
+
+[node name="Floor" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -262144, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+isInRoom = true
+
+[node name="AnimationTree" parent="Player" index="3"]
+parameters/playback = SubResource( 2 )
+
+[node name="HealStation" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Interactable" parent="HealStation" instance=ExtResource( 4 )]
+position = Vector2( 47, -7 )
+
+[node name="CollisionShape2D" parent="HealStation/Interactable/Area2D" index="0"]
+shape = SubResource( 3 )
+
+[node name="Sprite" parent="HealStation/Interactable" index="1"]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 5 )
+
+[connection signal="interacted_with" from="HealStation/Interactable" to="HealStation" method="_on_Interactable_interacted_with"]
+
+[editable path="Player"]
+[editable path="Player/HitboxPivot/WeaponHitbox"]
+[editable path="Player/Hurtbox"]
+[editable path="HealStation/Interactable"]

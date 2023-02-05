@@ -1,10 +1,14 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=145 format=2]
 
 [ext_resource path="res://OnFootAssets/Player/PlayerSpritesheet.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.gd" type="Script" id=2]
 [ext_resource path="res://OnFootAssets/Player/AttackSpritesheet.png" type="Texture" id=3]
 [ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://OnFootAssets/Player/WeaponHitbox.gd" type="Script" id=5]
+[ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hurtbox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://OnFootAssets/Player/PlayerUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://OnFootAssets/InteractionButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://OnFootAssets/Player/Netgun/NetgunSpritesheet.png" type="Texture" id=9]
 
 [sub_resource type="Animation" id=4]
 resource_name = "IdleDown"
@@ -46,6 +50,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ Vector2( 20, -15 ), Vector2( 20, -16 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
 
 [sub_resource type="Animation" id=41]
 resource_name = "IdleDownA"
@@ -62,6 +78,88 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 84, 85, 86, 87 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 20, -15 ), Vector2( 20, -16 ) ]
+}
+
+[sub_resource type="Animation" id=128]
+resource_name = "IdleDownG"
+length = 2.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 132, 133, 134, 135 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 20, -15 ), Vector2( 20, -16 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=79]
+resource_name = "IdleDownN"
+length = 2.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 128, 129, 130, 131 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("HitboxPivot:position")
@@ -104,6 +202,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
 
 [sub_resource type="Animation" id=42]
 resource_name = "IdleLeftA"
@@ -120,6 +230,76 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 76, 77, 78, 79 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 20, -15 ), Vector2( 20, -16 ) ]
+}
+
+[sub_resource type="Animation" id=129]
+resource_name = "IdleLeftG"
+length = 2.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 172, 173, 174, 175 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=80]
+resource_name = "IdleLeftN"
+length = 2.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 120, 121, 122, 123 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("HitboxPivot:position")
@@ -162,6 +342,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
 
 [sub_resource type="Animation" id=43]
 resource_name = "IdleRightA"
@@ -178,6 +370,88 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 72, 73, 74, 75 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot/AttackArm:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( -9, 15 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 20, -15 ), Vector2( 20, -16 ) ]
+}
+
+[sub_resource type="Animation" id=130]
+resource_name = "IdleRightG"
+length = 2.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 168, 169, 170, 171 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=81]
+resource_name = "IdleRightN"
+length = 2.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 116, 117, 118, 119 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("HitboxPivot/AttackArm:position")
@@ -232,6 +506,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
 
 [sub_resource type="Animation" id=44]
 resource_name = "IdleUpA"
@@ -248,6 +534,76 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 80, 81, 82, 83 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 20, -15 ), Vector2( 20, -16 ) ]
+}
+
+[sub_resource type="Animation" id=131]
+resource_name = "IdleUpG"
+length = 2.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 164, 165, 166, 167 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=82]
+resource_name = "IdleUpN"
+length = 2.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 124, 125, 126, 127 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("HitboxPivot:position")
@@ -312,6 +668,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 20, -15 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "RunDown"
@@ -341,6 +709,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
 
 [sub_resource type="Animation" id=32]
 resource_name = "RunDownA"
@@ -357,6 +737,76 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 66, 67, 68, 69, 70, 71 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 20, -15 ), Vector2( 20, -16 ), Vector2( 20, -15 ), Vector2( 20, -16 ) ]
+}
+
+[sub_resource type="Animation" id=132]
+resource_name = "RunDownG"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 159, 160, 161, 162, 163, 158 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=83]
+resource_name = "RunDownN"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 110, 111, 112, 113, 114, 115 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("HitboxPivot:position")
@@ -400,6 +850,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
 
 [sub_resource type="Animation" id=33]
 resource_name = "RunLeftA"
@@ -417,6 +879,78 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 52, 53, 54, 55, 56, 57, 58, 59 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 20, -14 ), Vector2( 20, -15 ), Vector2( 20, -16 ), Vector2( 20, -15 ), Vector2( 20, -14 ), Vector2( 20, -15 ), Vector2( 20, -16 ), Vector2( 20, -15 ) ]
+}
+
+[sub_resource type="Animation" id=133]
+resource_name = "RunLeftG"
+length = 0.6
+loop = true
+step = 0.075
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 144, 145, 146, 147, 148, 149, 150, 151 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=84]
+resource_name = "RunLeftN"
+length = 0.6
+loop = true
+step = 0.075
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 96, 97, 98, 99, 100, 101, 102, 103 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("HitboxPivot:position")
@@ -460,6 +994,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
 
 [sub_resource type="Animation" id=34]
 resource_name = "RunRightA"
@@ -477,6 +1023,78 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 44, 45, 46, 47, 48, 49, 50, 51 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 20, -14 ), Vector2( 20, -15 ), Vector2( 20, -16 ), Vector2( 20, -15 ), Vector2( 20, -14 ), Vector2( 20, -15 ), Vector2( 20, -16 ), Vector2( 20, -15 ) ]
+}
+
+[sub_resource type="Animation" id=134]
+resource_name = "RunRightG"
+length = 0.6
+loop = true
+step = 0.075
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 136, 137, 138, 139, 140, 141, 142, 143 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=85]
+resource_name = "RunRightN"
+length = 0.6
+loop = true
+step = 0.075
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 88, 89, 90, 91, 92, 93, 94, 95 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("HitboxPivot:position")
@@ -519,6 +1137,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
 
 [sub_resource type="Animation" id=35]
 resource_name = "RunUpA"
@@ -548,6 +1178,126 @@ tracks/1/keys = {
 "update": 1,
 "values": [ Vector2( 20, -15 ), Vector2( 20, -16 ), Vector2( 20, -15 ), Vector2( 20, -16 ) ]
 }
+
+[sub_resource type="Animation" id=135]
+resource_name = "RunUpG"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 152, 153, 154, 155, 156, 157 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=86]
+resource_name = "RunUpN"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 104, 105, 106, 107, 108, 109 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitboxPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 20, -15 ), Vector2( 20, -16 ), Vector2( 20, -15 ), Vector2( 20, -16 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=120]
+animation = "IdleLeftN"
+
+[sub_resource type="AnimationNodeAnimation" id=121]
+animation = "IdleRightN"
+
+[sub_resource type="AnimationNodeAnimation" id=122]
+animation = "IdleDownN"
+
+[sub_resource type="AnimationNodeAnimation" id=123]
+animation = "IdleUpN"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=100]
+blend_point_0/node = SubResource( 120 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 121 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 122 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 123 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=124]
+animation = "RunLeftN"
+
+[sub_resource type="AnimationNodeAnimation" id=125]
+animation = "RunDownN"
+
+[sub_resource type="AnimationNodeAnimation" id=126]
+animation = "RunRightN"
+
+[sub_resource type="AnimationNodeAnimation" id=127]
+animation = "RunUpN"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=105]
+blend_point_0/node = SubResource( 124 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 125 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 126 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 127 )
+blend_point_3/pos = Vector2( 0, -1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=45]
 animation = "IdleLeftA"
@@ -624,6 +1374,56 @@ min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=136]
+animation = "IdleLeftG"
+
+[sub_resource type="AnimationNodeAnimation" id=137]
+animation = "IdleRightG"
+
+[sub_resource type="AnimationNodeAnimation" id=138]
+animation = "IdleDownG"
+
+[sub_resource type="AnimationNodeAnimation" id=139]
+animation = "IdleUpG"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=140]
+blend_point_0/node = SubResource( 136 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 137 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 138 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 139 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=141]
+animation = "RunLeftG"
+
+[sub_resource type="AnimationNodeAnimation" id=142]
+animation = "RunRightG"
+
+[sub_resource type="AnimationNodeAnimation" id=143]
+animation = "RunDownG"
+
+[sub_resource type="AnimationNodeAnimation" id=144]
+animation = "RunUpG"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=145]
+blend_point_0/node = SubResource( 141 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 142 )
+blend_point_1/pos = Vector2( 1, 0.1 )
+blend_point_2/node = SubResource( 143 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 144 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id=8]
 animation = "RunLeft"
 
@@ -673,20 +1473,108 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=73]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=106]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=107]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=108]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=109]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=110]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=111]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=112]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=113]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=114]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=115]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=116]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=117]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=118]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=119]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=146]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=147]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=148]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=149]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=150]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=151]
+
 [sub_resource type="AnimationNodeStateMachine" id=15]
+states/ArmlessIdle/node = SubResource( 100 )
+states/ArmlessIdle/position = Vector2( 24, -115 )
+states/ArmlessRun/node = SubResource( 105 )
+states/ArmlessRun/position = Vector2( 586, -115 )
 states/AttackIdle/node = SubResource( 49 )
-states/AttackIdle/position = Vector2( 159, 221 )
+states/AttackIdle/position = Vector2( 24, 221 )
 states/AttackRun/node = SubResource( 40 )
-states/AttackRun/position = Vector2( 425, 221 )
+states/AttackRun/position = Vector2( 586, 221 )
 states/Idle/node = SubResource( 24 )
 states/Idle/position = Vector2( 159, 70 )
+states/NetgunIdle/node = SubResource( 140 )
+states/NetgunIdle/position = Vector2( 24, -234 )
+states/NetgunRun/node = SubResource( 145 )
+states/NetgunRun/position = Vector2( 586, -234 )
 states/Run/node = SubResource( 12 )
 states/Run/position = Vector2( 425, 70 )
-transitions = [ "Idle", "Run", SubResource( 25 ), "Run", "Idle", SubResource( 26 ), "Idle", "AttackIdle", SubResource( 51 ), "AttackIdle", "Idle", SubResource( 52 ), "AttackIdle", "AttackRun", SubResource( 55 ), "AttackRun", "AttackIdle", SubResource( 56 ), "AttackRun", "Run", SubResource( 57 ), "Run", "AttackRun", SubResource( 58 ), "Idle", "AttackRun", SubResource( 70 ), "AttackRun", "Idle", SubResource( 71 ), "Run", "AttackIdle", SubResource( 72 ), "AttackIdle", "Run", SubResource( 73 ) ]
+transitions = [ "Idle", "Run", SubResource( 25 ), "Run", "Idle", SubResource( 26 ), "Idle", "AttackIdle", SubResource( 51 ), "AttackIdle", "Idle", SubResource( 52 ), "AttackIdle", "AttackRun", SubResource( 55 ), "AttackRun", "AttackIdle", SubResource( 56 ), "AttackRun", "Run", SubResource( 57 ), "Run", "AttackRun", SubResource( 58 ), "Idle", "AttackRun", SubResource( 70 ), "AttackRun", "Idle", SubResource( 71 ), "Run", "AttackIdle", SubResource( 72 ), "AttackIdle", "Run", SubResource( 73 ), "Idle", "ArmlessIdle", SubResource( 106 ), "ArmlessIdle", "Idle", SubResource( 107 ), "Idle", "ArmlessRun", SubResource( 108 ), "ArmlessRun", "Idle", SubResource( 109 ), "Run", "ArmlessRun", SubResource( 110 ), "ArmlessRun", "Run", SubResource( 111 ), "Run", "ArmlessIdle", SubResource( 112 ), "ArmlessIdle", "Run", SubResource( 113 ), "ArmlessRun", "ArmlessIdle", SubResource( 114 ), "ArmlessIdle", "ArmlessRun", SubResource( 115 ), "ArmlessIdle", "AttackIdle", SubResource( 116 ), "AttackRun", "ArmlessRun", SubResource( 117 ), "ArmlessRun", "AttackRun", SubResource( 118 ), "AttackIdle", "ArmlessIdle", SubResource( 119 ), "NetgunIdle", "NetgunRun", SubResource( 146 ), "NetgunRun", "NetgunIdle", SubResource( 147 ), "NetgunIdle", "ArmlessIdle", SubResource( 148 ), "ArmlessIdle", "NetgunIdle", SubResource( 149 ), "NetgunRun", "ArmlessRun", SubResource( 150 ), "ArmlessRun", "NetgunRun", SubResource( 151 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -253, 51 )
+graph_offset = Vector2( -349, -275 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=16]
+
+[sub_resource type="AnimationNodeAnimation" id=63]
+animation = "AttackLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "AttackRight"
+
+[sub_resource type="AnimationNodeAnimation" id=65]
+animation = "AttackDown"
+
+[sub_resource type="AnimationNodeAnimation" id=66]
+animation = "AttackUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=67]
+blend_point_0/node = SubResource( 63 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 64 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 65 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 66 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 2
+
+[sub_resource type="AnimationNodeTimeSeek" id=68]
+
+[sub_resource type="AnimationNodeTimeScale" id=75]
+
+[sub_resource type="AnimationNodeBlendTree" id=69]
+graph_offset = Vector2( -350.494, 13.0932 )
+nodes/Attack/node = SubResource( 67 )
+nodes/Attack/position = Vector2( -200, 160 )
+nodes/Seek/node = SubResource( 68 )
+nodes/Seek/position = Vector2( 80, 160 )
+nodes/TimeScale/node = SubResource( 75 )
+nodes/TimeScale/position = Vector2( 280, 160 )
+nodes/output/position = Vector2( 520, 180 )
+node_connections = [ "Seek", 0, "Attack", "TimeScale", 0, "Seek", "output", 0, "TimeScale" ]
 
 [sub_resource type="Animation" id=27]
 resource_name = "AttackDown"
@@ -764,31 +1652,31 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false, true ]
 }
-tracks/6/type = "method"
-tracks/6/path = NodePath(".")
+tracks/6/type = "value"
+tracks/6/path = NodePath("HitboxPivot/AttackArm:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0.7 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "attack_animation_finished"
-} ]
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, true ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ true, true ]
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "harvest_end"
+} ]
 }
 
 [sub_resource type="Animation" id=28]
@@ -867,31 +1755,31 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false, true ]
 }
-tracks/6/type = "method"
-tracks/6/path = NodePath(".")
+tracks/6/type = "value"
+tracks/6/path = NodePath("HitboxPivot/AttackArm:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0.7 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "attack_animation_finished"
-} ]
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, true ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ true, true ]
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "harvest_end"
+} ]
 }
 
 [sub_resource type="Animation" id=29]
@@ -970,31 +1858,31 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false, true ]
 }
-tracks/6/type = "method"
-tracks/6/path = NodePath(".")
+tracks/6/type = "value"
+tracks/6/path = NodePath("HitboxPivot/AttackArm:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0.7 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "attack_animation_finished"
-} ]
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, true ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ true, true ]
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "harvest_end"
+} ]
 }
 
 [sub_resource type="Animation" id=30]
@@ -1073,31 +1961,31 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false, true ]
 }
-tracks/6/type = "method"
-tracks/6/path = NodePath(".")
+tracks/6/type = "value"
+tracks/6/path = NodePath("HitboxPivot/AttackArm:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0.7 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "attack_animation_finished"
-} ]
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, true ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("HitboxPivot/AttackArm:visible")
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ true, true ]
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "harvest_end"
+} ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -1199,44 +2087,507 @@ tracks/7/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=63]
-animation = "AttackLeft"
+[sub_resource type="RectangleShape2D" id=50]
+extents = Vector2( 0.7, 9.2 )
 
-[sub_resource type="AnimationNodeAnimation" id=64]
-animation = "AttackRight"
+[sub_resource type="CapsuleShape2D" id=152]
+radius = 55.0
+height = 65.0
 
-[sub_resource type="AnimationNodeAnimation" id=65]
-animation = "AttackDown"
+[sub_resource type="CapsuleShape2D" id=74]
+radius = 6.0
+height = 35.0
 
-[sub_resource type="AnimationNodeAnimation" id=66]
-animation = "AttackUp"
+[sub_resource type="AnimationNodeAnimation" id=92]
+animation = "NetgunLeft"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=67]
-blend_point_0/node = SubResource( 63 )
+[sub_resource type="AnimationNodeAnimation" id=93]
+animation = "NetgunRight"
+
+[sub_resource type="AnimationNodeAnimation" id=94]
+animation = "NetgunDown"
+
+[sub_resource type="AnimationNodeAnimation" id=95]
+animation = "NetgunUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=76]
+blend_point_0/node = SubResource( 92 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 64 )
+blend_point_1/node = SubResource( 93 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 65 )
+blend_point_2/node = SubResource( 94 )
 blend_point_2/pos = Vector2( 0, 1.1 )
-blend_point_3/node = SubResource( 66 )
+blend_point_3/node = SubResource( 95 )
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
-blend_mode = 2
+blend_mode = 1
 
-[sub_resource type="AnimationNodeTimeSeek" id=68]
+[sub_resource type="AnimationNodeTimeSeek" id=77]
 
-[sub_resource type="AnimationNodeBlendTree" id=69]
-graph_offset = Vector2( -672.424, 47.2224 )
-nodes/Attack/node = SubResource( 67 )
-nodes/Attack/position = Vector2( -200, 160 )
-nodes/Seek/node = SubResource( 68 )
-nodes/Seek/position = Vector2( 80, 160 )
-nodes/output/position = Vector2( 300, 160 )
-node_connections = [ "output", 0, "Seek", "Seek", 0, "Attack" ]
+[sub_resource type="AnimationNodeBlendTree" id=78]
+graph_offset = Vector2( -466.622, 37.7788 )
+nodes/NetgunAttack/node = SubResource( 76 )
+nodes/NetgunAttack/position = Vector2( -300, 120 )
+nodes/Seek/node = SubResource( 77 )
+nodes/Seek/position = Vector2( 20, 140 )
+nodes/output/position = Vector2( 340, 160 )
+node_connections = [ "Seek", 0, "NetgunAttack", "output", 0, "Seek" ]
 
-[sub_resource type="RectangleShape2D" id=50]
-extents = Vector2( 0.7, 9.2 )
+[sub_resource type="Animation" id=87]
+resource_name = "NetgunDown"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../HitboxPivot/Netgun:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ), Vector2( 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../HitboxPivot/Netgun:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2, 8 ), Vector2( -2, 8 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2.5, 62.5 ), Vector2( -2.5, 62.5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../HitboxPivot/NetProjectileOrigin:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -10, 12.5 ), Vector2( -10, 12.5 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../HitboxPivot/NetProjectileOrigin:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0 ]
+}
+
+[sub_resource type="Animation" id=88]
+resource_name = "NetgunLeft"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../HitboxPivot/Netgun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, 7 ), Vector2( -18, 7 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../HitboxPivot/Netgun:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0 ), Vector2( 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -67.5, 7.5 ), Vector2( -67.5, 7.5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../HitboxPivot/NetProjectileOrigin:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -30, 2.5 ), Vector2( -30, 2.5 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../HitboxPivot/NetProjectileOrigin:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0 ]
+}
+
+[sub_resource type="Animation" id=89]
+resource_name = "NetgunRight"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../HitboxPivot/Netgun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5, 7 ), Vector2( 5, 7 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../HitboxPivot/Netgun:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 55, 7.5 ), Vector2( 55, 7.5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../HitboxPivot/NetProjectileOrigin:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 17.5, 2.5 ), Vector2( 17.5, 2.5 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../HitboxPivot/NetProjectileOrigin:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=90]
+resource_name = "NetgunUp"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../HitboxPivot/Netgun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../HitboxPivot/Netgun:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -11, -1 ), Vector2( -11, -1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../HitboxPivot/Netgun:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -7.5, -50 ), Vector2( -7.5, -50 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../HitboxPivot/NetProjectileOrigin:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2.5, -10 ), Vector2( -2.5, -10 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../HitboxPivot/NetProjectileOrigin:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -90.0, -90.0 ]
+}
+
+[sub_resource type="Animation" id=91]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../HitboxPivot/Netgun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 5, 7 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../HitboxPivot/Netgun:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../HitboxPivot/Netgun:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../HitboxPivot/Netgun:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../HitboxPivot/NetgunHitbox/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -7.5, -40 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../HitboxPivot/NetProjectileOrigin:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, 12.5 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("../HitboxPivot/NetProjectileOrigin:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 0.4, 0.4 )
@@ -1247,68 +2598,96 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 centered = false
 offset = Vector2( 0, -32 )
-hframes = 88
+hframes = 132
+vframes = 2
 frame = 4
 
 [node name="WalkingHitbox" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2( 1.66667, -31.6667 )
 polygon = PoolVector2Array( 5.83333, 26.6667, 5.83333, 49.1667, 18.3333, 49.1667, 18.3333, 26.6667 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/IdleDown = SubResource( 4 )
 anims/IdleDownA = SubResource( 41 )
+anims/IdleDownG = SubResource( 128 )
+anims/IdleDownN = SubResource( 79 )
 anims/IdleLeft = SubResource( 18 )
 anims/IdleLeftA = SubResource( 42 )
+anims/IdleLeftG = SubResource( 129 )
+anims/IdleLeftN = SubResource( 80 )
 anims/IdleRight = SubResource( 19 )
 anims/IdleRightA = SubResource( 43 )
+anims/IdleRightG = SubResource( 130 )
+anims/IdleRightN = SubResource( 81 )
 anims/IdleUp = SubResource( 17 )
 anims/IdleUpA = SubResource( 44 )
+anims/IdleUpG = SubResource( 131 )
+anims/IdleUpN = SubResource( 82 )
 anims/RESET = SubResource( 2 )
 anims/RunDown = SubResource( 5 )
 anims/RunDownA = SubResource( 32 )
+anims/RunDownG = SubResource( 132 )
+anims/RunDownN = SubResource( 83 )
 anims/RunLeft = SubResource( 6 )
 anims/RunLeftA = SubResource( 33 )
+anims/RunLeftG = SubResource( 133 )
+anims/RunLeftN = SubResource( 84 )
 anims/RunRight = SubResource( 1 )
 anims/RunRightA = SubResource( 34 )
+anims/RunRightG = SubResource( 134 )
+anims/RunRightN = SubResource( 85 )
 anims/RunUp = SubResource( 3 )
 anims/RunUpA = SubResource( 35 )
+anims/RunUpG = SubResource( 135 )
+anims/RunUpN = SubResource( 86 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 15 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 16 )
+parameters/ArmlessIdle/blend_position = Vector2( 0, 0 )
+parameters/ArmlessRun/blend_position = Vector2( 0, 0 )
 parameters/AttackIdle/blend_position = Vector2( 0, 0 )
 parameters/AttackRun/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/NetgunIdle/blend_position = Vector2( 0, 0 )
+parameters/NetgunRun/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.3, 0.3 )
+zoom = Vector2( 0.2, 0.2 )
 
-[node name="AttackPlayer" type="AnimationPlayer" parent="."]
+[node name="AttackTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 69 )
+anim_player = NodePath("AttackPlayer")
+process_mode = 0
+parameters/Attack/blend_position = Vector2( 0, 0 )
+parameters/Seek/seek_position = -1.0
+parameters/TimeScale/scale = 1.0
+
+[node name="AttackPlayer" type="AnimationPlayer" parent="AttackTree"]
+root_node = NodePath("../..")
 anims/AttackDown = SubResource( 27 )
 anims/AttackLeft = SubResource( 28 )
 anims/AttackRight = SubResource( 29 )
 anims/AttackUp = SubResource( 30 )
 anims/RESET = SubResource( 31 )
 
-[node name="AttackTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 69 )
-anim_player = NodePath("../AttackPlayer")
-process_mode = 0
-parameters/Attack/blend_position = Vector2( 0, 0 )
-parameters/Seek/seek_position = -1.0
-
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 20, -15 )
 
 [node name="WeaponHitbox" parent="HitboxPivot" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( -14.5, 19 )
 rotation = 1.5708
 collision_mask = 8
 script = ExtResource( 5 )
 knockback_vector = Vector2( 0, 0 )
+harvesting_tool = true
+harvesting = false
+harvest_wait_time = 0.0
 
 [node name="CollisionShape2D" parent="HitboxPivot/WeaponHitbox" index="0"]
 shape = SubResource( 50 )
@@ -1319,4 +2698,54 @@ position = Vector2( 8, 15 )
 texture = ExtResource( 3 )
 hframes = 22
 
+[node name="Netgun" type="Sprite" parent="HitboxPivot"]
+position = Vector2( 5, 7 )
+texture = ExtResource( 9 )
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="NetgunHitbox" parent="HitboxPivot" instance=ExtResource( 4 )]
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="HitboxPivot/NetgunHitbox" index="0"]
+position = Vector2( -7.5, -40 )
+rotation = 1.5708
+shape = SubResource( 152 )
+
+[node name="NetProjectileOrigin" type="Position2D" parent="HitboxPivot"]
+position = Vector2( -10, 12.5 )
+rotation = 3.14159
+
+[node name="Hurtbox" parent="." instance=ExtResource( 6 )]
+visible = false
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 13.5, -7 )
+shape = SubResource( 74 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="UI" instance=ExtResource( 7 )]
+
+[node name="InteractionButton" parent="." instance=ExtResource( 8 )]
+
+[node name="NetgunTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 78 )
+anim_player = NodePath("NetgunPlayer")
+parameters/NetgunAttack/blend_position = Vector2( 0, 0 )
+parameters/Seek/seek_position = -1.0
+
+[node name="NetgunPlayer" type="AnimationPlayer" parent="NetgunTree"]
+anims/NetgunDown = SubResource( 87 )
+anims/NetgunLeft = SubResource( 88 )
+anims/NetgunRight = SubResource( 89 )
+anims/NetgunUp = SubResource( 90 )
+anims/RESET = SubResource( 91 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
 [editable path="HitboxPivot/WeaponHitbox"]
+[editable path="HitboxPivot/NetgunHitbox"]
+[editable path="Hurtbox"]
