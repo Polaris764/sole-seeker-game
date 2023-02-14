@@ -1,0 +1,69 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://OnFootAssets/Player/PlayerUI.gd" type="Script" id=1]
+[ext_resource path="res://OnFootAssets/Player/Hearts/HeartFrame1.png" type="Texture" id=2]
+[ext_resource path="res://OnFootAssets/Player/Hearts/HeartFrame2.png" type="Texture" id=3]
+[ext_resource path="res://OnFootAssets/Player/Hearts/3HeartF4.png" type="Texture" id=4]
+[ext_resource path="res://OnFootAssets/Player/Hearts/3HeartF1.png" type="Texture" id=5]
+[ext_resource path="res://OnFootAssets/Player/Hearts/3HeartF5.png" type="Texture" id=6]
+[ext_resource path="res://OnFootAssets/Player/Hearts/3HeartF3.png" type="Texture" id=7]
+[ext_resource path="res://OnFootAssets/Player/Hearts/2HeartF2.png" type="Texture" id=8]
+[ext_resource path="res://OnFootAssets/Player/Hearts/3HeartF2.png" type="Texture" id=9]
+[ext_resource path="res://OnFootAssets/Player/Hearts/2HeartF1.png" type="Texture" id=10]
+[ext_resource path="res://OnFootAssets/Player/Hearts/3HeartF6.png" type="Texture" id=11]
+
+[sub_resource type="AnimatedTexture" id=1]
+frames = 2
+frame_0/texture = ExtResource( 2 )
+frame_0/delay_sec = 0.83
+frame_1/texture = ExtResource( 3 )
+frame_1/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=2]
+frames = 2
+frame_0/texture = ExtResource( 10 )
+frame_0/delay_sec = 0.4
+frame_1/texture = ExtResource( 8 )
+frame_1/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=3]
+frames = 6
+fps = 15.0
+frame_0/texture = ExtResource( 5 )
+frame_0/delay_sec = 0.25
+frame_1/texture = ExtResource( 9 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 7 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 4 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 6 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 11 )
+frame_5/delay_sec = 0.0
+
+[node name="HealthUI" type="Control"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 1 )
+
+[node name="HeartUIStage3" type="TextureRect" parent="."]
+visible = false
+margin_right = 37.0
+margin_bottom = 55.0
+texture = SubResource( 1 )
+stretch_mode = 5
+
+[node name="HeartUIStage2" type="TextureRect" parent="."]
+visible = false
+margin_right = 37.0
+margin_bottom = 55.0
+texture = SubResource( 2 )
+stretch_mode = 5
+
+[node name="HeartUIStage1" type="TextureRect" parent="."]
+visible = false
+margin_right = 37.0
+margin_bottom = 55.0
+texture = SubResource( 3 )
+stretch_mode = 5

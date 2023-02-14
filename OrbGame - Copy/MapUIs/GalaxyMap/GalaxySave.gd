@@ -52,7 +52,8 @@ func load_data():
 			"galaxySeed": randi(),
 			"backpackBlood": {"red":0,"blue":0},
 			"storedBlood": {"red":0,"blue":0},
-			"buildingData": {}
+			"buildingData": {},
+			"storedBuildings":{"Wall":0,"Floor":0,"Turret":0,"Caltrops":0,"Landmine":0,"Laser":0}
 		}
 		save_data()
 	file.open(SAVE_FILE,File.READ)

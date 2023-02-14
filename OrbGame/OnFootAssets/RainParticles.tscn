@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://OnFootAssets/Assets/Raindrop.png" type="Texture" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 450, 50, 1 )
+flag_disable_z = true
+gravity = Vector3( -30, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = -20.0
+scale = 2.0
+scale_random = 1.0
+color = Color( 0.117647, 0.164706, 0.388235, 0.439216 )
+
+[node name="RainParticles" type="Particles2D"]
+position = Vector2( 0, -200 )
+z_index = 1
+amount = 4000
+lifetime = 4.0
+preprocess = 5.0
+speed_scale = 4.0
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
