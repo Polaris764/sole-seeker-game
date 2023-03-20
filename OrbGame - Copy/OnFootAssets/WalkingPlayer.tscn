@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=2]
+[gd_scene load_steps=151 format=2]
 
 [ext_resource path="res://OnFootAssets/Player/PlayerSpritesheet.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://OnFootAssets/Player/Netgun/NetgunSpritesheet.png" type="Texture" id=9]
 [ext_resource path="res://OnFootAssets/UI/ShopMenu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://OnFootAssets/UI/InventoryMenu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueInteractionArea.tscn" type="PackedScene" id=12]
+[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueLayer.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Animation" id=4]
 resource_name = "IdleDown"
@@ -394,7 +396,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 1.4 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 20, -15 ), Vector2( 20, -16 ) ]
 }
 
@@ -476,7 +478,7 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 1.4 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 20, -15 ), Vector2( 20, -16 ) ]
 }
 
@@ -1534,7 +1536,7 @@ states/Run/node = SubResource( 12 )
 states/Run/position = Vector2( 425, 70 )
 transitions = [ "Idle", "Run", SubResource( 25 ), "Run", "Idle", SubResource( 26 ), "Idle", "AttackIdle", SubResource( 51 ), "AttackIdle", "Idle", SubResource( 52 ), "AttackIdle", "AttackRun", SubResource( 55 ), "AttackRun", "AttackIdle", SubResource( 56 ), "AttackRun", "Run", SubResource( 57 ), "Run", "AttackRun", SubResource( 58 ), "Idle", "AttackRun", SubResource( 70 ), "AttackRun", "Idle", SubResource( 71 ), "Run", "AttackIdle", SubResource( 72 ), "AttackIdle", "Run", SubResource( 73 ), "Idle", "ArmlessIdle", SubResource( 106 ), "ArmlessIdle", "Idle", SubResource( 107 ), "Idle", "ArmlessRun", SubResource( 108 ), "ArmlessRun", "Idle", SubResource( 109 ), "Run", "ArmlessRun", SubResource( 110 ), "ArmlessRun", "Run", SubResource( 111 ), "Run", "ArmlessIdle", SubResource( 112 ), "ArmlessIdle", "Run", SubResource( 113 ), "ArmlessRun", "ArmlessIdle", SubResource( 114 ), "ArmlessIdle", "ArmlessRun", SubResource( 115 ), "ArmlessIdle", "AttackIdle", SubResource( 116 ), "AttackRun", "ArmlessRun", SubResource( 117 ), "ArmlessRun", "AttackRun", SubResource( 118 ), "AttackIdle", "ArmlessIdle", SubResource( 119 ), "NetgunIdle", "NetgunRun", SubResource( 146 ), "NetgunRun", "NetgunIdle", SubResource( 147 ), "NetgunIdle", "ArmlessIdle", SubResource( 148 ), "ArmlessIdle", "NetgunIdle", SubResource( 149 ), "NetgunRun", "ArmlessRun", SubResource( 150 ), "ArmlessRun", "NetgunRun", SubResource( 151 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -311, -384 )
+graph_offset = Vector2( -108, -258 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=16]
 
@@ -1568,7 +1570,7 @@ blend_mode = 2
 [sub_resource type="AnimationNodeTimeScale" id=75]
 
 [sub_resource type="AnimationNodeBlendTree" id=69]
-graph_offset = Vector2( -350.494, 13.0932 )
+graph_offset = Vector2( -350.494, -150 )
 nodes/Attack/node = SubResource( 67 )
 nodes/Attack/position = Vector2( -200, 160 )
 nodes/Seek/node = SubResource( 68 )
@@ -1576,7 +1578,7 @@ nodes/Seek/position = Vector2( 80, 160 )
 nodes/TimeScale/node = SubResource( 75 )
 nodes/TimeScale/position = Vector2( 280, 160 )
 nodes/output/position = Vector2( 520, 180 )
-node_connections = [ "TimeScale", 0, "Seek", "Seek", 0, "Attack", "output", 0, "TimeScale" ]
+node_connections = [ "output", 0, "TimeScale", "Seek", 0, "Attack", "TimeScale", 0, "Seek" ]
 
 [sub_resource type="Animation" id=27]
 resource_name = "AttackDown"
@@ -2128,13 +2130,13 @@ blend_mode = 1
 [sub_resource type="AnimationNodeTimeSeek" id=77]
 
 [sub_resource type="AnimationNodeBlendTree" id=78]
-graph_offset = Vector2( -466.622, 37.7788 )
+graph_offset = Vector2( -408.994, 62.5991 )
 nodes/NetgunAttack/node = SubResource( 76 )
 nodes/NetgunAttack/position = Vector2( -300, 120 )
 nodes/Seek/node = SubResource( 77 )
 nodes/Seek/position = Vector2( 20, 140 )
 nodes/output/position = Vector2( 340, 160 )
-node_connections = [ "Seek", 0, "NetgunAttack", "output", 0, "Seek" ]
+node_connections = [ "output", 0, "Seek", "Seek", 0, "NetgunAttack" ]
 
 [sub_resource type="Animation" id=87]
 resource_name = "NetgunDown"
@@ -2239,7 +2241,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -18, 7 ), Vector2( -18, 7 ) ]
+"values": [ Vector2( -18, 5.5 ), Vector2( -18, 5.5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../HitboxPivot/Netgun:frame_coords")
@@ -2328,7 +2330,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 5, 7 ), Vector2( 5, 7 ) ]
+"values": [ Vector2( 5, 5.5 ), Vector2( 5, 5.5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../HitboxPivot/Netgun:frame")
@@ -2591,23 +2593,27 @@ tracks/7/keys = {
 "values": [ 180.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=154]
+extents = Vector2( 13.75, 27.5 )
+
+[sub_resource type="RectangleShape2D" id=155]
+extents = Vector2( 3.92179, 4.45495 )
+
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( -4, -6.5 )
 scale = Vector2( 0.4, 0.4 )
 collision_layer = 2
 script = ExtResource( 2 )
+movementSpeed = 70
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 15, 16.25 )
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( 0, -32 )
+offset = Vector2( -15, -48.75 )
 hframes = 132
 vframes = 2
 frame = 4
-
-[node name="WalkingHitbox" type="CollisionPolygon2D" parent="."]
-visible = false
-position = Vector2( 1.66667, -31.6667 )
-polygon = PoolVector2Array( 5.83333, 26.6667, 5.83333, 49.1667, 18.3333, 49.1667, 18.3333, 26.6667 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/IdleDown = SubResource( 4 )
@@ -2649,11 +2655,11 @@ tree_root = SubResource( 15 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 16 )
 parameters/ArmlessIdle/blend_position = Vector2( 0, 0 )
-parameters/ArmlessRun/blend_position = Vector2( -0.0031696, 0.00635839 )
+parameters/ArmlessRun/blend_position = Vector2( 0, 0 )
 parameters/AttackIdle/blend_position = Vector2( 0, 0 )
-parameters/AttackRun/blend_position = Vector2( 0, 0 )
+parameters/AttackRun/blend_position = Vector2( 0.0408326, 0.286127 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/NetgunIdle/blend_position = Vector2( 0, 0 )
+parameters/NetgunIdle/blend_position = Vector2( -0.82546, 0.832948 )
 parameters/NetgunRun/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0, 0 )
 
@@ -2706,6 +2712,7 @@ vframes = 2
 frame = 1
 
 [node name="NetgunHitbox" parent="HitboxPivot" instance=ExtResource( 4 )]
+visible = false
 collision_mask = 16
 
 [node name="CollisionShape2D" parent="HitboxPivot/NetgunHitbox" index="0"]
@@ -2730,8 +2737,10 @@ shape = SubResource( 74 )
 [node name="HealthUI" parent="UI" instance=ExtResource( 7 )]
 
 [node name="ShopMenu" parent="UI" instance=ExtResource( 10 )]
+visible = false
 
 [node name="InventoryMenu" parent="UI" instance=ExtResource( 11 )]
+visible = false
 
 [node name="InteractionButton" parent="." instance=ExtResource( 8 )]
 
@@ -2748,8 +2757,25 @@ anims/NetgunRight = SubResource( 89 )
 anims/NetgunUp = SubResource( 90 )
 anims/RESET = SubResource( 91 )
 
+[node name="DialogueInteractionArea" parent="." instance=ExtResource( 12 )]
+visible = false
+
+[node name="CollisionShape2D" parent="DialogueInteractionArea" index="0"]
+position = Vector2( 13.75, -7.5 )
+shape = SubResource( 154 )
+
+[node name="DialogueLayer" parent="." instance=ExtResource( 13 )]
+visible = false
+scene_text_file = "res://OnFootAssets/DialogueSystem/world_dialogue.json"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 13.5, 11 )
+scale = Vector2( 1.594, 1.2 )
+shape = SubResource( 155 )
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="HitboxPivot/WeaponHitbox"]
 [editable path="HitboxPivot/NetgunHitbox"]
 [editable path="Hurtbox"]
+[editable path="DialogueInteractionArea"]

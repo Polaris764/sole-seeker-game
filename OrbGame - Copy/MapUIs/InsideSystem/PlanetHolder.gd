@@ -2,6 +2,8 @@ extends Node2D
 
 export var planetPlace : int
 
+var enlarged_Size = Vector2(1.2,1.2)
+
 func _ready():
 	
 	self.position = get_viewport_rect().size/2
@@ -26,7 +28,7 @@ func _on_Area2D_body_entered(_body):
 	updatePlanetInfoPanel(GalaxySave.getLastStarClicked())
 	var childArray = get_node("..").get_children()
 	GalaxySave.setLastPlanetClicked(GalaxySave.getLastStarClicked(),childArray.find(self,0))
-	$Planet/PlanetImage.scale = Vector2(2,2)
+	$Planet/PlanetImage.scale = enlarged_Size
 	$Tween.stop_all()
 	$Tween.interpolate_property(
 		get_node("../../PlanetInfoHolder/Control"),
@@ -42,7 +44,7 @@ func _on_Area2D_body_entered(_body):
 func _on_Area2D_body_exited(_body):
 	if get_node("../../PlanetInfoHolder/Control/Holder/EnterButton").transferring == false:
 		GalaxySave.setLastPlanetClicked(0,0)
-	$Planet/PlanetImage/Area2D/SizeTween.interpolate_property($Planet/PlanetImage, "scale", Vector2(2,2), Vector2(1,1), .2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Planet/PlanetImage/Area2D/SizeTween.interpolate_property($Planet/PlanetImage, "scale", enlarged_Size, Vector2(1,1), .2, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Planet/PlanetImage/Area2D/SizeTween.start()
 	$Tween.stop_all()
 	$Tween.interpolate_property(

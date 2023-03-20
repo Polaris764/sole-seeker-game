@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://OnFootAssets/Player/Build/CleanFloorTilemap.png" type="Texture" id=1]
-[ext_resource path="res://OnFootAssets/Player/Build/WallTilemap.tscn" type="PackedScene" id=2]
 
 [sub_resource type="TileSet" id=1]
 0/name = "CleanFloorTilemap.png 0"
@@ -32,6 +31,3 @@
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-
-[node name="WallTilemap" parent="." instance=ExtResource( 2 )]
-tile_data = PoolIntArray( -262133, 0, 196609, -262132, 0, 196611, -131061, 0, 196609, -131060, 0, 196611 )

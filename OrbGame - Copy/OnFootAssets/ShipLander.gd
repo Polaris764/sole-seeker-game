@@ -2,6 +2,9 @@ extends Node2D
 
 export var ship_position : Vector2
 
+var player
+var interation_button
+
 func _ready():
 	create_planet()
 
@@ -13,7 +16,7 @@ func _on_Area2D_body_entered(body):
 
 func _on_Area2D_body_exited(body):
 	if body.name == "Player":
-		$InteractionButton.areaLeft(self)
+		interation_button.areaLeft(self)
 
 export var scene : NodePath = "res://OnFootAssets/InsideShip/InsideShip.tscn"
 func custom_interaction():
@@ -21,10 +24,12 @@ func custom_interaction():
 	for i in InputMap.get_action_list('Interact'):
 		if i is InputEventKey:
 			relevantButtons.append(i.as_text())
-	$InteractionButton.updateButton(relevantButtons,"Enter Ship",self,"Interact")
+	interation_button.updateButton(relevantButtons,"Enter Ship",self,"Interact")
 
 func interacted():
 	get_tree().change_scene(scene)
+
+var visiting_controls = preload("res://MapUIs/General/FlightUIOverlay.tscn")
 
 func create_planet():
 	var MarshWorld = ("res://OnFootAssets/MarshWorld.tscn")
@@ -43,7 +48,16 @@ func create_planet():
 	$Spaceship.global_position = ship_position
 	$Shadow.global_position = ship_position
 	var path = planet.name + "/Player" if planet.has_node("Player") else planet.name + "/YSort/Player"
-	get_node(path).global_position = ship_position + Vector2(83,37)
-	if chosen_planet_type == WetWorld:
-		get_node(path).slipperyGround = true
+	player = get_node(path)
+	interation_button = player.get_node("InteractionButton")
+	if GalaxySave.game_data["shipPosition"][6]:
+		player.queue_free()
+		$VisitingCamera.global_position = ship_position
+		$VisitingCamera.current = true
+		var overlay = visiting_controls.instance()
+		add_child(overlay)
+	else:
+		player.global_position = ship_position + Vector2(83,37)
+		if chosen_planet_type == WetWorld:
+			player.slipperyGround = true
 		

@@ -9,6 +9,8 @@ export (float) var rotation_speed = 3.5
 
 export (float) var friction_weight = 0.5
 
+func _ready():
+	rotation = GalaxySave.game_data["shipPosition"][3]
 
 func _physics_process(delta):
 	input_vector.x = Input.get_action_strength("move_forward") - Input.get_action_strength("move_backward")

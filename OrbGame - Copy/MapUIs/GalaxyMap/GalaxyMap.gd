@@ -5,8 +5,10 @@ onready var save_file = GalaxySave.game_data
 var planet = preload("res://MapUIs/GalaxyMap/PlanetarySystem.tscn")
 var HQ = preload("res://MapUIs/GalaxyMap/CompanyHQ.tscn")
 
+onready var player = $Player
+
 func rotatePoint(point,angle):
-	var px = point
+	var px = point#*3
 
 	var qx = cos(angle) * (px) - sin(angle)*px
 	var qy = sin(angle) * (px) + cos(angle)*px
@@ -22,12 +24,12 @@ func _ready():
 		# set its global_position to two random (float)
 		# values lying somewhere between 0 and 400
 		add_child(new_planet)
-		var radius = pow(rand_range(0, 100),2)
+		var radius = pow(rand_range(0, 100),2)#*3
 		var angle = rand_range(0, 2*PI)
 		new_planet.global_position.x = cos(angle)*radius
 		new_planet.global_position.y = sin(angle)*radius
 	
-	for i in range(0,10000):
+	for i in range(0,5000):
 		if i %22 == 0:
 			for _x in range(20):
 				var new_planet = planet.instance()
@@ -36,6 +38,9 @@ func _ready():
 				new_planet.global_position = rotatePoint(i,i)
 
 	add_companyHQ()
+	update_ship()
+		
+
 export var starsInside = []
 
 func add_companyHQ():
@@ -44,3 +49,7 @@ func add_companyHQ():
 	var stationInstance = HQ.instance()
 	add_child(stationInstance)
 	stationInstance.global_position = Vector2(cos(stationAngle)*stationRadius,sin(stationAngle)*stationRadius)
+
+func update_ship():
+	GalaxySave.game_data["shipPosition"][5] = false
+	player.global_position = GalaxySave.game_data["shipPosition"][0]

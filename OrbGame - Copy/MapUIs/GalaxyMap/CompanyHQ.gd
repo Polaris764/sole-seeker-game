@@ -103,3 +103,7 @@ func updateSystemInfoPanel2(seedUsed):
 	pStarCoords.text = String(seedUsed.distance_to(Vector2(0,0))) + ", " + String(degPos)+"°" #set star coordinates
 	pPlanetAmount.text = "Planet Count: " + String(planetAmount) #set planet amount
 	pSystemType.text = "System Type: " + systemTypeOptions[randi() % systemTypeOptions.size()] #generate system type
+
+func update_ship_stats():
+		GalaxySave.set_ship_speed(-1,true)
+		GalaxySave.game_data["shipPosition"][3] = get_node("../../../../Player").rotation

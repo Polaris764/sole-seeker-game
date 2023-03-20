@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://OnFootAssets/CompanyHQ/ATOSStandBack.png" type="Texture" id=1]
+[ext_resource path="res://OnFootAssets/Interactable.tscn" type="PackedScene" id=2]
+[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://OnFootAssets/CompanyHQ/ATOSback.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.0
+height = 7.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 17.0
+height = 12.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 17.0
+height = 12.0
+
+[node name="ATOSback" type="Sprite"]
+position = Vector2( 0, 9 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -9 )
+script = ExtResource( 4 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -0.5, 0 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Interactable" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -9 )
+interaction_result = "Talk"
+
+[node name="CollisionShape2D" parent="Interactable/Area2D" index="0"]
+position = Vector2( -0.5, -11 )
+shape = SubResource( 2 )
+
+[node name="DialogueArea" parent="." instance=ExtResource( 3 )]
+dialogue_key = "atos"
+
+[node name="CollisionShape2D" parent="DialogueArea" index="0"]
+position = Vector2( -0.5, -20 )
+shape = SubResource( 3 )
+
+[connection signal="interacted_with" from="Interactable" to="." method="_on_Interactable_interacted_with"]
+
+[editable path="Interactable"]
+[editable path="DialogueArea"]

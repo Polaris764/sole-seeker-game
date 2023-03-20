@@ -12,3 +12,20 @@ enum building_types {
 	LANDMINE,
 	CALTROPS
 }
+
+enum ship_locations {
+	PLANET,
+	SYSTEM,
+	SPACEZOOMED,
+	SPACE,
+	GALAXY,
+	STATION
+}
+
+func update_story_from_atos():
+	var storyPos = GalaxySave.game_data["storyProgression"]
+	print("story position = ")
+	print(storyPos)
+	if storyPos == 2:
+		GalaxySave.game_data["storyProgression"] = 3
+		SignalBus.emit_signal("updated_story")

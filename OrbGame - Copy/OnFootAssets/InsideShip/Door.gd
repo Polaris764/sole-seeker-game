@@ -9,7 +9,9 @@ func _on_Area2D_body_exited(body):
 		get_node("../Player/InteractionButton").areaLeft(self)
 	
 #door destination
-export var scene : NodePath = "res://OnFootAssets/VisitingPlanet.tscn"
+export var planet_scene : NodePath = "res://OnFootAssets/VisitingPlanet.tscn"
+export var station_scene : NodePath = "res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn"
+
 func custom_interaction():
 	var relevantButtons = []
 	for i in InputMap.get_action_list('Interact'):
@@ -18,4 +20,8 @@ func custom_interaction():
 	get_node("../Player/InteractionButton").updateButton(relevantButtons,"Exit Ship",self,"Interact")
 
 func interacted():
-	get_tree().change_scene(scene)
+	var ship_location = GalaxySave.game_data["shipPosition"][7]
+	if ship_location == 0:
+		get_tree().change_scene(station_scene)
+	else:
+		get_tree().change_scene(planet_scene)

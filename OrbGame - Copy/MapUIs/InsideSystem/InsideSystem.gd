@@ -24,6 +24,7 @@ func generatePlanetarySystem(seedUsed):
 func _ready():
 	var posSeed = GalaxySave.getLastStarClicked()
 	generatePlanetarySystem(posSeed)
+	print("last planet = " + str(GalaxySave.game_data["shipPosition"]))
 
 func _on_Star_pressed():
 	print("center star pressed")

@@ -2,14 +2,12 @@ extends Camera2D
 
 func _ready():
 	self.position= get_node("../Player").position
-	get_node("../Player").max_speed = 100
-	get_node("../Player").rotation = 2
-	get_node("../Player").friction_weight = .3
 
 func _process(_delta):
 	var ship = get_node("../Player")
 	var ship_pos = ship.position
-	self.position = ship_pos
+	self.global_position = ship_pos
+	GalaxySave.game_data["shipPosition"][1] = global_position
 	
 func zoom():
 

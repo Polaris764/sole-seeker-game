@@ -1,7 +1,11 @@
 extends CanvasLayer
 
+onready var player = get_node("..")
 var OriginTable = [] setget ,updateLabel
 var ActionDictionary = {}
+
+func _ready():
+	SignalBus.connect("cutscene_edited",self,"updateLabel")
 
 func areaLeft(interactionOrigin):
 	OriginTable.erase(interactionOrigin)
@@ -9,7 +13,7 @@ func areaLeft(interactionOrigin):
 	updateLabel()
 
 func updateLabel():
-	if OriginTable.size() > 0:
+	if OriginTable.size() > 0 and player.cutscene.size() == 0:
 		self.visible = true
 		$Label.text = String(ActionDictionary[OriginTable[0]]["controls"]) + " to " + ActionDictionary[OriginTable[0]]["desc"]
 	else:

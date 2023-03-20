@@ -4,16 +4,18 @@ onready var buildings_list = $NinePatchRect/BuildingsList
 
 onready var defenses_list = $NinePatchRect/DefensesList
 
-var buildings_dictionary = {"Wall":{"red":0,"blue":0},"Floor":{"red":0,"blue":0}}
+var building_types = ConstantsHolder.building_types
 
-var defenses_dictionary = {"Landmine":{"red":0,"blue":0},"Laser":{"red":0,"blue":0},"Turret":{"red":0,"blue":0},"Caltrops":{"red":0,"blue":0}}
+var buildings_dictionary = {building_types.WALL:{"red":0,"blue":0},building_types.FLOOR:{"red":0,"blue":0}}
+
+var defenses_dictionary = {building_types.LANDMINE:{"red":0,"blue":0},building_types.LASER:{"red":0,"blue":0},building_types.TURRET:{"red":0,"blue":0},building_types.CALTROPS:{"red":0,"blue":0}}
 
 func _ready():
 	visible = false
 	for resource in buildings_dictionary:
-		buildings_list.add_item(resource)
+		buildings_list.add_item(building_types.keys()[resource])
 	for resource in defenses_dictionary:
-		defenses_list.add_item(resource)
+		defenses_list.add_item(building_types.keys()[resource])
 
 func _on_BuildingsList_item_activated(index):
 	var bought_item = buildings_dictionary.keys()[index]

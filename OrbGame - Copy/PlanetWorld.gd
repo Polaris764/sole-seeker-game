@@ -31,6 +31,7 @@ func make_grass_map():
 				lowestA = a
 				get_node("..").ship_position = Vector2(x*16,y*16)
 			if a < grass_cap:
+				
 				$Rock.set_cell(x,y,0)
 				# set edge corners
 				if x <= 20 and y <= 20:

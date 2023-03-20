@@ -18,6 +18,9 @@ texture = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 250, 250 )
+max_speed = 100
+rotation_speed = 2.0
+friction_weight = 0.3
 
 [node name="SystemCamera" type="Camera2D" parent="."]
 current = true

@@ -248,5 +248,4 @@ format = 1
 position = Vector2( 278, 114 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
 zoom = Vector2( 0.3, 0.3 )

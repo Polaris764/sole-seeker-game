@@ -5,10 +5,11 @@ extends KinematicBody2D
 var current_velocity := Vector2()
 var input_velocity : Vector2 = Vector2()
 var direction : Vector2 = Vector2()
-var movementSpeed = 100
+export var movementSpeed = 100
 export var isInRoom = false
 export var slipperyGround = false
 export var frozenPlanet = false
+export var cutscene = []
 var recent_vectors = []
 var isOnIce = false
 
@@ -19,7 +20,15 @@ onready var animationTree = $AnimationTree
 onready var animationState = $AnimationTree.get("parameters/playback")
 onready var weaponHitbox = $HitboxPivot/WeaponHitbox
 onready var hurtbox = $Hurtbox
-
+	
+# Control cutscene 
+func add_cutscene(value):
+	cutscene.append(value)
+	SignalBus.emit_signal("cutscene_edited")
+func remove_cutscene(value):
+	for instance in cutscene.count(value):
+		cutscene.erase(value)
+	SignalBus.emit_signal("cutscene_edited")
 # Player states
 enum {
 	MOVE,
@@ -46,22 +55,22 @@ func _ready():
 	update_buildings_from_saved_data()
 
 func _physics_process(delta):
-	
-	match state:
-		MOVE:
-			move_state()
-		ATTACK:
-			move_state()
-			match weapon:
-				player_weapons.NEEDLE:
-					attack_state(delta)
-				player_weapons.NETGUN:
-					attack_state_NETGUN(delta)
-		HARVEST:
-			harvest_state()
-		BUILD:
-			move_state()
-			build_state(delta)
+	if cutscene.size() == 0:
+		match state:
+			MOVE:
+				move_state()
+			ATTACK:
+				move_state()
+				match weapon:
+					player_weapons.NEEDLE:
+						attack_state(delta)
+					player_weapons.NETGUN:
+						attack_state_NETGUN(delta)
+			HARVEST:
+				harvest_state()
+			BUILD:
+				move_state()
+				build_state(delta)
 #	print(self.global_position)
 
 ## MOVING ##
@@ -159,14 +168,15 @@ func move_state():
 	# building
 	if Input.is_action_just_pressed("build_state_switch"):
 		print(state)
-		if state == MOVE:
-			state = BUILD
-			var mousepos = get_global_mouse_position()
-			var mousepos_floored = Vector2(floor(mousepos.x/tile_size)*tile_size, floor(mousepos.y/tile_size)*tile_size)
-			update_guides(mousepos_floored)
-		elif state == BUILD:
-			state = MOVE
-			clear_all_guides()
+		if not isInRoom:
+			if state == MOVE:
+				state = BUILD
+				var mousepos = get_global_mouse_position()
+				var mousepos_floored = Vector2(floor(mousepos.x/tile_size)*tile_size, floor(mousepos.y/tile_size)*tile_size)
+				update_guides(mousepos_floored)
+			elif state == BUILD:
+				state = MOVE
+				clear_all_guides()
 	
 	# detecting attacks
 	if Input.is_action_just_pressed("attack") and state == MOVE:
@@ -255,6 +265,7 @@ func harvest_check():
 
 func harvest_end():
 	$AttackTree.active = false
+	needle_attack_with_netgun_equipped = false
 	state = MOVE
 
 func _on_Hurtbox_area_entered(area):
@@ -313,6 +324,8 @@ var caltrops_scene = preload("res://OnFootAssets/Player/Build/Caltrops.tscn")
 var caltrops_guide_scene = preload("res://OnFootAssets/Player/Build/CaltropsGuide.tscn")
 var laser_scene = preload("res://OnFootAssets/Player/Build/LaserWall.tscn")
 var laser_guide_scene = preload("res://OnFootAssets/Player/Build/LaserGuide.tscn")
+var turret_scene = preload("res://OnFootAssets/Player/Build/Turret.tscn")
+var turret_guide_scene = preload("res://OnFootAssets/Player/Build/TurretGuide.tscn")
 var guide_frame_tilemap
 var wall_tilemap
 var wall_tilemap_guide
@@ -321,6 +334,7 @@ var floor_tilemap_guide
 var landmine_guide
 var caltrops_guide
 var laser_guide
+var turret_guide
 
 func update_buildings_from_saved_data():
 	guide_frame_tilemap = guide_frame.instance()
@@ -354,6 +368,11 @@ func update_buildings_from_saved_data():
 	laser_guide.modulate.a = .5
 	laser_guide.visible = false
 	
+	turret_guide = turret_guide_scene.instance()
+	get_tree().get_root().call_deferred("add_child",turret_guide)
+	turret_guide.modulate.a = .5
+	turret_guide.visible = false
+	
 	for building_type in planet_building_data:
 		match building_type:
 			building_types.WALL:
@@ -383,9 +402,14 @@ func update_buildings_from_saved_data():
 				for location in planet_building_data[building_type]:
 					var laser = laser_scene.instance()
 					laser.global_position = location
-					laser.rotation = planet_building_data[building_type][location][0]
+					laser.alignment_HV = planet_building_data[building_type][location][0]
 					laser.active = planet_building_data[building_type][location][1]
 					get_tree().get_root().call_deferred("add_child",laser)
+			building_types.TURRET:
+				for location in planet_building_data[building_type]:
+					var turret = turret_scene.instance()
+					turret.global_position = location
+					get_tree().get_root().call_deferred("add_child",turret)
 
 # building types
 
@@ -397,101 +421,140 @@ func build_state(delta):
 	planet_building_data = GalaxySave.get_planet_building_data()
 	var mousepos = get_global_mouse_position()
 	var mousepos_floored = Vector2(floor(mousepos.x/tile_size)*tile_size, floor(mousepos.y/tile_size)*tile_size)
-	if mousepos_floored != last_mousepos:
+	if mousepos_floored != last_mousepos or current_velocity != Vector2.ZERO:
 		last_mousepos = mousepos_floored
 		update_guides(mousepos_floored)
 	
 	if Input.is_action_just_pressed("attack"):
 		var placing_block_location = Vector2(floor(mousepos.x/tile_size)*tile_size, floor(mousepos.y/tile_size)*tile_size)
-		match current_building_type:
-			building_types.WALL:
-				if not current_building_type in planet_building_data:
-					planet_building_data[current_building_type] = []
-				if not planet_building_data[current_building_type].has(placing_block_location):
-					planet_building_data[current_building_type].append(placing_block_location)
-					wall_tilemap.set_cell(placing_block_location.x/tile_size,placing_block_location.y/tile_size,0)
-					wall_tilemap.update_bitmask_area(placing_block_location/Vector2(tile_size,tile_size))
-			building_types.FLOOR:
-				if not current_building_type in planet_building_data:
-					planet_building_data[current_building_type] = []
-				if not planet_building_data[current_building_type].has(placing_block_location):
-					planet_building_data[current_building_type].append(placing_block_location)
-					floor_tilemap.set_cell(placing_block_location.x/tile_size,placing_block_location.y/tile_size,0)
-					floor_tilemap.update_bitmask_area(placing_block_location/Vector2(tile_size,tile_size))
-			building_types.LANDMINE:
-				if not current_building_type in planet_building_data:
-					planet_building_data[current_building_type] = {}
-				if not planet_building_data[current_building_type].has(placing_block_location):
-					planet_building_data[current_building_type][placing_block_location] = 1
-					var landmine = landmine_scene.instance()
-					landmine.global_position = placing_block_location
-					get_tree().get_root().call_deferred("add_child",landmine)
-				elif planet_building_data[current_building_type][placing_block_location] < 3:
-					planet_building_data[current_building_type][placing_block_location] += 1
-					var possible_landmines = get_tree().get_nodes_in_group("Landmines")
-					var found_landmine = false
-					for candidate_landmine in possible_landmines:
-						if candidate_landmine.global_position == placing_block_location:
-							found_landmine = true
-							candidate_landmine.mines += 1
-			building_types.CALTROPS:
-				if not current_building_type in planet_building_data:
-					planet_building_data[current_building_type] = {}
-				if not planet_building_data[current_building_type].has(placing_block_location):
-					var caltrops = caltrops_scene.instance()
-					caltrops.global_position = placing_block_location
-					planet_building_data[current_building_type][placing_block_location] = randomize_orientation(caltrops.get_node("Sprite"))
-					get_tree().get_root().call_deferred("add_child",caltrops)
-			building_types.LASER:
-				if not current_building_type in planet_building_data:
-					planet_building_data[current_building_type] = {}
-				if not planet_building_data[current_building_type].has(placing_block_location):
-					var laser = laser_scene.instance()
-					laser.global_position = placing_block_location
-					var laser_rotation = 0
-					var laser_active_state = true
-					planet_building_data[current_building_type][placing_block_location] = [laser_rotation,laser_active_state] #rotation
-					get_tree().get_root().call_deferred("add_child",laser)
-					
-		GalaxySave.set_building_data(planet_building_data)
-		GalaxySave.save_data()
+		if can_afford_building():
+			match current_building_type:
+				building_types.WALL:
+					if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = []
+					if not planet_building_data[current_building_type].has(placing_block_location):
+						planet_building_data[current_building_type].append(placing_block_location)
+						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
+						wall_tilemap.set_cell(placing_block_location.x/tile_size,placing_block_location.y/tile_size,0)
+						wall_tilemap.update_bitmask_area(placing_block_location/Vector2(tile_size,tile_size))
+				building_types.FLOOR:
+					if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = []
+					if not planet_building_data[current_building_type].has(placing_block_location):
+						planet_building_data[current_building_type].append(placing_block_location)
+						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
+						floor_tilemap.set_cell(placing_block_location.x/tile_size,placing_block_location.y/tile_size,0)
+						floor_tilemap.update_bitmask_area(placing_block_location/Vector2(tile_size,tile_size))
+				building_types.LANDMINE:
+					if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = {}
+					if not planet_building_data[current_building_type].has(placing_block_location):
+						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
+						planet_building_data[current_building_type][placing_block_location] = 1
+						var landmine = landmine_scene.instance()
+						landmine.global_position = placing_block_location
+						get_tree().get_root().call_deferred("add_child",landmine)
+					elif planet_building_data[current_building_type][placing_block_location] < 3:
+						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
+						planet_building_data[current_building_type][placing_block_location] += 1
+						var possible_landmines = get_tree().get_nodes_in_group("Landmines")
+						var found_landmine = false
+						for candidate_landmine in possible_landmines:
+							if candidate_landmine.global_position == placing_block_location:
+								found_landmine = true
+								candidate_landmine.mines += 1
+				building_types.CALTROPS:
+					if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = {}
+					if not planet_building_data[current_building_type].has(placing_block_location):
+						var caltrops = caltrops_scene.instance()
+						caltrops.global_position = placing_block_location
+						planet_building_data[current_building_type][placing_block_location] = randomize_orientation(caltrops.get_node("Sprite"))
+						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
+						get_tree().get_root().call_deferred("add_child",caltrops)
+				building_types.LASER:
+					if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = {}
+					if not planet_building_data[current_building_type].has(placing_block_location) and check_side_availability(planet_building_data[current_building_type],placing_block_location):
+						var laser = laser_scene.instance()
+						laser.global_position = placing_block_location
+						laser.alignment_HV = direction_to_bool()
+						var laser_rotation = direction_to_bool()
+						var laser_active_state = true
+						planet_building_data[current_building_type][placing_block_location] = [laser_rotation,laser_active_state] #rotation
+						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
+						get_tree().get_root().call_deferred("add_child",laser)
+				building_types.TURRET:
+					if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = []
+					if not planet_building_data[current_building_type].has(placing_block_location):
+						planet_building_data[current_building_type].append(placing_block_location)
+						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
+						var turret = turret_scene.instance()
+						turret.global_position = placing_block_location
+						get_tree().get_root().call_deferred("add_child",turret)
+						
+			GalaxySave.set_building_data(planet_building_data)
+			GalaxySave.save_data()
 				
 	if Input.is_action_just_pressed("harvest"):
 		match current_building_type:
 			building_types.WALL:
+				if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = []
 				if planet_building_data[current_building_type].has(mousepos_floored):
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					wall_tilemap.set_cell(mousepos_floored.x/tile_size,mousepos_floored.y/tile_size,-1)
 					wall_tilemap.update_bitmask_area(mousepos_floored/Vector2(tile_size,tile_size))
+					GalaxySave.game_data["storedBuildings"][current_building_type] += 1
 			building_types.FLOOR:
+				if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = []
 				if planet_building_data[current_building_type].has(mousepos_floored):
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					floor_tilemap.set_cell(mousepos_floored.x/tile_size,mousepos_floored.y/tile_size,-1)
 					floor_tilemap.update_bitmask_area(mousepos_floored/Vector2(tile_size,tile_size))
+					GalaxySave.game_data["storedBuildings"][current_building_type] += 1
 			building_types.LANDMINE:
+				if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = {}
 				if planet_building_data[current_building_type].has(mousepos_floored):
 					planet_building_data[current_building_type][mousepos_floored] -= 1
 					var possible_landmines = get_tree().get_nodes_in_group("Landmines")
 					for candidate_landmine in possible_landmines:
 						if candidate_landmine.global_position == mousepos_floored:
 							candidate_landmine.mines -= 1
-							if planet_building_data[current_building_type][mousepos_floored] == 0:
-								candidate_landmine.queue_free()
-								planet_building_data[current_building_type].erase(mousepos_floored)
+							GalaxySave.game_data["storedBuildings"][current_building_type] += 1
 			building_types.CALTROPS:
+				if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = {}
 				if planet_building_data[current_building_type].has(mousepos_floored):
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					var possible_caltrops = get_tree().get_nodes_in_group("Caltrops")
 					for candidate_caltrops in possible_caltrops:
 						if candidate_caltrops.global_position == mousepos_floored:
 							candidate_caltrops.queue_free()
+							GalaxySave.game_data["storedBuildings"][current_building_type] += 1
 			building_types.LASER:
+				if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = {}
 				if planet_building_data[current_building_type].has(mousepos_floored):
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					var possible_lasers = get_tree().get_nodes_in_group("Lasers")
 					for candidate_lasers in possible_lasers:
 						if candidate_lasers.global_position == mousepos_floored:
 							candidate_lasers.queue_free()
+							GalaxySave.game_data["storedBuildings"][current_building_type] += 1
+			building_types.TURRET:
+				if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = []
+				if planet_building_data[current_building_type].has(mousepos_floored):
+					planet_building_data[current_building_type].erase(mousepos_floored)
+					var possible_turrets = get_tree().get_nodes_in_group("Turrets")
+					for candidate_turrets in possible_turrets:
+						if candidate_turrets.global_position == mousepos_floored:
+							candidate_turrets.queue_free()
+							GalaxySave.game_data["storedBuildings"][current_building_type] += 1
 			
 		GalaxySave.set_building_data(planet_building_data)
 		GalaxySave.save_data()
@@ -514,7 +577,12 @@ func update_guides(mousepos_floored):
 			guide_frame_tilemap.set_cell(mousepos_floored.x/tile_size,mousepos_floored.y/tile_size,0)
 		building_types.LASER:
 			laser_guide.visible = true
+			laser_guide.alignment_HV = direction_to_bool()
 			laser_guide.global_position = mousepos_floored
+		building_types.TURRET:
+			turret_guide.visible = true
+			turret_guide.global_position = mousepos_floored
+			guide_frame_tilemap.set_cell(mousepos_floored.x/tile_size,mousepos_floored.y/tile_size,0)
 
 func clear_all_guides():
 	wall_tilemap_guide.clear()
@@ -522,6 +590,7 @@ func clear_all_guides():
 	landmine_guide.visible = false
 	caltrops_guide.visible = false
 	laser_guide.visible = false
+	turret_guide.visible = false
 	guide_frame_tilemap.clear()
 
 func randomize_orientation(sprite):
@@ -530,3 +599,52 @@ func randomize_orientation(sprite):
 	sprite.flip_h = bools[randi()%2]
 	sprite.flip_v = bools[randi()%2]
 	return [sprite.rotation,sprite.flip_h,sprite.flip_v]
+
+func get_last_direction_moved():
+	return animationTree.get("parameters/Run/blend_position")
+
+func direction_to_bool(): # horizontal is true
+	var nearest = stepify(get_last_direction_moved().angle()-PI/2,PI/4)
+	if int(nearest)%int(PI) == 0:
+		return true
+	elif int(nearest/(PI/4))%2 != 0:
+		return true
+	else:
+		return false
+
+func check_side_availability(dictionary_of_positions,placing_position):
+	var HV = direction_to_bool()
+	var sides = []
+	var horizontal_to_check = [Vector2(16,0),Vector2(-16,0)]
+	var vertical_to_check = [Vector2(0,16),Vector2(0,-16)]
+	if HV:
+		sides.append(placing_position + Vector2(-16,0))
+		sides.append(placing_position + Vector2(16,0))
+	else:
+		sides.append(placing_position + Vector2(0,-16))
+		sides.append(placing_position + Vector2(0,16))
+	var site_approved = true
+	for side_to_check in sides:
+		if dictionary_of_positions.has(side_to_check):
+			return false # site not approved
+		for nearby_direction in horizontal_to_check:
+			var modified_direction = side_to_check + nearby_direction
+			if dictionary_of_positions.has(modified_direction):
+				if dictionary_of_positions[modified_direction][0] == true:
+					return false # site not approved
+		for nearby_direction in vertical_to_check:
+			var modified_direction = side_to_check + nearby_direction
+			if dictionary_of_positions.has(modified_direction):
+				if dictionary_of_positions[modified_direction][0] == false:
+					return false # site not approved
+	for location_to_check in horizontal_to_check:
+		var modified_PL = placing_position + location_to_check
+		if dictionary_of_positions.has(modified_PL):
+			return false # site not approved
+	return site_approved
+
+func can_afford_building():
+	if GalaxySave.game_data["storedBuildings"][current_building_type] > 0:
+		return true
+	else:
+		return false
