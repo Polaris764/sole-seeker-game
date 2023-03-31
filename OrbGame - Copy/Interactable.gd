@@ -2,9 +2,14 @@ extends Node2D
 
 export var player_node : NodePath
 
+export var required_story_pos = 0
+
+signal player_nearby
 func _on_Area2D_body_entered(body):
 	if body.name ==  "Player":
-		custom_interaction()
+		emit_signal("player_nearby")
+		if GalaxySave.game_data["storyProgression"] >= required_story_pos:
+			custom_interaction()
 
 
 func _on_Area2D_body_exited(body):

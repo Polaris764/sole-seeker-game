@@ -3,6 +3,8 @@ extends Node2D
 func _on_Area2D_body_entered(body):
 	if body.name ==  "Player":
 		custom_interaction()
+		if GalaxySave.game_data["storyProgression"] < 5:
+			SignalBus.emit_signal("display_announcement","ship_tour_door")
 
 func _on_Area2D_body_exited(body):
 	if body.name == "Player":

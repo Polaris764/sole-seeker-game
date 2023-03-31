@@ -38,7 +38,6 @@ func get_planet_building_data():
 # saving data
 func _ready():
 	load_data()
-	set_ship_speed(0)
 
 func save_data():
 	var file = File.new()
@@ -58,8 +57,8 @@ func load_data():
 			"storedBlood": {"red":0,"blue":0},
 			"buildingData": {},
 			"storedBuildings":{buildingTypes.WALL:50,buildingTypes.FLOOR:50,buildingTypes.TURRET:50,buildingTypes.CALTROPS:50,buildingTypes.LANDMINE:50,buildingTypes.LASER:50},
-			"shipPosition": [Vector2.ZERO,Vector2.ZERO,0,0,shipLocation.GALAXY,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
-			"storyProgression": 2 #0-just started, 1- woken in station, 2- ready for tutorial, 3- doing tutorial, 4- done w/ tut, 
+			"shipPosition": [Vector2.ZERO,Vector2.ZERO,-2,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
+			"storyProgression": 0 
 		}
 		save_data()
 	file.open(SAVE_FILE,File.READ)

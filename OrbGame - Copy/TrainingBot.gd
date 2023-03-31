@@ -18,7 +18,8 @@ func _ready():
 func activate(value):
 	active = true
 	velocity = Vector2(1,0)
-	timer.start(initial_time)
+	if timer:
+		timer.start(initial_time)
 
 func _on_MovementTimer_timeout():
 	if stats.health > 0:
@@ -84,3 +85,4 @@ func _on_Glass_animation_finished(): # harvest completed
 	GalaxySave.game_data["storyProgression"] = 4
 	GalaxySave.save_data()
 	SignalBus.emit_signal("updated_story")
+	SignalBus.emit_signal("display_announcement","completed_tutorial")

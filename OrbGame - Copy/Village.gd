@@ -63,8 +63,8 @@ func shoot_bullet():
 # Event management
 
 var event_stage = 0
-export var shooting_start_time = 5
-export var blackout_time = 5
+export var shooting_start_time = 30
+export var blackout_time = 30
 onready var event_timer = $EventTimer
 onready var playerCam = $ChildPlayerCamera
 onready var villagers = $Villagers.get_children()

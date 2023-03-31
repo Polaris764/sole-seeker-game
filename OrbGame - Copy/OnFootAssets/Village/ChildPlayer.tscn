@@ -305,7 +305,6 @@ scale = Vector2( 0.999999, 0.999999 )
 shape = SubResource( 26 )
 
 [node name="DialogueLayer" parent="." instance=ExtResource( 6 )]
-scene_text_file = "res://OnFootAssets/DialogueSystem/world_dialogue.json"
 
 [node name="InteractionButton" parent="." instance=ExtResource( 7 )]
 

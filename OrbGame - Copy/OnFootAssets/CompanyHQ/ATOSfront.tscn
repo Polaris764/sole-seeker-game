@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://OnFootAssets/CompanyHQ/ATOSStandFront.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/Interactable.tscn" type="PackedScene" id=2]
@@ -29,6 +29,36 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=46]
+resource_name = "glitch00"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 48 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "expression_glitch_ended"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -1302,6 +1332,7 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )
+anims/glitch00 = SubResource( 46 )
 anims/glitch01 = SubResource( 5 )
 anims/glitch02 = SubResource( 6 )
 anims/glitch03 = SubResource( 7 )

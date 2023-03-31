@@ -6,14 +6,17 @@ var scene_text = {}
 var selected_text = []
 var in_progress = false
 
+export var announcement_duration = 5
+
 onready var background = $Background
-onready var text_label = $TextLabel
+onready var text_label = $Background/TextLabel
+onready var timer = $Timer
 
 func _ready():
 	visible = true
 	background.visible = false
 	scene_text = load_scene_text()
-	SignalBus.connect("display_dialogue", self, "on_display_dialog")
+	SignalBus.connect("display_announcement", self, "on_display_announcement")
 
 func load_scene_text():
 	var file = File.new()
@@ -34,14 +37,18 @@ func finish():
 	text_label.text = ""
 	background.visible = false
 	in_progress = false
-	get_tree().paused = false
 	
-func on_display_dialog(text_key):
-	if in_progress:
-		next_line()
-	else:
-		get_tree().paused = true
-		background.visible = true
-		in_progress = true
-		selected_text = scene_text[text_key].duplicate()
-		show_text()
+func on_display_announcement(text_key):
+	timer.start(announcement_duration)
+#	if in_progress:
+#		pass
+#		#next_line()
+#	else:
+	background.visible = true
+	in_progress = true
+	selected_text = scene_text[text_key].duplicate()
+	show_text()
+
+
+func _on_Timer_timeout():
+	finish()

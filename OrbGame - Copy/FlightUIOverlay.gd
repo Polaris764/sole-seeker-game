@@ -14,6 +14,13 @@ func _ready():
 		$IncreaseLabel.disabled_message = "Max Speed Reached"
 	elif spaceship_level == -2:
 		$DecreaseLabel.interaction_result = "Exit Flight Chair"
+	var storyPos = GalaxySave.game_data["storyProgression"]
+	if storyPos == 5:
+		SignalBus.emit_signal("display_announcement","first_ship_powered")
+		GalaxySave.game_data["storyProgression"] = 6
+	elif storyPos == 6:
+		SignalBus.emit_signal("display_announcement","travel_to_planet")
+		GalaxySave.game_data["storyProgression"] = 7
 
 func _on_IncreaseLabel_interacted_with():
 	print("increasing")

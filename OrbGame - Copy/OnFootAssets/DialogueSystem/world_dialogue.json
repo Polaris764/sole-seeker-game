@@ -3,9 +3,25 @@
         "Hello player."
     ],
     "atos1": [
-        "Welcome text."
+        "Good morning Player.",
+        "Are you prepared for your first extrastation excursion today?",
+        "Leaving the station for the first time may seem big to you, but I assure you it is simply on stepping stone in your quest for vengeance.",
+        "Please warm up in the training room, then I will be honored to show you around your very own ship."
     ],
     "atos2": [
-        "Training text."
+        "Welcome again to your capability training.",
+        "I insist your body is ready before I allow you to enter the spaceship.",
+        "Your impending journey is dangerous. I care for your wellbeing."
+    ],
+    "atos3": [
+        "Are you prepared, Player?",
+        "First, shoot the robot with your net launcher to immobilize it.",
+        "Next, stab the robot. Just as you have always done.",
+        "When it is incapacitated. You may harvest it."
+    ],
+    "atos4": [
+        "Very well done Player.",
+        "When you have mentally readied yourself, board your spaceship.",
+        "Remember your practices over the past years. Do not be overwhelmed at this experience."
     ]
 }

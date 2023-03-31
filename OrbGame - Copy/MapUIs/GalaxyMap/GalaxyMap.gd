@@ -44,8 +44,10 @@ func _ready():
 export var starsInside = []
 
 func add_companyHQ():
-	var stationRadius = pow(rand_range(10,20),2)
-	var stationAngle = rand_range(0,2*PI)
+	var rngMach = RandomNumberGenerator.new()
+	rngMach.seed = GalaxySave.game_data["galaxySeed"]
+	var stationRadius = pow(rngMach.randi_range(10,20),2)
+	var stationAngle = rngMach.randi_range(0,2*PI)
 	var stationInstance = HQ.instance()
 	add_child(stationInstance)
 	stationInstance.global_position = Vector2(cos(stationAngle)*stationRadius,sin(stationAngle)*stationRadius)

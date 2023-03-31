@@ -1,0 +1,26 @@
+{
+    "entered_training_room": [
+        "You've now entered the training room. I will close the doors behind you."
+    ],
+    "completed_tutorial": [
+        "Very good. You may enter your ship once you're ready."
+    ],
+    "ship_tour1": [
+        "This ship is now yours to command. I'll tell you about each area as you visit it."
+    ],
+    "ship_tour_deposit": [
+        "Deposit essence you've gathered planetside here. This provides safe storage, ensuring you won't lose it when you die."
+    ],
+    "ship_tour_chair": [
+        "This is the chair you can use to pilot your ship. I will end the tour once you use it."
+    ],
+    "ship_tour_door": [
+        "Exit your ship through here. I'm sure you're familiar with doors."
+    ],
+    "first_ship_powered": [
+        "Ship: Ship powered. Increase speed to travel between star systems."
+    ],
+    "travel_to_planet": [
+        "Ship: Travel to nearby star system. Further ones are restricted due to danger."
+    ]
+}
