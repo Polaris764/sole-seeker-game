@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://MapUIs/General/InteractionLabel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://FlightUIOverlay.gd" type="Script" id=2]
+[ext_resource path="res://OnFootAssets/DialogueSystem/AnnouncementLayer.tscn" type="PackedScene" id=3]
 
 [node name="FlightUIOverlay" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -29,6 +30,9 @@ margin_right = 0.0
 align = 2
 interaction_result = "Decrease Speed"
 control = "decrease_speed"
+
+[node name="AnnouncementLayer" parent="." instance=ExtResource( 3 )]
+scene_text_file = "res://OnFootAssets/DialogueSystem/world_announcements.json"
 
 [connection signal="interacted_with" from="IncreaseLabel" to="." method="_on_IncreaseLabel_interacted_with"]
 [connection signal="interacted_with" from="DecreaseLabel" to="." method="_on_DecreaseLabel_interacted_with"]

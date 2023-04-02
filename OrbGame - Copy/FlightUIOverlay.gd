@@ -16,10 +16,11 @@ func _ready():
 		$DecreaseLabel.interaction_result = "Exit Flight Chair"
 	var storyPos = GalaxySave.game_data["storyProgression"]
 	if storyPos == 5:
+		print("CHECK!")
 		SignalBus.emit_signal("display_announcement","first_ship_powered")
 		GalaxySave.game_data["storyProgression"] = 6
 	elif storyPos == 6:
-		SignalBus.emit_signal("display_announcement","travel_to_planet")
+		SignalBus.emit_signal("display_announcement","ship_guide1")
 		GalaxySave.game_data["storyProgression"] = 7
 
 func _on_IncreaseLabel_interacted_with():

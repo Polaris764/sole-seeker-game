@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://TestWaveyCircle.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="ConcavePolygonShape2D" id=1]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+point_count = 200
+circle_radius = 500
+variance_radius = 600
+cosine_length = 5
+cosine_length2 = 10
+sin_length = 13
+
+[node name="Icon" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 9, 9 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

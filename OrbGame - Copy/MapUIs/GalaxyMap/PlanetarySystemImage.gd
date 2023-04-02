@@ -1,5 +1,7 @@
 extends Node2D
 export var CompanyStation = false
+export var system_type = []
+
 
 func _on_TextureButton_pressed():
 	#GalaxySave.setLastStarClicked(self.global_position.x)
@@ -82,4 +84,14 @@ func updateSystemInfoPanel(seedUsed):
 		degPos += 360
 	pStarCoords.text = String(seedUsed.distance_to(Vector2(0,0))) + ", " + String(degPos)+"°" #set star coordinates
 	pPlanetAmount.text = "Planet Count: " + String(planetAmount) #set planet amount
-	pSystemType.text = "System Type: " + systemTypeOptions[randi() % systemTypeOptions.size()] #generate system type
+	get_system_type(pSystemType)
+
+func get_system_type(textNode):
+	var system_type_desc : String
+	if system_type.size() > 0:
+		system_type_desc = system_type[0]
+		for type in range(1,system_type.size()):
+			system_type_desc += (", " + system_type[type])
+		textNode.text = "System Type: " + system_type_desc
+	else:
+		textNode.text = "System Type: Uninhabited"

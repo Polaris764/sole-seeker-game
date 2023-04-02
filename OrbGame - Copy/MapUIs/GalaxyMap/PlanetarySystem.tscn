@@ -5,7 +5,7 @@
 
 [sub_resource type="CircleShape2D" id=1]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["star_system"]]
 script = ExtResource( 2 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
@@ -23,6 +23,7 @@ texture_normal = ExtResource( 1 )
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 

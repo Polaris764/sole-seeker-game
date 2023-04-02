@@ -20,7 +20,7 @@
     "first_ship_powered": [
         "Ship: Ship powered. Increase speed to travel between star systems."
     ],
-    "travel_to_planet": [
+    "ship_guide1": [
         "Ship: Travel to nearby star system. Further ones are restricted due to danger."
     ]
 }
