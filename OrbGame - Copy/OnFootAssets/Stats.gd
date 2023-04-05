@@ -1,7 +1,7 @@
 extends Node
 
-export var harvest_duration = 3.5
-export(int) var max_health = 1 setget set_max_health
+export (int) var harvest_duration = 3.5
+export (int) var max_health = 1 setget set_max_health
 export (int) var health = max_health setget set_health
 
 signal no_health
@@ -21,5 +21,3 @@ func set_health(value):
 
 func _ready():
 	self.health = max_health
-	if harvest_duration > 3.5:
-		harvest_duration = 3.5

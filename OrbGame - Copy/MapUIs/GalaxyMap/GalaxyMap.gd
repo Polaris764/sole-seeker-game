@@ -8,7 +8,7 @@ var HQ = preload("res://MapUIs/GalaxyMap/CompanyHQ.tscn")
 onready var player = $Player
 
 export var biomes = {"blue":[],"red":[]}
-var biomes_collisions = {"blue":[],"red":[]}
+export var biomes_collisions = {"blue":[],"red":[]}
 
 func rotatePoint(point,angle):
 	var px = point#*3
@@ -40,9 +40,10 @@ func _ready():
 		if i %22 == 0:
 			for _x in range(20):
 				var new_planet = planet.instance()
-				new_planet.system_type = determine_biome(rotatePoint(i,i))
 				add_child(new_planet)
-				new_planet.global_position = rotatePoint(i,i)
+				var planet_pos = rotatePoint(i,i)
+				new_planet.global_position = planet_pos
+				new_planet.system_type = determine_biome(planet_pos)
 
 	add_companyHQ()
 	update_ship()

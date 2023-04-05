@@ -1,11 +1,12 @@
 extends Node2D
 export var CompanyStation = false
-export var system_type = []
+export var system_type = [] #setget get_system_type
 
 
 func _on_TextureButton_pressed():
 	#GalaxySave.setLastStarClicked(self.global_position.x)
-	get_tree().change_scene("res://MapUIs/InsideSystem/InsideSystem.tscn")
+	print(system_type)
+#	get_tree().change_scene("res://MapUIs/InsideSystem/InsideSystem.tscn")
 	
 func growSprite(spriteName):
 	spriteName.set_scale(Vector2(2,2))
@@ -74,24 +75,24 @@ func updateSystemInfoPanel(seedUsed):
 	var keyedSeed = pow(seedUsed.x,2)*cos(pow(seedUsed.x,3))
 	seed(keyedSeed)
 	var planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
-	
+	star_name = starNameOptions[randi() % starNameOptions.size()].capitalize()
 	pStarImage.texture = starIm
 	pStarImage.rect_size = Vector2(64,64)
 	pStarImage.modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1) #set star texture
-	pStarName.text = starNameOptions[randi() % starNameOptions.size()].capitalize() #generate star name
+	pStarName.text = star_name #generate star name
 	var degPos = rad2deg(atan2(seedUsed.y,seedUsed.x))*-1
 	if degPos < 0:
 		degPos += 360
 	pStarCoords.text = String(seedUsed.distance_to(Vector2(0,0))) + ", " + String(degPos)+"°" #set star coordinates
 	pPlanetAmount.text = "Planet Count: " + String(planetAmount) #set planet amount
-	get_system_type(pSystemType)
+	pSystemType.text = str(system_type)
 
-func get_system_type(textNode):
-	var system_type_desc : String
+var star_name
+var system_type_text : String = "System Type: Uninhabited"
+func get_system_type(system_table):
+	system_type = system_table
 	if system_type.size() > 0:
-		system_type_desc = system_type[0]
-		for type in range(1,system_type.size()):
-			system_type_desc += (", " + system_type[type])
-		textNode.text = "System Type: " + system_type_desc
+		system_type_text = "System Type: Blue"
 	else:
-		textNode.text = "System Type: Uninhabited"
+		system_type_text = "System Type: Uninhabited"
+	print(star_name)

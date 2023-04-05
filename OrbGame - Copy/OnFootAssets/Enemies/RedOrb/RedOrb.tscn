@@ -207,6 +207,7 @@ position = Vector2( 0, -16.6667 )
 shape = SubResource( 6 )
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
+harvest_duration = 4
 max_health = 4
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://OnFootAssets/Assets/floor2.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://OnFootAssets/Player/Build/Caltrops.tscn" type="PackedScene" id=10]
 [ext_resource path="res://OnFootAssets/Player/Build/Landmines.tscn" type="PackedScene" id=11]
 [ext_resource path="res://OnFootAssets/Player/Build/Turret.tscn" type="PackedScene" id=12]
+[ext_resource path="res://OnFootAssets/Enemies/Purple/PurpleEnemy.tscn" type="PackedScene" id=13]
+[ext_resource path="res://OnFootAssets/Enemies/Orange/OrangeEnemy.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -82,6 +84,12 @@ position = Vector2( 208, -110 )
 [node name="ItemConverter" parent="YSort" instance=ExtResource( 7 )]
 player_node = NodePath("../Player")
 interaction_result = "Use Converter"
+
+[node name="PurpleEnemy" parent="YSort" instance=ExtResource( 13 )]
+position = Vector2( -54, 197 )
+
+[node name="OrangeEnemy" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 95, 95 )
 
 [node name="BloodDeposit" parent="." instance=ExtResource( 8 )]
 position = Vector2( 32, 0 )

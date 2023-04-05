@@ -256,7 +256,6 @@ func harvest_check():
 	if not weaponHitbox.harvesting:
 		print("no target")
 	else:
-		print("waiting")
 		yield(get_tree().create_timer(weaponHitbox.harvest_wait_time), "timeout")
 	weaponHitbox.harvesting_tool = false
 	play_animation($AttackTree)

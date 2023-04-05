@@ -19,7 +19,7 @@ func getLastStarClickedName():
 var lastPlanetClicked = 0
 func setLastPlanetClicked(starPos,planetPos):
 	game_data["shipPosition"][7] = planetPos
-	lastPlanetClicked = pow(starPos*planetPos,2)*cos(pow(starPos*planetPos,3))
+	lastPlanetClicked = str(pow(starPos*planetPos,2)*cos(pow(starPos*planetPos,3))).hash()
 func getLastPlanetClicked():
 	return lastPlanetClicked
 
@@ -49,16 +49,16 @@ onready var buildingTypes = ConstantsHolder.building_types
 onready var shipLocation = ConstantsHolder.ship_locations
 func load_data():
 	var file = File.new()
-	if not file.file_exists(SAVE_FILE) or true:
+	if not file.file_exists(SAVE_FILE)  or true:
 		randomize()
 		game_data = {
 			"galaxySeed": randi(),
-			"backpackBlood": {"red":0,"blue":0},
-			"storedBlood": {"red":0,"blue":0},
+			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0},
+			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0},
 			"buildingData": {},
 			"storedBuildings":{buildingTypes.WALL:50,buildingTypes.FLOOR:50,buildingTypes.TURRET:50,buildingTypes.CALTROPS:50,buildingTypes.LANDMINE:50,buildingTypes.LASER:50},
 			"shipPosition": [Vector2.ZERO,Vector2.ZERO,-2,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
-			"storyProgression": 4
+			"storyProgression": 5
 		}
 		save_data()
 	file.open(SAVE_FILE,File.READ)
