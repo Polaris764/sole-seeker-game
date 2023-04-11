@@ -251,10 +251,12 @@ visibility_rect = Rect2( -1600, -1600, 3200, 3200 )
 process_material = SubResource( 6 )
 texture = ExtResource( 5 )
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 278, 114 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
 current = true
 zoom = Vector2( 0.3, 0.3 )
 
@@ -267,3 +269,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 1020.0
 margin_bottom = 600.0
+
+[connection signal="teleported" from="YSort/Player" to="." method="_on_Player_teleported"]

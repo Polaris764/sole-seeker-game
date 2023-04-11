@@ -300,8 +300,12 @@ tile_set = SubResource( 3 )
 cell_size = Vector2( 16, 16 )
 format = 1
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 278, 114 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
 zoom = Vector2( 0.3, 0.3 )
+
+[connection signal="teleported" from="YSort/Player" to="." method="_on_Player_teleported"]

@@ -24,6 +24,6 @@ func custom_interaction():
 func interacted():
 	var ship_location = GalaxySave.game_data["shipPosition"][7]
 	if ship_location == 0:
-		get_tree().change_scene(station_scene)
+		var _change = get_tree().change_scene(station_scene)
 	else:
-		get_tree().change_scene(planet_scene)
+		var _change = get_tree().change_scene(planet_scene)

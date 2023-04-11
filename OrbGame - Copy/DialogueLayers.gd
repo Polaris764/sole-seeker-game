@@ -12,7 +12,7 @@ onready var text_label = $Background/Label
 func _ready():
 	background.visible = false
 	scene_text = load_scene_text()
-	SignalBus.connect("display_dialogue", self, "on_display_dialog")
+	var _signal_connection = SignalBus.connect("display_dialogue", self, "on_display_dialog")
 
 func load_scene_text():
 	var file = File.new()

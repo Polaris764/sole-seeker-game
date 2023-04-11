@@ -10,10 +10,10 @@ var wet_cap = .4
 
 func _ready():
 	var rain = load("res://OnFootAssets/RainParticles.tscn").instance()
-	$Player/Camera2D.add_child(rain)
+	$YSort/Player/Camera2D.add_child(rain)
 	$Fog/Fog.rect_size = Vector2(16,16)*(map_size+Vector2(40,40))
 	$Fog/Fog.rect_position = Vector2(16,16)*Vector2(-20,-20)
-	$Player.slipperyGround = true
+	$YSort/Player.slipperyGround = true
 	get_node("..").ship_position = find_ship_pos()
 	seed(GalaxySave.getLastPlanetClicked())
 	make_lower_map()
@@ -164,3 +164,20 @@ func refine_upper_map():
 func find_ship_pos():
 #	print("finding ship pos")
 	return Vector2(1600,1600)
+
+func get_spawning_array():
+	var tilemap_table = $LowerStones.get_used_cells()
+	return tilemap_table
+
+func _on_Player_teleported(direction):
+	var entities = $YSort.get_children()
+	entities.erase($YSort/Player)
+	var entities_edited = []
+	for item in entities:
+		if item is KinematicBody2D:
+			entities_edited.append(item)
+	direction *= map_side_size
+	direction *= 16
+	print("teleporting all entities")
+	for entity in entities_edited:
+		entity.global_position += direction

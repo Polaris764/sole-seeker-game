@@ -1,6 +1,6 @@
 extends Node
 
-export (int) var harvest_duration = 3.5
+export (float) var harvest_duration = 3.5
 export (int) var max_health = 1 setget set_max_health
 export (int) var health = max_health setget set_health
 

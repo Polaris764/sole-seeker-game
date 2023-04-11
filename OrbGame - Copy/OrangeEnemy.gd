@@ -12,6 +12,8 @@ export var FRICTION = 200
 
 export var WANDER_TARGET_RANGE = 4
 
+var minion = preload("res://OnFootAssets/Enemies/Brown/BrownEnemy.tscn")
+
 enum{
 	IDLE,
 	CHASE,
@@ -34,12 +36,29 @@ onready var animator2 = $Body/BaseL/BaseLAnimator
 onready var animator3 = $Body/BaseR/BaseRAnimator
 onready var attackT = $AttackCountdown
 onready var player = get_node("../Player")
+onready var sprite = $Body0
 
 func _ready():
 	animator.play("Idle")
 	$SplurtCountdown.start(rand_range(.4,4))
+	set_sprite_distances()
 
-func _physics_process(delta):
+export var map_size : int = 0
+func set_sprite_distances():
+	map_size *= 16
+	var sprite_map_size = map_size * (1/scale.x)
+	sprite.get_node("Sprite1").position = Vector2(sprite_map_size,0)
+	sprite.get_node("Sprite2").position = Vector2(sprite_map_size,-sprite_map_size)
+	sprite.get_node("Sprite3").position = Vector2(0,-sprite_map_size)
+	sprite.get_node("Sprite4").position = Vector2(-sprite_map_size,-sprite_map_size)
+	sprite.get_node("Sprite5").position = Vector2(-sprite_map_size,0)
+	sprite.get_node("Sprite6").position = Vector2(-sprite_map_size,sprite_map_size)
+	sprite.get_node("Sprite7").position = Vector2(0,sprite_map_size)
+	sprite.get_node("Sprite8").position = Vector2(sprite_map_size,sprite_map_size)
+
+onready var last_seen_player_location = global_position
+
+func _physics_process(_delta):
 	if playerDetectionZone.can_see_player():
 		if state == IDLE:
 			state = CHASE
@@ -83,13 +102,15 @@ func _on_Stats_no_health():
 func death_animation():
 	state = DEAD
 	animator.stop()
-	var tween = $Body/DeathTween
 
 func completed_harvest():
 	harvest_area.harvesting = false
 	GalaxySave.game_data["backpackBlood"]["orange"] += 1
 	print(GalaxySave.game_data["backpackBlood"])
 	GalaxySave.save_data()
+	for child in sprite.get_children():
+		if child is Sprite:
+			child.position *= Vector2(1/.8,1/.8)
 
 func _on_SplurtCountdown_timeout():
 	if state != DEAD:
@@ -108,6 +129,11 @@ func _on_SplurtCountdown_timeout():
 				if not animator3.is_playing():
 					animator3.play("Burst")
 		$SplurtCountdown.start(rand_range(.2,4))
+
+func spawn_minion():
+	var minion_instance = minion.instance()
+	minion_instance.global_position = global_position + Vector2(rand_range(-5,5),-25.5)
+	get_node("..").add_child(minion_instance)
 
 # Trapped Functions #
 

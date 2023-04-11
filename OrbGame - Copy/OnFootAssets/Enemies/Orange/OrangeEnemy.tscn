@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://OrangeEnemy.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://OnFootAssets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OnFootAssets/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://OnFootAssets/Enemies/Orange/Orange.png" type="Texture" id=5]
+[ext_resource path="res://OnFootAssets/Enemies/Orange/Body0.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Burst"
@@ -68,11 +69,507 @@ tracks/0/keys = {
 "values": [ 15 ]
 }
 
+[sub_resource type="Animation" id=12]
+resource_name = "Burst"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 10 ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Burst"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 15 ]
+}
+
+[sub_resource type="Animation" id=15]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "Burst"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 10 ]
+}
+
+[sub_resource type="Animation" id=17]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "Burst"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 15 ]
+}
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "Burst"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 10 ]
+}
+
+[sub_resource type="Animation" id=21]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "Burst"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 15 ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "Burst"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 10 ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "Burst"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 15 ]
+}
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "Burst"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 10 ]
+}
+
+[sub_resource type="Animation" id=29]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "Burst"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 15 ]
+}
+
+[sub_resource type="Animation" id=31]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "Burst"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 10 ]
+}
+
+[sub_resource type="Animation" id=33]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "Burst"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 15 ]
+}
+
+[sub_resource type="Animation" id=35]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "Burst"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 10 ]
+}
+
+[sub_resource type="Animation" id=37]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "Burst"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 15 ]
+}
+
+[sub_resource type="Animation" id=39]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+
+[sub_resource type="Animation" id=40]
+resource_name = "Burst"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 10 ]
+}
+
+[sub_resource type="Animation" id=41]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "Burst"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17, 18, 15 ]
+}
+
+[sub_resource type="Animation" id=43]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 15 ]
+}
+
 [sub_resource type="Animation" id=5]
 resource_name = "Attack"
 length = 1.7
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
+tracks/0/path = NodePath("Body0:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -90,9 +587,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1.7 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 1.5, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spawn_minion"
+}, {
 "args": [  ],
 "method": "attack_animation_ended"
 } ]
@@ -102,7 +602,7 @@ tracks/1/keys = {
 resource_name = "Harvest"
 length = 6.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:scale")
+tracks/0/path = NodePath("Body0:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -133,7 +633,7 @@ resource_name = "Idle"
 length = 3.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
+tracks/0/path = NodePath("Body0:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -162,7 +662,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=8]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:frame")
+tracks/0/path = NodePath("Body0:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -174,7 +674,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body:scale")
+tracks/1/path = NodePath("Body0:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -201,36 +701,286 @@ radius = 190.168
 scale = Vector2( 0.4, 0.4 )
 collision_layer = 17
 script = ExtResource( 1 )
+map_size = 200
 
-[node name="Body" type="Sprite" parent="."]
+[node name="Body0" type="Sprite" parent="."]
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
+script = ExtResource( 6 )
 
-[node name="BaseL" type="Sprite" parent="Body"]
+[node name="BaseL" type="Sprite" parent="Body0"]
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 frame = 10
 
-[node name="BaseLAnimator" type="AnimationPlayer" parent="Body/BaseL"]
+[node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/BaseL"]
 anims/Burst = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
-[node name="DeathTween" type="Tween" parent="Body"]
+[node name="DeathTween" type="Tween" parent="Body0"]
 
-[node name="BaseR" type="Sprite" parent="Body"]
+[node name="BaseR" type="Sprite" parent="Body0"]
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 frame = 15
 
-[node name="BaseRAnimator" type="AnimationPlayer" parent="Body/BaseR"]
+[node name="BaseRAnimator" type="AnimationPlayer" parent="Body0/BaseR"]
 anims/Burst = SubResource( 3 )
 anims/RESET = SubResource( 4 )
+
+[node name="Body1" type="Sprite" parent="Body0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+
+[node name="BaseL" type="Sprite" parent="Body0/Body1"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/Body1/BaseL"]
+anims/Burst = SubResource( 12 )
+anims/RESET = SubResource( 13 )
+
+[node name="DeathTween" type="Tween" parent="Body0/Body1"]
+
+[node name="BaseR" type="Sprite" parent="Body0/Body1"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 15
+
+[node name="BaseRAnimator" type="AnimationPlayer" parent="Body0/Body1/BaseR"]
+anims/Burst = SubResource( 14 )
+anims/RESET = SubResource( 15 )
+
+[node name="Body2" type="Sprite" parent="Body0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+
+[node name="BaseL" type="Sprite" parent="Body0/Body2"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/Body2/BaseL"]
+anims/Burst = SubResource( 16 )
+anims/RESET = SubResource( 17 )
+
+[node name="DeathTween" type="Tween" parent="Body0/Body2"]
+
+[node name="BaseR" type="Sprite" parent="Body0/Body2"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 15
+
+[node name="BaseRAnimator" type="AnimationPlayer" parent="Body0/Body2/BaseR"]
+anims/Burst = SubResource( 18 )
+anims/RESET = SubResource( 19 )
+
+[node name="Body3" type="Sprite" parent="Body0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+
+[node name="BaseL" type="Sprite" parent="Body0/Body3"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/Body3/BaseL"]
+anims/Burst = SubResource( 20 )
+anims/RESET = SubResource( 21 )
+
+[node name="DeathTween" type="Tween" parent="Body0/Body3"]
+
+[node name="BaseR" type="Sprite" parent="Body0/Body3"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 15
+
+[node name="BaseRAnimator" type="AnimationPlayer" parent="Body0/Body3/BaseR"]
+anims/Burst = SubResource( 22 )
+anims/RESET = SubResource( 23 )
+
+[node name="Body4" type="Sprite" parent="Body0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+
+[node name="BaseL" type="Sprite" parent="Body0/Body4"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/Body4/BaseL"]
+anims/Burst = SubResource( 24 )
+anims/RESET = SubResource( 25 )
+
+[node name="DeathTween" type="Tween" parent="Body0/Body4"]
+
+[node name="BaseR" type="Sprite" parent="Body0/Body4"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 15
+
+[node name="BaseRAnimator" type="AnimationPlayer" parent="Body0/Body4/BaseR"]
+anims/Burst = SubResource( 26 )
+anims/RESET = SubResource( 27 )
+
+[node name="Body5" type="Sprite" parent="Body0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+
+[node name="BaseL" type="Sprite" parent="Body0/Body5"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/Body5/BaseL"]
+anims/Burst = SubResource( 28 )
+anims/RESET = SubResource( 29 )
+
+[node name="DeathTween" type="Tween" parent="Body0/Body5"]
+
+[node name="BaseR" type="Sprite" parent="Body0/Body5"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 15
+
+[node name="BaseRAnimator" type="AnimationPlayer" parent="Body0/Body5/BaseR"]
+anims/Burst = SubResource( 30 )
+anims/RESET = SubResource( 31 )
+
+[node name="Body6" type="Sprite" parent="Body0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+
+[node name="BaseL" type="Sprite" parent="Body0/Body6"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/Body6/BaseL"]
+anims/Burst = SubResource( 32 )
+anims/RESET = SubResource( 33 )
+
+[node name="DeathTween" type="Tween" parent="Body0/Body6"]
+
+[node name="BaseR" type="Sprite" parent="Body0/Body6"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 15
+
+[node name="BaseRAnimator" type="AnimationPlayer" parent="Body0/Body6/BaseR"]
+anims/Burst = SubResource( 34 )
+anims/RESET = SubResource( 35 )
+
+[node name="Body7" type="Sprite" parent="Body0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+
+[node name="BaseL" type="Sprite" parent="Body0/Body7"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/Body7/BaseL"]
+anims/Burst = SubResource( 36 )
+anims/RESET = SubResource( 37 )
+
+[node name="DeathTween" type="Tween" parent="Body0/Body7"]
+
+[node name="BaseR" type="Sprite" parent="Body0/Body7"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 15
+
+[node name="BaseRAnimator" type="AnimationPlayer" parent="Body0/Body7/BaseR"]
+anims/Burst = SubResource( 38 )
+anims/RESET = SubResource( 39 )
+
+[node name="Body8" type="Sprite" parent="Body0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+
+[node name="BaseL" type="Sprite" parent="Body0/Body8"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 10
+
+[node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/Body8/BaseL"]
+anims/Burst = SubResource( 40 )
+anims/RESET = SubResource( 41 )
+
+[node name="DeathTween" type="Tween" parent="Body0/Body8"]
+
+[node name="BaseR" type="Sprite" parent="Body0/Body8"]
+texture = ExtResource( 5 )
+offset = Vector2( 0, -37 )
+hframes = 10
+vframes = 2
+frame = 15
+
+[node name="BaseRAnimator" type="AnimationPlayer" parent="Body0/Body8/BaseR"]
+anims/Burst = SubResource( 42 )
+anims/RESET = SubResource( 43 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 5 )
@@ -266,6 +1016,12 @@ max_health = 8
 
 [node name="SplurtCountdown" type="Timer" parent="."]
 
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, -32.5 )
+
+[connection signal="frame_changed" from="Body0" to="Body0" method="_on_Body0_frame_changed"]
+[connection signal="frame_changed" from="Body0/BaseL" to="Body0" method="_on_BaseL_frame_changed"]
+[connection signal="frame_changed" from="Body0/BaseR" to="Body0" method="_on_BaseR_frame_changed"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="AttackCountdown" to="." method="_on_AttackCountdown_timeout"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]

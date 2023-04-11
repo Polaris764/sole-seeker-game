@@ -8,18 +8,18 @@ var angle_to_target = null
 onready var gunSprite = $Sprite
 onready var reloadTimer = $Timer
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if viable_enemies.size() > 0:
 		if not current_target:
 			current_target = viable_enemies[0]
 		if current_target.get_node("Stats").health <= 0:
-			print("removing dead entity")
 			viable_enemies.remove(viable_enemies.find(current_target))
 			current_target = null
 		if viable_enemies.size() > 0:
 			if not current_target:
 				current_target = viable_enemies[0]
 			angle_to_target = rad2deg(global_position.direction_to(current_target.global_position).angle())+180
+			#warning-ignore:integer_division
 			var target_frame = int(stepify(angle_to_target,45))/45-6
 			gunSprite.frame = target_frame if target_frame > -1 else target_frame + 8
 			if reloadTimer.is_stopped():

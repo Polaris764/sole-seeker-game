@@ -31,14 +31,31 @@ onready var hurtbox = $Hurtbox
 onready var soft_collision = $SoftCollision
 onready var wander_controller = $WanderController
 onready var animationState = $AnimationTree.get("parameters/playback")
+onready var sprite = $Sprite0
 
 func _ready():
-	$Sprite.scale = Vector2(1,1)
+	sprite.scale = Vector2(1,1)
 	current_max_speed = MAX_SPEED
+	set_sprite_distances()
 
+export var map_size : int = 0
+func set_sprite_distances():
+	map_size *= 16
+	var sprite_map_size = map_size * (1/scale.x)
+	sprite.get_node("Sprite1").position = Vector2(sprite_map_size,0)
+	sprite.get_node("Sprite2").position = Vector2(sprite_map_size,-sprite_map_size)
+	sprite.get_node("Sprite3").position = Vector2(0,-sprite_map_size)
+	sprite.get_node("Sprite4").position = Vector2(-sprite_map_size,-sprite_map_size)
+	sprite.get_node("Sprite5").position = Vector2(-sprite_map_size,0)
+	sprite.get_node("Sprite6").position = Vector2(-sprite_map_size,sprite_map_size)
+	sprite.get_node("Sprite7").position = Vector2(0,sprite_map_size)
+	sprite.get_node("Sprite8").position = Vector2(sprite_map_size,sprite_map_size)
+
+onready var last_seen_player_location = global_position
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO,200*delta)
 	knockback = move_and_slide(knockback)
+	handle_map_teleportation()
 	
 	match state:
 		IDLE:
@@ -61,10 +78,15 @@ func _physics_process(delta):
 		CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
-				var direction = global_position.direction_to(player.get_node("Hurtbox/CollisionShape2D").global_position)
+				var player_location = player.get_node("Hurtbox/CollisionShape2D").global_position
+				last_seen_player_location = global_position + Vector2(2,2) * velocity
+				var direction = global_position.direction_to(player_location)
 				velocity = velocity.move_toward(direction*current_max_speed,ACCELERATION*delta)
 			else:
-				state = IDLE
+				var direction = global_position.direction_to(last_seen_player_location)
+				velocity = velocity.move_toward(direction*current_max_speed,ACCELERATION*delta)
+				if global_position.distance_to(last_seen_player_location) < 5:
+					state = IDLE
 		TRAPPED:
 			current_max_speed = MAX_SPEED*trapped_speeds.min() if trapped_speeds.min() else MAX_SPEED
 			seek_player()
@@ -95,6 +117,20 @@ func _physics_process(delta):
 		
 	velocity = move_and_slide(velocity)
 
+func handle_map_teleportation():
+	if self.global_position.x < 0:
+		self.global_position.x += map_size
+		last_seen_player_location.x += map_size
+	elif self.global_position.x > map_size:
+		self.global_position.x -= map_size
+		last_seen_player_location.x -= map_size
+	if self.global_position.y < 0:
+		self.global_position.y += map_size
+		last_seen_player_location.y += map_size
+	elif self.global_position.y > map_size:
+		self.global_position.y -= map_size
+		last_seen_player_location.y -= map_size
+
 var seen_player = false
 func seek_player():
 	if playerDetectionZone.can_see_player():
@@ -124,17 +160,15 @@ func death_animation():
 	state = DEAD
 	$Hitbox.queue_free()
 	$AnimationTree.active = false
-	var tween = $Sprite/DeathTween
-	tween.interpolate_property($Sprite, "offset",
-			$Sprite.offset, Vector2(0,0), 2,
-			Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	tween.start()
 
 func completed_harvest():
 	harvest_area.harvesting = false
 	GalaxySave.game_data["backpackBlood"]["blue"] += 1
 	print(GalaxySave.game_data["backpackBlood"])
 	GalaxySave.save_data()
+	for child in sprite.get_children():
+		if child is Sprite:
+			child.position *= Vector2(1/.8,1/.8)
 
 var trapped_speeds = []
 
@@ -157,4 +191,3 @@ func entity_trapped(duration,speed):
 	add_child(timer)
 	timer.wait_time = duration/2
 	timer.start()
-

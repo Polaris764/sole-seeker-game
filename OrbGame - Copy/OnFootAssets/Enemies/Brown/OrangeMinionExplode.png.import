@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DamageSpritesheet.png-23484f98a706c1a0025aa59a31a0df4e.stex"
+path="res://.import/OrangeMinionExplode.png-4a10a297459b1bde526829182b40d6c8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OnFootAssets/Enemies/DamageSpritesheet.png"
-dest_files=[ "res://.import/DamageSpritesheet.png-23484f98a706c1a0025aa59a31a0df4e.stex" ]
+source_file="res://OnFootAssets/Enemies/Brown/OrangeMinionExplode.png"
+dest_files=[ "res://.import/OrangeMinionExplode.png-4a10a297459b1bde526829182b40d6c8.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

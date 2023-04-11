@@ -5,7 +5,7 @@ var OriginTable = [] setget ,updateLabel
 var ActionDictionary = {}
 
 func _ready():
-	SignalBus.connect("cutscene_edited",self,"updateLabel")
+	var _connection = SignalBus.connect("cutscene_edited",self,"updateLabel")
 
 func areaLeft(interactionOrigin):
 	OriginTable.erase(interactionOrigin)

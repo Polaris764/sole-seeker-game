@@ -12,7 +12,7 @@
 [ext_resource path="res://OnFootAssets/UI/ShopMenu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://OnFootAssets/UI/InventoryMenu.tscn" type="PackedScene" id=11]
 [ext_resource path="res://OnFootAssets/DialogueSystem/DialogueInteractionArea.tscn" type="PackedScene" id=12]
-[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueLayers.tscn" type="PackedScene" id=13]
+[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueLayer.tscn" type="PackedScene" id=13]
 [ext_resource path="res://OnFootAssets/DialogueSystem/AnnouncementLayer.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Animation" id=4]
@@ -1579,7 +1579,7 @@ nodes/Seek/position = Vector2( 80, 160 )
 nodes/TimeScale/node = SubResource( 75 )
 nodes/TimeScale/position = Vector2( 280, 160 )
 nodes/output/position = Vector2( 520, 180 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Seek", "Seek", 0, "Attack" ]
+node_connections = [ "TimeScale", 0, "Seek", "Seek", 0, "Attack", "output", 0, "TimeScale" ]
 
 [sub_resource type="Animation" id=27]
 resource_name = "AttackDown"
@@ -2137,7 +2137,7 @@ nodes/NetgunAttack/position = Vector2( -300, 120 )
 nodes/Seek/node = SubResource( 77 )
 nodes/Seek/position = Vector2( 20, 140 )
 nodes/output/position = Vector2( 340, 160 )
-node_connections = [ "output", 0, "Seek", "Seek", 0, "NetgunAttack" ]
+node_connections = [ "Seek", 0, "NetgunAttack", "output", 0, "Seek" ]
 
 [sub_resource type="Animation" id=87]
 resource_name = "NetgunDown"
@@ -2601,17 +2601,17 @@ extents = Vector2( 13.75, 27.5 )
 extents = Vector2( 3.92179, 4.45495 )
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( -4, -6.5 )
+position = Vector2( -4, -5 )
 scale = Vector2( 0.4, 0.4 )
 collision_layer = 2
 script = ExtResource( 2 )
-movementSpeed = 70
+movementSpeed = 100
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 15, 16.25 )
+position = Vector2( 15, 12 )
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( -15, -48.75 )
+offset = Vector2( -15, -48 )
 hframes = 132
 vframes = 2
 frame = 4
@@ -2666,7 +2666,6 @@ parameters/Run/blend_position = Vector2( 0, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.2, 0.2 )
 
 [node name="AttackTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 69 )
@@ -2703,11 +2702,13 @@ disabled = true
 [node name="AttackArm" type="Sprite" parent="HitboxPivot"]
 position = Vector2( 8, 15 )
 texture = ExtResource( 3 )
+offset = Vector2( 0, -2 )
 hframes = 22
 
 [node name="Netgun" type="Sprite" parent="HitboxPivot"]
 position = Vector2( 5, 7 )
 texture = ExtResource( 9 )
+offset = Vector2( 0, -3 )
 hframes = 2
 vframes = 2
 frame = 1
@@ -2766,7 +2767,7 @@ position = Vector2( 13.75, -7.5 )
 shape = SubResource( 154 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 13.5, 11 )
+position = Vector2( 14, 7.5 )
 scale = Vector2( 1.594, 1.2 )
 shape = SubResource( 155 )
 

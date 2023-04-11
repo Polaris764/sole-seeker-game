@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://OnFootAssets/Assets/floor2.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://OnFootAssets/Player/Build/Turret.tscn" type="PackedScene" id=12]
 [ext_resource path="res://OnFootAssets/Enemies/Purple/PurpleEnemy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://OnFootAssets/Enemies/Orange/OrangeEnemy.tscn" type="PackedScene" id=14]
+[ext_resource path="res://OnFootAssets/Enemies/Black/Black.tscn" type="PackedScene" id=15]
+[ext_resource path="res://MapUIs/GalaxyMap/SystemInfoBG.png" type="Texture" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -58,6 +60,12 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [node name="TestEnvironment" type="Node2D"]
 script = ExtResource( 4 )
 
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 3200.0
+margin_bottom = 3200.0
+texture = ExtResource( 16 )
+expand = true
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
@@ -70,13 +78,7 @@ tile_data = PoolIntArray( -655356, 1, 0, -655354, 1, 0, -655352, 1, 0, -524288, 
 position = Vector2( -60, 39 )
 
 [node name="RedOrb" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 97, -118 )
-
-[node name="RedOrb2" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 97, -118 )
-
-[node name="RedOrb3" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 97, -118 )
+position = Vector2( 194, 223 )
 
 [node name="BlueOrb" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 208, -110 )
@@ -90,6 +92,36 @@ position = Vector2( -54, 197 )
 
 [node name="OrangeEnemy" parent="YSort" instance=ExtResource( 14 )]
 position = Vector2( 95, 95 )
+
+[node name="Black" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
+
+[node name="Black2" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
+
+[node name="Black3" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
+
+[node name="Black4" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
+
+[node name="Black5" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
+
+[node name="Black6" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
+
+[node name="Black7" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
+
+[node name="Black8" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
+
+[node name="Black9" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
+
+[node name="Black10" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( -71, 100 )
 
 [node name="BloodDeposit" parent="." instance=ExtResource( 8 )]
 position = Vector2( 32, 0 )

@@ -5,7 +5,7 @@ extends KinematicBody2D
 var current_velocity := Vector2()
 var input_velocity : Vector2 = Vector2()
 var direction : Vector2 = Vector2()
-export var movementSpeed = 100
+export var movementSpeed = 70
 export var isInRoom = false
 export var slipperyGround = false
 export var frozenPlanet = false
@@ -47,11 +47,12 @@ enum player_weapons {
 var weapon = player_weapons.NETGUN
 var needle_attack_with_netgun_equipped = false
 
-
+signal teleported(direction)
 func _ready():
+	$Camera2D.zoom = Vector2(.2,.2)
 	stats.connect("no_health",self,"queue_free")
 	animationTree.active = true
-	weaponHitbox.knockback_vector
+#	weaponHitbox.knockback_vector
 	update_buildings_from_saved_data()
 
 func _physics_process(delta):
@@ -127,12 +128,16 @@ func move_state():
 		var map_size = get_node("../..").map_side_size*16 if not get_node("../..").get("map_side_size") == null else get_node("..").map_side_size*16
 		if self.global_position.x < 0:
 			self.global_position.x += map_size
+			emit_signal("teleported",Vector2(1,0))
 		elif self.global_position.x > map_size:
 			self.global_position.x -= map_size
+			emit_signal("teleported",Vector2(-1,0))
 		if self.global_position.y < 0:
 			self.global_position.y += map_size
+			emit_signal("teleported",Vector2(0,-1))
 		elif self.global_position.y > map_size:
 			self.global_position.y -= map_size
+			emit_signal("teleported",Vector2(0,1))
 	
 	# switching weapons
 	if Input.is_action_just_released("weapon_switch_down"):
@@ -236,7 +241,7 @@ func set_positions_of_animation_trees(target_velocity):
 	
 ## ATTACKING ##
 
-func attack_state(delta):
+func attack_state(_delta):
 	if state != HARVEST:
 		if input_velocity == Vector2.ZERO:
 			animationState.travel("AttackIdle")
@@ -280,7 +285,7 @@ func play_animation(player):
 
 ## Attacking With Netgun ##
 
-func attack_state_NETGUN(delta):
+func attack_state_NETGUN(_delta):
 	if not needle_attack_with_netgun_equipped:
 		if input_velocity == Vector2.ZERO:
 			animationState.travel("ArmlessIdle")
@@ -416,7 +421,7 @@ var current_building_type = ConstantsHolder.building_types.FLOOR
 var last_mousepos = Vector2(0,0)
 var building_types = ConstantsHolder.building_types
 
-func build_state(delta):
+func build_state(_delta):
 	planet_building_data = GalaxySave.get_planet_building_data()
 	var mousepos = get_global_mouse_position()
 	var mousepos_floored = Vector2(floor(mousepos.x/tile_size)*tile_size, floor(mousepos.y/tile_size)*tile_size)
@@ -457,6 +462,7 @@ func build_state(delta):
 						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
 						planet_building_data[current_building_type][placing_block_location] += 1
 						var possible_landmines = get_tree().get_nodes_in_group("Landmines")
+						#warning-ignore:unused_variable
 						var found_landmine = false
 						for candidate_landmine in possible_landmines:
 							if candidate_landmine.global_position == placing_block_location:

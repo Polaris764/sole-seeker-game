@@ -68,3 +68,20 @@ func make_background():
 #			if a < road_caps.x and a > road_caps.y:
 #				$Path.set_cell(x,y,0)
 #	$Path.update_bitmask_region(Vector2(0,0),Vector2(map_size.x,map_size.y))
+
+func get_spawning_array():
+	var tilemap_table = $Rock.get_used_cells()
+	return tilemap_table
+
+func _on_Player_teleported(direction):
+	var entities = $YSort.get_children()
+	entities.erase($YSort/Player)
+	var entities_edited = []
+	for item in entities:
+		if item is KinematicBody2D:
+			entities_edited.append(item)
+	direction *= map_side_size
+	direction *= 16
+	print("teleporting all entities")
+	for entity in entities_edited:
+		entity.global_position += direction

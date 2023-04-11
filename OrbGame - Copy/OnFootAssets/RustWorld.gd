@@ -73,7 +73,7 @@ func make_second_layer():
 	noiseImage.lock()
 	for x in range(map_size.x):
 		for y in range(map_size.y):
-			var a = noiseImage.get_pixel(x,y).gray()
+			var _a = noiseImage.get_pixel(x,y).gray()
 			if $LowerRust.get_cell(x,y) == -1:
 				$UpperRust.set_cell(x,y,0)
 				# set edge corners
@@ -205,3 +205,21 @@ func make_background():
 				$LowerRust.set_cell(x,map_size.y+y,cell_decal)
 			elif y >= map_size.y-21:
 				$LowerRust.set_cell(x,y-map_size.y,cell_decal)
+
+func get_spawning_array():
+	var tilemap_table = $UpperRust.get_used_cells()
+	tilemap_table.append_array($UpperRust2.get_used_cells())
+	return tilemap_table
+
+func _on_Player_teleported(direction):
+	var entities = $YSort.get_children()
+	entities.erase($YSort/Player)
+	var entities_edited = []
+	for item in entities:
+		if item is KinematicBody2D:
+			entities_edited.append(item)
+	direction *= map_side_size
+	direction *= 16
+	print("teleporting all entities")
+	for entity in entities_edited:
+		entity.global_position += direction

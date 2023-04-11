@@ -14,9 +14,7 @@ func _physics_process(delta):
 	global_position += velocity*speed
 
 func _on_VisibilityNotifier2D_screen_exited():
-	print("done1")
 	queue_free()
 
-func _on_Bullet_body_entered(body):
-	print("done2")
+func _on_Bullet_body_entered(_body):
 	queue_free()

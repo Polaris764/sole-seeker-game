@@ -32,24 +32,49 @@ onready var hurtbox = $Hurtbox
 onready var animator = $AnimationPlayer
 onready var attackT = $AttackCountdown
 onready var player = get_node("../Player")
+onready var sprite = $Sprite0
+onready var sprite2 = $Sprite2
 
 func _ready():
-	$Sprite.visible = false
-	$Sprite2.visible = false
-	$Sprite.scale = Vector2(1,1)
+	sprite.visible = false
+	sprite2.visible = false
+	sprite.scale = Vector2(1,1)
 	current_max_speed = MAX_SPEED
+	set_sprite_distances()
 
-func _physics_process(delta):
+export var map_size : int = 0
+func set_sprite_distances():
+	map_size *= 16
+	var sprite_map_size = map_size * (1/scale.x)
+	sprite.get_node("Sprite1").position = Vector2(sprite_map_size,0)
+	sprite.get_node("Sprite2").position = Vector2(sprite_map_size,-sprite_map_size)
+	sprite.get_node("Sprite3").position = Vector2(0,-sprite_map_size)
+	sprite.get_node("Sprite4").position = Vector2(-sprite_map_size,-sprite_map_size)
+	sprite.get_node("Sprite5").position = Vector2(-sprite_map_size,0)
+	sprite.get_node("Sprite6").position = Vector2(-sprite_map_size,sprite_map_size)
+	sprite.get_node("Sprite7").position = Vector2(0,sprite_map_size)
+	sprite.get_node("Sprite8").position = Vector2(sprite_map_size,sprite_map_size)
+	sprite2.get_node("Sprite1").position = Vector2(sprite_map_size,0)
+	sprite2.get_node("Sprite2").position = Vector2(sprite_map_size,-sprite_map_size)
+	sprite2.get_node("Sprite3").position = Vector2(0,-sprite_map_size)
+	sprite2.get_node("Sprite4").position = Vector2(-sprite_map_size,-sprite_map_size)
+	sprite2.get_node("Sprite5").position = Vector2(-sprite_map_size,0)
+	sprite2.get_node("Sprite6").position = Vector2(-sprite_map_size,sprite_map_size)
+	sprite2.get_node("Sprite7").position = Vector2(0,sprite_map_size)
+	sprite2.get_node("Sprite8").position = Vector2(sprite_map_size,sprite_map_size)
+
+onready var last_seen_player_location = global_position
+
+func _physics_process(_delta):
 	if playerDetectionZone.can_see_player():
 		if state == IDLE:
 			state = CHASE
-			print("chasing")
 			animator.play("Agro")
 			attackT.start(rand_range(attack_min,attack_max))
 	else:
 		if state != IDLE:
 			state = IDLE
-		if not animator.is_playing() and $Sprite.frame == 0:
+		if not animator.is_playing() and sprite.frame == 0:
 			animator.play_backwards("Agro")
 
 func _on_AttackCountdown_timeout():
@@ -99,13 +124,19 @@ func death_animation():
 	state = DEAD
 	animator.stop()
 	$Hitbox.queue_free()
-	var tween = $Sprite/DeathTween
+	var _tween = $Sprite/DeathTween
 
 func completed_harvest():
 	harvest_area.harvesting = false
 	GalaxySave.game_data["backpackBlood"]["purple"] += 1
 	print(GalaxySave.game_data["backpackBlood"])
 	GalaxySave.save_data()
+	for child in sprite.get_children():
+		if child is Sprite:
+			child.position *= Vector2(1/.8,1/.8)
+	for child in sprite2.get_children():
+		if child is Sprite:
+			child.position *= Vector2(1/.8,1/.8)
 
 # Trapped Functions #
 

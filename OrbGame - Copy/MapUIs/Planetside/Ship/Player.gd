@@ -32,4 +32,4 @@ func _physics_process(delta):
 			velocity.y = 0
 	
 	rotation += rotation_direction * rotation_speed * delta
-	move_and_slide(velocity)
+	var _move_slide = move_and_slide(velocity)

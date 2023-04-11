@@ -15,7 +15,7 @@ func _on_EnterButton_pressed():
 			transferring = true
 			update_ship_stats()
 	# uses star position and position of planet to uniquely set up city pattern
-			get_tree().change_scene("res://OnFootAssets/VisitingPlanet.tscn")
+			var _change = get_tree().change_scene("res://OnFootAssets/VisitingPlanet.tscn")
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("Interact"):
@@ -23,7 +23,7 @@ func _physics_process(_delta):
 			transferring = true
 			update_ship_stats()
 			# uses star position and position of planet to uniquely set up city pattern
-			get_tree().change_scene("res://OnFootAssets/VisitingPlanet.tscn")
+			var _change = get_tree().change_scene("res://OnFootAssets/VisitingPlanet.tscn")
 
 func update_ship_stats():
 		GalaxySave.set_ship_speed(-1,true)

@@ -107,3 +107,20 @@ func add_land_layer():
 	$Land.update_bitmask_region(Vector2(0,0),current_map_size)
 	$Sand.update_bitmask_region(Vector2(0,0),current_map_size)
 	$YSort/Player.global_position = Vector2(500,560)
+
+func get_spawning_array():
+	var tilemap_table = $Sand.get_used_cells()
+	return tilemap_table
+
+func _on_Player_teleported(direction):
+	var entities = $YSort.get_children()
+	entities.erase($YSort/Player)
+	var entities_edited = []
+	for item in entities:
+		if item is KinematicBody2D:
+			entities_edited.append(item)
+	direction *= map_side_size
+	direction *= 16
+	print("teleporting all entities")
+	for entity in entities_edited:
+		entity.global_position += direction

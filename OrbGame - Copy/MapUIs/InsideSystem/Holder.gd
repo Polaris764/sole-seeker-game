@@ -16,8 +16,8 @@ func generatePlanetarySystem(seedUsed):
 			new_planet.position = $Star.global_position
 			new_planet.get_node("Planet").margin_right = new_planet.get_node("Planet").margin_right + radius
 			new_planet.get_node("Planet").margin_left = radius
+			#warning-ignore:integer_division
 			new_planet.set_rotation(deg2rad(rand_range(0,360)+Time.get_ticks_msec()/100))
-			print("rotation = " + str(new_planet.rotation))
 			new_planet.get_node("Planet/PlanetImage").set_rotation(rand_range(0,360))
 			new_planet.get_node("Planet/PlanetImage").modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1)
 			new_planet.planetPlace = i+1
@@ -32,7 +32,5 @@ func _ready():
 	if planet_position > 0:
 		player.global_position = get_children()[planet_position].get_node("Planet/PlanetImage").global_position
 		planet_position = 0
-		print("setting at planet location. Player position = " + str(player.global_position) + ". Target planet = " + str(get_children()[planet_position]))
-	else:
-		print ("DISCARDED PLANET POSITION = " + str(planet_position))
+		#print("setting at planet location. Player position = " + str(player.global_position) + ". Target planet = " + str(get_children()[planet_position]))
 	GalaxySave.save_data()

@@ -20,7 +20,7 @@ func make_map():
 	# creating impact points
 	var number_of_impact_points = (rng.randi()%2+2)
 	var impact_locations = []
-	for i in range(number_of_impact_points):
+	for _i in range(number_of_impact_points):
 		impact_locations.append(Vector2(rng.randi_range(0,current_map_size.x),rng.randi_range(0,current_map_size.y)))
 
 	# creating point tendrils
@@ -35,7 +35,7 @@ func make_map():
 			var possible_tendril_directions = [Vector2(1,0),Vector2(1,-1),Vector2(0,-1),Vector2(-1,-1),Vector2(-1,0),Vector2(-1,1),Vector2(0,1),Vector2(1,1)]
 			var length = rng.randi() % int(current_map_size.x) + 5
 			#print("making tendril with length of " + str(length))
-			var tendril_points = []
+			var _tendril_points = []
 			var primaryPos = rng.randi() % possible_tendril_directions.size()
 			var primary_tendril_direction = possible_tendril_directions[primaryPos]
 			possible_tendril_directions.remove(primaryPos)
@@ -145,11 +145,16 @@ func find_ship_pos():
 			if not nearby_canyons:
 #				print("returning coords" + str(Vector2(x+20,y+20)))
 				return Vector2((x+20)*16,(y+20)*16)
-	
-	# creating connection tendrils
-#	for starting_point in impact_locations:
-#		for destination_point in impact_locations:
-#			pass
-	# find/create impact points
-	# create web extending from impact point, make tendrils mirror on opposite side
-	# create 1-3 lines extending to other points
+
+func get_spawning_array():
+	var tilemap_table = $Sand.get_used_cells()
+	return tilemap_table
+
+func _on_Player_teleported(direction):
+	var entities = $YSort.get_children()
+	entities.erase($YSort/Player)
+	direction *= map_side_size
+	direction *= 16
+	print("teleporting all entities")
+	for entity in entities:
+		entity.global_position += direction

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://OnFootAssets/Enemies/Purple/Purple.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/Stats.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://OnFootAssets/Enemies/Purple/PurpleAttack.png" type="Texture" id=5]
 [ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hitbox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://OnFootAssets/Enemies/Purple/PurpleEnemy.gd" type="Script" id=7]
+[ext_resource path="res://OnFootAssets/Enemies/Purple/Sprite0.gd" type="Script" id=8]
+[ext_resource path="res://OnFootAssets/Enemies/Purple/Sprite2.gd" type="Script" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.0
@@ -17,7 +19,7 @@ length = 1.2
 loop = true
 step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite0:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -72,7 +74,7 @@ resource_name = "Agro"
 length = 0.61
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite0:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -84,7 +86,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:visible")
+tracks/1/path = NodePath("Sprite0:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -152,7 +154,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
+tracks/1/path = NodePath("Sprite0:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -228,7 +230,7 @@ tracks/6/keys = {
 resource_name = "AttackRight"
 length = 1.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite0:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -318,7 +320,7 @@ tracks/6/keys = {
 resource_name = "Harvest"
 length = 6.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath("Sprite0:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -347,7 +349,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=7]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite0:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -359,7 +361,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:visible")
+tracks/1/path = NodePath("Sprite0:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -371,7 +373,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:scale")
+tracks/2/path = NodePath("Sprite0:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -461,13 +463,72 @@ script = ExtResource( 7 )
 MAX_SPEED = 0
 PERSISTANCE = 0
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite0" type="Sprite" parent="."]
 position = Vector2( -2.27374e-13, 4.54747e-13 )
 texture = ExtResource( 1 )
 offset = Vector2( 2.27374e-13, -33 )
 hframes = 27
+script = ExtResource( 8 )
 
-[node name="DeathTween" type="Tween" parent="Sprite"]
+[node name="DeathTween" type="Tween" parent="Sprite0"]
+
+[node name="Sprite1" type="Sprite" parent="Sprite0"]
+texture = ExtResource( 1 )
+offset = Vector2( 2.27374e-13, -33 )
+hframes = 27
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite1"]
+
+[node name="Sprite3" type="Sprite" parent="Sprite0"]
+texture = ExtResource( 1 )
+offset = Vector2( 2.27374e-13, -33 )
+hframes = 27
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite3"]
+
+[node name="Sprite4" type="Sprite" parent="Sprite0"]
+texture = ExtResource( 1 )
+offset = Vector2( 2.27374e-13, -33 )
+hframes = 27
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite4"]
+
+[node name="Sprite5" type="Sprite" parent="Sprite0"]
+texture = ExtResource( 1 )
+offset = Vector2( 2.27374e-13, -33 )
+hframes = 27
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite5"]
+
+[node name="Sprite6" type="Sprite" parent="Sprite0"]
+texture = ExtResource( 1 )
+offset = Vector2( 2.27374e-13, -33 )
+hframes = 27
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite6"]
+
+[node name="Sprite7" type="Sprite" parent="Sprite0"]
+texture = ExtResource( 1 )
+offset = Vector2( 2.27374e-13, -33 )
+hframes = 27
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite7"]
+
+[node name="Sprite8" type="Sprite" parent="Sprite0"]
+texture = ExtResource( 1 )
+offset = Vector2( 2.27374e-13, -33 )
+hframes = 27
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite8"]
+
+[node name="Sprite2" type="Sprite" parent="Sprite0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 1 )
+offset = Vector2( 2.27374e-13, -33 )
+hframes = 27
+script = ExtResource( 8 )
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -2, -3 )
@@ -514,10 +575,46 @@ one_shot = true
 position = Vector2( -16, -33 )
 texture = ExtResource( 5 )
 hframes = 2
+script = ExtResource( 9 )
 
+[node name="Sprite3" type="Sprite" parent="Sprite2"]
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="Sprite4" type="Sprite" parent="Sprite2"]
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="Sprite5" type="Sprite" parent="Sprite2"]
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="Sprite6" type="Sprite" parent="Sprite2"]
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="Sprite7" type="Sprite" parent="Sprite2"]
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="Sprite8" type="Sprite" parent="Sprite2"]
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="Sprite1" type="Sprite" parent="Sprite2"]
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="Sprite2" type="Sprite" parent="Sprite2"]
+texture = ExtResource( 5 )
+hframes = 2
+
+[connection signal="frame_changed" from="Sprite0" to="Sprite0" method="_on_Sprite0_frame_changed"]
+[connection signal="frame_changed" from="Sprite0/Sprite2" to="Sprite0/Sprite2" method="_on_Sprite0_frame_changed"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="AttackCountdown" to="." method="_on_AttackCountdown_timeout"]
+[connection signal="frame_changed" from="Sprite2" to="Sprite2" method="_on_Sprite2_frame_changed"]
 
 [editable path="Hurtbox"]
 [editable path="PlayerDetectionZone"]

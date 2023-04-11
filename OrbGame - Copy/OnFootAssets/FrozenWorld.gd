@@ -28,7 +28,7 @@ func make_grass_map():
 			var a = noiseImage.get_pixel(x,y).gray()
 			if a < lowestA and x > 20 and x < map_side_size-20 and  y > 20 and y < map_side_size-20:
 				lowestA = a
-				#get_node("..").ship_position = Vector2(x*16,y*16)
+				get_node("..").ship_position = Vector2(x*16,y*16)
 			if a < grass_cap:
 				$Grass.set_cell(x,y,0)
 				# set edge corners
@@ -156,3 +156,16 @@ func find_ship_pos():
 			if not nearby_ice:
 #				print("returning coords" + str(Vector2(x+20,y+20)))
 				return Vector2((x+20)*16,(y+20)*16)
+
+func get_spawning_array():
+	var tilemap_table = $Ice.get_used_cells()
+	return tilemap_table
+
+func _on_Player_teleported(direction):
+	var entities = $YSort.get_children()
+	entities.erase($YSort/Player)
+	direction *= map_side_size
+	direction *= 16
+	print("teleporting all entities")
+	for entity in entities:
+		entity.global_position += direction

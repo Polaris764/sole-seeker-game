@@ -30,6 +30,6 @@ signal interacted_with
 func interacted():
 	emit_signal("interacted_with")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed(control) and not disabled_message:
 		interacted()

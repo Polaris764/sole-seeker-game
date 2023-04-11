@@ -3050,7 +3050,7 @@ format = 1
 [node name="Player" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 278, 114 )
 
-[node name="AnimationPlayer" parent="YSort/Player" index="2"]
+[node name="AnimationPlayer" parent="YSort/Player" index="1"]
 anims/IdleDown = SubResource( 37 )
 anims/IdleDownA = SubResource( 38 )
 anims/IdleDownG = SubResource( 39 )
@@ -3085,10 +3085,10 @@ anims/RunUpA = SubResource( 67 )
 anims/RunUpG = SubResource( 68 )
 anims/RunUpN = SubResource( 69 )
 
-[node name="AnimationTree" parent="YSort/Player" index="3"]
+[node name="AnimationTree" parent="YSort/Player" index="2"]
 parameters/playback = SubResource( 70 )
 
-[node name="Camera2D" parent="YSort/Player" index="4"]
+[node name="Camera2D" parent="YSort/Player" index="3"]
 current = false
 zoom = Vector2( 0.3, 0.3 )
 
@@ -3106,7 +3106,10 @@ anims/NetgunRight = SubResource( 78 )
 anims/NetgunUp = SubResource( 79 )
 anims/RESET = SubResource( 80 )
 
+[connection signal="teleported" from="YSort/Player" to="." method="_on_Player_teleported"]
+
 [editable path="YSort/Player"]
 [editable path="YSort/Player/HitboxPivot/WeaponHitbox"]
 [editable path="YSort/Player/HitboxPivot/NetgunHitbox"]
 [editable path="YSort/Player/Hurtbox"]
+[editable path="YSort/Player/DialogueInteractionArea"]

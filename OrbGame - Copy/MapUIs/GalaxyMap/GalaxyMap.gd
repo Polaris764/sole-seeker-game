@@ -7,8 +7,9 @@ var HQ = preload("res://MapUIs/GalaxyMap/CompanyHQ.tscn")
 
 onready var player = $Player
 
-export var biomes = {"blue":[],"red":[]}
-export var biomes_collisions = {"blue":[],"red":[]}
+
+export var biomes = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"white":[]}
+export var biomes_collisions = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"white":[]}
 
 func rotatePoint(point,angle):
 	var px = point#*3
@@ -18,7 +19,6 @@ func rotatePoint(point,angle):
 	return Vector2(qx*rand_range(1,1.5-(.3*(px/4000))),qy*rand_range(.6,1.4))
 	
 func _ready():
-	
 	seed(save_file.galaxySeed) # player's saved world seed
 	
 	set_biome_circle_origins()
@@ -66,16 +66,33 @@ func update_ship():
 	
 func set_biome_circle_origins():
 	rngMach.seed = GalaxySave.game_data["galaxySeed"]
-	for amount in rngMach.randi_range(2,4):
+	for amount in rngMach.randi_range(4,5):
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["blue"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 		if rngMach.randi()%2==0: biomes["blue"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
-	for amount in rngMach.randi_range(2,4):
+	for amount in rngMach.randi_range(3,4):
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["red"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
+	for amount in rngMach.randi_range(1,2):
+		var radius = rngMach.randi_range(500,10000)
+		var angle = rngMach.randf_range(0,2*PI)
+		biomes["orange"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
+	for amount in rngMach.randi_range(2,3):
+		var radius = rngMach.randi_range(500,10000)
+		var angle = rngMach.randf_range(0,2*PI)
+		biomes["purple"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
+	for amount in rngMach.randi_range(1,6):
+		var radius = rngMach.randi_range(500,10000)
+		var angle = rngMach.randf_range(0,2*PI)
+		biomes["black"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
+	for amount in 1:
+		var radius = rngMach.randi_range(9000,10000)
+		var angle = rngMach.randf_range(0,2*PI)
+		biomes["white"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 
+var collision_scene = preload("res://MapUIs/GalaxyMap/SystemTypeCollision.tscn")
 func set_biome_collisions():
 	for biome_type in biomes:
 		for location in biomes[biome_type]:
@@ -90,15 +107,20 @@ func set_biome_collisions():
 			var sin_length = sin_length_options[rngMach.randi() % sin_length_options.size()]
 			var hori_stretch = rngMach.randf_range(1,2)
 			var vert_stretch = rngMach.randf_range(1,2)
-			var collision = CollisionPolygon2D.new()
+			var collision = collision_scene.instance()
 			var ptArray = PoolVector2Array()
-			add_child(collision)
+			if biome_type == "white":
+				circle_radius = rngMach.randi_range(1500,2000)
 			for point in point_count:
 				var circle_radius2 = circle_radius + variance_radius*cos(cosine_length*PI*point/point_count)*sin(sin_length*PI*point/point_count)*cos(cosine_length2*PI*point/point_count)# + 100*cos(2*PI*point/100)
 				var point_angle = (2*PI)/point_count*point
 				ptArray.append(location + Vector2(hori_stretch*cos(point_angle),vert_stretch*sin(point_angle))*Vector2(circle_radius2,circle_radius2))
 			collision.polygon = ptArray
+			#coloration
+			collision.draw_array = ptArray
+			collision.biome_type = biome_type
 			biomes_collisions[biome_type].append(collision)
+			add_child(collision)
 
 func determine_biome(system_pos):
 	var system_types = []

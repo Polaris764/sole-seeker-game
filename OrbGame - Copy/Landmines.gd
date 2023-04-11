@@ -13,7 +13,7 @@ func update_sprite(mine_count):
 		destroy_self()
 		print("mine removed")
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	yield(get_tree().create_timer(.2), "timeout")
 	$Hitbox/CollisionShape2D.set_deferred("disabled",false)
 	$AnimatedSprite.visible = true

@@ -16,7 +16,7 @@ func _ready():
 	visible = true
 	background.visible = false
 	scene_text = load_scene_text()
-	SignalBus.connect("display_announcement", self, "on_display_announcement")
+	var _connection = SignalBus.connect("display_announcement", self, "on_display_announcement")
 
 func load_scene_text():
 	var file = File.new()

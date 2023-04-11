@@ -6,22 +6,30 @@ var game_data = {}
 # holding star coordinates for galaxy map
 var lastStarClicked
 var lastStarClickedName
-func setLastStarClicked(starPos,starName):
+var lastStarType
+func setLastStarClicked(starPos,starName,starType):
 	lastStarClicked = starPos.x
 	lastStarClickedName = starName
+	lastStarType = starType
 	game_data["shipPosition"][0] = starPos
 func getLastStarClicked():
 	return lastStarClicked
 func getLastStarClickedName():
 	return lastStarClickedName
+func getLastStarType():
+	return lastStarType
 	
 # holding planet coordinates for galaxy map
 var lastPlanetClicked = 0
-func setLastPlanetClicked(starPos,planetPos):
+var lastPlanetType
+func setLastPlanetClicked(starPos,planetPos,planetType=null):
 	game_data["shipPosition"][7] = planetPos
 	lastPlanetClicked = str(pow(starPos*planetPos,2)*cos(pow(starPos*planetPos,3))).hash()
+	lastPlanetType = planetType
 func getLastPlanetClicked():
 	return lastPlanetClicked
+func getLastPlanetType():
+	return lastPlanetType
 
 # getting building data of planet
 var building_data = {} # all building data
@@ -49,16 +57,16 @@ onready var buildingTypes = ConstantsHolder.building_types
 onready var shipLocation = ConstantsHolder.ship_locations
 func load_data():
 	var file = File.new()
-	if not file.file_exists(SAVE_FILE)  or true:
+	if not file.file_exists(SAVE_FILE) or true:
 		randomize()
 		game_data = {
 			"galaxySeed": randi(),
-			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0},
-			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0},
+			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0},
+			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0},
 			"buildingData": {},
 			"storedBuildings":{buildingTypes.WALL:50,buildingTypes.FLOOR:50,buildingTypes.TURRET:50,buildingTypes.CALTROPS:50,buildingTypes.LANDMINE:50,buildingTypes.LASER:50},
 			"shipPosition": [Vector2.ZERO,Vector2.ZERO,-2,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
-			"storyProgression": 5
+			"storyProgression": 0
 		}
 		save_data()
 	file.open(SAVE_FILE,File.READ)
@@ -81,32 +89,28 @@ func set_ship_speed(speed,entering_specific_area = false):
 	print("last star = " + str(lastStarClicked))
 	print(GalaxySave.game_data["shipPosition"][5])
 	if speed == 1:
-		print("increasing speed")
 		match ship_position:
 			shipLocation.PLANET:
-				get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn")
+				var _change = get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn")
 				game_data["shipPosition"][4] = shipLocation.SYSTEM
 				# switch to system, update ship location
 			shipLocation.SYSTEM:
-				print("in system")
-				get_tree().change_scene("res://MapUIs/GalaxyMap/GalaxyMap.tscn")
+				var _change = get_tree().change_scene("res://MapUIs/GalaxyMap/GalaxyMap.tscn")
 				game_data["shipPosition"][4] = shipLocation.GALAXY
 				# switch to galaxy
 			shipLocation.SPACEZOOMED:
 				if game_data["shipPosition"][5]: #is in system
-					get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn")
+					var _change = get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn")
 					game_data["shipPosition"][4] = shipLocation.SYSTEM
 				else:
-					print("not in system")
-					get_tree().change_scene("res://MapUIs/General/RemoteSpace.tscn")
+					var _change = get_tree().change_scene("res://MapUIs/General/RemoteSpace.tscn")
 					game_data["shipPosition"][4] = shipLocation.SPACE
 					# switch to space
 			shipLocation.SPACE:
-				get_tree().change_scene("res://MapUIs/GalaxyMap/GalaxyMap.tscn")
+				var _change = get_tree().change_scene("res://MapUIs/GalaxyMap/GalaxyMap.tscn")
 				game_data["shipPosition"][4] = shipLocation.GALAXY
 				# switch to galaxy
 	elif speed == -1:
-		print("decreasing speed")
 		match ship_position:
 			shipLocation.GALAXY:
 				if entering_specific_area:
@@ -116,46 +120,46 @@ func set_ship_speed(speed,entering_specific_area = false):
 						rng.randomize()
 						game_data["shipPosition"][1] = Vector2(rng.randf_range(10,200),rng.randf_range(10,200))*Vector2(values[rng.randi()%2],values[rng.randi()%2])
 				else:
-					get_tree().change_scene("res://MapUIs/General/RemoteSpace.tscn")
+					var _change = get_tree().change_scene("res://MapUIs/General/RemoteSpace.tscn")
 					game_data["shipPosition"][4] = shipLocation.SPACE
 			shipLocation.SYSTEM:
 				if entering_specific_area:
 					game_data["shipPosition"][4] = shipLocation.PLANET
 					#enter specific planet
 				else:
-					get_tree().change_scene("res://MapUIs/General/RemoteSpaceZoomed.tscn")
+					var _change = get_tree().change_scene("res://MapUIs/General/RemoteSpaceZoomed.tscn")
 					game_data["shipPosition"][4] = shipLocation.SPACEZOOMED
 			shipLocation.SPACE:
-				get_tree().change_scene("res://MapUIs/General/RemoteSpaceZoomed.tscn")
+				var _change = get_tree().change_scene("res://MapUIs/General/RemoteSpaceZoomed.tscn")
 				game_data["shipPosition"][4] = shipLocation.SPACEZOOMED
 			shipLocation.SPACEZOOMED:
-				get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
+				var _change = get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
 			shipLocation.PLANET:
 				GalaxySave.game_data["shipPosition"][6] = false
-				get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
+				var _change = get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
 			shipLocation.STATION:
 				GalaxySave.game_data["shipPosition"][6] = false
-				get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
+				var _change = get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
 	elif speed == 0:
 		match ship_position:
 			shipLocation.SPACE:
-				get_tree().change_scene("res://MapUIs/General/RemoteSpace.tscn")
+				var _change = get_tree().change_scene("res://MapUIs/General/RemoteSpace.tscn")
 			shipLocation.SPACEZOOMED:
-				get_tree().change_scene("res://MapUIs/General/RemoteSpaceZoomed.tscn")
+				var _change = get_tree().change_scene("res://MapUIs/General/RemoteSpaceZoomed.tscn")
 			shipLocation.SYSTEM:
-				get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn")
+				var _change = get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn")
 			shipLocation.PLANET:
-				get_tree().change_scene("res://OnFootAssets/VisitingPlanet.tscn")
+				var _change = get_tree().change_scene("res://OnFootAssets/VisitingPlanet.tscn")
 			shipLocation.STATION:
-				get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")
+				var _change = get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")
 	elif speed == -2:
 		match ship_position:
 			shipLocation.GALAXY:
 				game_data["shipPosition"][4] = shipLocation.STATION
-				get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")
+				var _change = get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")
 	elif speed == 2:
 		match ship_position:
 			shipLocation.STATION:
-				get_tree().change_scene("res://MapUIs/GalaxyMap/GalaxyMap.tscn")
+				var _change = get_tree().change_scene("res://MapUIs/GalaxyMap/GalaxyMap.tscn")
 				game_data["shipPosition"][4] = shipLocation.GALAXY
-	print("new position = " + str(ConstantsHolder.ship_locations.keys()[game_data["shipPosition"][4]]))
+	#print("new position = " + str(ConstantsHolder.ship_locations.keys()[game_data["shipPosition"][4]]))

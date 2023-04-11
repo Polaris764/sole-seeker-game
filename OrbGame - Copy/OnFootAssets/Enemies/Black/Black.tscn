@@ -1,0 +1,141 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://OnFootAssets/Stats.tscn" type="PackedScene" id=2]
+[ext_resource path="res://OnFootAssets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://OnFootAssets/Enemies/WanderController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/SoftCollision.tscn" type="PackedScene" id=5]
+[ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hurtbox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Black.gd" type="Script" id=7]
+
+[sub_resource type="StreamTexture" id=8]
+load_path = "res://.import/Black.png-a8377bb42edbc5afbebdfba172bdf458.stex"
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = SubResource( 8 )
+region = Rect2( 0, 0, 6, 4 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = SubResource( 8 )
+region = Rect2( 6, 0, 6, 4 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 2.5
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 127.098
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 1.0
+
+[node name="Black" type="KinematicBody2D"]
+scale = Vector2( 0.4, 0.4 )
+collision_layer = 0
+script = ExtResource( 7 )
+map_size = 200
+
+[node name="Sprite0" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -20 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+
+[node name="DeathTween" type="Tween" parent="Sprite0"]
+
+[node name="Sprite1" type="AnimatedSprite" parent="Sprite0"]
+frames = SubResource( 3 )
+playing = true
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite1"]
+
+[node name="Sprite2" type="AnimatedSprite" parent="Sprite0"]
+frames = SubResource( 3 )
+playing = true
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite2"]
+
+[node name="Sprite3" type="AnimatedSprite" parent="Sprite0"]
+frames = SubResource( 3 )
+playing = true
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite3"]
+
+[node name="Sprite4" type="AnimatedSprite" parent="Sprite0"]
+frames = SubResource( 3 )
+frame = 1
+playing = true
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite4"]
+
+[node name="Sprite5" type="AnimatedSprite" parent="Sprite0"]
+frames = SubResource( 3 )
+frame = 1
+playing = true
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite5"]
+
+[node name="Sprite6" type="AnimatedSprite" parent="Sprite0"]
+frames = SubResource( 3 )
+playing = true
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite6"]
+
+[node name="Sprite7" type="AnimatedSprite" parent="Sprite0"]
+frames = SubResource( 3 )
+playing = true
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite7"]
+
+[node name="Sprite8" type="AnimatedSprite" parent="Sprite0"]
+frames = SubResource( 3 )
+frame = 1
+playing = true
+
+[node name="DeathTween" type="Tween" parent="Sprite0/Sprite8"]
+
+[node name="Hurtbox" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, -20 )
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 4 )
+
+[node name="Stats" parent="." instance=ExtResource( 2 )]
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="DetectionArea" parent="PlayerDetectionZone" index="0"]
+shape = SubResource( 5 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 0, -20 )
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 6 )
+
+[node name="WanderController" parent="." instance=ExtResource( 4 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -19 )
+shape = SubResource( 7 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[editable path="Hurtbox"]
+[editable path="PlayerDetectionZone"]
+[editable path="SoftCollision"]
+[editable path="WanderController"]
