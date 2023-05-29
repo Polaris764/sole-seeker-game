@@ -85,5 +85,5 @@ func _on_EventTimer_timeout():
 		destroy_fence()
 	elif event_stage == 2:
 		print("blackout")
-		get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")
+		var _change = get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")
 		

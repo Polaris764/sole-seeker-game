@@ -735,7 +735,6 @@ anims/Burst = SubResource( 3 )
 anims/RESET = SubResource( 4 )
 
 [node name="Body1" type="Sprite" parent="Body0"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -766,7 +765,6 @@ anims/Burst = SubResource( 14 )
 anims/RESET = SubResource( 15 )
 
 [node name="Body2" type="Sprite" parent="Body0"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -797,7 +795,6 @@ anims/Burst = SubResource( 18 )
 anims/RESET = SubResource( 19 )
 
 [node name="Body3" type="Sprite" parent="Body0"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -828,7 +825,6 @@ anims/Burst = SubResource( 22 )
 anims/RESET = SubResource( 23 )
 
 [node name="Body4" type="Sprite" parent="Body0"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -859,7 +855,6 @@ anims/Burst = SubResource( 26 )
 anims/RESET = SubResource( 27 )
 
 [node name="Body5" type="Sprite" parent="Body0"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -890,7 +885,6 @@ anims/Burst = SubResource( 30 )
 anims/RESET = SubResource( 31 )
 
 [node name="Body6" type="Sprite" parent="Body0"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -921,7 +915,6 @@ anims/Burst = SubResource( 34 )
 anims/RESET = SubResource( 35 )
 
 [node name="Body7" type="Sprite" parent="Body0"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -952,7 +945,6 @@ anims/Burst = SubResource( 38 )
 anims/RESET = SubResource( 39 )
 
 [node name="Body8" type="Sprite" parent="Body0"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10

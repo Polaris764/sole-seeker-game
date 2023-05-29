@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://MapUIs/GalaxyMap/SystemInfoBG.png" type="Texture" id=1]
+[ext_resource path="res://MapUIs/InsideSystem/closeupStar.png" type="Texture" id=1]
 [ext_resource path="res://MapUIs/InsideSystem/EnterButton.gd" type="Script" id=2]
+[ext_resource path="res://UIResources/InfoPanel.png" type="Texture" id=3]
+[ext_resource path="res://UIResources/EnterButton.png" type="Texture" id=4]
+[ext_resource path="res://UIResources/UIFont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://UIResources/EnterFont.tres" type="DynamicFont" id=6]
 
 [node name="PlanetInfoHolder" type="CanvasLayer"]
 
@@ -9,22 +13,36 @@
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Holder" type="NinePatchRect" parent="Control"]
-margin_right = 220.0
-margin_bottom = 146.0
+[node name="Holder" type="TextureRect" parent="Control"]
+margin_right = 237.0
+margin_bottom = 224.0
+
+[node name="Background" type="TextureRect" parent="Control/Holder"]
+margin_left = -31.0
+margin_top = -4.0
+margin_right = 1057.0
+margin_bottom = 1119.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="PlanetImage" type="TextureRect" parent="Control/Holder"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -32.0
+margin_top = 40.0
+margin_right = 32.0
+margin_bottom = 104.0
 texture = ExtResource( 1 )
-patch_margin_left = 110
-patch_margin_top = 60
-patch_margin_right = 110
-patch_margin_bottom = 60
+expand = true
 
 [node name="PlanetName" type="Label" parent="Control/Holder"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -110.0
-margin_top = 10.0
+margin_top = 119.0
 margin_right = 110.0
-margin_bottom = 30.0
+margin_bottom = 139.0
+custom_fonts/font = ExtResource( 5 )
 text = "Proxima Centauri a"
 align = 1
 valign = 1
@@ -33,38 +51,48 @@ valign = 1
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -110.0
-margin_top = 35.0
+margin_top = 144.0
 margin_right = 110.0
-margin_bottom = 55.0
+margin_bottom = 164.0
+custom_fonts/font = ExtResource( 5 )
 text = "Orbs: Green/Red"
 align = 1
 valign = 1
 
 [node name="BiomeType" type="Label" parent="Control/Holder"]
-margin_top = 60.0
-margin_right = 220.0
-margin_bottom = 80.0
+margin_left = 10.0
+margin_top = 169.0
+margin_right = 229.0
+margin_bottom = 189.0
+custom_fonts/font = ExtResource( 5 )
 text = "Biome: Volcanic"
 align = 1
 valign = 1
 
 [node name="EnterButton" type="TextureButton" parent="Control/Holder"]
-modulate = Color( 1, 1, 0, 1 )
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -25.5
-margin_top = 85.0
-margin_right = 25.5
-margin_bottom = 136.0
-texture_normal = ExtResource( 1 )
+anchor_bottom = 0.5
+margin_left = -61.5
+margin_top = 82.0
+margin_right = 351.5
+margin_bottom = 289.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 4 )
 expand = true
 script = ExtResource( 2 )
 
 [node name="EnterLabel" type="Label" parent="Control/Holder/EnterButton"]
-margin_right = 51.0
-margin_bottom = 51.0
-text = "Enter"
+margin_left = 100.0
+margin_top = 10.0
+margin_right = 313.0
+margin_bottom = 217.0
+custom_fonts/font = ExtResource( 6 )
+text = "Entrance Available"
 align = 1
 valign = 1
+autowrap = true
+uppercase = true
 
 [connection signal="pressed" from="Control/Holder/EnterButton" to="Control/Holder/EnterButton" method="_on_EnterButton_pressed"]

@@ -2,7 +2,7 @@ extends CollisionPolygon2D
 
 export var draw_array : PoolVector2Array
 export var biome_type : String
-export var transparency : float = 0 setget transparency_update
+export var transparency : float = .5 setget transparency_update
 
 func _draw():
 	var color_used
@@ -20,7 +20,6 @@ func _draw():
 		"black":
 			color_used = Color(.137,.137,.137,transparency)
 	draw_colored_polygon(draw_array,color_used)
-
 func transparency_update(value):
 	transparency = value
 	update()

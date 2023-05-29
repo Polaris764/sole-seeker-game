@@ -32,8 +32,8 @@ onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtbox = $Hurtbox
 onready var animator = $AnimationPlayer
-onready var animator2 = $Body/BaseL/BaseLAnimator
-onready var animator3 = $Body/BaseR/BaseRAnimator
+onready var animator2 = $Body0/BaseL/BaseLAnimator
+onready var animator3 = $Body0/BaseR/BaseRAnimator
 onready var attackT = $AttackCountdown
 onready var player = get_node("../Player")
 onready var sprite = $Body0
@@ -47,14 +47,14 @@ export var map_size : int = 0
 func set_sprite_distances():
 	map_size *= 16
 	var sprite_map_size = map_size * (1/scale.x)
-	sprite.get_node("Sprite1").position = Vector2(sprite_map_size,0)
-	sprite.get_node("Sprite2").position = Vector2(sprite_map_size,-sprite_map_size)
-	sprite.get_node("Sprite3").position = Vector2(0,-sprite_map_size)
-	sprite.get_node("Sprite4").position = Vector2(-sprite_map_size,-sprite_map_size)
-	sprite.get_node("Sprite5").position = Vector2(-sprite_map_size,0)
-	sprite.get_node("Sprite6").position = Vector2(-sprite_map_size,sprite_map_size)
-	sprite.get_node("Sprite7").position = Vector2(0,sprite_map_size)
-	sprite.get_node("Sprite8").position = Vector2(sprite_map_size,sprite_map_size)
+	sprite.get_node("Body1").position = Vector2(sprite_map_size,0)
+	sprite.get_node("Body2").position = Vector2(sprite_map_size,-sprite_map_size)
+	sprite.get_node("Body3").position = Vector2(0,-sprite_map_size)
+	sprite.get_node("Body4").position = Vector2(-sprite_map_size,-sprite_map_size)
+	sprite.get_node("Body5").position = Vector2(-sprite_map_size,0)
+	sprite.get_node("Body6").position = Vector2(-sprite_map_size,sprite_map_size)
+	sprite.get_node("Body7").position = Vector2(0,sprite_map_size)
+	sprite.get_node("Body8").position = Vector2(sprite_map_size,sprite_map_size)
 
 onready var last_seen_player_location = global_position
 
@@ -138,3 +138,5 @@ func spawn_minion():
 # Trapped Functions #
 
 var trapped_speeds = []
+func entity_trapped(_one,_two):
+	pass

@@ -17,10 +17,28 @@
     "ship_tour_door": [
         "Exit your ship through here. I'm sure you're familiar with doors."
     ],
+    "ship_tour_respawner":[
+        "This machine will reconstruct your body back at full health upon death."
+    ],
     "first_ship_powered": [
         "Ship: Ship powered. Increase speed to travel between star systems."
     ],
     "ship_guide1": [
-        "Ship: Travel to nearby star system. Further ones are restricted due to danger."
+        "Ship: Travel to nearby Red star system. Check your control manual on how to view optional galaxy map data."
+    ],
+    "ship_guide2": [
+        "Ship: Exit the ship to seek, kill, and harvest red organisms. Return when you are satisfied."
+    ],
+    "ship_guide3": [
+        "Ship: You may deposit organism matter for safe keeping or risk carrying it. Return to the space station when you are ready by entering the pilot seat."
+    ],
+    "ship_guide2.5": [
+        "Ship: Do not leave planet until required Red organism matter has been collected."
+    ],
+    "ship_guide4": [
+        "Ship: Visit more planets or return to the space station."
+    ],
+    "ship_guide5": [
+        "Ship: Speak to ATOS for further instruction."
     ]
 }

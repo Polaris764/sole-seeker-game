@@ -1,8 +1,12 @@
 extends TextureButton
 
+onready var storyPos = GalaxySave.game_data["storyProgression"]
 onready var starNameLabel = get_node("../StarName")
 var relevantButtons
 func _ready():
+	set_button_text_enter()
+
+func set_button_text_enter():
 	relevantButtons = []
 	for i in InputMap.get_action_list('Interact'):
 		if i is InputEventKey:
@@ -18,6 +22,7 @@ func _on_EnterButton_pressed():
 			print("error changing to companyHQ scene")## transport to company scene
 	else:
 		if not currentStar.system_type.has("white"):
+			#if storyPos == 5:
 			update_ship_stats(false)
 			if get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn") != OK:
 				print("error changing to system map scene")

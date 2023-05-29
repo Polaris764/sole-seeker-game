@@ -15,7 +15,7 @@ func _ready():
 	glass.speed_scale = 1/stats.harvest_duration
 	glass.frame = 0
 
-func activate(value):
+func activate(_value):
 	active = true
 	velocity = Vector2(1,0)
 	if timer:
@@ -60,7 +60,7 @@ func _on_Stats_no_health():
 	smoke_sprite.play("default")
 	animator.queue_free()
 
-func entity_trapped(duration,speed):
+func entity_trapped(duration,_speed):
 	speed_of_travel = movement_speed_used*.02
 	var timer2 = Timer.new()
 	timer2.connect("timeout",self,"_on_TrappedTimer_timeout",[timer2])

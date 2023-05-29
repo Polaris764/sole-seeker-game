@@ -17,7 +17,7 @@ func set_panic():
 	movementSpeed = panic_movement_speed
 	backward_slowdown_multiplier = backward_slowdown_multiplier_val
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_player()
 
 func move_player():

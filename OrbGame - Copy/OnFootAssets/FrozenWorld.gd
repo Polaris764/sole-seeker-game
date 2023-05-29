@@ -7,7 +7,7 @@ var grass_cap = .6
 var noiseImage
 
 func _ready():
-	$Player.frozenPlanet = true
+	$YSort/Player.frozenPlanet = true
 	seed(GalaxySave.getLastPlanetClicked())
 	make_grass_map()
 	make_snow_map()

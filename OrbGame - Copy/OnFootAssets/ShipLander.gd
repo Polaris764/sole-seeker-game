@@ -63,6 +63,9 @@ func create_planet():
 		add_child(overlay)
 	else:
 		player.global_position = ship_position + Vector2(83,37)
+		var locator = player.get_node("UI/LocationMarker")
+		locator.target_pos = ship_position
+		locator.active = true
 		if chosen_planet_type == WetWorld:
 			player.slipperyGround = true
 

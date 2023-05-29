@@ -23,5 +23,21 @@
         "Very well done Player.",
         "When you have mentally readied yourself, board your spaceship.",
         "Remember your practices over the past years. Do not be overwhelmed at this experience."
+    ],
+    "atos5": [
+        "Take this opportunity to get aquainted with your new permissions."
+    ],
+    "atos11": [
+        "I have unlocked the exchange area for your use.",
+        "You may purchase building supplies in this area, which can you can use on planets you explore.",
+        "Purchasing items will add the items to your inventory, while removing corresponding essence amounts.",
+        "Despite any foreign bases you may build, you will always have a home here."
+    ],
+    "atos12": [
+        "You have been prepared to explore on your own.",
+        "Go and do not disappoint."
+    ],
+    "atos13": [
+        "Welcome back. Please feel free to use all amenities at your disposal."
     ]
 }

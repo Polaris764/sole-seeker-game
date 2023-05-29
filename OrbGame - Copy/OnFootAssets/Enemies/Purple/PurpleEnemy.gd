@@ -142,4 +142,5 @@ func completed_harvest():
 
 var trapped_speeds = []
 
-
+func entity_trapped(_var1,_var2):
+	pass

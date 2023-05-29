@@ -10,7 +10,8 @@ enum building_types {
 	LASER,
 	TURRET,
 	LANDMINE,
-	CALTROPS
+	CALTROPS,
+	CAPTURER
 }
 
 enum ship_locations {

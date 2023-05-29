@@ -81,6 +81,6 @@ func idle(delta):
 func crouch(delta):
 	velocity = move_and_slide(velocity*20*delta)
 
-func dead(delta):
+func dead(_delta):
 	$CollisionShape2D.disabled = true
 	# change sprite to death animation

@@ -34,10 +34,10 @@ func set_items_to_alignment_and_status():
 		$Hitbox/CollisionShape2D.position = Vector2(8,8)
 		$Hitbox/CollisionShape2D.rotation = 0
 		
-		$LeftHorizontal.disabled = false
-		$RightHorizontal.disabled = false
-		$LeftVertical.disabled = true
-		$RightVertical.disabled = true
+		$LeftHorizontal.set_deferred("disabled",false)
+		$RightHorizontal.set_deferred("disabled",false)
+		$LeftVertical.set_deferred("disabled",true)
+		$RightVertical.set_deferred("disabled",true)
 		if active:
 			$Sprite.frame = 0
 		else:
@@ -47,10 +47,10 @@ func set_items_to_alignment_and_status():
 		$Hitbox/CollisionShape2D.position = Vector2(8,6)
 		$Hitbox/CollisionShape2D.rotation = PI/2
 		
-		$LeftHorizontal.disabled = true
-		$RightHorizontal.disabled = true
-		$LeftVertical.disabled = false
-		$RightVertical.disabled = false
+		$LeftHorizontal.set_deferred("disabled",true)
+		$RightHorizontal.set_deferred("disabled",true)
+		$LeftVertical.set_deferred("disabled",false)
+		$RightVertical.set_deferred("disabled",false)
 		if active:
 			$Sprite.frame = 2
 		else:

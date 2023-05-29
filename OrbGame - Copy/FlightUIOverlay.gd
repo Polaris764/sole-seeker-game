@@ -21,6 +21,11 @@ func _ready():
 	elif storyPos == 6:
 		SignalBus.emit_signal("display_announcement","ship_guide1")
 		GalaxySave.game_data["storyProgression"] = 7
+	elif storyPos == 9:
+		SignalBus.emit_signal("display_announcement","ship_guide4")
+		GalaxySave.game_data["storyProgression"] = 10
+	elif storyPos == 11 or storyPos == 12:
+		GalaxySave.game_data["storyProgression"] = 13
 
 func _on_IncreaseLabel_interacted_with():
 	print("increasing")

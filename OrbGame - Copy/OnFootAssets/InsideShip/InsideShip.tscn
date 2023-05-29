@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://OnFootAssets/InsideShip/InsideShip.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/InsideShip/FlightChair.png" type="Texture" id=2]
@@ -9,14 +9,19 @@
 [ext_resource path="res://OnFootAssets/InsideShip/BloodDeposit.png" type="Texture" id=7]
 [ext_resource path="res://OnFootAssets/InsideShip/BloodDeposit.gd" type="Script" id=8]
 [ext_resource path="res://OnFootAssets/InsideShip/FlightChair.gd" type="Script" id=9]
+[ext_resource path="res://OnFootAssets/InsideShip/ShipHealthPod.png" type="Texture" id=10]
+[ext_resource path="res://OnFootAssets/InsideShip/Respawner.gd" type="Script" id=11]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 31, 31 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 26.0
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 34, 36 )
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 26.0
 
 [node name="Ship" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,57 +38,82 @@ tile_data = PoolIntArray( 5, 4, 0, 6, 3, 0, 7, 3, 0, 8, 3, 0, 9, 3, 0, 10, 3, 0,
 position = Vector2( 400, 272 )
 scale = Vector2( 2, 2 )
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
+[node name="BackupCam" type="Camera2D" parent="."]
+scale = Vector2( 0.2, 0.2 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Respawner" type="Node2D" parent="YSort"]
+position = Vector2( 353, 197 )
+script = ExtResource( 11 )
+
+[node name="Interactable" parent="YSort/Respawner" instance=ExtResource( 6 )]
+player_node = NodePath("../../Player")
+
+[node name="CollisionShape2D" parent="YSort/Respawner/Interactable/Area2D" index="0"]
+position = Vector2( -3, -4 )
+shape = SubResource( 4 )
+
+[node name="Sprite" parent="YSort/Respawner/Interactable" index="1"]
+texture = ExtResource( 10 )
+
+[node name="FlightChair" type="Node2D" parent="YSort"]
+position = Vector2( 271, 80 )
+script = ExtResource( 9 )
+
+[node name="Interactable" parent="YSort/FlightChair" instance=ExtResource( 6 )]
+player_node = NodePath("../../Player")
+required_story_pos = 1
+optional_blacklist_pos = 8
+interaction_result = "Fly Ship"
+
+[node name="CollisionShape2D" parent="YSort/FlightChair/Interactable/Area2D" index="0"]
+shape = SubResource( 3 )
+
+[node name="Sprite" parent="YSort/FlightChair/Interactable" index="1"]
+texture = ExtResource( 2 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 296, 197 )
 isInRoom = true
 
-[node name="AnimationTree" parent="Player" index="2"]
+[node name="Sprite" parent="YSort/Player/BackBufferCopy" index="0"]
+frame = 0
+
+[node name="AnimationTree" parent="YSort/Player" index="2"]
 parameters/playback = SubResource( 2 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
 zoom = Vector2( 0.5, 0.5 )
 
-[node name="BloodDeposit" type="Node2D" parent="."]
+[node name="BloodDeposit" type="Node2D" parent="YSort"]
+position = Vector2( 192, 191 )
 script = ExtResource( 8 )
 
-[node name="Interactable" parent="BloodDeposit" instance=ExtResource( 6 )]
-position = Vector2( 185, 185 )
+[node name="Interactable" parent="YSort/BloodDeposit" instance=ExtResource( 6 )]
 player_node = NodePath("../../Player")
 interaction_result = "Use Deposit"
 
-[node name="CollisionShape2D" parent="BloodDeposit/Interactable/Area2D" index="0"]
+[node name="CollisionShape2D" parent="YSort/BloodDeposit/Interactable/Area2D" index="0"]
 position = Vector2( 5, 7 )
 shape = SubResource( 1 )
 
-[node name="Sprite" parent="BloodDeposit/Interactable" index="1"]
+[node name="Sprite" parent="YSort/BloodDeposit/Interactable" index="1"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 
-[node name="FlightChair" type="Node2D" parent="."]
-script = ExtResource( 9 )
-
-[node name="Interactable" parent="FlightChair" instance=ExtResource( 6 )]
-position = Vector2( 272, 60 )
-player_node = NodePath("../../Player")
-required_story_pos = 1
-interaction_result = "Fly Ship"
-
-[node name="CollisionShape2D" parent="FlightChair/Interactable/Area2D" index="0"]
-shape = SubResource( 3 )
-
-[node name="Sprite" parent="FlightChair/Interactable" index="1"]
-texture = ExtResource( 2 )
-
-[connection signal="interacted_with" from="BloodDeposit/Interactable" to="BloodDeposit" method="_on_Interactable_interacted_with"]
-[connection signal="player_nearby" from="BloodDeposit/Interactable" to="BloodDeposit" method="_on_Interactable_player_nearby"]
-[connection signal="interacted_with" from="FlightChair/Interactable" to="FlightChair" method="_on_Interactable_interacted_with"]
-[connection signal="player_nearby" from="FlightChair/Interactable" to="FlightChair" method="_on_Interactable_player_nearby"]
+[connection signal="player_nearby" from="YSort/Respawner/Interactable" to="YSort/Respawner" method="_on_Interactable_player_nearby"]
+[connection signal="interacted_with" from="YSort/FlightChair/Interactable" to="YSort/FlightChair" method="_on_Interactable_interacted_with"]
+[connection signal="player_nearby" from="YSort/FlightChair/Interactable" to="YSort/FlightChair" method="_on_Interactable_player_nearby"]
+[connection signal="interacted_with" from="YSort/BloodDeposit/Interactable" to="YSort/BloodDeposit" method="_on_Interactable_interacted_with"]
+[connection signal="player_nearby" from="YSort/BloodDeposit/Interactable" to="YSort/BloodDeposit" method="_on_Interactable_player_nearby"]
 
 [editable path="Door"]
-[editable path="Player"]
-[editable path="Player/HitboxPivot/WeaponHitbox"]
-[editable path="Player/HitboxPivot/NetgunHitbox"]
-[editable path="Player/Hurtbox"]
-[editable path="Player/DialogueInteractionArea"]
-[editable path="BloodDeposit/Interactable"]
-[editable path="FlightChair/Interactable"]
+[editable path="YSort/Respawner/Interactable"]
+[editable path="YSort/FlightChair/Interactable"]
+[editable path="YSort/Player"]
+[editable path="YSort/Player/HitboxPivot/WeaponHitbox"]
+[editable path="YSort/Player/HitboxPivot/NetgunHitbox"]
+[editable path="YSort/Player/Hurtbox"]
+[editable path="YSort/Player/DialogueInteractionArea"]
+[editable path="YSort/BloodDeposit/Interactable"]

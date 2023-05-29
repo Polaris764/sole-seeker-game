@@ -10,7 +10,7 @@ script = ExtResource( 1 )
 point_count = 200
 circle_radius = 500
 variance_radius = 600
-cosine_length = 5
+cosine_length = 9
 cosine_length2 = 10
 sin_length = 13
 

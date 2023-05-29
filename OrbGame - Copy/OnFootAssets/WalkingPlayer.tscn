@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=2]
+[gd_scene load_steps=167 format=2]
 
 [ext_resource path="res://OnFootAssets/Player/PlayerSpritesheet.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.gd" type="Script" id=2]
@@ -14,13 +14,20 @@
 [ext_resource path="res://OnFootAssets/DialogueSystem/DialogueInteractionArea.tscn" type="PackedScene" id=12]
 [ext_resource path="res://OnFootAssets/DialogueSystem/DialogueLayer.tscn" type="PackedScene" id=13]
 [ext_resource path="res://OnFootAssets/DialogueSystem/AnnouncementLayer.tscn" type="PackedScene" id=14]
+[ext_resource path="res://OnFootAssets/UI/LocationMarker.tscn" type="PackedScene" id=16]
+[ext_resource path="res://OnFootAssets/Assets/DeathAnimation.png" type="Texture" id=17]
+[ext_resource path="res://OnFootAssets/Assets/LegMask.png" type="Texture" id=18]
+[ext_resource path="res://OnFootAssets/Player/MaskingShader.tres" type="Shader" id=19]
+
+[sub_resource type="ShaderMaterial" id=160]
+shader = ExtResource( 19 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "IdleDown"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -73,7 +80,7 @@ resource_name = "IdleDownA"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -102,7 +109,7 @@ resource_name = "IdleDownG"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -155,7 +162,7 @@ resource_name = "IdleDownN"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -184,7 +191,7 @@ resource_name = "IdleLeft"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -225,7 +232,7 @@ resource_name = "IdleLeftA"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -254,7 +261,7 @@ resource_name = "IdleLeftG"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -295,7 +302,7 @@ resource_name = "IdleLeftN"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -324,7 +331,7 @@ resource_name = "IdleRight"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -365,7 +372,7 @@ resource_name = "IdleRightA"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -406,7 +413,7 @@ resource_name = "IdleRightG"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -447,7 +454,7 @@ resource_name = "IdleRightN"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -488,7 +495,7 @@ resource_name = "IdleUp"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -529,7 +536,7 @@ resource_name = "IdleUpA"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -558,7 +565,7 @@ resource_name = "IdleUpG"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -599,7 +606,7 @@ resource_name = "IdleUpN"
 length = 2.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -626,7 +633,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -691,7 +698,7 @@ resource_name = "RunDown"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -732,7 +739,7 @@ resource_name = "RunDownA"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -761,7 +768,7 @@ resource_name = "RunDownG"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -802,7 +809,7 @@ resource_name = "RunDownN"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -832,7 +839,7 @@ length = 0.6
 loop = true
 step = 0.075
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -874,7 +881,7 @@ length = 0.6
 loop = true
 step = 0.075
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -904,7 +911,7 @@ length = 0.6
 loop = true
 step = 0.075
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -946,7 +953,7 @@ length = 0.6
 loop = true
 step = 0.075
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -976,7 +983,7 @@ length = 0.6
 loop = true
 step = 0.075
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1018,7 +1025,7 @@ length = 0.6
 loop = true
 step = 0.075
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1048,7 +1055,7 @@ length = 0.6
 loop = true
 step = 0.075
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1090,7 +1097,7 @@ length = 0.6
 loop = true
 step = 0.075
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1119,7 +1126,7 @@ resource_name = "RunUp"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1160,7 +1167,7 @@ resource_name = "RunUpA"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1189,7 +1196,7 @@ resource_name = "RunUpG"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1230,7 +1237,7 @@ resource_name = "RunUpN"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1537,7 +1544,7 @@ states/Run/node = SubResource( 12 )
 states/Run/position = Vector2( 425, 70 )
 transitions = [ "Idle", "Run", SubResource( 25 ), "Run", "Idle", SubResource( 26 ), "Idle", "AttackIdle", SubResource( 51 ), "AttackIdle", "Idle", SubResource( 52 ), "AttackIdle", "AttackRun", SubResource( 55 ), "AttackRun", "AttackIdle", SubResource( 56 ), "AttackRun", "Run", SubResource( 57 ), "Run", "AttackRun", SubResource( 58 ), "Idle", "AttackRun", SubResource( 70 ), "AttackRun", "Idle", SubResource( 71 ), "Run", "AttackIdle", SubResource( 72 ), "AttackIdle", "Run", SubResource( 73 ), "Idle", "ArmlessIdle", SubResource( 106 ), "ArmlessIdle", "Idle", SubResource( 107 ), "Idle", "ArmlessRun", SubResource( 108 ), "ArmlessRun", "Idle", SubResource( 109 ), "Run", "ArmlessRun", SubResource( 110 ), "ArmlessRun", "Run", SubResource( 111 ), "Run", "ArmlessIdle", SubResource( 112 ), "ArmlessIdle", "Run", SubResource( 113 ), "ArmlessRun", "ArmlessIdle", SubResource( 114 ), "ArmlessIdle", "ArmlessRun", SubResource( 115 ), "ArmlessIdle", "AttackIdle", SubResource( 116 ), "AttackRun", "ArmlessRun", SubResource( 117 ), "ArmlessRun", "AttackRun", SubResource( 118 ), "AttackIdle", "ArmlessIdle", SubResource( 119 ), "NetgunIdle", "NetgunRun", SubResource( 146 ), "NetgunRun", "NetgunIdle", SubResource( 147 ), "NetgunIdle", "ArmlessIdle", SubResource( 148 ), "ArmlessIdle", "NetgunIdle", SubResource( 149 ), "NetgunRun", "ArmlessRun", SubResource( 150 ), "ArmlessRun", "NetgunRun", SubResource( 151 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -108, -258 )
+graph_offset = Vector2( -174, -196 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=16]
 
@@ -1571,7 +1578,7 @@ blend_mode = 2
 [sub_resource type="AnimationNodeTimeScale" id=75]
 
 [sub_resource type="AnimationNodeBlendTree" id=69]
-graph_offset = Vector2( -350.494, -150 )
+graph_offset = Vector2( -263.106, 126.229 )
 nodes/Attack/node = SubResource( 67 )
 nodes/Attack/position = Vector2( -200, 160 )
 nodes/Seek/node = SubResource( 68 )
@@ -1579,7 +1586,7 @@ nodes/Seek/position = Vector2( 80, 160 )
 nodes/TimeScale/node = SubResource( 75 )
 nodes/TimeScale/position = Vector2( 280, 160 )
 nodes/output/position = Vector2( 520, 180 )
-node_connections = [ "TimeScale", 0, "Seek", "Seek", 0, "Attack", "output", 0, "TimeScale" ]
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Seek", "Seek", 0, "Attack" ]
 
 [sub_resource type="Animation" id=27]
 resource_name = "AttackDown"
@@ -2131,13 +2138,13 @@ blend_mode = 1
 [sub_resource type="AnimationNodeTimeSeek" id=77]
 
 [sub_resource type="AnimationNodeBlendTree" id=78]
-graph_offset = Vector2( -408.994, 62.5991 )
+graph_offset = Vector2( -748.6, 433.898 )
 nodes/NetgunAttack/node = SubResource( 76 )
 nodes/NetgunAttack/position = Vector2( -300, 120 )
 nodes/Seek/node = SubResource( 77 )
 nodes/Seek/position = Vector2( 20, 140 )
 nodes/output/position = Vector2( 340, 160 )
-node_connections = [ "Seek", 0, "NetgunAttack", "output", 0, "Seek" ]
+node_connections = [ "output", 0, "Seek", "Seek", 0, "NetgunAttack" ]
 
 [sub_resource type="Animation" id=87]
 resource_name = "NetgunDown"
@@ -2600,6 +2607,358 @@ extents = Vector2( 13.75, 27.5 )
 [sub_resource type="RectangleShape2D" id=155]
 extents = Vector2( 3.92179, 4.45495 )
 
+[sub_resource type="AnimationNodeAnimation" id=167]
+animation = "DeathLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=168]
+animation = "DeathRight"
+
+[sub_resource type="AnimationNodeAnimation" id=169]
+animation = "DeathDown"
+
+[sub_resource type="AnimationNodeAnimation" id=170]
+animation = "DeathUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=161]
+blend_point_0/node = SubResource( 167 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 168 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 169 )
+blend_point_2/pos = Vector2( 0, 1.1 )
+blend_point_3/node = SubResource( 170 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
+[sub_resource type="Animation" id=162]
+resource_name = "DeathDown"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../DeathSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 14, -11.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../DeathSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BackBufferCopy/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 15, 11.5 ), Vector2( 15, 15 ), Vector2( 15, 19 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BackBufferCopy/Sprite/LegMask:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../DeathSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=163]
+resource_name = "DeathLeft"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../DeathSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../DeathSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 14, -11.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BackBufferCopy/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 15, 11.5 ), Vector2( 9, 13.5 ), Vector2( 7, 15.5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BackBufferCopy/Sprite/LegMask:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../DeathSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=164]
+resource_name = "DeathRight"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../DeathSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 14, -11.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../DeathSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BackBufferCopy/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 15, 11.5 ), Vector2( 21, 13.5 ), Vector2( 23, 15.5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BackBufferCopy/Sprite/LegMask:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../DeathSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=165]
+resource_name = "DeathUp"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../DeathSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 14, -11.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../DeathSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 9, 10, 11 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BackBufferCopy/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 15, 11.5 ), Vector2( 15, 13.5 ), Vector2( 15, 16.5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BackBufferCopy/Sprite/LegMask:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../DeathSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=166]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../DeathSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 14, -11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../DeathSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../BackBufferCopy/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 15, 12 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../BackBufferCopy/Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../BackBufferCopy/Sprite/LegMask:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../DeathSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( -4, -5 )
 scale = Vector2( 0.4, 0.4 )
@@ -2607,14 +2966,25 @@ collision_layer = 2
 script = ExtResource( 2 )
 movementSpeed = 100
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+scale = Vector2( 1, 1 )
+copy_mode = 2
+
+[node name="Sprite" type="Sprite" parent="BackBufferCopy"]
+light_mask = 2
 position = Vector2( 15, 12 )
+scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 centered = false
 offset = Vector2( -15, -48 )
 hframes = 132
 vframes = 2
-frame = 4
+
+[node name="LegMask" type="Sprite" parent="BackBufferCopy/Sprite"]
+visible = false
+material = SubResource( 160 )
+position = Vector2( 0, 1 )
+texture = ExtResource( 18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/IdleDown = SubResource( 4 )
@@ -2684,6 +3054,7 @@ anims/AttackUp = SubResource( 30 )
 anims/RESET = SubResource( 31 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
+visible = false
 position = Vector2( 20, -15 )
 
 [node name="WeaponHitbox" parent="HitboxPivot" instance=ExtResource( 4 )]
@@ -2700,12 +3071,14 @@ shape = SubResource( 50 )
 disabled = true
 
 [node name="AttackArm" type="Sprite" parent="HitboxPivot"]
+light_mask = 2
 position = Vector2( 8, 15 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -2 )
 hframes = 22
 
 [node name="Netgun" type="Sprite" parent="HitboxPivot"]
+light_mask = 2
 position = Vector2( 5, 7 )
 texture = ExtResource( 9 )
 offset = Vector2( 0, -3 )
@@ -2734,7 +3107,10 @@ collision_layer = 4
 position = Vector2( 13.5, -7 )
 shape = SubResource( 74 )
 
+[node name="InteractionButton" parent="." instance=ExtResource( 8 )]
+
 [node name="UI" type="CanvasLayer" parent="."]
+pause_mode = 2
 
 [node name="HealthUI" parent="UI" instance=ExtResource( 7 )]
 
@@ -2744,7 +3120,11 @@ visible = false
 [node name="InventoryMenu" parent="UI" instance=ExtResource( 11 )]
 visible = false
 
-[node name="InteractionButton" parent="." instance=ExtResource( 8 )]
+[node name="LocationMarker" parent="UI" instance=ExtResource( 16 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1024.0
+margin_bottom = 600.0
 
 [node name="NetgunTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 78 )
@@ -2772,11 +3152,28 @@ scale = Vector2( 1.594, 1.2 )
 shape = SubResource( 155 )
 
 [node name="AnnouncementLayer" parent="." instance=ExtResource( 14 )]
-visible = false
 scene_text_file = "res://OnFootAssets/DialogueSystem/world_announcements.json"
 
 [node name="DialogueLayers" parent="." instance=ExtResource( 13 )]
-scene_text_file = "res://OnFootAssets/DialogueSystem/world_dialogue.json"
+
+[node name="DeathTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 161 )
+anim_player = NodePath("DeathPlayer")
+parameters/blend_position = Vector2( 0, 0 )
+
+[node name="DeathPlayer" type="AnimationPlayer" parent="DeathTree"]
+anims/DeathDown = SubResource( 162 )
+anims/DeathLeft = SubResource( 163 )
+anims/DeathRight = SubResource( 164 )
+anims/DeathUp = SubResource( 165 )
+anims/RESET = SubResource( 166 )
+
+[node name="DeathSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 14, -11 )
+texture = ExtResource( 17 )
+hframes = 3
+vframes = 4
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

@@ -6,7 +6,7 @@ var planet = preload("res://MapUIs/GalaxyMap/PlanetarySystem.tscn")
 var HQ = preload("res://MapUIs/GalaxyMap/CompanyHQ.tscn")
 
 onready var player = $Player
-
+onready var camera = $GalaxyCamera
 
 export var biomes = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"white":[]}
 export var biomes_collisions = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"white":[]}
@@ -44,7 +44,6 @@ func _ready():
 				var planet_pos = rotatePoint(i,i)
 				new_planet.global_position = planet_pos
 				new_planet.system_type = determine_biome(planet_pos)
-
 	add_companyHQ()
 	update_ship()
 
@@ -66,24 +65,24 @@ func update_ship():
 	
 func set_biome_circle_origins():
 	rngMach.seed = GalaxySave.game_data["galaxySeed"]
-	for amount in rngMach.randi_range(4,5):
+	for amount in rngMach.randi_range(8,10):
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["blue"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 		if rngMach.randi()%2==0: biomes["blue"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
-	for amount in rngMach.randi_range(3,4):
+	for amount in rngMach.randi_range(6,8):
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["red"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
-	for amount in rngMach.randi_range(1,2):
+	for amount in rngMach.randi_range(2,4):
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["orange"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
-	for amount in rngMach.randi_range(2,3):
+	for amount in rngMach.randi_range(4,6):
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["purple"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
-	for amount in rngMach.randi_range(1,6):
+	for amount in rngMach.randi_range(2,12):
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["black"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
@@ -116,11 +115,12 @@ func set_biome_collisions():
 				var point_angle = (2*PI)/point_count*point
 				ptArray.append(location + Vector2(hori_stretch*cos(point_angle),vert_stretch*sin(point_angle))*Vector2(circle_radius2,circle_radius2))
 			collision.polygon = ptArray
-			#coloration
-			collision.draw_array = ptArray
-			collision.biome_type = biome_type
-			biomes_collisions[biome_type].append(collision)
-			add_child(collision)
+			if not Geometry.triangulate_polygon(ptArray) == PoolIntArray(): # check for invalid polygon
+				#coloration
+				collision.draw_array = ptArray
+				collision.biome_type = biome_type
+				biomes_collisions[biome_type].append(collision)
+				add_child(collision)
 
 func determine_biome(system_pos):
 	var system_types = []
@@ -130,3 +130,27 @@ func determine_biome(system_pos):
 				if not system_types.has(biome_type):
 					system_types.append(biome_type)
 	return system_types
+
+enum collision_visibility {
+	NONE,
+	ALL,
+	RED,
+	BLUE,
+	PURPLE,
+	ORANGE,
+	BLACK,
+	WHITE
+}
+var visibile_collision = collision_visibility.NONE
+var visible_transparency_float : float = .5
+func _process(_delta):
+	if Input.is_action_just_pressed("build_state_switch"):
+		visibile_collision += 1
+		if visibile_collision > collision_visibility.size()-1:
+			visibile_collision = 0
+		for color in biomes_collisions:
+			for collision in biomes_collisions[color]:
+				collision.transparency = 0
+				var normalized_CV = str(collision_visibility.keys()[visibile_collision]).to_lower()
+				if normalized_CV == color or normalized_CV == "all":
+					collision.transparency = visible_transparency_float

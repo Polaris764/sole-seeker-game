@@ -10,6 +10,7 @@ export var isInRoom = false
 export var slipperyGround = false
 export var frozenPlanet = false
 export var cutscene = []
+export var testWorld = false
 var recent_vectors = []
 var isOnIce = false
 
@@ -50,7 +51,8 @@ var needle_attack_with_netgun_equipped = false
 signal teleported(direction)
 func _ready():
 	$Camera2D.zoom = Vector2(.2,.2)
-	stats.connect("no_health",self,"queue_free")
+	$HitboxPivot.visible = true
+	stats.connect("no_health",self,"on_death")
 	animationTree.active = true
 #	weaponHitbox.knockback_vector
 	update_buildings_from_saved_data()
@@ -173,7 +175,7 @@ func move_state():
 	# building
 	if Input.is_action_just_pressed("build_state_switch"):
 		print(state)
-		if not isInRoom:
+		if not isInRoom or testWorld:
 			if state == MOVE:
 				state = BUILD
 				var mousepos = get_global_mouse_position()
@@ -219,7 +221,7 @@ func move_state():
 		harvest_check()
 
 func check_for_ice():
-	var grass_tilemap = get_node("../Grass")
+	var grass_tilemap = get_node("../../Grass")
 	var playerPos = Vector2(grass_tilemap.world_to_map(global_position).x,grass_tilemap.world_to_map(global_position+Vector2(0,5)).y)
 	var playerPos2 = Vector2(grass_tilemap.world_to_map(global_position+Vector2(8,0)).x,grass_tilemap.world_to_map(global_position+Vector2(0,-2)).y)
 	if grass_tilemap.get_cell(playerPos.x,playerPos.y) == -1 or grass_tilemap.get_cell(playerPos2.x,playerPos2.y) == -1 :
@@ -238,6 +240,7 @@ func set_positions_of_animation_trees(target_velocity):
 	animationTree.set("parameters/NetgunIdle/blend_position",target_velocity)
 	$NetgunTree.set("parameters/NetgunAttack/blend_position",target_velocity)
 	$AttackTree.set("parameters/Attack/blend_position",target_velocity)
+	$DeathTree.set("parameters/blend_position",target_velocity)
 	
 ## ATTACKING ##
 
@@ -310,7 +313,7 @@ func fire_netgun_create_projectiles():
 		var net_sprite = projectile.get_node("NetSprite")
 		projectile_sprite.frame = rand_range(0,projectile_sprite.hframes) # number of net image possibilities
 		net_sprite.frame = rand_range(0,net_sprite.hframes)
-		get_tree().get_root().add_child(projectile)
+		get_parent().add_child(projectile)
 		projectile.start($HitboxPivot/NetProjectileOrigin.global_transform,body)
 		print("making net")
 
@@ -330,6 +333,8 @@ var laser_scene = preload("res://OnFootAssets/Player/Build/LaserWall.tscn")
 var laser_guide_scene = preload("res://OnFootAssets/Player/Build/LaserGuide.tscn")
 var turret_scene = preload("res://OnFootAssets/Player/Build/Turret.tscn")
 var turret_guide_scene = preload("res://OnFootAssets/Player/Build/TurretGuide.tscn")
+var capturer_scene = preload("res://OnFootAssets/Player/Build/Capturer.tscn")
+var capturer_guide_scene = preload("res://OnFootAssets/Player/Build/CapturerGuide.tscn")
 var guide_frame_tilemap
 var wall_tilemap
 var wall_tilemap_guide
@@ -339,6 +344,7 @@ var landmine_guide
 var caltrops_guide
 var laser_guide
 var turret_guide
+var capturer_guide
 
 func update_buildings_from_saved_data():
 	guide_frame_tilemap = guide_frame.instance()
@@ -377,6 +383,11 @@ func update_buildings_from_saved_data():
 	turret_guide.modulate.a = .5
 	turret_guide.visible = false
 	
+	capturer_guide = capturer_guide_scene.instance()
+	get_tree().get_root().call_deferred("add_child",capturer_guide)
+	capturer_guide.modulate.a = .5
+	capturer_guide.visible = false
+	
 	for building_type in planet_building_data:
 		match building_type:
 			building_types.WALL:
@@ -414,6 +425,11 @@ func update_buildings_from_saved_data():
 					var turret = turret_scene.instance()
 					turret.global_position = location
 					get_tree().get_root().call_deferred("add_child",turret)
+			building_types.CAPTURER:
+				for location in planet_building_data[building_type]:
+					var capturer = capturer_scene.instance()
+					capturer.global_position = location
+					get_tree().get_root().call_deferred("add_child",capturer)
 
 # building types
 
@@ -498,7 +514,15 @@ func build_state(_delta):
 						var turret = turret_scene.instance()
 						turret.global_position = placing_block_location
 						get_tree().get_root().call_deferred("add_child",turret)
-						
+				building_types.CAPTURER:
+					if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = []
+					if not planet_building_data[current_building_type].has(placing_block_location):
+						planet_building_data[current_building_type].append(placing_block_location)
+						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
+						var capturer = capturer_scene.instance()
+						capturer.global_position = placing_block_location
+						get_tree().get_root().call_deferred("add_child",capturer)
 			GalaxySave.set_building_data(planet_building_data)
 			GalaxySave.save_data()
 				
@@ -560,6 +584,16 @@ func build_state(_delta):
 						if candidate_turrets.global_position == mousepos_floored:
 							candidate_turrets.queue_free()
 							GalaxySave.game_data["storedBuildings"][current_building_type] += 1
+			building_types.CAPTURER:
+				if not current_building_type in planet_building_data:
+						planet_building_data[current_building_type] = []
+				if planet_building_data[current_building_type].has(mousepos_floored):
+					planet_building_data[current_building_type].erase(mousepos_floored)
+					var possible_capturers = get_tree().get_nodes_in_group("Capturers")
+					for candidate_capturers in possible_capturers:
+						if candidate_capturers.global_position == mousepos_floored:
+							candidate_capturers.queue_free()
+							GalaxySave.game_data["storedBuildings"][current_building_type] += 1
 			
 		GalaxySave.set_building_data(planet_building_data)
 		GalaxySave.save_data()
@@ -588,6 +622,10 @@ func update_guides(mousepos_floored):
 			turret_guide.visible = true
 			turret_guide.global_position = mousepos_floored
 			guide_frame_tilemap.set_cell(mousepos_floored.x/tile_size,mousepos_floored.y/tile_size,0)
+		building_types.CAPTURER:
+			capturer_guide.visible = true
+			capturer_guide.global_position = mousepos_floored
+			guide_frame_tilemap.set_cell(mousepos_floored.x/tile_size,mousepos_floored.y/tile_size,0)
 
 func clear_all_guides():
 	wall_tilemap_guide.clear()
@@ -596,6 +634,7 @@ func clear_all_guides():
 	caltrops_guide.visible = false
 	laser_guide.visible = false
 	turret_guide.visible = false
+	capturer_guide.visible = false
 	guide_frame_tilemap.clear()
 
 func randomize_orientation(sprite):
@@ -653,3 +692,23 @@ func can_afford_building():
 		return true
 	else:
 		return false
+
+## Death ##
+
+onready var player_sprite = $BackBufferCopy/Sprite
+onready var death_animation_tree = $DeathTree
+var dead_check = false
+var netgun_out = false
+func on_death():
+	if not dead_check:
+		# death animation
+		dead_check = true
+		death_animation_tree.active = true
+		animationTree.active = false
+		add_cutscene("death")
+		# drop carried loot
+		for key in GalaxySave.game_data["backpackBlood"]:
+			GalaxySave.game_data["backpackBlood"][key] = 0
+		# fade to inside ship
+		# respawn at respawner with effect
+			get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")

@@ -89,6 +89,18 @@ func updateSystemInfoPanel(seedUsed):
 	pPlanetAmount.text = \"Planet Count: \" + String(planetAmount) #set planet amount
 	get_system_type()
 	pSystemType.text = system_type_text
+	
+
+onready var enterButtonText = get_node(\"../SystemInfo/Control/Holder/EnterButton/EnterLabel\")
+func set_enter_button_text(accessible):
+	if accessible:
+		var relevantButtons = []
+		for i in InputMap.get_action_list('Interact'):
+			if i is InputEventKey:
+				relevantButtons.append(i.as_text())
+		enterButtonText.text = \"Enter\\n\" + str(relevantButtons)
+	else:
+		enterButtonText.text = \"Access Restricted\"
 
 export var system_type : Array
 var system_type_text : String = \"System Type: Error\"
@@ -97,6 +109,14 @@ func get_system_type():
 		system_type_text = \"System Type: \" + array_join(system_type)
 	else:
 		system_type_text = \"System Type: Uninhabited\"
+	if \"white\" in system_type_text:
+		set_enter_button_text(false)
+	elif not \"red\" in system_type_text:# and GalaxySave.game_data[\"storyProgression\"] < 11:
+		set_enter_button_text(false)
+		print(system_type_text)
+		print(\"TRIGGER2\")
+	else:
+		set_enter_button_text(true)
 	return system_type_text
 
 func array_join(arr, separator = \", \"):

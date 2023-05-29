@@ -4,3 +4,4 @@
 
 [node name="SystemTypeCollision" type="CollisionPolygon2D"]
 script = ExtResource( 1 )
+transparency = 0.0

@@ -10,7 +10,7 @@ func _ready():
 	var children = get_children()
 	children.erase(BaseL)
 	children.erase(BaseR)
-	for item in get_children():
+	for item in children:
 		if item is Sprite:
 			sprites.append(item)
 	for sprite in sprites:

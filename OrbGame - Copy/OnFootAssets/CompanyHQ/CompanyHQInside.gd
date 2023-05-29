@@ -18,7 +18,7 @@ func _ready():
 	else:
 		player.get_node("Camera2D").current = true
 		player.global_position = ship_position + Vector2(37,-83)
-		SignalBus.connect("updated_story",self,"handle_story")
+		var _val = SignalBus.connect("updated_story",self,"handle_story")
 		handle_story()
 
 func handle_story():
@@ -28,16 +28,23 @@ func handle_story():
 	if storyPos < 1:
 		GalaxySave.game_data["shipPosition"][0] = get_station_position()
 		healStation.healing()
+		$BackupCamera.global_position = healStation.get_node("Position2D2").global_position
 		GalaxySave.game_data["storyProgression"] = 1
+	elif storyPos == 2:
+		$YSort/TrainingDoor.locked = true
 	elif storyPos == 3:
 		$YSort/TrainingBot.active = true
+	elif storyPos == 4:
+		$YSort/TrainingDoor.locked = false
+	elif storyPos >= 11:
+		$YSort/ShopDoor.locked = false
 
 func set_atos_dialogue():
 	var stands = $YSort/AtosStands.get_children()
 	for stand in stands:
 		stand.get_node("DialogueArea").dialogue_key = "atos" + key_from_story_pos[GalaxySave.game_data["storyProgression"]]
 		
-var key_from_story_pos = {0:"1",1:"1",2:"2",3:"3",4:"4",5:"5", 6:"5",7:"5"}
+var key_from_story_pos = {0:"1",1:"1",2:"2",3:"3",4:"4",5:"5", 6:"5",7:"5",8:"5",9:"5",10:"5",11:"11",12:"12",13:"13"}
 
 #ship interaction
 func _on_shipShape_body_entered(body):
@@ -55,7 +62,7 @@ func custom_interaction():
 	interaction_button.updateButton(relevantButtons,"Enter Ship",self,"Interact")
 
 func interacted():
-	get_tree().change_scene(inside_ship_scene)
+	var _change = get_tree().change_scene(inside_ship_scene)
 
 func get_station_position():
 	var rngMach = RandomNumberGenerator.new()

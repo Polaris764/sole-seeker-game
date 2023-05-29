@@ -4,7 +4,7 @@ func _ready():
 	$VBoxContainer/StartButton.grab_focus()
 
 func _on_StartButton_pressed():
-	get_tree().change_scene("res://MapUIs/GalaxyMap/GalaxyMap.tscn")
+	var _change = get_tree().change_scene("res://MapUIs/GalaxyMap/GalaxyMap.tscn")
 
 
 func _on_OptionsButton_pressed():
