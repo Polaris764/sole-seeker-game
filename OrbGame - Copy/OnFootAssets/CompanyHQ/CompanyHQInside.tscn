@@ -752,11 +752,11 @@ position = Vector2( 35, -490 )
 player_node = NodePath("../../../Player")
 
 [node name="HealStation" type="Node2D" parent="YSort"]
-position = Vector2( 250, -84 )
+position = Vector2( 296, -80 )
 script = ExtResource( 3 )
 
 [node name="Interactable" parent="YSort/HealStation" instance=ExtResource( 4 )]
-position = Vector2( 47, -6 )
+position = Vector2( 0, -12 )
 player_node = NodePath("../../Player")
 
 [node name="CollisionShape2D" parent="YSort/HealStation/Interactable/Area2D" index="0"]
@@ -782,16 +782,17 @@ anims/DoorsOpen = SubResource( 18 )
 anims/RESET = SubResource( 19 )
 
 [node name="Position2D" type="Position2D" parent="YSort/HealStation"]
-position = Vector2( 41, -4 )
+position = Vector2( 0, -2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="YSort/HealStation"]
+position = Vector2( -47, -6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/HealStation/StaticBody2D"]
 position = Vector2( 48, 3.5 )
 shape = SubResource( 20 )
 
 [node name="Position2D2" type="Position2D" parent="YSort/HealStation"]
-position = Vector2( 46, 10 )
+position = Vector2( 0, 7 )
 
 [node name="TrainingBot" parent="YSort" instance=ExtResource( 16 )]
 position = Vector2( -83, -435 )
@@ -961,7 +962,6 @@ shape = SubResource( 5 )
 
 [node name="BackupCamera" type="Camera2D" parent="."]
 position = Vector2( -2.38419e-07, -4.76837e-07 )
-scale = Vector2( 1, 1 )
 zoom = Vector2( 0.2, 0.2 )
 
 [connection signal="interacted_with" from="YSort/HealStation/Interactable" to="YSort/HealStation" method="_on_Interactable_interacted_with"]

@@ -3,6 +3,7 @@ extends Node
 export (float) var harvest_duration = 3.5
 export (int) var max_health = 1 setget set_max_health
 export (int) var health = max_health setget set_health
+export var is_player = false
 
 signal no_health
 signal health_changed(value)
@@ -20,4 +21,5 @@ func set_health(value):
 		emit_signal("no_health")
 
 func _ready():
-	self.health = max_health
+	if not is_player:
+		self.health = max_health

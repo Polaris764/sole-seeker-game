@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://OnFootAssets/InsideShip/InsideShip.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/InsideShip/FlightChair.png" type="Texture" id=2]
@@ -11,17 +11,58 @@
 [ext_resource path="res://OnFootAssets/InsideShip/FlightChair.gd" type="Script" id=9]
 [ext_resource path="res://OnFootAssets/InsideShip/ShipHealthPod.png" type="Texture" id=10]
 [ext_resource path="res://OnFootAssets/InsideShip/Respawner.gd" type="Script" id=11]
+[ext_resource path="res://OnFootAssets/Assets/ShipHealthPodZap.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 31, 31 )
 
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 1.0
+height = 14.0
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 20, 10 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 12 )
+region = Rect2( 20, 0, 20, 10 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 12 )
+region = Rect2( 40, 0, 20, 10 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 12 )
+region = Rect2( 60, 0, 20, 10 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 12 )
+region = Rect2( 80, 0, 20, 10 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 12 )
+region = Rect2( 100, 0, 20, 10 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
 [sub_resource type="CircleShape2D" id=3]
 radius = 26.0
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 34, 36 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
 
 [node name="Ship" type="Node2D"]
 script = ExtResource( 1 )
@@ -48,14 +89,40 @@ position = Vector2( 353, 197 )
 script = ExtResource( 11 )
 
 [node name="Interactable" parent="YSort/Respawner" instance=ExtResource( 6 )]
+position = Vector2( 0, -3 )
 player_node = NodePath("../../Player")
 
 [node name="CollisionShape2D" parent="YSort/Respawner/Interactable/Area2D" index="0"]
+visible = false
 position = Vector2( -3, -4 )
 shape = SubResource( 4 )
 
 [node name="Sprite" parent="YSort/Respawner/Interactable" index="1"]
 texture = ExtResource( 10 )
+
+[node name="PlatformArea" type="Area2D" parent="YSort/Respawner"]
+visible = false
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Respawner/PlatformArea"]
+position = Vector2( 0, -2 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/Respawner"]
+visible = false
+position = Vector2( -353, -197 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Respawner/StaticBody2D"]
+position = Vector2( 353, 196 )
+rotation = 1.5708
+shape = SubResource( 6 )
+
+[node name="ZapSprite" type="AnimatedSprite" parent="YSort/Respawner"]
+position = Vector2( 0, -12 )
+frames = SubResource( 13 )
+frame = 3
+speed_scale = 2.0
 
 [node name="FlightChair" type="Node2D" parent="YSort"]
 position = Vector2( 271, 80 )
@@ -73,19 +140,6 @@ shape = SubResource( 3 )
 [node name="Sprite" parent="YSort/FlightChair/Interactable" index="1"]
 texture = ExtResource( 2 )
 
-[node name="Player" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 296, 197 )
-isInRoom = true
-
-[node name="Sprite" parent="YSort/Player/BackBufferCopy" index="0"]
-frame = 0
-
-[node name="AnimationTree" parent="YSort/Player" index="2"]
-parameters/playback = SubResource( 2 )
-
-[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
-zoom = Vector2( 0.5, 0.5 )
-
 [node name="BloodDeposit" type="Node2D" parent="YSort"]
 position = Vector2( 192, 191 )
 script = ExtResource( 8 )
@@ -102,7 +156,19 @@ shape = SubResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 276, 152 )
+isInRoom = true
+
+[node name="AnimationTree" parent="YSort/Player" index="2"]
+parameters/playback = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+zoom = Vector2( 0.5, 0.5 )
+
 [connection signal="player_nearby" from="YSort/Respawner/Interactable" to="YSort/Respawner" method="_on_Interactable_player_nearby"]
+[connection signal="body_exited" from="YSort/Respawner/PlatformArea" to="YSort/Respawner" method="_on_PlatformArea_body_exited"]
+[connection signal="animation_finished" from="YSort/Respawner/ZapSprite" to="YSort/Respawner" method="_on_ZapSprite_animation_finished"]
 [connection signal="interacted_with" from="YSort/FlightChair/Interactable" to="YSort/FlightChair" method="_on_Interactable_interacted_with"]
 [connection signal="player_nearby" from="YSort/FlightChair/Interactable" to="YSort/FlightChair" method="_on_Interactable_player_nearby"]
 [connection signal="interacted_with" from="YSort/BloodDeposit/Interactable" to="YSort/BloodDeposit" method="_on_Interactable_interacted_with"]
@@ -111,9 +177,9 @@ texture = ExtResource( 7 )
 [editable path="Door"]
 [editable path="YSort/Respawner/Interactable"]
 [editable path="YSort/FlightChair/Interactable"]
+[editable path="YSort/BloodDeposit/Interactable"]
 [editable path="YSort/Player"]
 [editable path="YSort/Player/HitboxPivot/WeaponHitbox"]
 [editable path="YSort/Player/HitboxPivot/NetgunHitbox"]
 [editable path="YSort/Player/Hurtbox"]
 [editable path="YSort/Player/DialogueInteractionArea"]
-[editable path="YSort/BloodDeposit/Interactable"]

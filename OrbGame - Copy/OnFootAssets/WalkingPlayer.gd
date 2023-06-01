@@ -279,6 +279,10 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
+	GalaxySave.game_data["playerHealth"] = stats.health
+	print("player save stats:")
+	print(GalaxySave.game_data)
+	GalaxySave.save_data()
 
 func pause_animation(player,time_position):
 	player.set("parameters/TimeScale/scale",0)
@@ -711,4 +715,8 @@ func on_death():
 			GalaxySave.game_data["backpackBlood"][key] = 0
 		# fade to inside ship
 		# respawn at respawner with effect
-			get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
+		ConstantsHolder.respawning = true
+		PlayerStats.health = PlayerStats.max_health
+		var _change = get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
+		GalaxySave.save_data()
+		

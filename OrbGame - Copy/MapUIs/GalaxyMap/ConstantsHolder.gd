@@ -30,3 +30,5 @@ func update_story_from_atos():
 	if storyPos == 2:
 		GalaxySave.game_data["storyProgression"] = 3
 		SignalBus.emit_signal("updated_story")
+
+var respawning = false

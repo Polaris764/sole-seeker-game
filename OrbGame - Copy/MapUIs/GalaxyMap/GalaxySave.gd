@@ -46,6 +46,8 @@ func get_planet_building_data():
 # saving data
 func _ready():
 	load_data()
+	# setup player
+	PlayerStats.health = game_data["playerHealth"]
 
 func save_data():
 	var file = File.new()
@@ -57,7 +59,7 @@ onready var buildingTypes = ConstantsHolder.building_types
 onready var shipLocation = ConstantsHolder.ship_locations
 func load_data():
 	var file = File.new()
-	if not file.file_exists(SAVE_FILE) or true:
+	if not file.file_exists(SAVE_FILE):# or true:
 		randomize()
 		game_data = {
 			"galaxySeed": randi(),
@@ -66,8 +68,10 @@ func load_data():
 			"buildingData": {},
 			"storedBuildings":{buildingTypes.WALL:50,buildingTypes.FLOOR:50,buildingTypes.TURRET:50,buildingTypes.CALTROPS:50,buildingTypes.LANDMINE:50,buildingTypes.LASER:50,buildingTypes.CAPTURER:50},
 			"capturedEnemies":[],
-			"shipPosition": [Vector2.ZERO,Vector2.ZERO,-2,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
-			"storyProgression": 0
+			"shipPosition": [Vector2(1800,500),Vector2.ZERO,-2,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
+			"storyProgression": 0,
+			"totalKills" : 0,
+			"playerHealth" : PlayerStats.health
 		}
 		save_data()
 	file.open(SAVE_FILE,File.READ)

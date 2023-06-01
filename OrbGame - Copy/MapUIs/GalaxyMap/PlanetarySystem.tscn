@@ -6,16 +6,17 @@
 resource_local_to_scene = true
 script/source = "extends Node2D
 export var CompanyStation = false
+onready var texButton = $TextureButton
 
 func _on_TextureButton_pressed():
 	#GalaxySave.setLastStarClicked(self.global_position.x)
-	print(system_type)
+	print(\"system type dup: \" + str(self) + str(system_type))
 	#get_tree().change_scene(\"res://MapUIs/InsideSystem/InsideSystem.tscn\")
 	
 func growSprite(spriteName):
 	spriteName.set_scale(Vector2(2,2))
 func shrinkSprite(spriteName):
-	$SizeTween.interpolate_property(spriteName, \"scale\", Vector2(2,2), Vector2(1,1), .2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$SizeTween.interpolate_property(spriteName, \"rect_scale\", Vector2(2,2), Vector2(1,1), .2, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$SizeTween.call_deferred(\"start\")
 
 func _on_Area2D_body_entered(_body):
@@ -25,8 +26,8 @@ func _on_Area2D_body_entered(_body):
 		playerStarList.append(self)
 		get_parent().starsInside = playerStarList
 		if playerStarList.size() == 1:
-			growSprite(self)
-			updateSystemInfoPanel(playerStarList[0].global_position) # set star info
+			growSprite(texButton)
+			updateSystemInfoPanel(playerStarList[0]) # set star info
 			$Tween.stop_all()
 			$Tween.interpolate_property(
 				get_node(\"../SystemInfo/Control\"),
@@ -40,11 +41,11 @@ func _on_Area2D_body_entered(_body):
 			$Tween.call_deferred(\"start\")
 
 func _on_Area2D_body_exited(_body):
-	var playerStarList = get_parent().starsInside
+	var playerStarList = get_parent().starsInside.duplicate()
 	var i = playerStarList.find(self)
 	if i > -1:
 		playerStarList.remove(i)
-		get_parent().starsInside = playerStarList
+		get_parent().starsInside = playerStarList.duplicate()
 	if playerStarList.size() == 0:
 		$Tween.stop_all()
 		$Tween.interpolate_property(
@@ -58,16 +59,18 @@ func _on_Area2D_body_exited(_body):
 		) # hide info panel
 		$Tween.call_deferred(\"start\")
 	elif i == 0:
-		updateSystemInfoPanel(playerStarList[0].global_position)
-		growSprite(playerStarList[0])
-	if self.get_scale().x > 1:
-		shrinkSprite(self)
+		print(\"updating\")
+		updateSystemInfoPanel(playerStarList[0])
+		growSprite(playerStarList[0].get_node(\"TextureButton\"))
+	if texButton.get_scale().x > 1:
+		shrinkSprite(texButton)
 
 
 var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
 onready var constantsHolder = get_node(\"/root/ConstantsHolder\")
 var starIm = preload(\"res://MapUIs/InsideSystem/closeupStar.png\")
-func updateSystemInfoPanel(seedUsed):
+func updateSystemInfoPanel(starUsed):
+	var seedUsed = starUsed.global_position
 	var starNameOptions = constantsHolder.starNameOptions
 	var pStarImage = get_node(\"../SystemInfo/Control/Holder/StarImage\")
 	var pStarName = get_node(\"../SystemInfo/Control/Holder/StarName\")
@@ -87,8 +90,7 @@ func updateSystemInfoPanel(seedUsed):
 		degPos += 360
 	pStarCoords.text = String(seedUsed.distance_to(Vector2(0,0))) + \", \" + String(degPos)+\"°\" #set star coordinates
 	pPlanetAmount.text = \"Planet Count: \" + String(planetAmount) #set planet amount
-	get_system_type()
-	pSystemType.text = system_type_text
+	pSystemType.text = get_system_type(starUsed)
 	
 
 onready var enterButtonText = get_node(\"../SystemInfo/Control/Holder/EnterButton/EnterLabel\")
@@ -103,18 +105,20 @@ func set_enter_button_text(accessible):
 		enterButtonText.text = \"Access Restricted\"
 
 export var system_type : Array
-var system_type_text : String = \"System Type: Error\"
-func get_system_type():
-	if system_type.size() > 0:
-		system_type_text = \"System Type: \" + array_join(system_type)
+
+func get_system_type(first_star):
+	var type_to_use = first_star.system_type
+	var system_type_text : String = \"System Type: Error\"
+	print(\"SYSTEM TYPE: \" + get_node(\"../SystemInfo/Control/Holder/StarName\").text)
+	print(type_to_use)
+	if type_to_use.size() > 0:
+		system_type_text = \"System Type: \" + array_join(type_to_use)
 	else:
 		system_type_text = \"System Type: Uninhabited\"
 	if \"white\" in system_type_text:
 		set_enter_button_text(false)
-	elif not \"red\" in system_type_text:# and GalaxySave.game_data[\"storyProgression\"] < 11:
+	elif not \"red\" in system_type_text and GalaxySave.game_data[\"storyProgression\"] < 11:
 		set_enter_button_text(false)
-		print(system_type_text)
-		print(\"TRIGGER2\")
 	else:
 		set_enter_button_text(true)
 	return system_type_text
@@ -141,6 +145,7 @@ margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
+rect_pivot_offset = Vector2( 32, 32 )
 texture_normal = ExtResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
