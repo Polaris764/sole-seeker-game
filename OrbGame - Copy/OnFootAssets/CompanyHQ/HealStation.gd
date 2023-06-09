@@ -41,5 +41,6 @@ func on_animation_end():
 		player.remove_cutscene(name)
 		player.global_position = backup_cam.global_position
 		player.get_node("Camera2D").current = true
+		GalaxySave.save_data()
 #	back_sprite.z_index = 0
 

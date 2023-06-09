@@ -12,6 +12,8 @@ export var FRICTION = 200
 
 export var WANDER_TARGET_RANGE = 4
 
+export var is_in_room = false
+
 enum{
 	IDLE,
 	WANDER,
@@ -58,7 +60,8 @@ var midjump = false
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO,200*delta)
 	knockback = move_and_slide(knockback)
-	handle_map_teleportation()
+	if not is_in_room:
+		handle_map_teleportation()
 	
 	match state:
 		IDLE:
@@ -168,6 +171,7 @@ func death_animation():
 	state = DEAD
 	$Hitbox.queue_free()
 	animator.stop()
+	GalaxySave.game_data["individualKills"]["brown"] += 1
 
 func completed_harvest():
 	harvest_area.harvesting = false

@@ -125,6 +125,7 @@ func death_animation():
 	animator.stop()
 	$Hitbox.queue_free()
 	var _tween = $Sprite/DeathTween
+	GalaxySave.game_data["individualKills"]["green"] += 1
 
 func completed_harvest():
 	harvest_area.harvesting = false

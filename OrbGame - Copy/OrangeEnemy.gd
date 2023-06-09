@@ -102,6 +102,7 @@ func _on_Stats_no_health():
 func death_animation():
 	state = DEAD
 	animator.stop()
+	GalaxySave.game_data["individualKills"]["orange"] += 1
 
 func completed_harvest():
 	harvest_area.harvesting = false

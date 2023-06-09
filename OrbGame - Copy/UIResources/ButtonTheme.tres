@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=4 format=2]
+
+[ext_resource path="res://UIResources/UIFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UIResources/ButtonStyleBox.tres" type="StyleBox" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[resource]
+Button/fonts/font = ExtResource( 1 )
+Button/styles/disabled = SubResource( 1 )
+Button/styles/focus = ExtResource( 2 )
+Button/styles/hover = ExtResource( 2 )
+Button/styles/normal = ExtResource( 2 )
+Button/styles/pressed = ExtResource( 2 )

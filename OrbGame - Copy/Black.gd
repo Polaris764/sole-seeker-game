@@ -12,6 +12,8 @@ export var FRICTION = 200
 
 export var WANDER_TARGET_RANGE = 4
 
+export var is_in_room = false
+
 enum{
 	IDLE,
 	WANDER,
@@ -54,7 +56,8 @@ onready var last_seen_player_location = global_position
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO,200*delta)
 	knockback = move_and_slide(knockback)
-	handle_map_teleportation()
+	if not is_in_room:
+		handle_map_teleportation()
 	
 	match state:
 		IDLE:
@@ -151,6 +154,7 @@ func death_animation():
 			child.offset, Vector2(0,0), 1,
 			Tween.TRANS_LINEAR, Tween.EASE_OUT)
 		tween.start()
+	GalaxySave.game_data["individualKills"]["black"] += 1
 # Trapped Functions #
 
 var trapped_speeds = []

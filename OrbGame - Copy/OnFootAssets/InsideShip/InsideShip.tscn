@@ -119,6 +119,7 @@ rotation = 1.5708
 shape = SubResource( 6 )
 
 [node name="ZapSprite" type="AnimatedSprite" parent="YSort/Respawner"]
+visible = false
 position = Vector2( 0, -12 )
 frames = SubResource( 13 )
 frame = 3

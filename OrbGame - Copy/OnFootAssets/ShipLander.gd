@@ -71,9 +71,10 @@ func create_planet():
 
 var red_enemy = preload("res://OnFootAssets/Enemies/RedOrb/RedOrb.tscn")
 var blue_enemy = preload("res://OnFootAssets/Enemies/BlueOrb/BlueOrb.tscn")
-var purple_enemy = preload("res://OnFootAssets/Enemies/Purple/PurpleEnemy.tscn")
+var green_enemy = preload("res://OnFootAssets/Enemies/Purple/PurpleEnemy.tscn")
 var orange_enemy = preload("res://OnFootAssets/Enemies/Orange/OrangeEnemy.tscn")
 var black_enemy = preload("res://OnFootAssets/Enemies/Black/Black.tscn")
+var purple_enemy = preload("res://OnFootAssets/Enemies/Round/Round.tscn")
 
 var spawning_array
 func spawn_enemies():
@@ -89,6 +90,8 @@ func spawn_enemies():
 		spawn_orange()
 	if enemies.has("black"):
 		spawn_black()
+	if enemies.has("green"):
+		spawn_green()
 func spawn_red():
 	print("spawning red")
 	var spawn_location_count = rng.randi_range(5,15)
@@ -109,7 +112,7 @@ func spawn_blue():
 		planet.get_node("YSort").add_child(entity)
 func spawn_purple():
 	print("spawning purple")
-	var spawn_location_count = rng.randi_range(10,20)
+	var spawn_location_count = rng.randi_range(2,4)
 	for spawn in spawn_location_count:
 		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
 		var entity = purple_enemy.instance()
@@ -131,5 +134,15 @@ func spawn_black():
 		var group_size = rng.randi_range(8,16)
 		for unit in group_size:
 			var entity = black_enemy.instance()
+			entity.global_position = location
+			planet.get_node("YSort").add_child(entity)
+func spawn_green():
+	print("spawning green")
+	var spawn_location_count = rng.randi_range(30,40)
+	for spawn in spawn_location_count:
+		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
+		var group_size = rng.randi_range(8,16)
+		for unit in group_size:
+			var entity = green_enemy.instance()
 			entity.global_position = location
 			planet.get_node("YSort").add_child(entity)

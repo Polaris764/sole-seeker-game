@@ -12,6 +12,8 @@ export var FRICTION = 200
 
 export var WANDER_TARGET_RANGE = 4
 
+export var is_in_room = false
+
 enum{
 	IDLE,
 	WANDER,
@@ -54,7 +56,8 @@ onready var last_seen_player_location = global_position
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO,200*delta)
 	knockback = move_and_slide(knockback)
-	handle_map_teleportation()
+	if not is_in_room:
+		handle_map_teleportation()
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, 200*delta)
@@ -152,6 +155,7 @@ func death_animation():
 	state = DEAD
 	$Hitbox.queue_free()
 	$AnimationPlayer.play_backwards("Agro")
+	GalaxySave.game_data["individualKills"]["red"] += 1
 	var tween = sprite.get_node("DeathTween")
 	tween.interpolate_property(sprite, "offset",
 			sprite.offset, Vector2(0,0), 2,

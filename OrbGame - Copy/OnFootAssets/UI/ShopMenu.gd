@@ -41,6 +41,8 @@ func calibrate_options():
 		selected_list = 2
 	buildings_list.clear()
 	defenses_list.clear()
+	buildings_price_list.clear()
+	defenses_price_list.clear()
 	for resource in buildings_dictionary:
 		buildings_list.add_item(building_types.keys()[resource].capitalize() + ", Owned: " + str(GalaxySave.game_data["storedBuildings"][resource]))
 		buildings_price_list.add_item("Price: " + dictionary_as_string(buildings_dictionary[resource]))

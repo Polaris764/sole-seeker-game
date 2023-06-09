@@ -19,6 +19,8 @@ func _draw():
 			color_used = Color(1,.651,0,transparency)
 		"black":
 			color_used = Color(.137,.137,.137,transparency)
+		"green":
+			color_used = Color(.251,.769,.137,transparency)
 	draw_colored_polygon(draw_array,color_used)
 func transparency_update(value):
 	transparency = value

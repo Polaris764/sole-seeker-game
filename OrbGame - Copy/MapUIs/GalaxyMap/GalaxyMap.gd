@@ -8,8 +8,8 @@ var HQ = preload("res://MapUIs/GalaxyMap/CompanyHQ.tscn")
 onready var player = $Player
 onready var camera = $GalaxyCamera
 
-export var biomes = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"white":[]}
-export var biomes_collisions = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"white":[]}
+export var biomes = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"green":[],"white":[]}
+export var biomes_collisions = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"green":[],"white":[]}
 
 func rotatePoint(point,angle):
 	var px = point#*3
@@ -78,7 +78,7 @@ func set_biome_circle_origins():
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["orange"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
-	for amount in rngMach.randi_range(4,6):
+	for amount in rngMach.randi_range(2,3):
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["purple"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
@@ -86,6 +86,10 @@ func set_biome_circle_origins():
 		var radius = rngMach.randi_range(500,10000)
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["black"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
+	for amount in rngMach.randi_range(4,6):
+		var radius = rngMach.randi_range(500,10000)
+		var angle = rngMach.randf_range(0,2*PI)
+		biomes["green"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 	for amount in 1:
 		var radius = rngMach.randi_range(9000,10000)
 		var angle = rngMach.randf_range(0,2*PI)
@@ -139,6 +143,7 @@ enum collision_visibility {
 	PURPLE,
 	ORANGE,
 	BLACK,
+	GREEN,
 	WHITE
 }
 var visibile_collision = collision_visibility.NONE

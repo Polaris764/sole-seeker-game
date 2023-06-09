@@ -59,19 +59,20 @@ onready var buildingTypes = ConstantsHolder.building_types
 onready var shipLocation = ConstantsHolder.ship_locations
 func load_data():
 	var file = File.new()
-	if not file.file_exists(SAVE_FILE):# or true:
+	if not file.file_exists(SAVE_FILE) or true:
 		randomize()
 		game_data = {
 			"galaxySeed": randi(),
-			"backpackBlood": {"red":2,"blue":2,"purple":0,"orange":0,"brown":0},
-			"storedBlood": {"red":40,"blue":40,"purple":0,"orange":0,"brown":0},
+			"backpackBlood": {"red":2,"blue":2,"purple":0,"orange":0,"brown":0,"green":0},
+			"storedBlood": {"red":40,"blue":40,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
 			"storedBuildings":{buildingTypes.WALL:50,buildingTypes.FLOOR:50,buildingTypes.TURRET:50,buildingTypes.CALTROPS:50,buildingTypes.LANDMINE:50,buildingTypes.LASER:50,buildingTypes.CAPTURER:50},
-			"capturedEnemies":[],
+			"capturedEnemies":["BlueOrb","BrownEnemy","Round"],
 			"shipPosition": [Vector2(1800,500),Vector2.ZERO,-2,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
 			"storyProgression": 0,
 			"totalKills" : 0,
-			"playerHealth" : PlayerStats.health
+			"individualKills" : {"black":0,"blue":0,"brown":0,"orange":0,"green":0,"red":0,"purple":0},
+			"playerHealth" : PlayerStats.max_health
 		}
 		save_data()
 	file.open(SAVE_FILE,File.READ)

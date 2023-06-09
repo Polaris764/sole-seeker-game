@@ -1,0 +1,157 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UIResources/UIFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UIResources/ShopBGCropped.png" type="Texture" id=2]
+[ext_resource path="res://CapturedMenu.gd" type="Script" id=3]
+[ext_resource path="res://UIResources/ButtonTheme.tres" type="Theme" id=4]
+[ext_resource path="res://UIResources/CaptureMenu.png" type="Texture" id=5]
+[ext_resource path="res://UIResources/BlurShader.tres" type="Material" id=6]
+[ext_resource path="res://UIResources/LabelTheme.tres" type="Theme" id=7]
+
+[node name="CapturedMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="CloseButton" type="Button" parent="TextureRect"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -204.0
+margin_top = -50.0
+margin_right = -157.0
+margin_bottom = -30.0
+theme = ExtResource( 4 )
+text = "Close"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -412.0
+margin_top = -175.0
+margin_right = 412.0
+margin_bottom = 225.0
+scroll_horizontal_enabled = false
+
+[node name="GridContainer" type="GridContainer" parent="TextureRect/ScrollContainer"]
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
+columns = 6
+
+[node name="ShopTitle" type="Label" parent="TextureRect"]
+anchor_right = 1.0
+margin_top = 75.0
+margin_bottom = 125.0
+custom_fonts/font = ExtResource( 1 )
+text = "Captured Organisms"
+align = 1
+valign = 1
+
+[node name="BlurCover" type="TextureRect" parent="TextureRect"]
+visible = false
+material = ExtResource( 6 )
+margin_right = 2190.0
+margin_bottom = 1533.0
+texture = ExtResource( 2 )
+
+[node name="TerminatedLabel" type="Label" parent="TextureRect"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -159.0
+margin_top = -11.5
+margin_right = 159.0
+margin_bottom = 11.5
+theme = ExtResource( 7 )
+text = "Organism Terminated: Resources Added"
+
+[node name="Tween" type="Tween" parent="TextureRect/TerminatedLabel"]
+
+[node name="OrganismMenu" type="TextureRect" parent="."]
+visible = false
+margin_left = 100.0
+margin_top = 125.0
+margin_right = 924.0
+margin_bottom = 525.0
+texture = ExtResource( 5 )
+expand = true
+
+[node name="NameLabel" type="Label" parent="OrganismMenu"]
+margin_left = 131.0
+margin_top = 105.0
+margin_right = 412.0
+margin_bottom = 128.0
+custom_fonts/font = ExtResource( 1 )
+text = "Red Orb"
+
+[node name="InfoLabel" type="Label" parent="OrganismMenu"]
+margin_left = 131.0
+margin_top = 128.0
+margin_right = 412.0
+margin_bottom = 275.0
+custom_fonts/font = ExtResource( 1 )
+text = "Red Orb"
+autowrap = true
+
+[node name="ContactButton" type="Button" parent="OrganismMenu"]
+margin_left = 131.0
+margin_top = 276.0
+margin_right = 271.0
+margin_bottom = 296.0
+theme = ExtResource( 4 )
+text = "Contact"
+
+[node name="TerminateButton" type="Button" parent="OrganismMenu"]
+margin_left = 271.0
+margin_top = 276.0
+margin_right = 411.0
+margin_bottom = 296.0
+theme = ExtResource( 4 )
+text = "Terminate"
+
+[node name="EnemyView" type="TextureRect" parent="OrganismMenu"]
+margin_left = 412.0
+margin_top = 56.0
+margin_right = 693.0
+margin_bottom = 225.0
+rect_min_size = Vector2( 281, 145 )
+expand = true
+stretch_mode = 5
+
+[node name="CurrentCapLabel" type="Label" parent="OrganismMenu"]
+margin_left = 417.0
+margin_top = 250.0
+margin_right = 698.0
+margin_bottom = 275.0
+valign = 1
+
+[node name="TotalKillLabel" type="Label" parent="OrganismMenu"]
+margin_left = 417.0
+margin_top = 275.0
+margin_right = 698.0
+margin_bottom = 300.0
+valign = 1
+
+[node name="CloseButton2" type="Button" parent="OrganismMenu"]
+margin_left = 248.0
+margin_top = 314.0
+margin_right = 294.0
+margin_bottom = 339.0
+theme = ExtResource( 4 )
+text = "Close"
+
+[connection signal="pressed" from="TextureRect/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="OrganismMenu/ContactButton" to="." method="_on_ContactButton_pressed"]
+[connection signal="pressed" from="OrganismMenu/TerminateButton" to="." method="_on_TerminateButton_pressed"]
+[connection signal="pressed" from="OrganismMenu/CloseButton2" to="." method="_on_CloseButton2_pressed"]

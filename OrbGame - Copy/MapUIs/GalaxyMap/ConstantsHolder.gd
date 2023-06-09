@@ -32,3 +32,24 @@ func update_story_from_atos():
 		SignalBus.emit_signal("updated_story")
 
 var respawning = false
+
+func storyProgressorRequirement0():
+	return true
+func storyProgressorRequirement1():
+	if GalaxySave.game_data["totalKills"] > 10:
+		return true
+	else:
+		return false
+
+var organism_descriptions = {
+	"Blue":"PLACEHOLDER DESCRIPTION",
+	"Brown":"PLACEHOLDER DESCRIPTION",
+	"Orange":"PLACEHOLDER DESCRIPTION",
+	"Green":"PLACEHOLDER DESCRIPTION",
+	"Red":"PLACEHOLDER DESCRIPTION",
+	"Purple":"PLACEHOLDER DESCRIPTION"
+}
+
+var contact_organism
+var name_to_file = {"Blue":"BlueOrb","Brown":"BrownEnemy","Orange":"OrangeEnemy","Green":"PurpleEnemy","Red":"RedOrb","Purple":"Round"}
+var name_to_scene = {"Blue":"res://OnFootAssets/Enemies/BlueOrb/BlueOrb.tscn","Brown":"res://OnFootAssets/Enemies/Brown/BrownEnemy.tscn","Orange":"res://OnFootAssets/Enemies/Orange/OrangeEnemy.tscn","Green":"res://OnFootAssets/Enemies/Purple/PurpleEnemy.tscn","Red":"res://OnFootAssets/Enemies/RedOrb/RedOrb.tscn","Purple":"res://OnFootAssets/Enemies/Round/Round.tscn"}
