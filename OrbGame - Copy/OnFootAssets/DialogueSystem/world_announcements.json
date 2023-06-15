@@ -43,5 +43,20 @@
     ],
     "request_capture1": [
         "I need a live sample of an organism. Please fabricate a capturer at the Exchange Terminal and capture a blue organism. Naturally, I will reward you upon return."
+    ],
+    "contact_order_stab": [
+        "Current Order: Stab"
+    ],
+    "contact_order_reverse_direction": [
+        "Current Order: Reverse Direction"
+    ],
+    "contact_order_trap": [
+        "Current Order: Trap"
+    ],
+    "contact_order_scan": [
+        "Current Order: Scan"
+    ],
+    "cannon_audience": [
+        "Come to a terminal. I have a plan to introduce you to."
     ]
 }

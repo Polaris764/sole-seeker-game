@@ -62,7 +62,12 @@ var clicked_type
 func button_clicked(origin_node):
 	clicked_type = origin_node.organism_type
 	organism_menu.get_node("NameLabel").text = clicked_type
-	organism_menu.get_node("InfoLabel").text = ConstantsHolder.organism_descriptions[clicked_type]
+	var info_text
+	if GalaxySave.game_data["enemiesContacted"].find(ConstantsHolder.name_to_file[clicked_type]) != -1:
+		info_text = ConstantsHolder.organism_descriptions[clicked_type]
+	else:
+		info_text = ConstantsHolder.no_organism_description
+	organism_menu.get_node("InfoLabel").text = info_text
 	var amount_of_type_captured = 0
 	var organism_file_name = name_to_file[clicked_type]
 	for organism in GalaxySave.game_data["capturedEnemies"]:

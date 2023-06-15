@@ -29,10 +29,13 @@ func alignment_set(alignment_set_to):
 
 func set_items_to_alignment_and_status():
 	if alignment_HV: #horizontal
-		print("HV")
-		
-		$Hitbox/CollisionShape2D.position = Vector2(8,8)
+		$Sprite.offset = Vector2(-24,-39)
+		$Hitbox.position = Vector2(0,-16)
+		$Hitbox/CollisionShape2D.position = Vector2(8,9)
 		$Hitbox/CollisionShape2D.rotation = 0
+		$Detector.position = Vector2(0,-16)
+		$Detector/CollisionShape2D.position = Vector2(8,9)
+		$Detector/CollisionShape2D.rotation = 0
 		
 		$LeftHorizontal.set_deferred("disabled",false)
 		$RightHorizontal.set_deferred("disabled",false)
@@ -43,10 +46,14 @@ func set_items_to_alignment_and_status():
 		else:
 			$Sprite.frame = 1
 	else:
+		$Sprite.offset = Vector2(-24,-21)
+		$Hitbox.position = Vector2(0,2)
 		
-		$Hitbox/CollisionShape2D.position = Vector2(8,6)
+		$Hitbox/CollisionShape2D.position = Vector2(8,7)
 		$Hitbox/CollisionShape2D.rotation = PI/2
-		
+		$Detector.position = Vector2(0,2)
+		$Detector/CollisionShape2D.position = Vector2(8,7)
+		$Detector/CollisionShape2D.rotation = PI/2
 		$LeftHorizontal.set_deferred("disabled",true)
 		$RightHorizontal.set_deferred("disabled",true)
 		$LeftVertical.set_deferred("disabled",false)
@@ -61,3 +68,27 @@ func _on_Hitbox_damage_dealt():
 
 func laser_repaired():
 	self.active = true
+
+var disabled_for_player_passthrough = false setget set_sprite_color
+
+func set_sprite_color(value):
+	print("setting value")
+	disabled_for_player_passthrough = value
+	if value: #player in laser
+		$Sprite.use_parent_material = false
+		$Hitbox/CollisionShape2D.set_deferred("disabled",true)
+		print("damage disabled")
+	else: #player left laser
+		print("damage enabled")
+		$Sprite.use_parent_material = true
+		$Hitbox/CollisionShape2D.set_deferred("disabled",false)
+
+func _on_Detector_area_entered(area):
+	if area.is_in_group("PlayerHurtbox") and active:
+		print("player entered")
+		self.disabled_for_player_passthrough = true
+
+func _on_Detector_area_exited(area):
+	if area.is_in_group("PlayerHurtbox") and disabled_for_player_passthrough:
+		print("player left")
+		self.disabled_for_player_passthrough = false

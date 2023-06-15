@@ -22,7 +22,7 @@ enum{
 	DEAD
 }
 
-var velocity = Vector2.ZERO
+var velocity = Vector2.RIGHT
 var knockback = Vector2.ZERO
 
 var state = IDLE
@@ -34,6 +34,9 @@ onready var soft_collision = $SoftCollision
 onready var wander_controller = $WanderController
 onready var animator = $AnimationPlayer
 onready var sprite = $Sprite0
+
+signal direction_changed
+export var velocity_for_change : Vector2 = Vector2.ZERO
 
 func _ready():
 	$ExplodeSprite.visible = false
@@ -115,6 +118,11 @@ func _physics_process(delta):
 			MAX_SPEED = 0
 	if soft_collision.is_colliding():
 		velocity += soft_collision.get_push_vector()*delta*400
+	if velocity_for_change != Vector2.ZERO:
+		var change_amount = velocity.normalized().dot(velocity_for_change)
+		if change_amount < -.9:
+			emit_signal("direction_changed")
+			velocity_for_change = Vector2.ZERO
 	velocity = move_and_slide(velocity)
 
 func handle_map_teleportation():
@@ -194,9 +202,10 @@ func _on_TrappedTimer_timeout(trapped_speed_used,timer_used):
 		current_max_speed = MAX_SPEED
 		state = WANDER
 	timer_used.queue_free()
-
+signal organism_trapped
 func entity_trapped(duration,speed):
 	state = TRAPPED
+	emit_signal("organism_trapped")
 	velocity = Vector2.ZERO
 	trapped_speeds.append(speed)
 	var timer = Timer.new()

@@ -63,16 +63,18 @@ func load_data():
 		randomize()
 		game_data = {
 			"galaxySeed": randi(),
-			"backpackBlood": {"red":2,"blue":2,"purple":0,"orange":0,"brown":0,"green":0},
-			"storedBlood": {"red":40,"blue":40,"purple":0,"orange":0,"brown":0,"green":0},
+			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
+			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
-			"storedBuildings":{buildingTypes.WALL:50,buildingTypes.FLOOR:50,buildingTypes.TURRET:50,buildingTypes.CALTROPS:50,buildingTypes.LANDMINE:50,buildingTypes.LASER:50,buildingTypes.CAPTURER:50},
-			"capturedEnemies":["BlueOrb","BrownEnemy","Round"],
-			"shipPosition": [Vector2(1800,500),Vector2.ZERO,-2,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
-			"storyProgression": 0,
+			"storedBuildings": {buildingTypes.WALL:10,buildingTypes.FLOOR:10,buildingTypes.TURRET:10,buildingTypes.CALTROPS:10,buildingTypes.LANDMINE:10,buildingTypes.LASER:10,buildingTypes.CAPTURER:10,buildingTypes.CANNONBASE:1,buildingTypes.CANNONTURRET:1,buildingTypes.CANNONPOWER:1},
+			"capturedEnemies": [],#["BlueOrb","BrownEnemy","Round"],
+			"shipPosition": [Vector2.ZERO,Vector2.ZERO,-2,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
+			"storyProgression": 22,
 			"totalKills" : 0,
 			"individualKills" : {"black":0,"blue":0,"brown":0,"orange":0,"green":0,"red":0,"purple":0},
-			"playerHealth" : PlayerStats.max_health
+			"playerHealth" : PlayerStats.max_health,
+			"enemiesContacted": [],
+			"cannonPartsBought":{buildingTypes.CANNONBASE:false,buildingTypes.CANNONTURRET:false,buildingTypes.CANNONPOWER:false}
 		}
 		save_data()
 	file.open(SAVE_FILE,File.READ)

@@ -5,7 +5,7 @@
 
 [node name="LaserGuide" type="Sprite"]
 texture = ExtResource( 1 )
-offset = Vector2( 8, 8 )
+offset = Vector2( 8, -7 )
 hframes = 2
 vframes = 2
 frame = 2

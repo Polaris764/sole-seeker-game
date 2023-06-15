@@ -38,13 +38,15 @@ func handle_story():
 		$YSort/TrainingDoor.locked = false
 	elif storyPos >= 11:
 		$YSort/ShopDoor.locked = false
+	elif storyPos == 21:
+		SignalBus.emit_signal("display_announcement","cannon_audience")
 
 func set_atos_dialogue():
 	var stands = $YSort/AtosStands.get_children()
 	for stand in stands:
 		stand.get_node("DialogueArea").dialogue_key = "atos" + key_from_story_pos[GalaxySave.game_data["storyProgression"]]
 		
-var key_from_story_pos = {0:"1",1:"1",2:"2",3:"3",4:"4",5:"5", 6:"5",7:"5",8:"5",9:"5",10:"5",11:"11",12:"12",13:"13"}
+var key_from_story_pos = {0:"1",1:"1",2:"2",3:"3",4:"4",5:"5",6:"5",7:"5",8:"5",9:"5",10:"5",11:"11",12:"12",13:"13",14:"14",15:"15",16:"16",17:"17",18:"18",19:"18",20:"18",21:"21",22:"21"}
 
 #ship interaction
 func _on_shipShape_body_entered(body):

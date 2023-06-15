@@ -22,7 +22,7 @@ enum{
 	DEAD
 }
 
-var velocity = Vector2.ZERO
+var velocity = Vector2.RIGHT
 var knockback = Vector2.ZERO
 
 var state = IDLE
@@ -33,6 +33,9 @@ onready var hurtbox = $Hurtbox
 onready var soft_collision = $SoftCollision
 onready var wander_controller = $WanderController
 onready var sprite = $Body0
+
+signal direction_changed
+export var velocity_for_change : Vector2 = Vector2.ZERO
 
 onready var bodySprites = [$Body0,$Body1,$Body2,$Body3,$Body4,$Body5,$Body6,$Body7,$Body8]
 onready var crystalSprites = [$Crystals0,$Crystals1,$Crystals2,$Crystals3,$Crystals4,$Crystals5,$Crystals6,$Crystals7,$Crystals8]
@@ -124,6 +127,11 @@ func _physics_process(delta):
 	elif velocity.x < 0:
 		for item in bodySprites:
 			item.rotation_degrees -= 1
+	if velocity_for_change != Vector2.ZERO:
+		var change_amount = velocity.normalized().dot(velocity_for_change)
+		if change_amount < -.9:
+			emit_signal("direction_changed")
+			velocity_for_change = Vector2.ZERO
 	velocity = move_and_slide(velocity)
 
 func handle_map_teleportation():
@@ -221,9 +229,10 @@ func _on_TrappedTimer_timeout(trapped_speed_used,timer_used):
 		current_max_speed = MAX_SPEED
 		state = WANDER
 	timer_used.queue_free()
-
+signal organism_trapped
 func entity_trapped(duration,speed):
 	state = TRAPPED
+	emit_signal("organism_trapped")
 	velocity = Vector2.ZERO
 	trapped_speeds.append(speed)
 	var timer = Timer.new()

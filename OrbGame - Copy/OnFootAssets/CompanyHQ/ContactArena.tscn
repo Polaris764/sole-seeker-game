@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://OnFootAssets/CompanyHQ/ContactFloor.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/CompanyHQ/ContactArena.gd" type="Script" id=2]
@@ -7,6 +7,12 @@
 [ext_resource path="res://OnFootAssets/CompanyHQ/StationFloor.png" type="Texture" id=5]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://OnFootAssets/CompanyHQ/ATOSfront.tscn" type="PackedScene" id=7]
+[ext_resource path="res://OnFootAssets/CompanyHQ/Door.tscn" type="PackedScene" id=8]
+[ext_resource path="res://OnFootAssets/InsideShip/Door.gd" type="Script" id=9]
+[ext_resource path="res://OnFootAssets/Interactable.tscn" type="PackedScene" id=10]
+[ext_resource path="res://OnFootAssets/CompanyHQ/Scanner.png" type="Texture" id=11]
+[ext_resource path="res://OnFootAssets/CompanyHQ/Scanner.gd" type="Script" id=12]
+[ext_resource path="res://OnFootAssets/CompanyHQ/ScannerBase.png" type="Texture" id=13]
 
 [sub_resource type="TileSet" id=1]
 0/name = "StationFloor.png 0"
@@ -570,6 +576,47 @@
 39/shapes = [  ]
 39/z_index = 0
 
+[sub_resource type="CircleShape2D" id=2]
+radius = 23.0
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Scanning"
+length = 2.7
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65, 1.8, 1.95, 2.1, 2.25, 2.4, 2.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 1.5, 1 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 28, 1.5 )
+
 [node name="ContactArena" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -584,6 +631,11 @@ format = 1
 tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, 65535, 0, 0, 14, 0, 0, 131071, 0, 0, 65550, 0, 0, 196607, 0, 0, 131086, 0, 0, 262143, 0, 0, 196622, 0, 0, 327679, 0, 0, 262158, 0, 0, 393215, 0, 0, 327694, 0, 0, 458751, 0, 0, 393230, 0, 0, 524287, 0, 0, 458766, 0, 0, 589823, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0 )
 script = ExtResource( 4 )
 
+[node name="ScBase" type="Sprite" parent="."]
+position = Vector2( 74, 36 )
+texture = ExtResource( 13 )
+hframes = 18
+
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Wall" type="TileMap" parent="YSort"]
@@ -595,13 +647,60 @@ format = 1
 tile_data = PoolIntArray( -1, 0, 1, -65536, 0, 196610, -65535, 0, 196610, -65534, 0, 196610, -65533, 0, 196610, -65532, 0, 196610, -65531, 0, 196610, -65530, 0, 196610, -65529, 0, 196610, -65528, 0, 196610, -65527, 0, 196610, -65526, 0, 196610, -65525, 0, 196610, -65524, 0, 196610, -65523, 0, 196610, -65522, 0, 3, 65535, 0, 65536, 14, 0, 65536, 131071, 0, 65536, 65550, 0, 65536, 196607, 0, 65536, 131086, 0, 65536, 262143, 0, 65536, 196622, 0, 65536, 327679, 0, 65536, 262158, 0, 65536, 393215, 0, 65536, 327694, 0, 65536, 458751, 0, 65536, 393230, 0, 65536, 524287, 0, 65536, 458766, 0, 65536, 589823, 0, 131073, 524288, 0, 196610, 524289, 0, 196610, 524290, 0, 196610, 524291, 0, 196610, 524292, 0, 196610, 524293, 0, 196610, 524294, 0, 196610, 524295, 0, 196610, 524296, 0, 196610, 524297, 0, 196610, 524298, 0, 196610, 524299, 0, 196610, 524300, 0, 196610, 524301, 0, 196610, 524302, 0, 131075 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 50, 5 )
 isInRoom = true
 
 [node name="ATOSfront" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 113, 1 )
+position = Vector2( 112.5, 1 )
 
 [node name="Interactable" parent="YSort/ATOSfront" index="0"]
 player_node = NodePath("../../Player")
+
+[node name="DialogueArea" parent="YSort/ATOSfront" index="2"]
+dialogue_key = "atosContact"
+
+[node name="ContactDoor" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 51, -8 )
+script = ExtResource( 9 )
+planet_scene = NodePath("res://OnFootAssets/VisitingPlanet.tscn")
+station_scene = NodePath("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")
+
+[node name="Interactable" parent="YSort/ContactDoor" instance=ExtResource( 10 )]
+player_node = NodePath("../../Player")
+interaction_result = "End Contact"
+
+[node name="CollisionShape2D" parent="YSort/ContactDoor/Interactable/Area2D" index="0"]
+shape = SubResource( 2 )
+
+[node name="Scanner" type="Node2D" parent="YSort"]
+position = Vector2( 44, 44 )
+script = ExtResource( 12 )
+
+[node name="Sprite" type="Sprite" parent="YSort/Scanner"]
+texture = ExtResource( 11 )
+centered = false
+offset = Vector2( 0, -19 )
+hframes = 18
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/Scanner"]
+autoplay = "Scanning"
+anims/RESET = SubResource( 3 )
+anims/Scanning = SubResource( 4 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/Scanner"]
+position = Vector2( 0, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Scanner/StaticBody2D"]
+position = Vector2( 2.5, -3 )
+shape = SubResource( 5 )
+
+[node name="ScannerArea" type="Area2D" parent="YSort/Scanner"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Scanner/ScannerArea"]
+position = Vector2( 32, -0.5 )
+shape = SubResource( 6 )
 
 [node name="OcclusionWall" type="TileMap" parent="."]
 z_index = 1
@@ -611,6 +710,11 @@ cell_y_sort = true
 format = 1
 tile_data = PoolIntArray( 589823, 0, 196609, 524288, 0, 196610, 524289, 0, 196610, 524290, 0, 196610, 524291, 0, 196610, 524292, 0, 196610, 524293, 0, 196610, 524294, 0, 196610, 524295, 0, 196610, 524296, 0, 196610, 524297, 0, 196610, 524298, 0, 196610, 524299, 0, 196610, 524300, 0, 196610, 524301, 0, 196610, 524302, 0, 196611 )
 
+[connection signal="interacted_with" from="YSort/ContactDoor/Interactable" to="." method="_on_Interactable_interacted_with"]
+[connection signal="animation_finished" from="YSort/Scanner/AnimationPlayer" to="YSort/Scanner" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="YSort/Scanner/ScannerArea" to="." method="_on_ScannerArea_body_entered"]
+
 [editable path="YSort/ATOSfront"]
 [editable path="YSort/ATOSfront/Interactable"]
 [editable path="YSort/ATOSfront/DialogueArea"]
+[editable path="YSort/ContactDoor/Interactable"]

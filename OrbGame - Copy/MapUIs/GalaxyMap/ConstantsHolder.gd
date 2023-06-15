@@ -11,7 +11,10 @@ enum building_types {
 	TURRET,
 	LANDMINE,
 	CALTROPS,
-	CAPTURER
+	CAPTURER,
+	CANNONBASE,
+	CANNONTURRET,
+	CANNONPOWER
 }
 
 enum ship_locations {
@@ -30,6 +33,9 @@ func update_story_from_atos():
 	if storyPos == 2:
 		GalaxySave.game_data["storyProgression"] = 3
 		SignalBus.emit_signal("updated_story")
+	elif storyPos == 21:
+		GalaxySave.game_data["storyProgression"] = 22
+		SignalBus.emit_signal("updated_story")
 
 var respawning = false
 
@@ -41,6 +47,7 @@ func storyProgressorRequirement1():
 	else:
 		return false
 
+var no_organism_description = "Description not available."
 var organism_descriptions = {
 	"Blue":"PLACEHOLDER DESCRIPTION",
 	"Brown":"PLACEHOLDER DESCRIPTION",
@@ -52,4 +59,5 @@ var organism_descriptions = {
 
 var contact_organism
 var name_to_file = {"Blue":"BlueOrb","Brown":"BrownEnemy","Orange":"OrangeEnemy","Green":"PurpleEnemy","Red":"RedOrb","Purple":"Round"}
+var file_to_name = {"BlueOrb":"Blue","BrownEnemy":"Brown","OrangeEnemy":"Orange","PurpleEnemy":"Green","RedOrb":"Red","Round":"Purple"}
 var name_to_scene = {"Blue":"res://OnFootAssets/Enemies/BlueOrb/BlueOrb.tscn","Brown":"res://OnFootAssets/Enemies/Brown/BrownEnemy.tscn","Orange":"res://OnFootAssets/Enemies/Orange/OrangeEnemy.tscn","Green":"res://OnFootAssets/Enemies/Purple/PurpleEnemy.tscn","Red":"res://OnFootAssets/Enemies/RedOrb/RedOrb.tscn","Purple":"res://OnFootAssets/Enemies/Round/Round.tscn"}

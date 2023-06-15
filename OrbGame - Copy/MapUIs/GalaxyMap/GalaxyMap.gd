@@ -52,15 +52,18 @@ func _ready():
 export var starsInside = []
 onready var rngMach = RandomNumberGenerator.new()
 
+var stationInstance
 func add_companyHQ():
 	var stationRadius = pow(rngMach.randi_range(10,20),2)
 	var stationAngle = rngMach.randi_range(0,2*PI)
-	var stationInstance = HQ.instance()
+	stationInstance = HQ.instance()
 	add_child(stationInstance)
 	stationInstance.global_position = Vector2(cos(stationAngle)*stationRadius,sin(stationAngle)*stationRadius)
 
 func update_ship():
 	GalaxySave.game_data["shipPosition"][5] = false
+	if GalaxySave.game_data["shipPosition"][0] == Vector2.ZERO:
+		GalaxySave.game_data["shipPosition"][0] = stationInstance.global_position
 	player.global_position = GalaxySave.game_data["shipPosition"][0]
 	
 func set_biome_circle_origins():

@@ -26,9 +26,20 @@ func _ready():
 		GalaxySave.game_data["storyProgression"] = 10
 	elif storyPos == 11 or storyPos == 12:
 		GalaxySave.game_data["storyProgression"] = 13
+	elif storyPos == 13 and GalaxySave.game_data["totalKills"] > 24:
+		GalaxySave.game_data["storyProgression"] = 14
+	elif storyPos == 15:
+		GalaxySave.game_data["storyProgression"] = 16
+	elif storyPos == 16 and GalaxySave.game_data["totalKills"] > 34:
+		GalaxySave.game_data["storyProgression"] = 17
+	elif storyPos == 18 and GalaxySave.game_data["totalKills"] > 39:
+		GalaxySave.game_data["storyProgression"] = 19
+	elif storyPos == 19:
+		GalaxySave.game_data["storyProgression"] = 20
+	elif storyPos == 20:
+		GalaxySave.game_data["storyProgression"] = 21
 
 func _on_IncreaseLabel_interacted_with():
-	print("increasing")
 	set_ship_rotation()
 	if GalaxySave.game_data["shipPosition"][4] == ConstantsHolder.ship_locations.STATION:
 		GalaxySave.set_ship_speed(2)
@@ -37,7 +48,6 @@ func _on_IncreaseLabel_interacted_with():
 
 
 func _on_DecreaseLabel_interacted_with():
-	print("decreasing")
 	set_ship_rotation()
 	GalaxySave.set_ship_speed(-1)
 

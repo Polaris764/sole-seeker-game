@@ -5,5 +5,5 @@
 [node name="TurretGuide" type="Sprite"]
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( 0, -1 )
+offset = Vector2( 0, -17 )
 hframes = 8

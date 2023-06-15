@@ -2440,7 +2440,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -11, -1 ), Vector2( -11, -1 ) ]
+"values": [ Vector2( -11, -2 ), Vector2( -11, -2 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../HitboxPivot/Netgun:visible")
@@ -3098,10 +3098,10 @@ shape = SubResource( 152 )
 position = Vector2( -10, 12.5 )
 rotation = 3.14159
 
-[node name="Hurtbox" parent="." instance=ExtResource( 6 )]
-visible = false
+[node name="Hurtbox" parent="." groups=["PlayerHurtbox"] instance=ExtResource( 6 )]
 position = Vector2( -12.5, -12.5 )
 collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 13.5, -7 )

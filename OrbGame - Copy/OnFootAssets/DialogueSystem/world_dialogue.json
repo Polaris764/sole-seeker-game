@@ -39,5 +39,41 @@
     ],
     "atos13": [
         "Welcome back. Please feel free to use all amenities at your disposal."
+    ],
+    "atos14": [
+        "I need you to planets perform a contact mission with a red organism.",
+        "You may retrieve it using a capturer, or use one you have already captured.",
+        "I will be waiting."
+    ],
+    "atos15": [
+        "I hope you are using your resources to their fullest potential.",
+        "Some of them can be hard to come by."
+    ],
+    "atos16": [
+        "I have big plans for you. Continue doing well."
+    ],
+    "atos17": [
+        "The purple organism is the source of some information I need.",
+        "Please contact it as you did with the red one."
+    ],
+    "atos18": [
+        "You've done well.",
+        "Keep collecting resources. You will need them shortly."
+    ],
+    "atos21": [
+        "I have added schematics of a new weapon to the fabricator.",
+        "Build it on any planet of your choosing. All it requires is materials and space."
+    ],
+    "atos_stab": [
+        "Your current order is to stab the organism."
+    ],
+    "atos_reverse_direction": [
+        "Your current order is to reverse the direction of the organism."
+    ],
+    "atos_trap": [
+        "Your current order is to trap the organism."
+    ],
+    "atos_scan": [
+        "Your current order is to scan the organism."
     ]
 }

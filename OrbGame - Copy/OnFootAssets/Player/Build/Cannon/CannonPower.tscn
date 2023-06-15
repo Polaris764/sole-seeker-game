@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://OnFootAssets/Player/Build/Cannon/CannonPower.png" type="Texture" id=1]
+
+[node name="CannonPower" type="Node2D" groups=["Cannon_Power"]]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( 16, -3 )

@@ -1,61 +1,83 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://OnFootAssets/Player/Build/LaserWall.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/Player/Build/LaserWall.gd" type="Script" id=2]
 [ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://OnFootAssets/Assets/ColorChangeShader.tres" type="Material" id=4]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 14, 4 )
+extents = Vector2( 13.5, 4 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3, 7 )
+extents = Vector2( 3, 3.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3, 7 )
+extents = Vector2( 3, 3.5 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 4, 6 )
+extents = Vector2( 4, 2.5 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 4, 6 )
+extents = Vector2( 4, 3 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 15, 6 )
 
 [node name="LaserWall" type="StaticBody2D" groups=["Lasers"]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 4 )
+use_parent_material = true
 position = Vector2( 8, 8 )
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( -24, -24 )
+offset = Vector2( -24, -21 )
 hframes = 2
 vframes = 2
 frame = 2
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 0, 2 )
 collision_mask = 12
 damage = 100
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( 8, 6 )
+position = Vector2( 8, 7.5 )
 rotation = 1.5708
 shape = SubResource( 3 )
 
 [node name="LeftHorizontal" type="CollisionShape2D" parent="."]
-position = Vector2( -9, 8 )
+visible = false
+position = Vector2( -9, -3.5 )
 shape = SubResource( 1 )
 
 [node name="RightHorizontal" type="CollisionShape2D" parent="."]
-position = Vector2( 25, 8 )
+visible = false
+position = Vector2( 25, -3.5 )
 shape = SubResource( 2 )
 
 [node name="LeftVertical" type="CollisionShape2D" parent="."]
-position = Vector2( 8, -8 )
+position = Vector2( 8, -2.5 )
 shape = SubResource( 4 )
 
 [node name="RightVertical" type="CollisionShape2D" parent="."]
-position = Vector2( 8, 26 )
+position = Vector2( 8, 31 )
 shape = SubResource( 5 )
 
+[node name="Detector" type="Area2D" parent="."]
+position = Vector2( 0, 2 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+position = Vector2( 8, 7 )
+rotation = 1.5708
+shape = SubResource( 6 )
+
 [connection signal="damage_dealt" from="Hitbox" to="." method="_on_Hitbox_damage_dealt"]
+[connection signal="area_entered" from="Detector" to="." method="_on_Detector_area_entered"]
+[connection signal="area_exited" from="Detector" to="." method="_on_Detector_area_exited"]
 
 [editable path="Hitbox"]

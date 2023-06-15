@@ -14,6 +14,8 @@ var buildings_dictionary = {building_types.WALL:{"red":4,"blue":2},building_type
 
 var defenses_dictionary = {building_types.LANDMINE:{"red":0,"blue":0},building_types.LASER:{"red":0,"blue":0},building_types.TURRET:{"red":0,"blue":0},building_types.CALTROPS:{"red":0,"blue":0}}
 
+var cannon_dictionary = {building_types.CANNONBASE:{"red":0,"blue":0},building_types.CANNONTURRET:{"red":0,"blue":0},building_types.CANNONPOWER:{"red":0,"blue":0}}
+
 func _ready():
 	visible = false
 	calibrate_options()
@@ -53,6 +55,21 @@ func calibrate_options():
 				affordable = false
 		if not affordable:
 			buildings_list.set_item_custom_fg_color(resource,Color(1,1,1,.5))
+	if GalaxySave.game_data["storyProgression"] >= 22:
+		for resource in cannon_dictionary:
+			if GalaxySave.game_data["cannonPartsBought"][resource] == false:
+				buildings_list.add_item(building_types.keys()[resource].capitalize() + ", Owned: " + str(GalaxySave.game_data["storedBuildings"][resource]))
+			else:
+				buildings_list.add_item(building_types.keys()[resource].capitalize() + ", Owned: " + str(GalaxySave.game_data["storedBuildings"][resource]) + " (Max)")
+			buildings_price_list.add_item("Price: " + dictionary_as_string(cannon_dictionary[resource]))
+			var affordable = true
+			var player_resources = complete_resources
+			for resource_type in ConstantsHolder.resource_types:
+				if player_resources[resource_type] < cannon_dictionary[resource][resource_type] or GalaxySave.game_data["cannonPartsBought"][resource] == true:
+					affordable = false
+			if not affordable:
+				print("setting resource" + str(resource))
+				buildings_list.set_item_custom_fg_color(resource,Color(1,1,1,.5))
 	for resource in defenses_dictionary:
 		defenses_list.add_item(building_types.keys()[resource].capitalize() + ", Owned: " + str(GalaxySave.game_data["storedBuildings"][resource]))
 		defenses_price_list.add_item("Price: " + dictionary_as_string(defenses_dictionary[resource]))
@@ -71,24 +88,37 @@ func calibrate_options():
 			defenses_list.select(item)
 
 func _on_BuildingsList_item_activated(index):
-	var bought_item = buildings_dictionary.keys()[index]
+	var bought_item
+	var cannon_item = false
+	if index < buildings_dictionary.size():
+		bought_item = buildings_dictionary.keys()[index]
+	else:
+		cannon_item = true
+		bought_item = cannon_dictionary.keys()[index-buildings_dictionary.size()]
 	var player_resources1 = GalaxySave.game_data["backpackBlood"]
 	var player_resources2 = GalaxySave.game_data["storedBlood"]
 	var player_resources = dictionary_merge(player_resources1,player_resources2)
 	var affordable = true
+	var resource_dictionary_to_use
+	if cannon_item:
+		resource_dictionary_to_use = cannon_dictionary
+	else:
+		resource_dictionary_to_use = buildings_dictionary
 	for resource_type in ConstantsHolder.resource_types:
-		if player_resources[resource_type] < buildings_dictionary[bought_item][resource_type]:
+		if player_resources[resource_type] < resource_dictionary_to_use[bought_item][resource_type]:
 			affordable = false
 	if affordable:
 		GalaxySave.game_data["storedBuildings"][bought_item] += 1
 		for resource_type in ConstantsHolder.resource_types: #deducting price
-			if player_resources1[resource_type] > buildings_dictionary[bought_item][resource_type]:
-				GalaxySave.game_data["backpackBlood"][resource_type] -= buildings_dictionary[bought_item][resource_type]
+			if player_resources1[resource_type] > resource_dictionary_to_use[bought_item][resource_type]:
+				GalaxySave.game_data["backpackBlood"][resource_type] -= resource_dictionary_to_use[bought_item][resource_type]
 			else:
-				var price = buildings_dictionary[bought_item][resource_type]
+				var price = resource_dictionary_to_use[bought_item][resource_type]
 				var debt = price - player_resources1[resource_type]
 				GalaxySave.game_data["backpackBlood"][resource_type] = 0
 				GalaxySave.game_data["storedBlood"][resource_type] -= debt
+		if cannon_item:
+			GalaxySave.game_data["cannonPartsBought"][bought_item] = true
 		GalaxySave.save_data()
 		calibrate_options()
 
@@ -156,3 +186,6 @@ func dictionary_as_string(dict):
 		else:
 			new_string += (", " + item.capitalize() + ": " + str(dict[item]))
 	return new_string
+
+func _on_BuildingsList_gui_input(_event):
+	buildings_price_list.get_v_scroll().value = buildings_list.get_v_scroll().value

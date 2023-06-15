@@ -10,12 +10,13 @@ func alignment_set(alignment_set_to):
 
 func set_items_to_alignment_and_status():
 	if alignment_HV: #horizontal
-		print("hV")
+		offset = Vector2(8,-7)
 		if active:
 			frame = 0
 		else:
 			frame = 1
 	else:
+		offset = Vector2(8,11)
 		if active:
 			frame = 2
 		else:

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://OnFootAssets/Player/Build/Cannon/CannonTurret.png" type="Texture" id=1]
+[ext_resource path="res://OnFootAssets/Player/Build/Cannon/CannonRadio.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.0
+height = 70.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4, 0.5 )
+
+[node name="CannonTurret" type="Node2D" groups=["Cannon_Turret"]]
+
+[node name="Turret" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -43, -94 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Turret"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret/StaticBody2D"]
+position = Vector2( 0, -7 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Radio" type="Sprite" parent="."]
+position = Vector2( -88, -5 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Radio"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radio/StaticBody2D"]
+position = Vector2( -1, 4.5 )
+shape = SubResource( 2 )

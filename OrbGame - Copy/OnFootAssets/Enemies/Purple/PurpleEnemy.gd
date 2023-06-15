@@ -35,6 +35,9 @@ onready var player = get_node("../Player")
 onready var sprite = $Sprite0
 onready var sprite2 = $Sprite2
 
+#warning-ignore:unused_signal
+signal direction_changed
+
 func _ready():
 	sprite.visible = false
 	sprite2.visible = false
@@ -142,6 +145,6 @@ func completed_harvest():
 # Trapped Functions #
 
 var trapped_speeds = []
-
+signal organism_trapped
 func entity_trapped(_var1,_var2):
-	pass
+	emit_signal("organism_trapped")

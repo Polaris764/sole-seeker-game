@@ -14,6 +14,9 @@ export var WANDER_TARGET_RANGE = 4
 
 var minion = preload("res://OnFootAssets/Enemies/Brown/BrownEnemy.tscn")
 
+#warning-ignore:unused_signal
+signal direction_changed
+
 enum{
 	IDLE,
 	CHASE,
@@ -137,7 +140,7 @@ func spawn_minion():
 	get_node("..").add_child(minion_instance)
 
 # Trapped Functions #
-
+signal organism_trapped
 var trapped_speeds = []
 func entity_trapped(_one,_two):
-	pass
+	emit_signal("organism_trapped")

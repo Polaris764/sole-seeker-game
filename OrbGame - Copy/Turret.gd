@@ -42,5 +42,5 @@ func _on_AttackRadius_body_entered(body):
 	viable_enemies.append(body)
 func _on_AttackRadius_body_exited(body):
 	var left_body = viable_enemies.find(body)
-	if left_body:
+	if left_body != -1:
 		viable_enemies.remove(left_body)

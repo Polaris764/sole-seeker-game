@@ -522,7 +522,6 @@ hframes = 27
 [node name="DeathTween" type="Tween" parent="Sprite0/Sprite8"]
 
 [node name="Sprite2" type="Sprite" parent="Sprite0"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( 2.27374e-13, -33 )
 hframes = 27

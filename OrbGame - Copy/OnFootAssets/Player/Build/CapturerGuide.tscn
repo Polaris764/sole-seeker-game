@@ -5,5 +5,5 @@
 [node name="CapturerGuide" type="Sprite"]
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( 5, 2 )
+offset = Vector2( 5, -7 )
 hframes = 8
