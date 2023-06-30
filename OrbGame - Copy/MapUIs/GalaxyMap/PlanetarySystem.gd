@@ -111,7 +111,7 @@ func get_system_type():
 		system_type_text = "System Type: " + array_join(system_type_dup)
 	else:
 		system_type_text = "System Type: Uninhabited"
-	if "white" in system_type_text:
+	if not constantsHolder.white_system_check(system_type):
 		set_enter_button_text(false)
 	elif not "red" in system_type_text and GalaxySave.game_data["storyProgression"] < 11:
 		set_enter_button_text(false)

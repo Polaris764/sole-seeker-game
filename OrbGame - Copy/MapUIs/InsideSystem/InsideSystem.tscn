@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MapUIs/InsideSystem/insideSystemCam.gd" type="Script" id=1]
 [ext_resource path="res://MapUIs/InsideSystem/InsideSystem.gd" type="Script" id=2]
+[ext_resource path="res://MapUIs/InsideSystem/sunFlareMaterial.tres" type="Material" id=3]
 [ext_resource path="res://MapUIs/InsideSystem/closeupStar.png" type="Texture" id=4]
+[ext_resource path="res://MapUIs/InsideSystem/GeneralSunParticleMaterial.tres" type="Material" id=5]
 
 [node name="System" type="Control"]
 anchor_left = 0.5
@@ -14,6 +16,8 @@ margin_top = -300.0
 margin_right = 3584.0
 margin_bottom = 2100.0
 script = ExtResource( 2 )
+flare_min = 1
+flare_max = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -26,5 +30,31 @@ margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
 texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="GeneralParticles" type="Particles2D" parent="Star"]
+show_behind_parent = true
+position = Vector2( 32, 32 )
+amount = 30
+lifetime = 5.0
+process_material = ExtResource( 5 )
+
+[node name="FlareHolder" type="Node2D" parent="Star"]
+show_behind_parent = true
+position = Vector2( 60, 21 )
+
+[node name="FlareParticles" type="Particles2D" parent="Star/FlareHolder"]
+show_behind_parent = true
+position = Vector2( -14, -13 )
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 30
+one_shot = true
+process_material = ExtResource( 3 )
+
+[node name="FlareTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="pressed" from="Star" to="." method="_on_Star_pressed"]
+[connection signal="timeout" from="FlareTimer" to="." method="_on_FlareTimer_timeout"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://OnFootAssets/Player/Build/Cannon/CannonTurret.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/Player/Build/Cannon/CannonRadio.png" type="Texture" id=2]
+[ext_resource path="res://OnFootAssets/Player/Build/Cannon/CannonTurret.gd" type="Script" id=3]
+[ext_resource path="res://OnFootAssets/Player/Build/Cannon/CannonEnergy.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.0
@@ -11,6 +13,16 @@ height = 70.0
 extents = Vector2( 4, 0.5 )
 
 [node name="CannonTurret" type="Node2D" groups=["Cannon_Turret"]]
+script = ExtResource( 3 )
+
+[node name="Energy" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -77 )
+texture = ExtResource( 4 )
+hframes = 7
+
+[node name="Timer" type="Timer" parent="Energy"]
+wait_time = 0.15
 
 [node name="Turret" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -33,3 +45,5 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radio/StaticBody2D"]
 position = Vector2( -1, 4.5 )
 shape = SubResource( 2 )
+
+[connection signal="timeout" from="Energy/Timer" to="." method="_on_Timer_timeout"]

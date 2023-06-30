@@ -233,12 +233,12 @@ nodes/StateMachine/position = Vector2( -386.945, 101.961 )
 nodes/TimeScale/node = SubResource( 40 )
 nodes/TimeScale/position = Vector2( -20, 120 )
 nodes/output/position = Vector2( 380, 100 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "StateMachine" ]
+node_connections = [ "TimeScale", 0, "StateMachine", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=42]
 
 [sub_resource type="RectangleShape2D" id=24]
-extents = Vector2( 7.5, 7.5 )
+extents = Vector2( 5, 5 )
 
 [sub_resource type="CapsuleShape2D" id=25]
 radius = 5.0
@@ -255,6 +255,7 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+offset = Vector2( 0, -19 )
 hframes = 44
 frame = 10
 
@@ -279,7 +280,8 @@ parameters/StateMachine/Walk/blend_position = Vector2( -0.00312012, 0.133526 )
 parameters/TimeScale/scale = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 7.45058e-07, 10 )
+position = Vector2( -7.45058e-08, -5 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 24 )
 
 [node name="HealthTimer" type="Timer" parent="."]
@@ -292,15 +294,17 @@ shape = SubResource( 24 )
 visible = true
 
 [node name="SoftCollision" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -19 )
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 position = Vector2( 0, 10 )
 shape = SubResource( 25 )
 
 [node name="DialogueInteractionArea" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -19 )
 
 [node name="CollisionShape2D" parent="DialogueInteractionArea" index="0"]
-position = Vector2( 2.98023e-07, 2.68221e-06 )
+position = Vector2( 0, -1 )
 scale = Vector2( 0.999999, 0.999999 )
 shape = SubResource( 26 )
 

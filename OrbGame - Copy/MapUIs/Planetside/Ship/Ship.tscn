@@ -1,16 +1,17 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://MapUIs/Planetside/Ship/Player.gd" type="Script" id=1]
-[ext_resource path="res://MapUIs/Planetside/Ship/SpaceshipSimple.png" type="Texture" id=2]
+[ext_resource path="res://MapUIs/Planetside/Ship/SpaceshipV3.png" type="Texture" id=2]
 [ext_resource path="res://MapUIs/General/FlightUIOverlay.tscn" type="PackedScene" id=3]
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 0.7, 0.7 )
 script = ExtResource( 1 )
 max_speed = 600
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 3 )
-scale = Vector2( 0.4, 0.4 )
+position = Vector2( -2.86102e-06, 0.866669 )
+scale = Vector2( 1.73333, 1.73333 )
 z_index = 1
 texture = ExtResource( 2 )
 

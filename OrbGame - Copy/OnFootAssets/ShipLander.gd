@@ -37,6 +37,9 @@ var planet
 
 onready var rng = RandomNumberGenerator.new()
 func create_planet():
+	var enemies = GalaxySave.getLastPlanetType()
+	if enemies.has("white"):
+		get_tree().change_scene("res://OnFootAssets/EndSequence/EndingPlanet.tscn")
 	var MarshWorld = ("res://OnFootAssets/MarshWorld.tscn")
 	var VolcanicWorld = ("res://OnFootAssets/VolcanicWorld.tscn")
 	var DesertWorld = ("res://OnFootAssets/DesertWorld.tscn")

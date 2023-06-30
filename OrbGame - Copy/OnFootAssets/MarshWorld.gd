@@ -2,7 +2,7 @@ extends Node2D
 
 export var current_map_size = Vector2(200,200)
 export var map_side_size : int = current_map_size.x
-export (float,0.0,100.0) var percentage_floors = 54
+export (float,0.0,100.0) var percentage_floors = 54.0
 
 var neighbor_dir = [Vector2(1,0),Vector2(1,1),Vector2(0,1),
 					Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),

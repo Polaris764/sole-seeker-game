@@ -1,0 +1,26 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float amt:hint_range(0.0, 1.0);
+render_mode unshaded;
+
+uniform sampler2D TextureMap;
+uniform int NumDivisions = 32;
+
+
+void fragment() 
+{
+	if (distance(UV, vec2(0.5,0.5)) > amt/2.0) 
+	{
+		COLOR = vec4(0.0);
+		
+	}
+	else 
+	{
+		vec2 st = (vec2(ivec2( UV * float(NumDivisions) ))+0.5)/float(NumDivisions);
+		vec4 tex_col = textureLod( TextureMap, st, 0 );
+		COLOR = tex_col;  
+	}
+}"

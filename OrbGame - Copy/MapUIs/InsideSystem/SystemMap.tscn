@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://MapUIs/InsideSystem/Holder.gd" type="Script" id=1]
 [ext_resource path="res://MapUIs/InsideSystem/closeupStar.png" type="Texture" id=2]
 [ext_resource path="res://MapUIs/Planetside/Ship/Ship.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MapUIs/InsideSystem/SystemCamera.gd" type="Script" id=4]
 [ext_resource path="res://MapUIs/InsideSystem/PlanetInfoHolder.tscn" type="PackedScene" id=5]
+[ext_resource path="res://MapUIs/InsideSystem/GeneralSunParticleMaterial.tres" type="Material" id=6]
+[ext_resource path="res://MapUIs/InsideSystem/sunFlareMaterial.tres" type="Material" id=7]
+[ext_resource path="res://OnFootAssets/Assets/ColorChangeShader.tres" type="Material" id=8]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.1403
 
 [node name="SystemMap" type="Node2D"]
 
@@ -14,7 +20,39 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="Star" type="Sprite" parent="Holder"]
+material = ExtResource( 8 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 2 )
+
+[node name="GeneralParticles" type="Particles2D" parent="Holder/Star"]
+show_behind_parent = true
+amount = 30
+lifetime = 5.0
+process_material = ExtResource( 6 )
+
+[node name="FlareHolder" type="Node2D" parent="Holder/Star"]
+show_behind_parent = true
+position = Vector2( 60, 21 )
+
+[node name="FlareParticles" type="Particles2D" parent="Holder/Star/FlareHolder"]
+show_behind_parent = true
+position = Vector2( -14, -13 )
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 30
+one_shot = true
+process_material = ExtResource( 7 )
+
+[node name="FlareTimer" type="Timer" parent="Holder/Star"]
+one_shot = true
+
+[node name="StarArea" type="Area2D" parent="Holder/Star"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Holder/Star/StarArea"]
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="Holder/Star"]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 250, 250 )
@@ -27,3 +65,8 @@ current = true
 script = ExtResource( 4 )
 
 [node name="PlanetInfoHolder" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[connection signal="timeout" from="Holder/Star/FlareTimer" to="Holder" method="_on_FlareTimer_timeout"]
+[connection signal="body_entered" from="Holder/Star/StarArea" to="Holder" method="_on_StarArea_body_entered"]
+[connection signal="body_exited" from="Holder/Star/StarArea" to="Holder" method="_on_StarArea_body_exited"]

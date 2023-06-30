@@ -26,18 +26,23 @@ func _ready():
 		GalaxySave.game_data["storyProgression"] = 10
 	elif storyPos == 11 or storyPos == 12:
 		GalaxySave.game_data["storyProgression"] = 13
-	elif storyPos == 13 and GalaxySave.game_data["totalKills"] > 24:
+	elif storyPos == 13 and GalaxySave.game_data["totalKills"] > ConstantsHolder.capture_1_kill_requirement:
 		GalaxySave.game_data["storyProgression"] = 14
 	elif storyPos == 15:
 		GalaxySave.game_data["storyProgression"] = 16
-	elif storyPos == 16 and GalaxySave.game_data["totalKills"] > 34:
+	elif storyPos == 16 and GalaxySave.game_data["totalKills"] > ConstantsHolder.capture_2_kill_requirement:
 		GalaxySave.game_data["storyProgression"] = 17
-	elif storyPos == 18 and GalaxySave.game_data["totalKills"] > 39:
+	elif storyPos == 18 and GalaxySave.game_data["totalKills"] > ConstantsHolder.cannon_proposal_kill_requirement:
 		GalaxySave.game_data["storyProgression"] = 19
 	elif storyPos == 19:
 		GalaxySave.game_data["storyProgression"] = 20
 	elif storyPos == 20:
 		GalaxySave.game_data["storyProgression"] = 21
+	elif storyPos == 22:
+		if not ConstantsHolder.building_types.CANNONPOWER in GalaxySave.game_data["buildingData"]:
+			GalaxySave.game_data["buildingData"][ConstantsHolder.building_types.CANNONPOWER] = []
+		if GalaxySave.game_data["buildingData"][ConstantsHolder.building_types.CANNONPOWER].size() > 0:
+			GalaxySave.game_data["storyProgression"] = 23
 
 func _on_IncreaseLabel_interacted_with():
 	set_ship_rotation()

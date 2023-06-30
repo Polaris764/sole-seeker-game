@@ -9,9 +9,9 @@ func _ready():
 	GalaxySave.game_data["shipPosition"][2] = -2
 	set_up_terrain()
 	start_events()
-onready var grass = $Fence/Grass
-onready var fenceLength = $Fence/FenceLength
-onready var fenceWidth = $Fence/FenceWidth
+onready var grass = $Grass
+onready var fenceLength = $YSort/FenceLength
+onready var fenceWidth = $YSort/FenceWidth
 
 func set_up_terrain():
 	var grass_array = grass.get_used_cells()

@@ -11,8 +11,10 @@ onready var camera = $GalaxyCamera
 export var biomes = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"green":[],"white":[]}
 export var biomes_collisions = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"green":[],"white":[]}
 
+export var galaxy_size_var : float = 6
+
 func rotatePoint(point,angle):
-	var px = point#*3
+	var px = point*galaxy_size_var
 
 	var qx = cos(angle) * (px) - sin(angle)*px
 	var qy = sin(angle) * (px) + cos(angle)*px
@@ -30,14 +32,14 @@ func _ready():
 		# set its global_position to two random (float)
 		# values lying somewhere between 0 and 400
 		add_child(new_planet)
-		var radius = pow(rand_range(0, 100),2)#*3
+		var radius = pow(rand_range(0, 100),2)*galaxy_size_var
 		var angle = rand_range(0, 2*PI)
 		new_planet.global_position.x = cos(angle)*radius
 		new_planet.global_position.y = sin(angle)*radius
 		new_planet.system_type = determine_biome(Vector2(cos(angle)*radius,sin(angle)*radius))
 	
 	for i in range(0,5000):
-		if i %22 == 0:
+		if i % 22 == 0:
 			for _x in range(20):
 				var new_planet = planet.instance()
 				add_child(new_planet)
@@ -46,7 +48,6 @@ func _ready():
 				new_planet.system_type = determine_biome(planet_pos)
 	add_companyHQ()
 	update_ship()
-
 		
 
 export var starsInside = []
@@ -69,32 +70,32 @@ func update_ship():
 func set_biome_circle_origins():
 	rngMach.seed = GalaxySave.game_data["galaxySeed"]
 	for amount in rngMach.randi_range(8,10):
-		var radius = rngMach.randi_range(500,10000)
+		var radius = rngMach.randi_range(500,10000)*galaxy_size_var
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["blue"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 		if rngMach.randi()%2==0: biomes["blue"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 	for amount in rngMach.randi_range(6,8):
-		var radius = rngMach.randi_range(500,10000)
+		var radius = rngMach.randi_range(500,10000)*galaxy_size_var
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["red"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 	for amount in rngMach.randi_range(2,4):
-		var radius = rngMach.randi_range(500,10000)
+		var radius = rngMach.randi_range(500,10000)*galaxy_size_var
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["orange"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 	for amount in rngMach.randi_range(2,3):
-		var radius = rngMach.randi_range(500,10000)
+		var radius = rngMach.randi_range(500,10000)*galaxy_size_var
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["purple"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 	for amount in rngMach.randi_range(2,12):
-		var radius = rngMach.randi_range(500,10000)
+		var radius = rngMach.randi_range(500,10000)*galaxy_size_var
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["black"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 	for amount in rngMach.randi_range(4,6):
-		var radius = rngMach.randi_range(500,10000)
+		var radius = rngMach.randi_range(500,10000)*galaxy_size_var
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["green"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 	for amount in 1:
-		var radius = rngMach.randi_range(9000,10000)
+		var radius = rngMach.randi_range(9000,10000)*galaxy_size_var
 		var angle = rngMach.randf_range(0,2*PI)
 		biomes["white"].append(Vector2(cos(angle),sin(angle))*Vector2(radius,radius))
 
@@ -106,8 +107,8 @@ func set_biome_collisions():
 			var cosine_length2_options = [4,6]
 			var sin_length_options = [7,9,11,13]
 			var point_count = 200
-			var circle_radius = rngMach.randi_range(300,1000)
-			var variance_radius = rngMach.randi_range(350,650)
+			var circle_radius = rngMach.randi_range(300,1000)*galaxy_size_var
+			var variance_radius = rngMach.randi_range(350,650)*galaxy_size_var
 			var cosine_length = cosine_length_options[rngMach.randi() % cosine_length_options.size()]
 			var cosine_length2 = cosine_length2_options[rngMach.randi() % cosine_length2_options.size()]
 			var sin_length = sin_length_options[rngMach.randi() % sin_length_options.size()]
@@ -116,7 +117,7 @@ func set_biome_collisions():
 			var collision = collision_scene.instance()
 			var ptArray = PoolVector2Array()
 			if biome_type == "white":
-				circle_radius = rngMach.randi_range(1500,2000)
+				circle_radius = rngMach.randi_range(1500,2000)*galaxy_size_var
 			for point in point_count:
 				var circle_radius2 = circle_radius + variance_radius*cos(cosine_length*PI*point/point_count)*sin(sin_length*PI*point/point_count)*cos(cosine_length2*PI*point/point_count)# + 100*cos(2*PI*point/100)
 				var point_angle = (2*PI)/point_count*point

@@ -24,7 +24,26 @@ func generatePlanetarySystem(seedUsed):
 func _ready():
 	var posSeed = GalaxySave.getLastStarClicked()
 	generatePlanetarySystem(posSeed)
+	start_fTimer()
+	print("sun ready")
 	print("last planet = " + str(GalaxySave.game_data["shipPosition"]))
 
 func _on_Star_pressed():
 	print("center star pressed")
+
+var rng = RandomNumberGenerator.new()
+onready var flare_timer = $FlareTimer
+onready var flare_holder = $Star/FlareHolder
+onready var flare = $Star/FlareHolder/FlareParticles
+export var flare_min = 5
+export var flare_max = 20
+func _on_FlareTimer_timeout():
+	var random_angle = rng.randf_range(0,2*PI)
+	flare_holder.global_position = Vector2(cos(random_angle),sin(random_angle))*Vector2(32,32)
+	flare_holder.rotation = random_angle
+	flare.emitting = true
+	start_fTimer()
+
+func start_fTimer():
+	print("showing items")
+	flare_timer.start(rand_range(flare_min,flare_max))

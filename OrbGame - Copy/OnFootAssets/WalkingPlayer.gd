@@ -425,6 +425,7 @@ func update_buildings_from_saved_data():
 	cannon_power_guide.modulate.a = .5
 	cannon_power_guide.visible = false
 	
+	var cannon_turret_placed_instance = null
 	for building_type in planet_building_data:
 		match building_type:
 			building_types.WALL:
@@ -481,13 +482,13 @@ func update_buildings_from_saved_data():
 			building_types.CANNONTURRET:
 				for location in planet_building_data[building_type]:
 					var cannon_turret = cannon_turret_scene.instance()
+					cannon_turret_placed_instance = cannon_turret
 					cannon_turret.global_position = location
 					YSorting_Node.call_deferred("add_child",cannon_turret)
 			building_types.CANNONPOWER:
 				for location in planet_building_data[building_type]:
 					var cannon_power = cannon_power_scene.instance()
-					cannon_power.global_position = location
-					YSorting_Node.call_deferred("add_child",cannon_power)
+					cannon_turret_placed_instance.call_deferred("add_child",cannon_power)
 
 # building types
 
@@ -614,12 +615,18 @@ func build_state(_delta):
 				building_types.CANNONPOWER:
 					if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = []
-					if not planet_building_data[current_building_type].has(placing_block_location):
-						planet_building_data[current_building_type].append(placing_block_location)
-						GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
-						var cannon_power = cannon_power_scene.instance()
-						cannon_power.global_position = placing_block_location
-						YSorting_Node.call_deferred("add_child",cannon_power)
+					if not building_types.CANNONBASE in planet_building_data:
+						planet_building_data[building_types.CANNONBASE] = []
+					if not building_types.CANNONTURRET in planet_building_data:
+						planet_building_data[building_types.CANNONTURRET] = []
+					if planet_building_data[building_types.CANNONBASE].size() > 0 and planet_building_data[building_types.CANNONTURRET].size() > 0:
+						var power_placement_location = planet_building_data[building_types.CANNONTURRET][0] + Vector2(-37,-10)
+						if power_placement_location.distance_to(placing_block_location) < tile_size*5:
+							planet_building_data[current_building_type].append(0)
+							GalaxySave.game_data["storedBuildings"][current_building_type] -= 1
+							var cannon_power = cannon_power_scene.instance()
+							var turret_placed_instance = get_tree().get_nodes_in_group("Cannon_Turret")[0]
+							turret_placed_instance.call_deferred("add_child",cannon_power)
 			GalaxySave.set_building_data(planet_building_data)
 			GalaxySave.save_data()
 				
@@ -706,23 +713,25 @@ func build_state(_delta):
 			building_types.CANNONTURRET:
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = []
+				if not building_types.CANNONPOWER in planet_building_data:
+					planet_building_data[building_types.CANNONPOWER] = []
 				if planet_building_data[current_building_type].has(mousepos_floored):
-					planet_building_data[current_building_type].erase(mousepos_floored)
-					var possible_bases = get_tree().get_nodes_in_group("Cannon_Turret")
-					for candidate_bases in possible_bases:
-						if candidate_bases.global_position == mousepos_floored:
-							candidate_bases.queue_free()
-							GalaxySave.game_data["storedBuildings"][current_building_type] += 1
+					if planet_building_data[building_types.CANNONPOWER].size() == 0:
+						planet_building_data[current_building_type].erase(mousepos_floored)
+						var possible_bases = get_tree().get_nodes_in_group("Cannon_Turret")
+						for candidate_bases in possible_bases:
+							if candidate_bases.global_position == mousepos_floored:
+								candidate_bases.queue_free()
+								GalaxySave.game_data["storedBuildings"][current_building_type] += 1
 			building_types.CANNONPOWER:
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = []
-				if planet_building_data[current_building_type].has(mousepos_floored):
-					planet_building_data[current_building_type].erase(mousepos_floored)
+				if planet_building_data[current_building_type].has(0) and ConstantsHolder.cannon_moveable:
+					planet_building_data[current_building_type].erase(0)
 					var possible_bases = get_tree().get_nodes_in_group("Cannon_Power")
 					for candidate_bases in possible_bases:
-						if candidate_bases.global_position == mousepos_floored:
-							candidate_bases.queue_free()
-							GalaxySave.game_data["storedBuildings"][current_building_type] += 1
+						candidate_bases.queue_free()
+						GalaxySave.game_data["storedBuildings"][current_building_type] += 1
 			
 		GalaxySave.set_building_data(planet_building_data)
 		GalaxySave.save_data()

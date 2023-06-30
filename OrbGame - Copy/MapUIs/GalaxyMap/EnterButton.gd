@@ -22,7 +22,7 @@ func _on_EnterButton_pressed():
 		if get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn") != OK:
 			print("error changing to companyHQ scene")## transport to company scene
 	else:
-		if not currentStar.system_type.has("white"):
+		if ConstantsHolder.white_system_check(currentStar.system_type):
 			#if storyPos == 5:
 			update_ship_stats(false)
 			if get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn") != OK:
@@ -36,10 +36,11 @@ func _physics_process(_delta):
 			update_ship_stats(true)
 			if get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn") != OK:
 				print("error changing to CompanyHQ inside scene.")## transport to company scene
-		elif not currentStar.system_type.has("white") and not "Access Restricted" in enter_label.text:
-			update_ship_stats(false)
-			if get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn") != OK:
-				print("error changing to system map scene.")
+		elif not "Access Restricted" in enter_label.text:
+			if ConstantsHolder.white_system_check(currentStar.system_type):
+				update_ship_stats(false)
+				if get_tree().change_scene("res://MapUIs/InsideSystem/SystemMap.tscn") != OK:
+					print("error changing to system map scene.")
 
 func update_ship_stats(companyStation):
 	if companyStation:

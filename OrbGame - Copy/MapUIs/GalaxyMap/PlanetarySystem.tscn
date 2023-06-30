@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://MapUIs/GalaxyMap/star.png" type="Texture" id=1]
+[ext_resource path="res://MapUIs/GalaxyMap/PixelStar.png" type="Texture" id=1]
+[ext_resource path="res://OnFootAssets/Enemies/Round/SmoothScale.tres" type="Material" id=2]
 
 [sub_resource type="GDScript" id=2]
 resource_local_to_scene = true
@@ -68,7 +69,7 @@ func _on_Area2D_body_exited(_body):
 
 var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
 onready var constantsHolder = get_node(\"/root/ConstantsHolder\")
-var starIm = preload(\"res://MapUIs/InsideSystem/closeupStar.png\")
+var starIm = preload(\"res://MapUIs/InsideSystem/starIcon.png\")
 func updateSystemInfoPanel(starUsed):
 	var seedUsed = starUsed.global_position
 	var starNameOptions = constantsHolder.starNameOptions
@@ -83,7 +84,6 @@ func updateSystemInfoPanel(starUsed):
 	var planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
 	pStarImage.texture = starIm
 	pStarImage.rect_size = Vector2(64,64)
-	pStarImage.modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1) #set star texture
 	pStarName.text = starNameOptions[randi() % starNameOptions.size()].capitalize() #generate star name
 	var degPos = rad2deg(atan2(seedUsed.y,seedUsed.x))*-1
 	if degPos < 0:
@@ -115,7 +115,7 @@ func get_system_type(first_star):
 		system_type_text = \"System Type: \" + array_join(type_to_use)
 	else:
 		system_type_text = \"System Type: Uninhabited\"
-	if \"white\" in system_type_text:
+	if \"white\" in system_type_text and not ConstantsHolder.white_systems_visitable():
 		set_enter_button_text(false)
 	elif not \"red\" in system_type_text and GalaxySave.game_data[\"storyProgression\"] < 11:
 		set_enter_button_text(false)
@@ -137,16 +137,18 @@ func array_join(arr, separator = \", \"):
 script = SubResource( 2 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
+material = ExtResource( 2 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -32.0
-margin_right = 32.0
-margin_bottom = 32.0
-rect_pivot_offset = Vector2( 32, 32 )
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 16, 16 )
 texture_normal = ExtResource( 1 )
+expand = true
 
 [node name="Area2D" type="Area2D" parent="."]
 monitorable = false

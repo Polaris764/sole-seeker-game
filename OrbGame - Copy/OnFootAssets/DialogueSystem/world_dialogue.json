@@ -62,7 +62,14 @@
     ],
     "atos21": [
         "I have added schematics of a new weapon to the fabricator.",
-        "Build it on any planet of your choosing. All it requires is materials and space."
+        "Build it on any planet of your choosing. All it requires is materials and space.",
+        "Return here afterwards for further instruction after you have constructed it."
+    ],
+    "atos23": [
+        "Thank you for setting up my weapon of mass destruction.",
+        "With it, I will be able to completely wipe out white organisms from existence.",
+        "First, you will need to visit one of the planets for yourself.",
+        "The mission cannot be complete without this vital step."
     ],
     "atos_stab": [
         "Your current order is to stab the organism."

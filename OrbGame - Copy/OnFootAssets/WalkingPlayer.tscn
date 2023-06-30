@@ -1587,7 +1587,7 @@ nodes/Seek/position = Vector2( 80, 160 )
 nodes/TimeScale/node = SubResource( 75 )
 nodes/TimeScale/position = Vector2( 280, 160 )
 nodes/output/position = Vector2( 520, 180 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Seek", "Seek", 0, "Attack" ]
+node_connections = [ "output", 0, "TimeScale", "Seek", 0, "Attack", "TimeScale", 0, "Seek" ]
 
 [sub_resource type="Animation" id=27]
 resource_name = "AttackDown"
