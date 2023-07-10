@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://MainMenu/MainUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://MainMenu/UIHolder.gd" type="Script" id=2]
+[ext_resource path="res://MainMenu/SettingsUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MainMenu/NewGameUI.tscn" type="PackedScene" id=4]
+
+[node name="UIHolder" type="Node"]
+script = ExtResource( 2 )
+
+[node name="MainUI" parent="." instance=ExtResource( 1 )]
+visible = false
+transition_duration = 1.0
+
+[node name="SettingsUI" parent="." instance=ExtResource( 3 )]
+visible = false
+transition_duration = 1.0
+
+[node name="NewGameUI" parent="." instance=ExtResource( 4 )]
+visible = false

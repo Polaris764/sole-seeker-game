@@ -3,7 +3,6 @@ export var transferring = false
 
 func _ready():
 	get_node("../..").modulate.a = 0
-	GalaxySave.setLastPlanetClicked(0,0)
 	var relevantButtons = []
 	for i in InputMap.get_action_list('Interact'):
 		if i is InputEventKey:
@@ -11,7 +10,7 @@ func _ready():
 	$EnterLabel.text = "Enter\n" + str(relevantButtons)
 
 func _on_EnterButton_pressed():
-		if GalaxySave.getLastPlanetClicked() != 0:
+		if GalaxySave.game_data["shipPosition"][7] != 0:
 			transferring = true
 			update_ship_stats()
 	# uses star position and position of planet to uniquely set up city pattern
@@ -19,7 +18,9 @@ func _on_EnterButton_pressed():
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("Interact"):
-		if GalaxySave.getLastPlanetClicked() != 0:
+		if GalaxySave.game_data["shipPosition"][7] != 0:
+			print("TRANSFERRING")
+			print(GalaxySave.getLastPlanetClicked())
 			transferring = true
 			update_ship_stats()
 			# uses star position and position of planet to uniquely set up city pattern

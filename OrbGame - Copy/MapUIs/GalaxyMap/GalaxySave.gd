@@ -1,6 +1,7 @@
 extends Node
 
-const SAVE_FILE = "user://save_file.save"
+var SAVE_FILE_PATH = "user://save"
+var SAVE_FILE = "user://saves/save_file.save"
 var game_data = {}
 
 # holding star coordinates for galaxy map
@@ -63,12 +64,13 @@ func load_data():
 		randomize()
 		game_data = {
 			"galaxySeed": randi(),
+			"gameModifications": {"megasystems":false,"glassCannon":false,"speedDemon":false,"populationBoom":false,"agingGalaxy":false,"fuelEfficient":false},
 			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
 			"storedBuildings": {buildingTypes.WALL:10,buildingTypes.FLOOR:10,buildingTypes.TURRET:10,buildingTypes.CALTROPS:10,buildingTypes.LANDMINE:10,buildingTypes.LASER:10,buildingTypes.CAPTURER:10,buildingTypes.CANNONBASE:1,buildingTypes.CANNONTURRET:1,buildingTypes.CANNONPOWER:1},
 			"capturedEnemies": [],#["BlueOrb","BrownEnemy","Round"],
-			"shipPosition": [Vector2.ZERO,Vector2.ZERO,-2,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
+			"shipPosition": [Vector2.ZERO,Vector2.ZERO,0,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
 			"storyProgression": 24,
 			"totalKills" : 0,
 			"individualKills" : {"black":0,"blue":0,"brown":0,"orange":0,"green":0,"red":0,"purple":0},

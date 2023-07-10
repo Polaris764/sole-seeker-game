@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UIResources/UIFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://MainMenu/MainUITheme.tres" type="Theme" id=2]
+[ext_resource path="res://MainMenu/SeedEditor.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="Theme" id=4]
+default_font = ExtResource( 1 )
+LineEdit/fonts/font = ExtResource( 1 )
+LineEdit/styles/focus = SubResource( 1 )
+LineEdit/styles/normal = SubResource( 2 )
+LineEdit/styles/read_only = SubResource( 3 )
+
+[node name="EnterTextBase" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -40.0
+margin_bottom = -576.0
+rect_min_size = Vector2( 984, 24 )
+
+[node name="Instructions" type="Label" parent="."]
+margin_left = 284.0
+margin_right = 492.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 150, 23 )
+rect_pivot_offset = Vector2( 150, 1 )
+theme = ExtResource( 2 )
+text = "Generation Seed Number: "
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextEditor" type="LineEdit" parent="."]
+margin_left = 492.0
+margin_right = 612.0
+margin_bottom = 24.0
+theme = SubResource( 4 )
+max_length = 10
+expand_to_text_length = true
+placeholder_text = "Random Seed"
+caret_blink = true
+script = ExtResource( 3 )
+
+[connection signal="text_changed" from="TextEditor" to="TextEditor" method="_on_SeedEditor_text_changed"]

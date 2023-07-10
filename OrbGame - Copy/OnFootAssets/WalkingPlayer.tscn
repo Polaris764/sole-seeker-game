@@ -1587,7 +1587,7 @@ nodes/Seek/position = Vector2( 80, 160 )
 nodes/TimeScale/node = SubResource( 75 )
 nodes/TimeScale/position = Vector2( 280, 160 )
 nodes/output/position = Vector2( 520, 180 )
-node_connections = [ "output", 0, "TimeScale", "Seek", 0, "Attack", "TimeScale", 0, "Seek" ]
+node_connections = [ "TimeScale", 0, "Seek", "Seek", 0, "Attack", "output", 0, "TimeScale" ]
 
 [sub_resource type="Animation" id=27]
 resource_name = "AttackDown"
@@ -2145,7 +2145,7 @@ nodes/NetgunAttack/position = Vector2( -300, 120 )
 nodes/Seek/node = SubResource( 77 )
 nodes/Seek/position = Vector2( 20, 140 )
 nodes/output/position = Vector2( 340, 160 )
-node_connections = [ "output", 0, "Seek", "Seek", 0, "NetgunAttack" ]
+node_connections = [ "Seek", 0, "NetgunAttack", "output", 0, "Seek" ]
 
 [sub_resource type="Animation" id=87]
 resource_name = "NetgunDown"

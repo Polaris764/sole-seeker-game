@@ -78,7 +78,7 @@ func updateSystemInfoPanel(seedUsed):
 	star_name = starNameOptions[randi() % starNameOptions.size()].capitalize()
 	pStarImage.texture = starIm
 	pStarImage.rect_size = Vector2(64,64)
-	pStarImage.modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1) #set star texture
+	#pStarImage.modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1) #set star texture
 	pStarName.text = star_name #generate star name
 	var degPos = rad2deg(atan2(seedUsed.y,seedUsed.x))*-1
 	if degPos < 0:

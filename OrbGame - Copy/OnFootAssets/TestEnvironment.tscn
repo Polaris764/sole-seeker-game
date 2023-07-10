@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://OnFootAssets/Assets/floor2.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://OnFootAssets/Enemies/Orange/OrangeEnemy.tscn" type="PackedScene" id=14]
 [ext_resource path="res://OnFootAssets/Enemies/Black/Black.tscn" type="PackedScene" id=15]
 [ext_resource path="res://OnFootAssets/Enemies/Round/Round.tscn" type="PackedScene" id=16]
+[ext_resource path="res://MapUIs/InsideSystem/ColorShaderScript.tres" type="Shader" id=17]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -56,6 +57,12 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 17 )
+shader_param/u_color_key = Color( 0.72549, 0.0666667, 0.0823529, 1 )
+shader_param/u_replacement_color = Color( 0.152941, 1, 0.00392157, 1 )
+shader_param/u_tolerance = 0.3
 
 [node name="TestEnvironment" type="Node2D"]
 script = ExtResource( 4 )
@@ -129,6 +136,9 @@ interaction_result = "Deposit"
 [node name="LaserWall" parent="." instance=ExtResource( 9 )]
 position = Vector2( -41, -47 )
 
+[node name="Sprite" parent="LaserWall" index="0"]
+material = SubResource( 3 )
+
 [node name="Caltrops" parent="." instance=ExtResource( 10 )]
 position = Vector2( -104, 37 )
 
@@ -136,7 +146,7 @@ position = Vector2( -104, 37 )
 position = Vector2( -128, -41 )
 
 [node name="Turret" parent="." instance=ExtResource( 12 )]
-position = Vector2( -120, -77 )
+position = Vector2( -123, -91 )
 
 [editable path="YSort/ItemConverter"]
 [editable path="LaserWall"]

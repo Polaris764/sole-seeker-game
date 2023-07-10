@@ -1,0 +1,21 @@
+[gd_resource type="ParticlesMaterial" load_steps=7 format=2]
+
+[ext_resource path="res://MapUIs/InsideSystem/RingAccCurve.tres" type="Texture" id=1]
+[ext_resource path="res://MapUIs/InsideSystem/RingOrbitCurve.tres" type="Texture" id=2]
+[ext_resource path="res://MapUIs/InsideSystem/RingScaleCurve.tres" type="Texture" id=3]
+[ext_resource path="res://MapUIs/InsideSystem/RingTangentCurve2.tres" type="Curve" id=4]
+[ext_resource path="res://MapUIs/InsideSystem/RingAngleCurve.tres" type="Texture" id=5]
+
+[sub_resource type="CurveTexture" id=8]
+curve = ExtResource( 4 )
+
+[resource]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+angular_velocity_curve = ExtResource( 5 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+orbit_velocity_curve = ExtResource( 2 )
+linear_accel_curve = ExtResource( 1 )
+tangential_accel_curve = SubResource( 8 )
+scale_curve = ExtResource( 3 )

@@ -4,7 +4,7 @@ onready var planet = preload("res://MapUIs/InsideSystem/PlanetHolder.tscn")
 onready var starSprite = $Star
 onready var starImage = preload("res://MapUIs/InsideSystem/starIcon.png")
 var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
-var starAmountOptions = [4]#[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,3,4]
+var starAmountOptions =[1,2]# [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,3,4]
 var starType
 var star_initial_size = Vector2(5,5)
 func generatePlanetarySystem(seedUsed):
@@ -38,6 +38,7 @@ func generatePlanetarySystem(seedUsed):
 	for i in range(planetAmount):
 		var radius = (i+1) * rand_range (400,600)
 		var new_planet = planet.instance()
+		new_planet.planetPlace = i+1
 		add_child(new_planet)
 		new_planet.position = $Star.global_position
 		new_planet.get_node("Planet").margin_right = new_planet.get_node("Planet").margin_right + radius
@@ -45,8 +46,7 @@ func generatePlanetarySystem(seedUsed):
 		#warning-ignore:integer_division
 		new_planet.set_rotation(deg2rad(rand_range(0,360)+Time.get_ticks_msec()/100))
 		new_planet.get_node("Planet/PlanetImage").set_rotation(rand_range(0,360))
-		new_planet.get_node("Planet/PlanetImage").modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1)
-		new_planet.planetPlace = i+1
+		#new_planet.get_node("Planet/PlanetImage").modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1)
 
 onready var player = get_node("../Player")
 func _ready():
@@ -66,6 +66,7 @@ func _ready():
 	GalaxySave.save_data()
 	start_fTimer()
 
+# star handling
 var rng = RandomNumberGenerator.new()
 onready var flare_timer = $Star/FlareTimer
 onready var flare_holder = $Star/FlareHolder
@@ -120,6 +121,8 @@ func update_info_panel():
 	var pPlanetName = get_node("../PlanetInfoHolder/Control/Holder/PlanetName")
 	var pOrbTypes = get_node("../PlanetInfoHolder/Control/Holder/OrbTypes")
 	var pPlanetBiome = get_node("../PlanetInfoHolder/Control/Holder/BiomeType")
+	var pPlanetButton = get_node("../PlanetInfoHolder/Control/Holder/EnterButton")
+	pPlanetButton.visible = false
 	var rng2 = RandomNumberGenerator.new()
 	var keyedSeed = pow(GalaxySave.getLastStarClicked(),2)*cos(pow(GalaxySave.getLastStarClicked(),3))
 	seed(keyedSeed)
@@ -128,6 +131,7 @@ func update_info_panel():
 	pPlanetName.text = GalaxySave.getLastStarClickedName()
 	var star_type
 	var star_temp
+	var _planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
 	star_type = starAmountOptions[randi() % starAmountOptions.size()]
 	match star_type:
 		1:

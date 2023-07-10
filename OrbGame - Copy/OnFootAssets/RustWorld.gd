@@ -28,10 +28,10 @@ func make_lowest_rust():
 	var amount_of_craters = randi()%20+30
 	var largest_crater = 0
 	var center_of_largest = Vector2(100,100)
-	for i in range(amount_of_craters):
+	for _i in range(amount_of_craters):
 		var location = Vector2(map_side_size-((randi()%map_side_size)+1),map_side_size-((randi()%map_side_size)+1))
 		var radius = crater_radii[randi() % crater_radii.size()]
-		var circle_tiles = []
+		var _circle_tiles = []
 		#finding ship pos
 		if radius > largest_crater and location.x > 20 and location.y > 20 and location.x < map_side_size-20 and location.y < map_side_size-20:
 			largest_crater = radius

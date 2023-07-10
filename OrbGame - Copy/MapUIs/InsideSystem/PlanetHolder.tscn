@@ -1,9 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://MapUIs/InsideSystem/PlanetHolder.gd" type="Script" id=1]
-[ext_resource path="res://MapUIs/InsideSystem/closeupStar.png" type="Texture" id=2]
+[ext_resource path="res://MapUIs/InsideSystem/PlaneyShaderNew.tres" type="Material" id=2]
 [ext_resource path="res://MapUIs/InsideSystem/PlanetOrbitLine.gd" type="Script" id=3]
-[ext_resource path="res://MapUIs/InsideSystem/PlanetMaterial.tres" type="Material" id=4]
+[ext_resource path="res://MapUIs/InsideSystem/closeupStar.png" type="Texture" id=4]
+[ext_resource path="res://MapUIs/InsideSystem/RingTexture.png" type="Texture" id=5]
+[ext_resource path="res://MapUIs/InsideSystem/RingParticleMaterial.tres" type="Material" id=6]
+[ext_resource path="res://MapUIs/InsideSystem/RingScaleCurve2.tres" type="Curve" id=7]
+[ext_resource path="res://MapUIs/InsideSystem/RingOrbitCurve2.tres" type="Curve" id=8]
+[ext_resource path="res://MapUIs/InsideSystem/RingTangentCurve2.tres" type="Curve" id=9]
+[ext_resource path="res://MapUIs/InsideSystem/RingAccCurve2.tres" type="Curve" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 31.0644
@@ -16,11 +22,12 @@ margin_right = 64.0
 margin_bottom = 64.0
 
 [node name="PlanetImage" type="Sprite" parent="Planet"]
-material = ExtResource( 4 )
-position = Vector2( 32, 33 )
-texture = ExtResource( 2 )
+material = ExtResource( 2 )
+position = Vector2( 33, 33 )
+texture = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="Planet/PlanetImage"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Planet/PlanetImage/Area2D"]
 shape = SubResource( 1 )
@@ -33,6 +40,31 @@ default_color = Color( 0.709804, 0.72549, 0.815686, 1 )
 script = ExtResource( 3 )
 persistence = 2
 persistence_condition = 1
+
+[node name="RingParticles" type="Particles2D" parent="Planet/PlanetImage"]
+rotation = 1.5708
+scale = Vector2( 1, 3 )
+amount = 50
+lifetime = 3.0
+preprocess = 15.0
+speed_scale = 0.2
+fixed_fps = 140
+process_material = ExtResource( 6 )
+texture = ExtResource( 5 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Planet/PlanetImage"]
+visible = false
+rotation = 1.5708
+scale = Vector2( 1, 3 )
+emitting = false
+amount = 50
+lifetime = 3.0
+preprocess = 3.0
+speed_scale = 0.2
+orbit_velocity_curve = ExtResource( 8 )
+linear_accel_curve = ExtResource( 10 )
+tangential_accel_curve = ExtResource( 9 )
+scale_amount_curve = ExtResource( 7 )
 
 [node name="Tween" type="Tween" parent="."]
 

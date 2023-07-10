@@ -1,0 +1,6 @@
+[gd_resource type="CurveTexture" load_steps=2 format=2]
+
+[ext_resource path="res://MapUIs/InsideSystem/RingOrbitCurve2.tres" type="Curve" id=1]
+
+[resource]
+curve = ExtResource( 1 )

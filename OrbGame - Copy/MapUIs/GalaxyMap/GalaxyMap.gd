@@ -39,7 +39,7 @@ func _ready():
 		new_planet.system_type = determine_biome(Vector2(cos(angle)*radius,sin(angle)*radius))
 	
 	for i in range(0,5000):
-		if i % 22 == 0:
+		if i % 22 == 0:# or i % 22 == 11 or i % 22 == 7 or i % 22 == 12 :
 			for _x in range(20):
 				var new_planet = planet.instance()
 				add_child(new_planet)

@@ -10,6 +10,7 @@ func generatePlanetarySystem(seedUsed):
 	#$Camera2D.zoom = Vector2(planetAmount/3*2.5,planetAmount/3*2.5)
 	#self.rect_size = Vector2(4096*7/planetAmount,2400*2/planetAmount)
 	for i in range(planetAmount):
+		yield(get_tree().create_timer(1.0), "timeout")
 		var radius = (i+1) * rand_range (235,270)
 		var new_planet = planet.instance()
 		add_child(new_planet)
@@ -25,8 +26,6 @@ func _ready():
 	var posSeed = GalaxySave.getLastStarClicked()
 	generatePlanetarySystem(posSeed)
 	start_fTimer()
-	print("sun ready")
-	print("last planet = " + str(GalaxySave.game_data["shipPosition"]))
 
 func _on_Star_pressed():
 	print("center star pressed")

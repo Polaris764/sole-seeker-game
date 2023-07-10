@@ -10,15 +10,15 @@ func shrinkSprite(spriteName):
 	
 
 
-func _on_Area2D_body_entered(_body):
-	var playerStarList = get_parent().starsInside
+func _on_Area2D_body_entered(_body): # when station is entered by ship
+	var playerStarList = get_parent().starsInside # get list of stars ship is inside
 	var i = playerStarList.find(self)
 	if i < 0:
 		playerStarList.insert(0,self)
-		get_parent().starsInside = playerStarList
-		growSprite(texButton)
+		get_parent().starsInside = playerStarList # set list to array
+		growSprite(texButton) # grow station image on map
 		updateSystemInfoPanel() # set HQ info
-		if playerStarList.size() == 1:
+		if playerStarList.size() == 1: # if the list size is only one star
 			$Tween.stop_all()
 			$Tween.interpolate_property(
 				get_node("../SystemInfo/Control"),
@@ -33,10 +33,10 @@ func _on_Area2D_body_entered(_body):
 
 
 onready var texButton = $TextureButton
-func _on_Area2D_body_exited(_body):
+func _on_Area2D_body_exited(_body): # when ship exits station
 	var playerStarList = get_parent().starsInside
 	var i = playerStarList.find(self)
-	if i > -1:
+	if i > -1: #if the station is findable in the star list
 		playerStarList.remove(i)
 		get_parent().starsInside = playerStarList
 	if playerStarList.size() == 0:
@@ -58,7 +58,7 @@ func _on_Area2D_body_exited(_body):
 		shrinkSprite(texButton)
 
 var stationIm = preload("res://MapUIs/GalaxyMap/companyHQ.png")
-var starIm = preload("res://MapUIs/InsideSystem/closeupStar.png")
+var starIm = preload("res://MapUIs/InsideSystem/starIcon.png")
 
 func updateSystemInfoPanel():
 	var pStarImage = get_node("../SystemInfo/Control/Holder/StarImage")
@@ -70,7 +70,7 @@ func updateSystemInfoPanel():
 	pStarImage.texture = starIm
 	pStarImage.texture = stationIm # set station image
 	pStarImage.rect_size = Vector2(64,64)
-	pStarImage.modulate = Color.white # return to default color
+	#pStarImage.modulate = Color.white # return to default color
 	pStarName.text = "Company Headquarters"
 	var degPos = rad2deg(atan2(self.global_position.y,self.global_position.x))*-1
 	if degPos < 0:
@@ -96,7 +96,7 @@ func updateSystemInfoPanel2(starUsed):
 	
 	pStarImage.texture = starIm
 	pStarImage.rect_size = Vector2(64,64)
-	pStarImage.modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1) #set star texture
+	#pStarImage.modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1) #set star texture
 	pStarName.text = starNameOptions[randi() % starNameOptions.size()].capitalize() #generate star name
 	var degPos = rad2deg(atan2(seedUsed.y,seedUsed.x))*-1
 	if degPos < 0:
