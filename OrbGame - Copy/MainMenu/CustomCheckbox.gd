@@ -25,7 +25,6 @@ func align_self(position):
 			$BoxTitle.rect_position.x = 63
 			$BoxTitle.align = Label.ALIGN_LEFT
 func _on_CustomCheckbox_pressed():
-	print("button presseed")
 	selected = not selected
 	if selected:
 		$Box.texture = selected_texture

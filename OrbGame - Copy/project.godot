@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Orb"
-run/main_scene="res://MainMenu/Menu.tscn"
+run/main_scene="res://MainMenu/UIHolder.tscn"
 config/icon="res://icon.png"
 
 [autoload]

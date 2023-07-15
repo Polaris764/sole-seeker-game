@@ -87,3 +87,5 @@ var file_to_name = {"BlueOrb":"Blue","BrownEnemy":"Brown","OrangeEnemy":"Orange"
 var name_to_scene = {"Blue":"res://OnFootAssets/Enemies/BlueOrb/BlueOrb.tscn","Brown":"res://OnFootAssets/Enemies/Brown/BrownEnemy.tscn","Orange":"res://OnFootAssets/Enemies/Orange/OrangeEnemy.tscn","Green":"res://OnFootAssets/Enemies/Purple/PurpleEnemy.tscn","Red":"res://OnFootAssets/Enemies/RedOrb/RedOrb.tscn","Purple":"res://OnFootAssets/Enemies/Round/Round.tscn"}
 
 var cannon_moveable = false
+
+var customizable_controls = {"move_forward":"Move Up","move_left":"Move Left","move_backward":"Move Down","move_right":"Move Right","Interact":"Interact","attack":"Attack","harvest":"Harvest","build_state_switch":"Switch State","inventory":"Inventory","increase_speed":"Increase Speed","decrease_speed":"Decrease Speed","weapon_switch_up":"Weapon Switch Up","weapon_switch_down":"Weapon Switch Down"}

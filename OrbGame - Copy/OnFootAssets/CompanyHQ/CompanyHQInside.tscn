@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://OnFootAssets/Assets/floor2.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=2]
@@ -17,10 +17,10 @@
 [ext_resource path="res://OnFootAssets/CompanyHQ/StationFloor.gd" type="Script" id=15]
 [ext_resource path="res://OnFootAssets/CompanyHQ/TrainingBot.tscn" type="PackedScene" id=16]
 [ext_resource path="res://OnFootAssets/CompanyHQ/Door.tscn" type="PackedScene" id=17]
-[ext_resource path="res://OnFootAssets/Assets/ExchangeMachine.png" type="Texture" id=18]
+[ext_resource path="res://OnFootAssets/Assets/ExchangeMachineResize.png" type="Texture" id=18]
 [ext_resource path="res://OnFootAssets/CompanyHQ/ExchangeMachine.gd" type="Script" id=19]
-[ext_resource path="res://OnFootAssets/CompanyHQ/CaptureMachine.png" type="Texture" id=20]
 [ext_resource path="res://OnFootAssets/CompanyHQ/CaptureMachine.gd" type="Script" id=21]
+[ext_resource path="res://OnFootAssets/Assets/CaptureMachineResize.png" type="Texture" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "floor2.png 0"
@@ -702,6 +702,9 @@ extents = Vector2( 4, 28 )
 [sub_resource type="CircleShape2D" id=17]
 radius = 44.0
 
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 23.75, 3 )
+
 [sub_resource type="CircleShape2D" id=22]
 radius = 30.5941
 
@@ -764,6 +767,9 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 ]
 }
+
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 8.5, 4 )
 
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/SpaceshipV2.png-7dd47954bb43bd6b4ae8a4031f1f1d20.stex"
@@ -995,12 +1001,19 @@ hframes = 2
 one_shot = true
 autostart = true
 
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/ExchangeMachine"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/ExchangeMachine/StaticBody2D"]
+position = Vector2( 0.25, 10 )
+shape = SubResource( 27 )
+
 [node name="CaptureMachine" type="Node2D" parent="YSort"]
-position = Vector2( 310, -307 )
+position = Vector2( 312, -286 )
 script = ExtResource( 21 )
 player_node = NodePath("../Player")
 
 [node name="Interactable" parent="YSort/CaptureMachine" instance=ExtResource( 4 )]
+position = Vector2( 0, -15 )
 player_node = NodePath("../../Player")
 
 [node name="CollisionShape2D" parent="YSort/CaptureMachine/Interactable/Area2D" index="0"]
@@ -1008,7 +1021,7 @@ position = Vector2( 1, 13 )
 shape = SubResource( 22 )
 
 [node name="Sprite" parent="YSort/CaptureMachine/Interactable" index="1"]
-texture = ExtResource( 20 )
+texture = ExtResource( 22 )
 hframes = 10
 vframes = 3
 
@@ -1020,6 +1033,13 @@ anims/Retrieve3 = SubResource( 26 )
 
 [node name="AnimationTimer" type="Timer" parent="YSort/CaptureMachine"]
 one_shot = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/CaptureMachine"]
+position = Vector2( 0, -15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/CaptureMachine/StaticBody2D"]
+position = Vector2( 0.5, 11 )
+shape = SubResource( 28 )
 
 [node name="ArenaDoor" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( 688, -136 )

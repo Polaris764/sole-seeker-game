@@ -1,7 +1,7 @@
 extends Node
 
-var SAVE_FILE_PATH = "user://save"
-var SAVE_FILE = "user://saves/save_file.save"
+var SAVE_FILE_PATH = "user://saves/"
+var SAVE_FILE = "save_file.save"
 var game_data = {}
 
 # holding star coordinates for galaxy map
@@ -45,26 +45,25 @@ func get_planet_building_data():
 
 
 # saving data
-func _ready():
-	load_data()
-	# setup player
-	PlayerStats.health = game_data["playerHealth"]
-
 func save_data():
 	var file = File.new()
-	file.open(SAVE_FILE,File.WRITE)
+	file.open(SAVE_FILE_PATH + SAVE_FILE,File.WRITE)
 	file.store_var(game_data)
 	file.close()
 
 onready var buildingTypes = ConstantsHolder.building_types
 onready var shipLocation = ConstantsHolder.ship_locations
 func load_data():
+	var directory = Directory.new()
+	if not directory.dir_exists(SAVE_FILE_PATH):
+		directory.make_dir(SAVE_FILE_PATH)
 	var file = File.new()
-	if not file.file_exists(SAVE_FILE) or true:
+	if not file.file_exists(SAVE_FILE_PATH + SAVE_FILE):
 		randomize()
 		game_data = {
 			"galaxySeed": randi(),
 			"gameModifications": {"megasystems":false,"glassCannon":false,"speedDemon":false,"populationBoom":false,"agingGalaxy":false,"fuelEfficient":false},
+			"playerLocation": {"scene":"res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn","position":Vector2.ZERO},
 			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
@@ -79,9 +78,19 @@ func load_data():
 			"cannonPartsBought":{buildingTypes.CANNONBASE:false,buildingTypes.CANNONTURRET:false,buildingTypes.CANNONPOWER:false}
 		}
 		save_data()
-	file.open(SAVE_FILE,File.READ)
+	file.open(SAVE_FILE_PATH + SAVE_FILE,File.READ)
 	game_data = file.get_var()
 	file.close()
+
+func start_game():
+	# set up player
+	PlayerStats.health = game_data["playerHealth"]
+	var scene_tree = get_tree()
+	var _new_scene = scene_tree.change_scene(game_data["playerLocation"]["scene"])
+	yield(scene_tree,"node_added")
+	yield(scene_tree.current_scene,"ready")
+	var playerNode = scene_tree.get_nodes_in_group("Player")[0]
+	playerNode.global_position = game_data["playerLocation"]["position"]
 
 # handling ship position
 

@@ -247,7 +247,7 @@ height = 5.0
 [sub_resource type="RectangleShape2D" id=26]
 extents = Vector2( 20, 27.5 )
 
-[node name="ChildPlayer" type="KinematicBody2D"]
+[node name="ChildPlayer" type="KinematicBody2D" groups=["Player"]]
 scale = Vector2( 0.4, 0.4 )
 collision_layer = 3
 collision_mask = 0
@@ -281,7 +281,6 @@ parameters/TimeScale/scale = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -7.45058e-08, -5 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 24 )
 
 [node name="HealthTimer" type="Timer" parent="."]

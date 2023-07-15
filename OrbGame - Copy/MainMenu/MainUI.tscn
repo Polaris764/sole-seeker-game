@@ -5,6 +5,9 @@
 
 [node name="MainUI" instance=ExtResource( 1 )]
 
+[node name="Title" parent="MarginContainer/MenuContainer" index="0"]
+text = "Sole Seeker"
+
 [node name="LoadSaveButton" type="Button" parent="MarginContainer/MenuContainer" index="1" groups=["Buttons", "TransitionTarget"]]
 margin_left = -20.0
 margin_top = 38.0

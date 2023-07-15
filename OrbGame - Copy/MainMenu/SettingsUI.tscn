@@ -30,6 +30,14 @@ margin_bottom = 500.0
 rect_min_size = Vector2( 984, 500 )
 script = ExtResource( 4 )
 
+[node name="CooldownTimer" type="Timer" parent="MarginContainer/MenuContainer/ScrollContainer" index="1"]
+one_shot = true
+
+[node name="DefaultControls" parent="MarginContainer/MenuContainer" index="3" groups=["TransitionTarget"] instance=ExtResource( 5 )]
+margin_right = 984.0
+margin_bottom = 23.0
+text = "Restore Default Mapping"
+
 [node name="BackButtonHolder" type="Control" parent="MarginContainer" index="1"]
 margin_right = 984.0
 margin_bottom = 560.0
@@ -48,3 +56,6 @@ text = "Back"
 
 [connection signal="appearing" from="." to="." method="_on_SettingsUI_appearing"]
 [connection signal="disappearing" from="." to="." method="_on_SettingsUI_disappearing"]
+[connection signal="timeout" from="MarginContainer/MenuContainer/ScrollContainer/CooldownTimer" to="." method="_on_CooldownTimer_timeout"]
+[connection signal="pressed" from="MarginContainer/MenuContainer/DefaultControls" to="." method="_on_DefaultControls_pressed"]
+[connection signal="pressed" from="MarginContainer/BackButtonHolder/BackButton" to="." method="_on_BackButton_pressed"]
