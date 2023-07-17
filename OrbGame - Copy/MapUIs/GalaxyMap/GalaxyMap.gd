@@ -11,7 +11,7 @@ onready var camera = $GalaxyCamera
 export var biomes = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"green":[],"white":[]}
 export var biomes_collisions = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"green":[],"white":[]}
 
-export var galaxy_size_var : float = 6
+export var galaxy_size_var : float = 6 #1.3
 
 func rotatePoint(point,angle):
 	var px = point*galaxy_size_var
@@ -32,19 +32,22 @@ func _ready():
 		# set its global_position to two random (float)
 		# values lying somewhere between 0 and 400
 		add_child(new_planet)
-		var radius = pow(rand_range(0, 100),2)*galaxy_size_var
+		var radius = pow(rand_range(2, 100),2)*galaxy_size_var
 		var angle = rand_range(0, 2*PI)
-		new_planet.global_position.x = cos(angle)*radius
-		new_planet.global_position.y = sin(angle)*radius
+		new_planet.global_position.x = (cos(angle)*radius)
+		new_planet.global_position.y = (sin(angle)*radius)
 		new_planet.system_type = determine_biome(Vector2(cos(angle)*radius,sin(angle)*radius))
 	
-	for i in range(0,5000):
-		if i % 22 == 0:# or i % 22 == 11 or i % 22 == 7 or i % 22 == 12 :
+	var possible_arms = [0]#[0,11,7,12]
+#	for i in rand_range(0,3):
+#		possible_arms.pop_at(rand_range(0,possible_arms.size()-1))
+	for i in range(0,10000):
+		if possible_arms.has(i % 22):
 			for _x in range(20):
 				var new_planet = planet.instance()
 				add_child(new_planet)
 				var planet_pos = rotatePoint(i,i)
-				new_planet.global_position = planet_pos
+				new_planet.global_position = Vector2(planet_pos.x,planet_pos.y).round()#planet_pos
 				new_planet.system_type = determine_biome(planet_pos)
 	add_companyHQ()
 	update_ship()

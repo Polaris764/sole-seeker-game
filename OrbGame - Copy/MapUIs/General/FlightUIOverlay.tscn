@@ -1,38 +1,54 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MapUIs/General/InteractionLabel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://FlightUIOverlay.gd" type="Script" id=2]
 [ext_resource path="res://OnFootAssets/DialogueSystem/AnnouncementLayer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MapUIs/General/FlightUIOverlayTheme.tres" type="Theme" id=4]
+[ext_resource path="res://MapUIs/GalaxyMap/flightUI.svg" type="Texture" id=5]
 
 [node name="FlightUIOverlay" type="CanvasLayer"]
 script = ExtResource( 2 )
 
-[node name="IncreaseLabel" parent="." instance=ExtResource( 1 )]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -250.0
-margin_top = -14.0
-margin_right = 0.0
-margin_bottom = 0.0
-align = 2
-interaction_result = "Increase Speed"
-control = "increase_speed"
-
-[node name="DecreaseLabel" parent="." instance=ExtResource( 1 )]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -250.0
-margin_right = 0.0
-align = 2
-interaction_result = "Decrease Speed"
-control = "decrease_speed"
-
 [node name="AnnouncementLayer" parent="." instance=ExtResource( 3 )]
 scene_text_file = "res://OnFootAssets/DialogueSystem/world_announcements.json"
 
-[connection signal="interacted_with" from="IncreaseLabel" to="." method="_on_IncreaseLabel_interacted_with"]
-[connection signal="interacted_with" from="DecreaseLabel" to="." method="_on_DecreaseLabel_interacted_with"]
+[node name="Holder" type="TextureRect" parent="."]
+margin_left = 374.9
+margin_top = 530.0
+margin_right = 831.9
+margin_bottom = 790.0
+rect_scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Holder"]
+margin_top = 25.0
+margin_right = 457.0
+margin_bottom = 117.0
+
+[node name="SpeedLabel" type="Label" parent="Holder/VBoxContainer"]
+margin_right = 457.0
+margin_bottom = 27.0
+theme = ExtResource( 4 )
+text = "Current Speed"
+align = 1
+
+[node name="IncreaseLabel" parent="Holder/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 31.0
+margin_right = 457.0
+margin_bottom = 58.0
+theme = ExtResource( 4 )
+align = 1
+interaction_result = "Increase Thrust"
+control = "increase_speed"
+
+[node name="DecreaseLabel" parent="Holder/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 62.0
+margin_right = 457.0
+margin_bottom = 89.0
+theme = ExtResource( 4 )
+align = 1
+interaction_result = "Decrease Thrust"
+control = "decrease_speed"
+
+[connection signal="interacted_with" from="Holder/VBoxContainer/IncreaseLabel" to="." method="_on_IncreaseLabel_interacted_with"]
+[connection signal="interacted_with" from="Holder/VBoxContainer/DecreaseLabel" to="." method="_on_DecreaseLabel_interacted_with"]

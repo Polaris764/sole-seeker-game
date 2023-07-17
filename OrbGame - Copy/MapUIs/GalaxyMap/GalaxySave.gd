@@ -63,7 +63,7 @@ func load_data():
 		game_data = {
 			"galaxySeed": randi(),
 			"gameModifications": {"megasystems":false,"glassCannon":false,"speedDemon":false,"populationBoom":false,"agingGalaxy":false,"fuelEfficient":false},
-			"playerLocation": {"scene":"res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn","position":Vector2.ZERO},
+			"playerLocation": {"scene":"res://MapUIs/GalaxyMap/GalaxyMap.tscn","position":Vector2.ZERO},
 			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},

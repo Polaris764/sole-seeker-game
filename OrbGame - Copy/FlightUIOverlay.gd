@@ -8,12 +8,15 @@ onready var current_spaceship_location = spaceship_locations.keys()[GalaxySave.g
 
 export var player : NodePath
 
+onready var increase_label = $Holder/VBoxContainer/IncreaseLabel
+onready var decrease_label = $Holder/VBoxContainer/DecreaseLabel
+
 func _ready():
 #	print("space ship level: " + str(spaceship_level))
 	if spaceship_level == 0:
-		$IncreaseLabel.disabled_message = "Max Speed Reached"
+		increase_label.disabled_message = "Max Thrust Reached"
 	elif spaceship_level == -2:
-		$DecreaseLabel.interaction_result = "Exit Flight Chair"
+		decrease_label.interaction_result = "Exit Flight Chair"
 	var storyPos = GalaxySave.game_data["storyProgression"]
 	if storyPos == 5:
 		SignalBus.emit_signal("display_announcement","first_ship_powered")

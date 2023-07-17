@@ -1,23 +1,59 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://MapUIs/Planetside/Ship/Player.gd" type="Script" id=1]
 [ext_resource path="res://MapUIs/Planetside/Ship/SpaceshipV3.png" type="Texture" id=2]
 [ext_resource path="res://MapUIs/General/FlightUIOverlay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MapUIs/General/ShipParticles.tres" type="Material" id=4]
+[ext_resource path="res://MapUIs/GalaxyMap/SpeedParticle.png" type="Texture" id=5]
+[ext_resource path="res://MapUIs/Planetside/Ship/JetSmoke.png" type="Texture" id=6]
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 0.5
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 15.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 50.0
+angular_velocity = 15.82
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 scale = Vector2( 0.7, 0.7 )
 script = ExtResource( 1 )
-max_speed = 600
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -2.86102e-06, 0.866669 )
+rotation = -1.5708
 scale = Vector2( 1.73333, 1.73333 )
 z_index = 1
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 0, 3 )
+position = Vector2( 2, 1.429 )
+rotation = -1.5708
 scale = Vector2( 0.5, 0.5 )
 polygon = PoolVector2Array( 52, -6, 52, -8, 38, -14, 34, -14, 24, -20, 8, -28, -6, -30, -10, -32, -18, -32, -52, -22, -52, -20, -34, -18, -26, -12, -36, -10, -36, -2, -26, -2, -26, 0, -34, 4, -46, 6, -52, 8, -52, 10, -14, 20, -8, 20, 0, 18, 36, 2, 52, -4 )
 
 [node name="FlightUIOverlay" parent="." instance=ExtResource( 3 )]
+layer = 2
+
+[node name="Particles2D" type="Particles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 2
+lifetime = 0.25
+fixed_fps = 120
+local_coords = false
+process_material = ExtResource( 4 )
+texture = ExtResource( 5 )
+
+[node name="JetEffect" type="Particles2D" parent="."]
+position = Vector2( -0.75, 15.714 )
+scale = Vector2( 0.2, 0.2 )
+lifetime = 0.6
+randomness = 1.0
+fixed_fps = 120
+process_material = SubResource( 1 )
+texture = ExtResource( 6 )

@@ -9,4 +9,5 @@ script = ExtResource( 2 )
 
 [node name="PauseInventory" parent="." instance=ExtResource( 1 )]
 pause_mode = 2
+layer = 2
 visible = false

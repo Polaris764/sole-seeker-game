@@ -11,6 +11,8 @@ func generatePlanetarySystem(seedUsed):
 	var keyedSeed = pow(seedUsed,2)*cos(pow(seedUsed,3))
 	seed(keyedSeed)
 	var planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
+	player.travel_distance = 600+600*planetAmount
+	player.travel_distance_squared = pow(player.travel_distance,2)
 	starType = starAmountOptions[randi() % starAmountOptions.size()]
 	var particles = $Star/GeneralParticles
 	match starType:

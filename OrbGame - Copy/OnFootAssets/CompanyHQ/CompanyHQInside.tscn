@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://OnFootAssets/Assets/floor2.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=2]
@@ -19,8 +19,10 @@
 [ext_resource path="res://OnFootAssets/CompanyHQ/Door.tscn" type="PackedScene" id=17]
 [ext_resource path="res://OnFootAssets/Assets/ExchangeMachineResize.png" type="Texture" id=18]
 [ext_resource path="res://OnFootAssets/CompanyHQ/ExchangeMachine.gd" type="Script" id=19]
+[ext_resource path="res://OnFootAssets/CompanyHQ/FuelMachine.gd" type="Script" id=20]
 [ext_resource path="res://OnFootAssets/CompanyHQ/CaptureMachine.gd" type="Script" id=21]
 [ext_resource path="res://OnFootAssets/Assets/CaptureMachineResize.png" type="Texture" id=22]
+[ext_resource path="res://OnFootAssets/Assets/FuelMachine.png" type="Texture" id=23]
 
 [sub_resource type="TileSet" id=1]
 0/name = "floor2.png 0"
@@ -771,6 +773,41 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 8.5, 4 )
 
+[sub_resource type="Animation" id=29]
+resource_name = "Pump"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=30]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 23.5, 5.5 )
+
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/SpaceshipV2.png-7dd47954bb43bd6b4ae8a4031f1f1d20.stex"
 
@@ -1043,6 +1080,25 @@ shape = SubResource( 28 )
 
 [node name="ArenaDoor" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( 688, -136 )
+
+[node name="FuelMachine" type="Sprite" parent="YSort"]
+position = Vector2( 34, -168 )
+texture = ExtResource( 23 )
+offset = Vector2( 0, -21 )
+vframes = 8
+script = ExtResource( 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/FuelMachine"]
+autoplay = "Pump"
+playback_speed = 0.7
+anims/Pump = SubResource( 29 )
+anims/RESET = SubResource( 30 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/FuelMachine"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/FuelMachine/StaticBody2D"]
+position = Vector2( -39, -6 )
+shape = SubResource( 31 )
 
 [node name="Shadow" type="Sprite" parent="."]
 position = Vector2( 80, -121 )
