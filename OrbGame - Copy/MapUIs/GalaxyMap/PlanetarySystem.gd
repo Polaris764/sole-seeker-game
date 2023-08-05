@@ -61,7 +61,6 @@ func _on_Area2D_body_exited(_body):
 		shrinkSprite(texButton)
 
 
-var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
 onready var constantsHolder = get_node("/root/ConstantsHolder")
 var starIm = preload("res://MapUIs/InsideSystem/closeupStar.png")
 func updateSystemInfoPanel(seedUsed):
@@ -74,7 +73,12 @@ func updateSystemInfoPanel(seedUsed):
 	
 	var keyedSeed = pow(seedUsed.x,2)*cos(pow(seedUsed.x,3))
 	seed(keyedSeed)
-	var planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
+	var planetAmount
+	if GalaxySave.game_data["gameModifications"]["megasystems"]:
+		planetAmount = ConstantsHolder.megaPlanetAmountOptions[randi() % ConstantsHolder.megaPlanetAmountOptions.size()]
+	else:
+		planetAmount = ConstantsHolder.planetAmountOptions[randi() % ConstantsHolder.planetAmountOptions.size()]
+
 	pStarImage.texture = starIm
 	pStarImage.rect_size = Vector2(64,64)
 	pStarImage.modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1) #set star texture
@@ -105,8 +109,8 @@ func uniquify(val):
 
 func get_system_type():
 	var system_type_text : String = "System Type: Error"
-	print("SYSTEM TYPE: " + get_node("../SystemInfo/Control/Holder/StarName").text)
-	print(system_type_dup)
+	#print("SYSTEM TYPE: " + get_node("../SystemInfo/Control/Holder/StarName").text)
+	#print(system_type_dup)
 	if system_type_dup.size() > 0:
 		system_type_text = "System Type: " + array_join(system_type_dup)
 	else:

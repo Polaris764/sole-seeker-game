@@ -63,7 +63,7 @@ func load_data():
 		game_data = {
 			"galaxySeed": randi(),
 			"gameModifications": {"megasystems":false,"glassCannon":false,"speedDemon":false,"populationBoom":false,"agingGalaxy":false,"fuelEfficient":false},
-			"playerLocation": {"scene":"res://MapUIs/GalaxyMap/GalaxyMap.tscn","position":Vector2.ZERO},
+			"playerLocation": {"scene":"res://MapUIs/GalaxyMap/GalaxyMap.tscn","position":null},
 			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
@@ -75,7 +75,8 @@ func load_data():
 			"individualKills" : {"black":0,"blue":0,"brown":0,"orange":0,"green":0,"red":0,"purple":0},
 			"playerHealth" : PlayerStats.max_health,
 			"enemiesContacted": [],
-			"cannonPartsBought":{buildingTypes.CANNONBASE:false,buildingTypes.CANNONTURRET:false,buildingTypes.CANNONPOWER:false}
+			"cannonPartsBought":{buildingTypes.CANNONBASE:false,buildingTypes.CANNONTURRET:false,buildingTypes.CANNONPOWER:false},
+			"cannonLocation": null
 		}
 		save_data()
 	file.open(SAVE_FILE_PATH + SAVE_FILE,File.READ)
@@ -84,13 +85,16 @@ func load_data():
 
 func start_game():
 	# set up player
+	if GalaxySave.game_data["gameModifications"]["glassCannon"]:
+		PlayerStats.max_health = PlayerStats.max_health_glass
 	PlayerStats.health = game_data["playerHealth"]
 	var scene_tree = get_tree()
 	var _new_scene = scene_tree.change_scene(game_data["playerLocation"]["scene"])
 	yield(scene_tree,"node_added")
 	yield(scene_tree.current_scene,"ready")
 	var playerNode = scene_tree.get_nodes_in_group("Player")[0]
-	playerNode.global_position = game_data["playerLocation"]["position"]
+	if game_data["playerLocation"]["position"]:
+		playerNode.global_position = game_data["playerLocation"]["position"]
 
 # handling ship position
 

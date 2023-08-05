@@ -27,5 +27,16 @@ polygon = PoolVector2Array( -70, -21.5, -6.66667, -34.4444, 27.7778, -44.4444, 1
 [node name="VisitingCamera" type="Camera2D" parent="."]
 zoom = Vector2( 0.5, 0.5 )
 
+[node name="TransitionCover" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="TransitionCover"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Tween" type="Tween" parent="TransitionCover"]
+
 [connection signal="body_entered" from="Spaceship/Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Spaceship/Area2D" to="." method="_on_Area2D_body_exited"]

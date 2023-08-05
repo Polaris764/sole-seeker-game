@@ -65,9 +65,9 @@ func _on_MoreInfoButton_pressed():
 			tween.start()
 			tween.interpolate_property(info2,"modulate:a",info2.modulate.a,1,.25,Tween.TRANS_LINEAR)
 			tween.start()
-			tween.interpolate_property(info1,"rect_position:y",infobutton.rect_position.y,81,.25,Tween.TRANS_LINEAR,Tween.EASE_IN,.25)
+			tween.interpolate_property(info1,"rect_position:y",infobutton.rect_position.y,81+27,.25,Tween.TRANS_LINEAR,Tween.EASE_IN,.25)
 			tween.start()
-			tween.interpolate_property(info2,"rect_position:y",infobutton.rect_position.y,108,.25,Tween.TRANS_LINEAR)
+			tween.interpolate_property(info2,"rect_position:y",infobutton.rect_position.y,108+27,.25,Tween.TRANS_LINEAR)
 			tween.start()
 			info_visible = true
 func _on_Timer_timeout():
@@ -76,3 +76,19 @@ func _on_Timer_timeout():
 func _on_LoadButton_pressed():
 	var mainUI = get_node("../../../../../..")
 	mainUI.start_game(assigned_save)
+
+var delete_state = false
+onready var delete_button = $DeleteButton
+onready var dTimer = $DeleteButton/DeleteTimer
+func _on_DeleteButton_pressed():
+	if not delete_state:
+		delete_state = true
+		delete_button.text = "Are you sure?"
+		dTimer.start(3)
+	else:
+		var mainUI = get_node("../../../../../..")
+		mainUI.delete_save(assigned_save)
+		queue_free()
+func _on_DeleteTimer_timeout():
+	delete_state = false
+	delete_button.text = "Delete"

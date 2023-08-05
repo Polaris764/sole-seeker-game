@@ -36,6 +36,7 @@ GalaxySave="*res://MapUIs/GalaxyMap/GalaxySave.gd"
 ConstantsHolder="*res://MapUIs/GalaxyMap/ConstantsHolder.gd"
 PlayerStats="*res://OnFootAssets/Player/PlayerStats.tscn"
 SignalBus="*res://OnFootAssets/DialogueSystem/signal_bus.gd"
+BackgroundLoader="*res://UIResources/BackgroundLoader.gd"
 
 [display]
 

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://PolygonColoringTest.gd" type="Script" id=1]
+[ext_resource path="res://ColorPoly.gd" type="Script" id=2]
+
+[node name="PolygonColoringTest" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 35, 116, 80, 75, 102, 52, 245, 46, 269, 34, 373, 27, 402, 73, 406, 109, 418, 149, 379, 210, 297, 242, 223, 260, 133, 294, -16, 254, -46, 176, 29, 128 )
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 851, 445, 363, 176, 259, 190 )

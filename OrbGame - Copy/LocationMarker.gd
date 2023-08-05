@@ -8,7 +8,8 @@ onready var sprite = $Arrow
 func _process(_delta):
 	if active:
 		var center = cam.get_camera_screen_center()
-		var vec = target_pos - center
+		var target_pos_closest = get_nearest_ship(center,target_pos)
+		var vec = target_pos_closest - center
 		var half_size = (get_viewport_rect().size / 2)
 		var nearest_edge = get_closest_edge_point(half_size,vec.angle())
 		if vec.length() < nearest_edge*.33: #.2 for exact point
@@ -34,3 +35,24 @@ func get_closest_edge_point(middle,angle):
 		if location > 0:
 			edited_intersects.append(location)
 	return edited_intersects.min()
+
+func get_nearest_ship(origin_pos,center_ship):
+	var closest = center_ship
+	var closest_distance = (center_ship - origin_pos).length()
+	if (center_ship + Vector2(200*16,0) - origin_pos).length() < closest_distance:
+		closest = center_ship + Vector2(200*16,0)
+	if (center_ship + Vector2(200*16,200*16) - origin_pos).length() < closest_distance:
+		closest = center_ship + Vector2(200*16,0)
+	if (center_ship + Vector2(0,200*16) - origin_pos).length() < closest_distance:
+		closest = center_ship + Vector2(200*16,0)
+	if (center_ship + Vector2(-200*16,200*16) - origin_pos).length() < closest_distance:
+		closest = center_ship + Vector2(200*16,0)
+	if (center_ship + Vector2(-200*16,0) - origin_pos).length() < closest_distance:
+		closest = center_ship + Vector2(200*16,0)
+	if (center_ship + Vector2(-200*16,-200*16) - origin_pos).length() < closest_distance:
+		closest = center_ship + Vector2(200*16,0)
+	if (center_ship + Vector2(0,-200*16) - origin_pos).length() < closest_distance:
+		closest = center_ship + Vector2(200*16,0)
+	if (center_ship + Vector2(200*16,-200*16) - origin_pos).length() < closest_distance:
+		closest = center_ship + Vector2(200*16,0)
+	return closest

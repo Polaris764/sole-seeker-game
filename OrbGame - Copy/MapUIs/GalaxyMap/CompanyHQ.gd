@@ -57,7 +57,7 @@ func _on_Area2D_body_exited(_body): # when ship exits station
 	if texButton.get_scale().x > 1:
 		shrinkSprite(texButton)
 
-var stationIm = preload("res://MapUIs/GalaxyMap/companyHQ.png")
+var stationIm = preload("res://MapUIs/GalaxyMap/StationIcon.png")
 var starIm = preload("res://MapUIs/InsideSystem/starIcon.png")
 
 func updateSystemInfoPanel():
@@ -79,7 +79,6 @@ func updateSystemInfoPanel():
 	pPlanetAmount.text = "Planet Count: N/A" #set planet amount
 	pSystemType.text = "System Type: Orb Reciever" #generate system type
 	
-var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
 onready var constantsHolder = get_node("/root/ConstantsHolder")
 func updateSystemInfoPanel2(starUsed):
 	var seedUsed = starUsed.global_position
@@ -92,7 +91,12 @@ func updateSystemInfoPanel2(starUsed):
 	
 	var keyedSeed = pow(seedUsed.x,2)*cos(pow(seedUsed.x,3))
 	seed(keyedSeed)
-	var planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
+	var planetAmount
+	if GalaxySave.game_data["gameModifications"]["megasystems"]:
+		planetAmount = ConstantsHolder.megaPlanetAmountOptions[randi() % ConstantsHolder.megaPlanetAmountOptions.size()]
+	else:
+		planetAmount = ConstantsHolder.planetAmountOptions[randi() % ConstantsHolder.planetAmountOptions.size()]
+
 	
 	pStarImage.texture = starIm
 	pStarImage.rect_size = Vector2(64,64)

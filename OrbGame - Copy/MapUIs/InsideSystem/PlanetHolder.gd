@@ -69,7 +69,7 @@ func updatePlanetInfoPanel(seedUsed):
 	var pPlanetBiome = get_node("../../PlanetInfoHolder/Control/Holder/BiomeType")
 	var pPlanetButton = get_node("../../PlanetInfoHolder/Control/Holder/EnterButton")
 	pPlanetButton.visible = true
-	var keyedSeed = str(pow(seedUsed*planetPlace,2)*cos(pow(seedUsed*planetPlace,3))).hash()
+	var keyedSeed = 1#str(pow(seedUsed*planetPlace,2)*cos(pow(seedUsed*planetPlace,3))).hash()
 	seed(keyedSeed)
 	var starName = GalaxySave.getLastStarClickedName()
 	var alphabetOrder = {1:"a",2:"b",3:"c",4:"d",5:"e",6:"f",7:"g",8:"h",9:"i",10:"j",11:"k",12:"l",13:"m",14:"n",15:"o",16:"p",17:"q",18:"r",19:"s",20:"t",21:"u",22:"v",23:"w",24:"x",25:"y",26:"z",}
@@ -123,7 +123,7 @@ const possible_ring_colors = [
 func create_texture():
 	var noise = OpenSimplexNoise.new()
 	var seedUsed = GalaxySave.getLastStarClicked()
-	var keyedSeed = str(pow(seedUsed*planetPlace,2)*cos(pow(seedUsed*planetPlace,3))).hash()
+	var keyedSeed = 1#str(pow(seedUsed*planetPlace,2)*cos(pow(seedUsed*planetPlace,3))).hash()
 	var rng = RandomNumberGenerator.new()
 	rng.seed = keyedSeed
 	var planetTypes = ["Marsh","Volcanic","Desert","Wet","Rust","Frozen"]

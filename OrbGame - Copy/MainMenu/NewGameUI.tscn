@@ -65,10 +65,18 @@ Checkbox_Text = "Speed Demon"
 Checkbox_Text = "Population Boom"
 
 [node name="agingGalaxy" parent="MarginContainer/MenuContainer/NewGameContainer" index="4" groups=["SettingButton", "TransitionTarget"] instance=ExtResource( 5 )]
+disabled = true
 Checkbox_Text = "Aging Galaxy"
 
+[node name="Box" parent="MarginContainer/MenuContainer/NewGameContainer/agingGalaxy" index="0"]
+modulate = Color( 0.654902, 0.168627, 0.168627, 1 )
+
 [node name="fuelEfficient" parent="MarginContainer/MenuContainer/NewGameContainer" index="5" groups=["SettingButton", "TransitionTarget"] instance=ExtResource( 5 )]
+disabled = true
 Checkbox_Text = "Fuel Efficient"
+
+[node name="Box" parent="MarginContainer/MenuContainer/NewGameContainer/fuelEfficient" index="0"]
+modulate = Color( 0.654902, 0.168627, 0.168627, 1 )
 
 [node name="CreateButton" parent="MarginContainer/MenuContainer" index="5" groups=["Buttons", "TransitionTarget"] instance=ExtResource( 2 )]
 margin_right = 984.0
@@ -93,3 +101,5 @@ text = "Back"
 
 [editable path="MarginContainer/MenuContainer/NameHolder"]
 [editable path="MarginContainer/MenuContainer/SeedHolder"]
+[editable path="MarginContainer/MenuContainer/NewGameContainer/agingGalaxy"]
+[editable path="MarginContainer/MenuContainer/NewGameContainer/fuelEfficient"]

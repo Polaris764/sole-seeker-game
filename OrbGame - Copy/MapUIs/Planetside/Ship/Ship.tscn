@@ -38,6 +38,7 @@ polygon = PoolVector2Array( 52, -6, 52, -8, 38, -14, 34, -14, 24, -20, 8, -28, -
 
 [node name="FlightUIOverlay" parent="." instance=ExtResource( 3 )]
 layer = 2
+visible = false
 
 [node name="Particles2D" type="Particles2D" parent="."]
 z_index = 1

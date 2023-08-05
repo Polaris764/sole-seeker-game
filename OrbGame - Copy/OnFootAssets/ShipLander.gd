@@ -9,6 +9,7 @@ func _ready():
 	create_planet()
 	if GalaxySave.lastPlanetType:
 		spawn_enemies()
+	ConstantsHolder.leaving_planet = true
 
 
 func _on_Area2D_body_entered(body):
@@ -28,7 +29,13 @@ func custom_interaction():
 			relevantButtons.append(i.as_text())
 	interation_button.updateButton(relevantButtons,"Enter Ship",self,"Interact")
 
+onready var cover = $TransitionCover/ColorRect
+onready var tween = $TransitionCover/Tween
 func interacted():
+	ConstantsHolder.leaving_map = false
+	tween.interpolate_property(cover,"modulate:a",0,1,.5)
+	tween.start()
+	yield(tween,"tween_completed")
 	if get_tree().change_scene(scene) != OK:
 		print("error changing scenes")
 
@@ -64,11 +71,15 @@ func create_planet():
 		$VisitingCamera.current = true
 		var overlay = visiting_controls.instance()
 		add_child(overlay)
+		overlay.get_node("Holder/VBoxContainer/SpeedLabel").text = ""
 	else:
 		player.global_position = ship_position + Vector2(83,37)
 		var locator = player.get_node("UI/LocationMarker")
 		locator.target_pos = ship_position
 		locator.active = true
+		cover.modulate.a = 1
+		tween.interpolate_property(cover,"modulate:a",1,0,.5)
+		tween.start()
 		if chosen_planet_type == WetWorld:
 			player.slipperyGround = true
 

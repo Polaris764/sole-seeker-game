@@ -6,6 +6,8 @@ var scene_text = {}
 var selected_text = []
 var in_progress = false
 
+var pause_while_showing = true
+
 onready var background = $Background
 onready var text_label = $Background/Label
 
@@ -33,13 +35,15 @@ func finish():
 	text_label.text = ""
 	background.visible = false
 	in_progress = false
-	get_tree().paused = false
+	if pause_while_showing:
+		get_tree().paused = false
 	
 func on_display_dialog(text_key):
 	if in_progress:
 		next_line()
 	else:
-		get_tree().paused = true
+		if pause_while_showing:
+			get_tree().paused = true
 		background.visible = true
 		in_progress = true
 		selected_text = scene_text[text_key].duplicate()

@@ -60,7 +60,6 @@ func _on_Area2D_body_exited(_body):
 		shrinkSprite($TextureButton)
 
 
-var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
 onready var constantsHolder = get_node("/root/ConstantsHolder")
 var starIm = preload("res://MapUIs/InsideSystem/closeupStar.png")
 func updateSystemInfoPanel(seedUsed):
@@ -74,7 +73,11 @@ func updateSystemInfoPanel(seedUsed):
 
 	var keyedSeed = pow(seedUsed.x,2)*cos(pow(seedUsed.x,3))
 	seed(keyedSeed)
-	var planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
+	var planetAmount
+	if GalaxySave.game_data["gameModifications"]["megasystems"]:
+		planetAmount = ConstantsHolder.megaPlanetAmountOptions[randi() % ConstantsHolder.megaPlanetAmountOptions.size()]
+	else:
+		planetAmount = ConstantsHolder.planetAmountOptions[randi() % ConstantsHolder.planetAmountOptions.size()]
 	star_name = starNameOptions[randi() % starNameOptions.size()].capitalize()
 	pStarImage.texture = starIm
 	pStarImage.rect_size = Vector2(64,64)

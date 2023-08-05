@@ -257,7 +257,6 @@ texture = ExtResource( 5 )
 position = Vector2( 278, 114 )
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player"]
-current = true
 zoom = Vector2( 0.3, 0.3 )
 
 [node name="Fog" type="Node2D" parent="."]

@@ -1147,6 +1147,17 @@ dialogue_key = "request_capture1"
 position = Vector2( 15, 6.5 )
 shape = SubResource( 21 )
 
+[node name="TransitionCover" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="TransitionCover"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Tween" type="Tween" parent="TransitionCover"]
+
 [connection signal="interacted_with" from="YSort/HealStation/Interactable" to="YSort/HealStation" method="_on_Interactable_interacted_with"]
 [connection signal="timeout" from="YSort/HealStation/HealTimer" to="YSort/HealStation" method="_on_HealTimer_timeout"]
 [connection signal="interacted_with" from="YSort/ExchangeMachine/Interactable" to="YSort/ExchangeMachine" method="_on_Interactable_interacted_with"]

@@ -1,6 +1,7 @@
 extends Camera2D
 
 export var smoothspeed = 10
+onready var ending = get_node("..").trigger_ending
 func _ready():
 	var ship = get_node("../Player")
 	var ship_pos = ship.position
@@ -20,13 +21,13 @@ export var zoom_max = 15
 export var zoom_min = .25
 	
 func zoom():
-
-	if Input.is_action_just_released('zoom_out') and self.zoom.x < zoom_max and self.zoom.y < zoom_max:
-		self.zoom.x += 0.25
-		self.zoom.y += 0.25
-	if Input.is_action_just_released('zoom_in') and self.zoom.x > zoom_min and self.zoom.y > zoom_min:
-		self.zoom.x -= 0.25
-		self.zoom.y -= 0.25
+	if not ending:
+		if Input.is_action_just_released('zoom_out') and self.zoom.x < zoom_max and self.zoom.y < zoom_max:
+			self.zoom.x += 0.25
+			self.zoom.y += 0.25
+		if Input.is_action_just_released('zoom_in') and self.zoom.x > zoom_min and self.zoom.y > zoom_min:
+			self.zoom.x -= 0.25
+			self.zoom.y -= 0.25
 
 # lerp to overshot target, without overshooting
 static func lerp_overshoot(from: float, to: float, weight: float, overshoot: float) -> float:

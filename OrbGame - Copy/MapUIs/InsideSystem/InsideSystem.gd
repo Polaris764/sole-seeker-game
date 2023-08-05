@@ -1,11 +1,15 @@
 extends Control
 
 onready var planet = preload("res://MapUIs/InsideSystem/PlanetHolder.tscn")
-var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
 func generatePlanetarySystem(seedUsed):
 	var keyedSeed = pow(seedUsed,2)*cos(pow(seedUsed,3))
 	seed(keyedSeed)
-	var planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
+	var planetAmount
+	if GalaxySave.game_data["gameModifications"]["megasystems"]:
+		planetAmount = ConstantsHolder.megaPlanetAmountOptions[randi() % ConstantsHolder.megaPlanetAmountOptions.size()]
+	else:
+		planetAmount = ConstantsHolder.planetAmountOptions[randi() % ConstantsHolder.planetAmountOptions.size()]
+
 	print(planetAmount)
 	#$Camera2D.zoom = Vector2(planetAmount/3*2.5,planetAmount/3*2.5)
 	#self.rect_size = Vector2(4096*7/planetAmount,2400*2/planetAmount)

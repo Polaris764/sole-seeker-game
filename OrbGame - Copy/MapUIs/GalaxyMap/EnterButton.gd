@@ -29,7 +29,7 @@ func _on_EnterButton_pressed():
 				print("error changing to system map scene")
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("Interact") and get_node("../../../..").starsInside.size() > 0:
+	if Input.is_action_just_pressed("Interact") and get_node("../../../..").starsInside.size() > 0 and get_node("../../../../Player").functional:
 		var currentStar = get_node("../../../..").starsInside[0]
 		GalaxySave.setLastStarClicked(currentStar.global_position,starNameLabel.text,currentStar.system_type)
 		if currentStar.CompanyStation == true:

@@ -35,6 +35,8 @@ func on_button_pressed(name):
 			change_screen(newgameUI)
 		"SettingsButton":
 			change_screen(settingsUI)
+		"QuitButton":
+			get_tree().quit()
 		"BackButton":
 			change_screen(mainUI)
 		# New Game Buttons
@@ -147,3 +149,13 @@ func set_specific_keybind(action, keybind,keybind_type): # Sets a specific keybi
 
 func delete_specific_keybind(action):
 	InputMap.action_erase_events(action)
+
+func delete_save(save):
+	var dir = Directory.new()
+	if not dir.dir_exists(GalaxySave.SAVE_FILE_PATH):
+		dir.make_dir(GalaxySave.SAVE_FILE_PATH)
+	dir.open(GalaxySave.SAVE_FILE_PATH)
+	var err = dir.remove(save)
+	if err != OK:
+		print("deletion error. code:")
+		print(err)

@@ -1,0 +1,282 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://UIResources/TransitionScene.gd" type="Script" id=1]
+[ext_resource path="res://OnFootAssets/InsideShip/SpaceshipV2.png" type="Texture" id=2]
+[ext_resource path="res://UIResources/ShipPath.gd" type="Script" id=3]
+[ext_resource path="res://MapUIs/Planetside/Ship/JetSmoke.png" type="Texture" id=4]
+[ext_resource path="res://MapUIs/GalaxyMap/SpeedParticle.png" type="Texture" id=5]
+[ext_resource path="res://OnFootAssets/Player/Build/Bullet.png" type="Texture" id=6]
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform int iterations = 20;
+uniform float formuparam = 1.00;
+
+uniform int volsteps = 20;
+uniform float stepsize = 0.1;
+
+uniform float zoom = 0.800;
+uniform float tile = 0.5;
+uniform float speed = 0.001;
+
+uniform float brightness = 0.002;
+uniform float darkmatter = 0.100;
+uniform float distfading = 0.650;
+uniform float saturation = 0.750;
+
+uniform vec2 iResolution = vec2(192, 192);
+uniform vec2 iMouse = vec2(0,0);
+
+float SCurve (float value) {
+
+    if (value < 0.5)
+    {
+        return value * value * value * value * value * 16.0; 
+    }
+    
+    value -= 1.0;
+    
+    return value * value * value * value * value * 16.0 + 1.0;
+}
+
+void fragment()
+{
+	//get coords and direction
+	vec2 uv=FRAGCOORD.xy/iResolution.xy-.5;
+	uv.y*=iResolution.y/iResolution.x;
+	vec3 dir=vec3(uv*zoom,1.);
+	float time=TIME*speed+.25;
+
+	//mouse rotation
+	float a1=0.5+iMouse.x/iResolution.x*2.;
+	float a2=0.8+iMouse.y/iResolution.y*2.;
+	mat2 rot1=mat2(vec2(cos(a1),sin(a1)),vec2(-sin(a1),cos(a1)));
+	mat2 rot2=mat2(vec2(cos(a2),sin(a2)),vec2(-sin(a2),cos(a2)));
+	dir.xy*=rot1;
+	dir.xz*=rot2;
+	vec3 from=vec3(1.0,0.5,0.5);
+	from-=vec3(0.0,time,0.0);
+	from.xz*=rot1;
+	from.xy*=rot2;
+	
+	//volumetric rendering
+	float s=0.1,fade=1.;
+	vec3 v=vec3(0.);
+	for (int r=0; r<volsteps; r++) {
+		vec3 p=from+s*dir*0.5;
+		p = abs(vec3(tile)-mod(p,vec3(tile*2.))); // tiling fold
+		float pa,a=pa=0.;
+		for (int i=0; i<iterations; i++) { 
+			p=abs(p)/dot(p,p)-formuparam; // the magic formula
+			a+=abs(length(p)-pa); // absolute sum of average change
+			pa=length(p);
+		}
+		float dm=max(0.,darkmatter-a*a*.001); //dark matter
+		a = pow(a, 2.3); // add contrast
+		if (r>6) fade*=1.-dm; // dark matter, don't render near
+		//v+=vec3(dm,dm*.5,0.);
+		v+=fade;
+		v+=vec3(s,s*s,s*s*s*s)*a*brightness*fade; // coloring based on distance
+		fade*=distfading; // distance fading
+		s+=stepsize;
+	}
+    
+	v=mix(vec3(length(v)),v,saturation); //color adjust
+    
+    vec4 C = vec4(v*.01,1.);
+    
+     	C.r = pow(C.r, 0.35); 
+ 	 	C.g = pow(C.g, 0.36); 
+ 	 	C.b = pow(C.b, 0.38); 
+ 	
+    vec4 L = C;   	
+    
+    COLOR.r = mix(L.r, SCurve(C.r), 0.7); 
+    COLOR.g = mix(L.g, SCurve(C.g), 1.0); 
+    COLOR.b = mix(L.b, SCurve(C.b), 0.2);     	
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/iterations = 20
+shader_param/formuparam = 1.0
+shader_param/volsteps = 20
+shader_param/stepsize = 0.1
+shader_param/zoom = 0.8
+shader_param/tile = 0.5
+shader_param/speed = 0.001
+shader_param/brightness = 0.002
+shader_param/darkmatter = 0.1
+shader_param/distfading = 0.65
+shader_param/saturation = 0.75
+shader_param/iResolution = Vector2( 192, 192 )
+shader_param/iMouse = Vector2( 0, 0 )
+
+[sub_resource type="Shader" id=10]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform float size: hint_range(0.0,2.0);
+uniform vec2 center = vec2(0.5,0.5);
+uniform float thickness:hint_range (0.0,0.50);
+uniform float force =0.123;
+// uniform used to move the texture by pixels
+uniform float pixel_move: hint_range(-0.103,0.103);
+void fragment()
+{
+	float ratio = (SCREEN_PIXEL_SIZE.x/SCREEN_PIXEL_SIZE.y );
+	vec2 scaledUV = (SCREEN_UV-vec2(0.5,0.0)) / vec2(ratio,1.0) +vec2 (0.5,0.0);
+	float mask    = (1.0-smoothstep(size-0.1,size,length(scaledUV-center))) 
+	                    *smoothstep(size-thickness-0.1,size-thickness,length(scaledUV-center));
+	vec2 displacement = normalize(scaledUV-center) *force;
+	vec4 tex =  texture(SCREEN_TEXTURE,(SCREEN_UV)-displacement *mask);
+	///offset used to Move the Textures 
+	vec2 offset = (SCREEN_PIXEL_SIZE.xy+vec2(pixel_move) )* mask;
+
+	vec4 rc = texture(SCREEN_TEXTURE,(SCREEN_UV-vec2(offset.x,0.0))-displacement *mask);
+	vec4 gc = texture(SCREEN_TEXTURE,(SCREEN_UV+vec2(offset.x,0.0))-displacement *mask);
+	vec4 bc = texture(SCREEN_TEXTURE,(SCREEN_UV-vec2(0.0,offset.y))-displacement *mask);
+
+	COLOR =  vec4(rc.r, gc.g, bc.b, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+shader_param/size = 0.0
+shader_param/center = Vector2( 0.5, 0.5 )
+shader_param/thickness = 0.5
+shader_param/force = 0.1
+shader_param/pixel_move = 0.103
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -90, 469, -336.647, 95.5234, 336.647, -95.5234, 696, 290, 0, 0, 0, 0, 1417, 54 )
+}
+
+[sub_resource type="Shader" id=8]
+code = "// Converted/modified from ShaderToy: https://www.shadertoy.com/view/ldBXDD
+// Attach this shader to a ColorRect
+
+shader_type canvas_item;
+
+uniform float wave_count : hint_range(1.0, 20.0, 1.0) = 20.0;
+uniform float speed : hint_range(0.0, 10.0, 0.1) = 3.0;
+uniform float height : hint_range(0.0, 0.1, 0.001) = 0.003;
+
+void fragment() {
+	vec2 cPos = -1.0 + 2.0 * UV / (1.0 / TEXTURE_PIXEL_SIZE);
+	float cLength = length(cPos);
+	vec2 uv = FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy + (cPos/cLength) * cos(cLength * wave_count - TIME * speed) * height;
+    vec3 col = texture(SCREEN_TEXTURE,uv).xyz;
+	COLOR = vec4(col,1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/wave_count = 20.0
+shader_param/speed = 3.0
+shader_param/height = 0.01
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 60, 50, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 100.0
+
+[sub_resource type="ParticlesMaterial" id=2]
+lifetime_randomness = 0.5
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 15.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 50.0
+angular_velocity = 15.82
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[node name="TransitionScene" type="CanvasLayer"]
+process_priority = 3
+layer = 3
+script = ExtResource( 1 )
+direction = false
+
+[node name="Colors" type="TextureRect" parent="."]
+material = SubResource( 7 )
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Shockwave" type="ColorRect" parent="."]
+material = SubResource( 11 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Shockwave2" type="ColorRect" parent="."]
+material = SubResource( 11 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ShipPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="ShipPath"]
+position = Vector2( -90, 469 )
+rotation = -0.186767
+loop = false
+lookahead = 20.0
+
+[node name="Effect" type="Sprite" parent="ShipPath/PathFollow2D"]
+visible = false
+material = SubResource( 9 )
+scale = Vector2( 150, 150 )
+texture = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="ShipPath/PathFollow2D"]
+texture = ExtResource( 2 )
+
+[node name="SpeedParticles" type="Particles2D" parent="ShipPath/PathFollow2D/Sprite"]
+position = Vector2( -32.7433, 1.87283 )
+scale = Vector2( 2, 1 )
+z_index = 1
+amount = 5
+lifetime = 0.5
+fixed_fps = 120
+local_coords = false
+process_material = SubResource( 3 )
+texture = ExtResource( 5 )
+
+[node name="JetEffect" type="Particles2D" parent="ShipPath/PathFollow2D/Sprite"]
+position = Vector2( -90.793, -0.794678 )
+rotation = 1.53589
+lifetime = 0.6
+speed_scale = 0.4
+randomness = 1.0
+fixed_fps = 120
+process_material = SubResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="ShipTween" type="Tween" parent="ShipPath"]
+
+[node name="Timer" type="Timer" parent="ShipPath"]
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="ShipPath"]
+one_shot = true
+
+[node name="ShTween" type="Tween" parent="."]
+
+[connection signal="load_complete" from="." to="." method="_on_TransitionScene_load_complete"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="timeout" from="ShipPath/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="ShipPath/Timer" to="ShipPath" method="_on_Timer_timeout"]
+[connection signal="timeout" from="ShipPath/Timer2" to="." method="_on_Timer2_timeout"]

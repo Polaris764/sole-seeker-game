@@ -3,14 +3,18 @@ extends Container
 onready var planet = preload("res://MapUIs/InsideSystem/PlanetHolder.tscn")
 onready var starSprite = $Star
 onready var starImage = preload("res://MapUIs/InsideSystem/starIcon.png")
-var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
+
 var starAmountOptions =[1,2]# [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,3,4]
 var starType
 var star_initial_size = Vector2(5,5)
 func generatePlanetarySystem(seedUsed):
-	var keyedSeed = pow(seedUsed,2)*cos(pow(seedUsed,3))
+	var keyedSeed = 1#pow(seedUsed,2)*cos(pow(seedUsed,3))
 	seed(keyedSeed)
-	var planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
+	var planetAmount
+	if GalaxySave.game_data["gameModifications"]["megasystems"]:
+		planetAmount = ConstantsHolder.megaPlanetAmountOptions[randi() % ConstantsHolder.megaPlanetAmountOptions.size()]
+	else:
+		planetAmount = ConstantsHolder.planetAmountOptions[randi() % ConstantsHolder.planetAmountOptions.size()]
 	player.travel_distance = 600+600*planetAmount
 	player.travel_distance_squared = pow(player.travel_distance,2)
 	starType = starAmountOptions[randi() % starAmountOptions.size()]
@@ -50,8 +54,13 @@ func generatePlanetarySystem(seedUsed):
 		new_planet.get_node("Planet/PlanetImage").set_rotation(rand_range(0,360))
 		#new_planet.get_node("Planet/PlanetImage").modulate = Color.from_hsv((randi() % 12) / 12.0, 1, 1)
 
+onready var transScene = get_node("../TransitionScene")
 onready var player = get_node("../Player")
 func _ready():
+	if ConstantsHolder.leaving_planet:
+		transScene.queue_free()
+	ConstantsHolder.leaving_planet = false
+	set_process(false)
 	get_node("../PlanetInfoHolder").visible = true
 	var posSeed = GalaxySave.getLastStarClicked()
 	generatePlanetarySystem(posSeed)
@@ -67,6 +76,11 @@ func _ready():
 		#print("setting at planet location. Player position = " + str(player.global_position) + ". Target planet = " + str(get_children()[planet_position]))
 	GalaxySave.save_data()
 	start_fTimer()
+	if not trigger_end:
+		player.functional = true
+		transScene.emit_signal("load_complete")
+	else:
+		transScene.queue_free()
 
 # star handling
 var rng = RandomNumberGenerator.new()
@@ -133,7 +147,7 @@ func update_info_panel():
 	pPlanetName.text = GalaxySave.getLastStarClickedName()
 	var star_type
 	var star_temp
-	var _planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
+	#var _planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
 	star_type = starAmountOptions[randi() % starAmountOptions.size()]
 	match star_type:
 		1:
@@ -150,3 +164,44 @@ func update_info_panel():
 			star_temp = str(rng2.randi_range(8000,40000))
 	pOrbTypes.text = star_type
 	pPlanetBiome.text = "Surface Temp: " + star_temp + " Kelvin"
+
+onready var camera = get_node("../SystemCamera")
+onready var tween = get_node("../CamTween")
+var trigger_end = false
+func end_animation():
+	var clouds = get_node("../Clouds/TextureRect")
+	clouds.modulate.a = 1
+	player.functional = false
+	camera.zoom = Vector2(.1,.1)
+	player.visible = false
+	tween.interpolate_property(clouds,"modulate:a",1,0,1)
+	tween.start()
+	tween.interpolate_property(camera,"zoom",camera.zoom,Vector2(50,50),8,Tween.TRANS_EXPO)
+	tween.start()
+	yield(tween,"tween_all_completed")
+	visible = false
+	tween.interpolate_property(self,"modulate:a",1,0,1)
+	tween.start()
+	yield(tween,"tween_all_completed")
+	var scene = load("res://MapUIs/GalaxyMap/GalaxyMap.tscn")
+	var sceneI = scene.instance()
+	sceneI.trigger_ending = true
+	get_node("/root").add_child(sceneI)
+	#sceneI.ending_scene()
+	get_parent().queue_free()
+
+onready var sTween = get_node("../ShipTween")
+var planetTarget
+func _on_EnterButton_entering_planet():
+	player.functional = false
+	planetTarget = get_children()[GalaxySave.game_data["shipPosition"][7]].get_node("Planet/PlanetImage")
+	sTween.interpolate_property(player,"scale",player.scale,Vector2(.1,.1),2)
+	sTween.start()
+	sTween.interpolate_property(camera,"zoom",camera.zoom,Vector2(.2,.2),2)
+	set_process(true)
+
+func _on_ShipTween_tween_all_completed():
+	get_node("../PlanetInfoHolder/Control/Holder/EnterButton").emit_signal("scene_switch")
+
+func _process(delta):
+	player.global_position = lerp(player.global_position, planetTarget.global_position, delta)

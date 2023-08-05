@@ -50,6 +50,10 @@ var needle_attack_with_netgun_equipped = false
 
 signal teleported(direction)
 func _ready():
+	if GalaxySave.game_data["gameModifications"]["speedDemon"]:
+		movementSpeed *= 3
+	if GalaxySave.game_data["gameModifications"]["glassCannon"]:
+		$HitboxPivot/WeaponHitbox.damage = 50
 	$Camera2D.zoom = Vector2(.2,.2)
 	$HitboxPivot.visible = true
 	stats.connect("no_health",self,"on_death")
@@ -624,6 +628,7 @@ func build_state(_delta):
 							var cannon_power = cannon_power_scene.instance()
 							var turret_placed_instance = get_tree().get_nodes_in_group("Cannon_Turret")[0]
 							turret_placed_instance.call_deferred("add_child",cannon_power)
+							GalaxySave.game_data["cannonLocation"] = GalaxySave.game_data["shipPosition"][0]
 			GalaxySave.set_building_data(planet_building_data)
 			GalaxySave.save_data()
 				

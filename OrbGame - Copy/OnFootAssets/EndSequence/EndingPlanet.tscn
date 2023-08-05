@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://OnFootAssets/Village/Grass.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/Village/Fence.png" type="Texture" id=2]
@@ -6,6 +6,13 @@
 [ext_resource path="res://OnFootAssets/EndSequence/EndingPlanet.gd" type="Script" id=4]
 [ext_resource path="res://OnFootAssets/InsideShip/SpaceshipShadowV2.png" type="Texture" id=5]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://OnFootAssets/EndSequence/Clouds.tscn" type="PackedScene" id=7]
+[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueArea.tscn" type="PackedScene" id=8]
+[ext_resource path="res://OnFootAssets/Interactable.tscn" type="PackedScene" id=9]
+[ext_resource path="res://OnFootAssets/Village/Building2.png" type="Texture" id=10]
+[ext_resource path="res://OnFootAssets/Village/Building1.png" type="Texture" id=11]
+[ext_resource path="res://OnFootAssets/Village/Roof2.png" type="Texture" id=12]
+[ext_resource path="res://OnFootAssets/Village/Roof1.png" type="Texture" id=13]
 
 [sub_resource type="TileSet" id=28]
 0/name = "Grass.png 0"
@@ -813,8 +820,89 @@ points = PoolVector2Array( 0, 12, 4, 12, 4, 20, 0, 20 )
 } ]
 15/z_index = 0
 
+[sub_resource type="AnimationNodeStateMachinePlayback" id=32]
+
+[sub_resource type="RectangleShape2D" id=35]
+extents = Vector2( 32, 10 )
+
+[sub_resource type="RectangleShape2D" id=36]
+extents = Vector2( 32, 12.25 )
+
+[sub_resource type="RectangleShape2D" id=37]
+extents = Vector2( 39.5, 27.5 )
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 39.5, 27.5 )
+
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 32, 10 )
+
+[sub_resource type="RectangleShape2D" id=40]
+extents = Vector2( 32, 12.25 )
+
+[sub_resource type="RectangleShape2D" id=41]
+extents = Vector2( 42.5, 29 )
+
+[sub_resource type="RectangleShape2D" id=42]
+extents = Vector2( 42.5, 29 )
+
 [sub_resource type="StreamTexture" id=31]
 load_path = "res://.import/SpaceshipV2.png-7dd47954bb43bd6b4ae8a4031f1f1d20.stex"
+
+[sub_resource type="Animation" id=33]
+resource_name = "CameraZoom"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("YSort/Player/Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 2, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Clouds/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2.5, 3.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=34]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("YSort/Player/Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 5, 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Clouds/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="EndingPlanet" type="Node2D"]
 script = ExtResource( 4 )
@@ -877,7 +965,91 @@ vframes = 3
 frame = 2
 
 [node name="Player" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( 493, 78 )
+position = Vector2( 537, 87 )
+
+[node name="AnimationTree" parent="YSort/Player" index="2"]
+parameters/playback = SubResource( 32 )
+
+[node name="Camera2D" parent="YSort/Player" index="3"]
+zoom = Vector2( 5, 5 )
+
+[node name="Building5" type="Sprite" parent="YSort"]
+position = Vector2( 292, 218 )
+texture = ExtResource( 11 )
+offset = Vector2( 0, -31 )
+
+[node name="Roof1" type="Sprite" parent="YSort/Building5"]
+position = Vector2( 0, -66 )
+texture = ExtResource( 13 )
+
+[node name="Area2D" type="Area2D" parent="YSort/Building5"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Building5/Area2D"]
+position = Vector2( 0, -29 )
+shape = SubResource( 35 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/Building5"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Building5/StaticBody2D"]
+position = Vector2( 0, -11 )
+shape = SubResource( 36 )
+
+[node name="Interactable" parent="YSort/Building5" instance=ExtResource( 9 )]
+player_node = NodePath("../../Player")
+interaction_result = "Inspect"
+
+[node name="CollisionShape2D" parent="YSort/Building5/Interactable/Area2D" index="0"]
+position = Vector2( 0.5, -19.5 )
+shape = SubResource( 37 )
+
+[node name="DialogueArea" parent="YSort/Building5" instance=ExtResource( 8 )]
+dialogue_key = "house5"
+
+[node name="CollisionShape2D" parent="YSort/Building5/DialogueArea" index="0"]
+position = Vector2( 0.5, -19.5 )
+shape = SubResource( 38 )
+
+[node name="Building4" type="Sprite" parent="YSort"]
+position = Vector2( 660, 247 )
+texture = ExtResource( 10 )
+offset = Vector2( 1, -31 )
+
+[node name="Roof2" type="Sprite" parent="YSort/Building4"]
+position = Vector2( 0, -72 )
+texture = ExtResource( 12 )
+
+[node name="Area2D" type="Area2D" parent="YSort/Building4"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Building4/Area2D"]
+position = Vector2( 1, -31 )
+shape = SubResource( 39 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/Building4"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Building4/StaticBody2D"]
+position = Vector2( 1, -11 )
+shape = SubResource( 40 )
+
+[node name="DialogueArea" parent="YSort/Building4" instance=ExtResource( 8 )]
+dialogue_key = "house4"
+
+[node name="CollisionShape2D" parent="YSort/Building4/DialogueArea" index="0"]
+position = Vector2( 1.5, -20 )
+shape = SubResource( 41 )
+
+[node name="Interactable" parent="YSort/Building4" instance=ExtResource( 9 )]
+player_node = NodePath("../../Player")
+interaction_result = "Inspect"
+
+[node name="CollisionShape2D" parent="YSort/Building4/Interactable/Area2D" index="0"]
+position = Vector2( 1.5, -20 )
+shape = SubResource( 42 )
 
 [node name="Shadow" type="Sprite" parent="."]
 position = Vector2( 1060.2, 466.6 )
@@ -904,5 +1076,28 @@ polygon = PoolVector2Array( -70, -21.5, -6.66667, -34.4444, 27.7778, -44.4444, 1
 wait_time = 4.0
 one_shot = true
 
+[node name="LaserTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/CameraZoom = SubResource( 33 )
+anims/RESET = SubResource( 34 )
+
+[node name="Clouds" parent="." instance=ExtResource( 7 )]
+
 [connection signal="screen_exited" from="Spaceship/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="ShipTimer" to="." method="_on_ShipTimer_timeout"]
+[connection signal="timeout" from="LaserTimer" to="." method="_on_LaserTimer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="YSort/Player"]
+[editable path="YSort/Player/HitboxPivot/WeaponHitbox"]
+[editable path="YSort/Player/HitboxPivot/NetgunHitbox"]
+[editable path="YSort/Player/Hurtbox"]
+[editable path="YSort/Player/DialogueInteractionArea"]
+[editable path="YSort/Building5/Interactable"]
+[editable path="YSort/Building5/DialogueArea"]
+[editable path="YSort/Building4/DialogueArea"]
+[editable path="YSort/Building4/Interactable"]

@@ -1,7 +1,7 @@
 extends Node2D
 
 func _on_Area2D_body_entered(body):
-	if body.name ==  "Player":
+	if body.name ==  "Player" and GalaxySave.game_data["shipPosition"][4] != GalaxySave.shipLocation.SPACEZOOMED:
 		custom_interaction()
 		if GalaxySave.game_data["storyProgression"] < 5:
 			SignalBus.emit_signal("display_announcement","ship_tour_door")
@@ -21,8 +21,13 @@ func custom_interaction():
 			relevantButtons.append(i.as_text())
 	get_node("../YSort/Player/InteractionButton").updateButton(relevantButtons,"Exit Ship",self,"Interact")
 
+onready var tween = get_node("../TransitionCover/Tween")
+onready var cover = get_node("../TransitionCover/ColorRect")
 func interacted():
 	var ship_location = GalaxySave.game_data["shipPosition"][7]
+	tween.interpolate_property(cover,"modulate:a",0,1,.5)
+	tween.start()
+	yield(tween,"tween_completed")
 	if ship_location == 0:
 		var _change = get_tree().change_scene(station_scene)
 	else:

@@ -96,3 +96,4 @@ autowrap = true
 uppercase = true
 
 [connection signal="pressed" from="Control/Holder/EnterButton" to="Control/Holder/EnterButton" method="_on_EnterButton_pressed"]
+[connection signal="scene_switch" from="Control/Holder/EnterButton" to="Control/Holder/EnterButton" method="_on_EnterButton_scene_switch"]

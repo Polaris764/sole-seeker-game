@@ -4,6 +4,7 @@ onready var grass = $Grass
 onready var fenceLength = $YSort/FenceLength
 onready var fenceWidth = $YSort/FenceWidth
 onready var player = $YSort/Player
+onready var ysorter = $YSort
 onready var spaceship = $Spaceship
 onready var ship_shadow = $Shadow
 export var map_side_size = 100
@@ -16,7 +17,7 @@ func _ready():
 		$VisitingCamera.global_position = spaceship.global_position
 		$VisitingCamera.current = true
 	else:
-		player.global_position = spaceship.global_position + Vector2(83,37)
+		player.global_position = (spaceship.global_position + Vector2(83,37))
 		send_ship()
 func set_up_terrain():
 	for tileX in map_side_size:
@@ -59,8 +60,27 @@ func send_ship():
 	tween.interpolate_property(ship_shadow,"scale",ship_shadow.scale,Vector2(0,0),6)
 	tween.start()
 	$ShipTimer.start()
+	print("ship leaving")
 func _on_ShipTimer_timeout():
 	tween.interpolate_property(ship_shadow,"global_position",ship_shadow.global_position,ship_shadow.global_position+Vector2(25*16,0),5)
 func _on_VisibilityNotifier2D_screen_exited():
 	spaceship.queue_free()
 	player.remove_cutscene(name)
+	print("ship end")
+
+onready var playerCam = $YSort/Player/Camera2D
+onready var animator = $AnimationPlayer
+func _on_LaserTimer_timeout():
+	print("Cam zoom" + str(playerCam.zoom))
+#	tween.interpolate_property(playerCam,"zoom",playerCam.zoom,Vector2(2,2),3)
+#	tween.start()
+	animator.play("CameraZoom")
+
+func _on_AnimationPlayer_animation_finished(_anim_name):
+	var scene_resource = load("res://MapUIs/InsideSystem/SystemMap.tscn")
+	var current_scene = scene_resource.instance()
+	var holder = current_scene.get_node("Holder")
+	holder.trigger_end = true
+	get_node("/root").add_child(current_scene)
+	holder.end_animation()
+	queue_free()

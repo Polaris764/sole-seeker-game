@@ -2,6 +2,7 @@ extends Node
 
 export (float) var harvest_duration = 3.5
 export (int) var max_health = 1 setget set_max_health
+export (int) var max_health_glass = 1 setget set_max_health
 export (int) var health = max_health setget set_health
 export var is_player = false
 

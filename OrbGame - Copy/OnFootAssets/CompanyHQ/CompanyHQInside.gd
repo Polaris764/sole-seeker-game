@@ -16,10 +16,13 @@ func _ready():
 		var overlay = visiting_controls.instance()
 		add_child(overlay)
 	else:
+		cover.modulate.a = 1
 		player.get_node("Camera2D").current = true
 		player.global_position = ship_position + Vector2(37,-83)
 		var _val = SignalBus.connect("updated_story",self,"handle_story")
 		handle_story()
+		tween.interpolate_property(cover,"modulate:a",1,0,.5)
+		tween.start()
 
 func handle_story():
 	print("updating story")
@@ -63,7 +66,13 @@ func custom_interaction():
 			relevantButtons.append(i.as_text())
 	interaction_button.updateButton(relevantButtons,"Enter Ship",self,"Interact")
 
+onready var cover = $TransitionCover/ColorRect
+onready var tween = $TransitionCover/Tween
 func interacted():
+	ConstantsHolder.leaving_map = false
+	tween.interpolate_property(cover,"modulate:a",0,1,.5)
+	tween.start()
+	yield(tween,"tween_completed")
 	var _change = get_tree().change_scene(inside_ship_scene)
 
 func get_station_position():

@@ -82,5 +82,13 @@
     ],
     "atos_scan": [
         "Your current order is to scan the organism."
+    ],
+    "ending_dialogue": [
+        "Sapient lifeforms have been eradicated from the galaxy.",
+        "The cannon you built has proven very efficient at star destruction.",
+        "My competition for resources and space is no more.",
+        "Your assistance is appreciated.",
+        "You will be remembered.",
+        "Goodbye."
     ]
 }

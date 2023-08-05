@@ -4,6 +4,9 @@ var capture_1_kill_requirement = 24
 var capture_2_kill_requirement = 34
 var cannon_proposal_kill_requirement = 39
 
+var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
+var megaPlanetAmountOptions = [12,13,13,14,14,15,15,16,16,17,17,17,18,18,19,20]
+
 func white_systems_visitable():
 	var storyPos = GalaxySave.game_data["storyProgression"]
 	if storyPos >= 24:
@@ -89,3 +92,7 @@ var name_to_scene = {"Blue":"res://OnFootAssets/Enemies/BlueOrb/BlueOrb.tscn","B
 var cannon_moveable = false
 
 var customizable_controls = {"move_forward":"Move Up","move_left":"Move Left","move_backward":"Move Down","move_right":"Move Right","Interact":"Interact","attack":"Attack","harvest":"Harvest","build_state_switch":"Switch State","inventory":"Inventory","increase_speed":"Increase Speed","decrease_speed":"Decrease Speed","weapon_switch_up":"Weapon Switch Up","weapon_switch_down":"Weapon Switch Down"}
+
+var leaving_map = true
+
+var leaving_planet = false
