@@ -4,6 +4,8 @@ var capture_1_kill_requirement = 24
 var capture_2_kill_requirement = 34
 var cannon_proposal_kill_requirement = 39
 
+var galaxy_size_var = 6 #1.3
+
 var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
 var megaPlanetAmountOptions = [12,13,13,14,14,15,15,16,16,17,17,17,18,18,19,20]
 
@@ -96,3 +98,10 @@ var customizable_controls = {"move_forward":"Move Up","move_left":"Move Left","m
 var leaving_map = true
 
 var leaving_planet = false
+
+func rotatePoint(point,angle,generator):
+	var px = point*galaxy_size_var
+
+	var qx = cos(angle) * (px) - sin(angle)*px
+	var qy = sin(angle) * (px) + cos(angle)*px
+	return Vector2(qx*generator.randf_range(1,1.5-(.3*(px/4000))),qy*generator.randf_range(.6,1.4))

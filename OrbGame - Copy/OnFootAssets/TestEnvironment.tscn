@@ -75,10 +75,6 @@ tile_data = PoolIntArray( -655356, 1, 0, -655354, 1, 0, -655352, 1, 0, -524288, 
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 30, 113 )
-testWorld = true
-
 [node name="RedOrb" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( -100, 304 )
 
@@ -86,7 +82,6 @@ position = Vector2( -100, 304 )
 position = Vector2( 208, -110 )
 
 [node name="ItemConverter" parent="YSort" instance=ExtResource( 7 )]
-player_node = NodePath("../Player")
 interaction_result = "Use Converter"
 
 [node name="PurpleEnemy" parent="YSort" instance=ExtResource( 13 )]
@@ -128,9 +123,12 @@ position = Vector2( -71, 100 )
 [node name="Round" parent="YSort" instance=ExtResource( 16 )]
 position = Vector2( 219, 102 )
 
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 30, 113 )
+testWorld = true
+
 [node name="BloodDeposit" parent="." instance=ExtResource( 8 )]
 position = Vector2( 32, 0 )
-player_node = NodePath("../YSort/Player")
 interaction_result = "Deposit"
 
 [node name="LaserWall" parent="." instance=ExtResource( 9 )]

@@ -4,11 +4,11 @@ onready var planet = preload("res://MapUIs/InsideSystem/PlanetHolder.tscn")
 onready var starSprite = $Star
 onready var starImage = preload("res://MapUIs/InsideSystem/starIcon.png")
 
-var starAmountOptions =[1,2]# [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,3,4]
+var starAmountOptions = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,3,4]
 var starType
 var star_initial_size = Vector2(5,5)
 func generatePlanetarySystem(seedUsed):
-	var keyedSeed = 1#pow(seedUsed,2)*cos(pow(seedUsed,3))
+	var keyedSeed = pow(seedUsed,2)*cos(pow(seedUsed,3))
 	seed(keyedSeed)
 	var planetAmount
 	if GalaxySave.game_data["gameModifications"]["megasystems"]:
@@ -133,12 +133,15 @@ func _on_StarArea_body_exited(_body):
 	$Star/Tween.call_deferred("start")
 
 func update_info_panel():
+	print(GalaxySave.game_data["bookmarkedStars"])
 	var pPlanetImage = get_node("../PlanetInfoHolder/Control/Holder/PlanetImage")
 	var pPlanetName = get_node("../PlanetInfoHolder/Control/Holder/PlanetName")
 	var pOrbTypes = get_node("../PlanetInfoHolder/Control/Holder/OrbTypes")
 	var pPlanetBiome = get_node("../PlanetInfoHolder/Control/Holder/BiomeType")
 	var pPlanetButton = get_node("../PlanetInfoHolder/Control/Holder/EnterButton")
+	var pBookmarkButton = get_node("../PlanetInfoHolder/Control/Holder/BookmarkButton")
 	pPlanetButton.visible = false
+	pBookmarkButton.visible = true
 	var rng2 = RandomNumberGenerator.new()
 	var keyedSeed = pow(GalaxySave.getLastStarClicked(),2)*cos(pow(GalaxySave.getLastStarClicked(),3))
 	seed(keyedSeed)
@@ -164,6 +167,14 @@ func update_info_panel():
 			star_temp = str(rng2.randi_range(8000,40000))
 	pOrbTypes.text = star_type
 	pPlanetBiome.text = "Surface Temp: " + star_temp + " Kelvin"
+	pPlanetButton.star = GalaxySave.getLastStarClickedName()
+	pPlanetButton.star_pos = GalaxySave.game_data["shipPosition"][0]
+	if GalaxySave.game_data["bookmarkedStars"].has(GalaxySave.getLastStarClickedName()) and GalaxySave.game_data["bookmarkedStars"][GalaxySave.getLastStarClickedName()] == GalaxySave.game_data["shipPosition"][0]:
+		pBookmarkButton.get_node("BLabel").text = "Unbookmark"
+		pPlanetButton.bookmarkable = false
+	else:
+		pPlanetButton.bookmarkable = true
+		pBookmarkButton.get_node("BLabel").text = "Bookmark"
 
 onready var camera = get_node("../SystemCamera")
 onready var tween = get_node("../CamTween")

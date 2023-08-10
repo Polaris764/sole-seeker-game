@@ -126,7 +126,7 @@ func spawn_blue():
 		planet.get_node("YSort").add_child(entity)
 func spawn_purple():
 	print("spawning purple")
-	var spawn_location_count = rng.randi_range(2,4)
+	var spawn_location_count = rng.randi_range(2,3)
 	for spawn in spawn_location_count:
 		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
 		var entity = purple_enemy.instance()

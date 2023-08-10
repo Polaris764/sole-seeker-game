@@ -7,11 +7,14 @@ onready var newgameUI = $NewGameUI
 onready var loadsaveUI = $LoadSave
 
 func _ready():
+	AudioManager.play_song(AudioManager.songs.rancor)
 	setup_custom_configs()
 	register_buttons()
 	change_screen(mainUI)
 	initialize_newGame_scene()
 
+func _exit_tree():
+	AudioManager.stop_song(AudioManager.songs.rancor)
 func register_buttons():
 	var buttons = get_tree().get_nodes_in_group("Buttons")
 	for button in buttons:

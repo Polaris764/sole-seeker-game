@@ -188,6 +188,7 @@ visible = false
 [node name="CamTween" type="Tween" parent="."]
 
 [node name="Clouds" parent="." instance=ExtResource( 9 )]
+visible = false
 
 [node name="GalaxyShader" type="CanvasLayer" parent="."]
 layer = -1

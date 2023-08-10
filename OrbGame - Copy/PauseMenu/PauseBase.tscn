@@ -6,6 +6,7 @@
 [ext_resource path="res://MainMenu/TitleUiTheme.tres" type="Theme" id=4]
 
 [node name="PauseBase" type="CanvasLayer"]
+layer = 3
 script = ExtResource( 3 )
 
 [node name="PauseBackground" type="TextureRect" parent="."]
@@ -14,27 +15,33 @@ margin_bottom = 600.0
 texture = ExtResource( 1 )
 expand = true
 
-[node name="Inventory" parent="." instance=ExtResource( 2 )]
+[node name="Inventory" parent="." groups=["change_buttons"] instance=ExtResource( 2 )]
 margin_left = 126.0
 margin_top = 71.0
 margin_right = 202.0
 margin_bottom = 94.0
 text = "Inventory"
 
-[node name="TravelLogs" parent="." instance=ExtResource( 2 )]
+[node name="TravelLogs" parent="." groups=["change_buttons"] instance=ExtResource( 2 )]
 margin_left = 111.0
 margin_top = 131.0
 margin_right = 200.0
 margin_bottom = 154.0
 text = "Travel Logs"
 
-[node name="EnemyHandbook" parent="." instance=ExtResource( 2 )]
+[node name="EnemyHandbook" parent="." groups=["change_buttons"] instance=ExtResource( 2 )]
 margin_left = 67.0
 margin_top = 201.0
 margin_right = 229.0
 margin_bottom = 224.0
 text = "Organism Handbook"
-clip_text = true
+
+[node name="Quit" parent="." groups=["change_buttons"] instance=ExtResource( 2 )]
+margin_left = 61.0
+margin_top = 274.0
+margin_right = 223.0
+margin_bottom = 297.0
+text = "Quit"
 
 [node name="CloseButton" parent="." instance=ExtResource( 2 )]
 margin_left = 37.0
@@ -57,4 +64,8 @@ text = "Menu Title"
 align = 1
 valign = 1
 
+[connection signal="pressed" from="Inventory" to="." method="_on_Inventory_pressed"]
+[connection signal="pressed" from="TravelLogs" to="." method="_on_TravelLogs_pressed"]
+[connection signal="pressed" from="EnemyHandbook" to="." method="_on_EnemyHandbook_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

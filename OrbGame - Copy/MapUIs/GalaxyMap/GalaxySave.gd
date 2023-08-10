@@ -43,7 +43,6 @@ func get_planet_building_data():
 		building_data[lastPlanetClicked] = {}
 	return building_data[lastPlanetClicked]
 
-
 # saving data
 func save_data():
 	var file = File.new()
@@ -76,7 +75,10 @@ func load_data():
 			"playerHealth" : PlayerStats.max_health,
 			"enemiesContacted": [],
 			"cannonPartsBought":{buildingTypes.CANNONBASE:false,buildingTypes.CANNONTURRET:false,buildingTypes.CANNONPOWER:false},
-			"cannonLocation": null
+			"cannonLocation": null,
+			"starsVisitedArray": [],
+			"starsVisitedDictionary": {},
+			"bookmarkedStars": {}
 		}
 		save_data()
 	file.open(SAVE_FILE_PATH + SAVE_FILE,File.READ)

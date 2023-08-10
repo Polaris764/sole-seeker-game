@@ -11,14 +11,7 @@ onready var camera = $GalaxyCamera
 export var biomes = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"green":[],"white":[]}
 export var biomes_collisions = {"blue":[],"red":[],"orange":[],"purple":[],"black":[],"green":[],"white":[]}
 
-export var galaxy_size_var : float = 6 #1.3
-
-func rotatePoint(point,angle):
-	var px = point*galaxy_size_var
-
-	var qx = cos(angle) * (px) - sin(angle)*px
-	var qy = sin(angle) * (px) + cos(angle)*px
-	return Vector2(qx*rand_range(1,1.5-(.3*(px/4000))),qy*rand_range(.6,1.4))
+onready var galaxy_size_var : float = ConstantsHolder.galaxy_size_var
 
 var Tinstance
 func _ready():
@@ -29,10 +22,11 @@ func _ready():
 	start()
 
 func start():
-	#seed(save_file.galaxySeed) # player's saved world seed
+	seed(save_file.galaxySeed) # player's saved world seed
 	set_biome_circle_origins()
 	set_biome_collisions()
-	
+	var rng = RandomNumberGenerator.new()
+	rng.seed = (save_file.galaxySeed)
 	for i in range(4000):
 		if i % 100 == 0: 
 			yield(get_tree(), "idle_frame")
@@ -41,8 +35,8 @@ func start():
 		# set its global_position to two random (float)
 		# values lying somewhere between 0 and 400
 		add_child(new_planet)
-		var radius = pow(rand_range(2, 100),2)*galaxy_size_var
-		var angle = rand_range(0, 2*PI)
+		var radius = pow(rng.randf_range(2, 100),2)*galaxy_size_var
+		var angle = rng.randf_range(0, 2*PI)
 		new_planet.global_position.x = (cos(angle)*radius)
 		new_planet.global_position.y = (sin(angle)*radius)
 		new_planet.system_type = determine_biome(Vector2(cos(angle)*radius,sin(angle)*radius))
@@ -56,17 +50,17 @@ func start():
 			for _x in range(20):
 				var new_planet = planet.instance()
 				add_child(new_planet)
-				var planet_pos = rotatePoint(i,i)
-				new_planet.global_position = Vector2(planet_pos.x,planet_pos.y).round()#planet_pos
+				var planet_pos = ConstantsHolder.rotatePoint(i,i,rng)
+				new_planet.global_position = Vector2(planet_pos.x,planet_pos.y)#planet_pos
 				new_planet.system_type = determine_biome(planet_pos)
 	add_companyHQ()
 	update_ship()
 	camera.current = true
+	AudioManager.play_song(AudioManager.songs.)
 	if Tinstance:
 		Tinstance.emit_signal("load_complete")
 	if trigger_ending:
 		ending_scene()
-	print("load complete")
 
 export var starsInside = []
 onready var rngMach = RandomNumberGenerator.new()

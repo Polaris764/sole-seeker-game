@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Audio/AudioManager.gd" type="Script" id=1]
+[ext_resource path="res://Audio/AudioFiles/bass.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Audio/AudioFiles/storm.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Audio/AudioFiles/array.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Audio/AudioFiles/forest.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Audio/AudioFiles/release.ogg" type="AudioStream" id=6]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Array" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Bass" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="Forest" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Storm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Release" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )

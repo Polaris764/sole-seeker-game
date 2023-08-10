@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rancor.ogg-a0362a57f62487ba7704cb79c1ddece7.oggstr"
+
+[deps]
+
+source_file="res://Audio/AudioFiles/rancor.ogg"
+dest_files=[ "res://.import/rancor.ogg-a0362a57f62487ba7704cb79c1ddece7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

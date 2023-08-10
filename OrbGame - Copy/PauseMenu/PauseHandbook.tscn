@@ -1,0 +1,128 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://PauseMenu/PauseBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://OnFootAssets/UI/CapturedComponents/RoundThumbnail.png" type="Texture" id=2]
+[ext_resource path="res://PauseMenu/OrganismButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MainMenu/UIButtonBase.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UIResources/LabelTheme.tres" type="Theme" id=5]
+[ext_resource path="res://OnFootAssets/UI/CapturedComponents/BlueThumbnail.png" type="Texture" id=6]
+[ext_resource path="res://OnFootAssets/UI/CapturedComponents/PurpleThumbnail.png" type="Texture" id=7]
+[ext_resource path="res://OnFootAssets/UI/CapturedComponents/RedThumbnail.png" type="Texture" id=8]
+[ext_resource path="res://OnFootAssets/UI/CapturedComponents/OrangeThumbnail.png" type="Texture" id=9]
+[ext_resource path="res://OnFootAssets/UI/CapturedComponents/BrownThumbnail.png" type="Texture" id=10]
+[ext_resource path="res://PauseMenu/PauseHandbook.gd" type="Script" id=11]
+
+[node name="PauseHandbook" instance=ExtResource( 1 )]
+script = ExtResource( 11 )
+
+[node name="MenuTitle" parent="VBoxContainer" index="0"]
+text = "Organism Handbook"
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer" index="1"]
+margin_top = 47.0
+margin_right = 600.0
+margin_bottom = 47.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 20
+columns = 4
+
+[node name="BlueOrb" parent="VBoxContainer/GridContainer" index="0" instance=ExtResource( 3 )]
+visible = false
+margin_right = 125.0
+margin_bottom = 125.0
+texture_normal = ExtResource( 6 )
+
+[node name="RedOrb" parent="VBoxContainer/GridContainer" index="1" instance=ExtResource( 3 )]
+visible = false
+margin_left = 145.0
+margin_right = 270.0
+margin_bottom = 125.0
+texture_normal = ExtResource( 8 )
+
+[node name="PurpleEnemy" parent="VBoxContainer/GridContainer" index="2" instance=ExtResource( 3 )]
+visible = false
+margin_left = 290.0
+margin_right = 415.0
+margin_bottom = 125.0
+texture_normal = ExtResource( 7 )
+
+[node name="OrangeEnemy" parent="VBoxContainer/GridContainer" index="3" instance=ExtResource( 3 )]
+visible = false
+margin_left = 435.0
+margin_right = 560.0
+margin_bottom = 125.0
+texture_normal = ExtResource( 9 )
+
+[node name="BrownEnemy" parent="VBoxContainer/GridContainer" index="4" instance=ExtResource( 3 )]
+visible = false
+margin_top = 145.0
+margin_right = 125.0
+margin_bottom = 270.0
+texture_normal = ExtResource( 10 )
+
+[node name="Round" parent="VBoxContainer/GridContainer" index="5" instance=ExtResource( 3 )]
+visible = false
+margin_left = 145.0
+margin_top = 145.0
+margin_right = 270.0
+margin_bottom = 270.0
+texture_normal = ExtResource( 2 )
+
+[node name="Research" type="Label" parent="VBoxContainer" index="2"]
+margin_top = 51.0
+margin_right = 600.0
+margin_bottom = 65.0
+text = "Perform Contact missions with organisms to unlock their entries."
+
+[node name="DescriptionContainer" type="VBoxContainer" parent="VBoxContainer" index="3"]
+visible = false
+margin_top = 321.0
+margin_right = 600.0
+margin_bottom = 554.0
+
+[node name="ImageHolder" type="Control" parent="VBoxContainer/DescriptionContainer" index="0"]
+margin_right = 600.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 0, 125 )
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/DescriptionContainer/ImageHolder" index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.5
+margin_top = -62.5
+margin_right = 62.5
+margin_bottom = 62.5
+rect_min_size = Vector2( 125, 125 )
+stretch_mode = 6
+
+[node name="oDesc" type="Label" parent="VBoxContainer/DescriptionContainer" index="1"]
+margin_top = 129.0
+margin_right = 600.0
+margin_bottom = 152.0
+theme = ExtResource( 5 )
+text = "Description holder"
+autowrap = true
+
+[node name="Strengths" type="Label" parent="VBoxContainer/DescriptionContainer" index="2"]
+margin_top = 156.0
+margin_right = 600.0
+margin_bottom = 179.0
+theme = ExtResource( 5 )
+text = "Description holder"
+
+[node name="Weaknesses" type="Label" parent="VBoxContainer/DescriptionContainer" index="3"]
+margin_top = 183.0
+margin_right = 600.0
+margin_bottom = 206.0
+theme = ExtResource( 5 )
+text = "Description holder"
+
+[node name="ReturnButton" parent="VBoxContainer/DescriptionContainer" index="4" instance=ExtResource( 4 )]
+margin_top = 210.0
+margin_right = 600.0
+margin_bottom = 233.0
+text = "Return"
+
+[connection signal="pressed" from="VBoxContainer/DescriptionContainer/ReturnButton" to="." method="_on_ReturnButton_pressed"]

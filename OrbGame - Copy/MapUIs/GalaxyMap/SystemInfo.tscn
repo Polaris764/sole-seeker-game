@@ -13,6 +13,7 @@
 layer = 2
 
 [node name="Control" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 224.0
 margin_bottom = 244.0
 

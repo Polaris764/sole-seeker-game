@@ -1,6 +1,17 @@
 extends Node2D
 
 func _ready():
+	seed(123)
+	var x = randi()
+	var y = rand_range(300,800)
+	var z = randi()
+	print(z)
+	seed(123)
+	var a = randi()
+	var b = rand_range(300,800)
+	var c = randi()
+	print(c)
+	
 	$YSort/Player.isInRoom = true
 
 func dictionary_merge(dict1,dict2):

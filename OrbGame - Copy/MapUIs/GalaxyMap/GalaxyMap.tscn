@@ -132,7 +132,6 @@ shader_param/iMouse = Vector2( 0, 0 )
 
 [node name="GalaxyMap" type="Node2D"]
 script = ExtResource( 1 )
-galaxy_size_var = 4.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 519, 252 )

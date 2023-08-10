@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/storm.ogg-8d9f799a24963b86f231eda34afd24d0.oggstr"
+
+[deps]
+
+source_file="res://Audio/AudioFiles/storm.ogg"
+dest_files=[ "res://.import/storm.ogg-8d9f799a24963b86f231eda34afd24d0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

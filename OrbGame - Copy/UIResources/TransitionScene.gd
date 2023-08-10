@@ -44,5 +44,4 @@ func _on_Tween_tween_completed(_object, _key):
 
 
 func _on_Timer2_timeout():
-	print("req met1")
 	self.req1 = true

@@ -14,6 +14,8 @@ func disappear():
 	emit_signal("disappearing")
 	var targets = get_tree().get_nodes_in_group("TransitionTarget")
 	for item in targets:
+#		if "disabled" in item:
+#			item.disabled = true
 		tween.interpolate_property(item,"rect_position:x",item.rect_position.x,-screen_edge,transition_duration,Tween.TRANS_CUBIC,Tween.EASE_IN,rng.randf_range(0,.5))
 		tween.start()
 	yield(tween,"tween_all_completed")
@@ -23,6 +25,8 @@ func appear():
 	emit_signal("appearing")
 	var targets = get_tree().get_nodes_in_group("TransitionTarget")
 	for item in targets:
+#		if "disabled" in item:
+#			item.disabled = false
 		item.rect_position.x = screen_edge
 		var target_position = 0
 		if "desired_position" in item:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://MapUIs/Planetside/Ship/Player.gd" type="Script" id=1]
 [ext_resource path="res://MapUIs/Planetside/Ship/SpaceshipV3.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://MapUIs/General/ShipParticles.tres" type="Material" id=4]
 [ext_resource path="res://MapUIs/GalaxyMap/SpeedParticle.png" type="Texture" id=5]
 [ext_resource path="res://MapUIs/Planetside/Ship/JetSmoke.png" type="Texture" id=6]
+[ext_resource path="res://PauseMenu/PauseHolder.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ParticlesMaterial" id=1]
 lifetime_randomness = 0.5
@@ -58,3 +59,5 @@ randomness = 1.0
 fixed_fps = 120
 process_material = SubResource( 1 )
 texture = ExtResource( 6 )
+
+[node name="PauseHolder" parent="." instance=ExtResource( 7 )]

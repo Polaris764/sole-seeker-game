@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://PauseMenu/PauseBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://PauseMenu/PauseTravel.gd" type="Script" id=2]
+[ext_resource path="res://MainMenu/MainUITheme.tres" type="Theme" id=3]
+[ext_resource path="res://MainMenu/MenuBG.webp" type="Texture" id=4]
+
+[node name="PauseTravel" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+zoom_max = 20.0
+zoom_min = 1.0
+
+[node name="VBoxContainer" parent="." index="6"]
+custom_constants/separation = 10
+
+[node name="MenuTitle" parent="VBoxContainer" index="0"]
+text = "Travel Logs"
+
+[node name="Container" type="Control" parent="VBoxContainer" index="1"]
+margin_top = 53.0
+margin_right = 600.0
+margin_bottom = 53.0
+
+[node name="GalaxyImageBorder" type="ColorRect" parent="VBoxContainer/Container" index="0"]
+margin_left = -5.0
+margin_top = -5.0
+margin_right = 355.0
+margin_bottom = 355.0
+rect_min_size = Vector2( 360, 360 )
+color = Color( 0.501961, 0, 0, 1 )
+
+[node name="StarsBox" type="VBoxContainer" parent="VBoxContainer/Container" index="1"]
+margin_left = 360.0
+margin_right = 585.0
+margin_bottom = 381.0
+
+[node name="VisitedBox" type="VBoxContainer" parent="VBoxContainer/Container/StarsBox" index="0"]
+margin_right = 225.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 225, 175 )
+
+[node name="Title" type="Label" parent="VBoxContainer/Container/StarsBox/VisitedBox" index="0"]
+margin_right = 225.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 225, 23 )
+theme = ExtResource( 3 )
+text = "Recently Visited"
+align = 1
+valign = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Container/StarsBox/VisitedBox" index="1"]
+margin_top = 27.0
+margin_right = 225.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 225, 175 )
+
+[node name="LocationHolder" type="VBoxContainer" parent="VBoxContainer/Container/StarsBox/VisitedBox/ScrollContainer" index="0"]
+margin_right = 225.0
+rect_min_size = Vector2( 225, 0 )
+
+[node name="BookmarkedBox" type="VBoxContainer" parent="VBoxContainer/Container/StarsBox" index="1"]
+margin_top = 206.0
+margin_right = 225.0
+margin_bottom = 381.0
+rect_min_size = Vector2( 225, 175 )
+
+[node name="Title" type="Label" parent="VBoxContainer/Container/StarsBox/BookmarkedBox" index="0"]
+margin_right = 225.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 225, 23 )
+theme = ExtResource( 3 )
+text = "Bookmarked"
+align = 1
+valign = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Container/StarsBox/BookmarkedBox" index="1"]
+margin_top = 27.0
+margin_right = 225.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 225, 125 )
+
+[node name="LocationHolder" type="VBoxContainer" parent="VBoxContainer/Container/StarsBox/BookmarkedBox/ScrollContainer" index="0"]
+margin_right = 225.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 225, 125 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/Container" index="2"]
+margin_right = 350.0
+margin_bottom = 350.0
+mouse_filter = 2
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="VBoxContainer/Container/ViewportContainer" index="0"]
+size = Vector2( 350, 350 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="GalaxyImage" type="TextureRect" parent="VBoxContainer/Container/ViewportContainer/Viewport" index="0"]
+margin_right = 350.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 350, 350 )
+mouse_filter = 2
+texture = ExtResource( 4 )
+expand = true
+
+[node name="CircleImage" type="TextureRect" parent="VBoxContainer/Container/ViewportContainer/Viewport" index="1"]
+margin_right = 350.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 350, 350 )
+mouse_filter = 2
+expand = true
+
+[node name="MouseDetection" type="TextureRect" parent="VBoxContainer/Container/ViewportContainer/Viewport" index="2"]
+margin_right = 350.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 350, 350 )
+expand = true
+
+[connection signal="mouse_entered" from="VBoxContainer/Container/ViewportContainer/Viewport/MouseDetection" to="." method="_on_MouseDetection_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/Container/ViewportContainer/Viewport/MouseDetection" to="." method="_on_MouseDetection_mouse_exited"]
