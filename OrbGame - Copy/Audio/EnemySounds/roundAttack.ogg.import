@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/roundAttack.ogg-3e538218e770039cc6e4becc7d06c9c3.oggstr"
+
+[deps]
+
+source_file="res://Audio/EnemySounds/roundAttack.ogg"
+dest_files=[ "res://.import/roundAttack.ogg-3e538218e770039cc6e4becc7d06c9c3.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Audio/AudioManager.gd" type="Script" id=1]
 [ext_resource path="res://Audio/AudioFiles/bass.ogg" type="AudioStream" id=2]
@@ -6,6 +6,17 @@
 [ext_resource path="res://Audio/AudioFiles/array.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Audio/AudioFiles/forest.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Audio/AudioFiles/release.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Audio/AudioFiles/preparation.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Audio/AudioFiles/found.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Audio/AudioFiles/unto.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Audio/AudioFiles/will.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Audio/AudioFiles/settled.ogg" type="AudioStream" id=11]
+[ext_resource path="res://Audio/AudioFiles/delusional.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Audio/AudioFiles/drifting.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Audio/AudioFiles/prey.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Audio/AudioFiles/abound.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Audio/AudioFiles/rest.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Audio/AudioFiles/home.ogg" type="AudioStream" id=18]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource( 1 )
@@ -24,3 +35,36 @@ stream = ExtResource( 3 )
 
 [node name="Release" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+
+[node name="abound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+
+[node name="delusional" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[node name="drifting" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
+[node name="rest" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[node name="found" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="prey" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[node name="preparation" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="settled" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="unto" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="will" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="home" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )

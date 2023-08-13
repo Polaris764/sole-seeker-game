@@ -170,7 +170,6 @@ func move_state():
 				weapon -= 1
 				if weapon < 0:
 					weapon = player_weapons.size()-1
-				print("going up")
 			BUILD:
 				current_building_type -= 1
 				if current_building_type < 0:
@@ -181,7 +180,6 @@ func move_state():
 				var mousepos = get_global_mouse_position()
 				var mousepos_floored = Vector2(floor(mousepos.x/tile_size)*tile_size, ceil(mousepos.y/tile_size)*tile_size)
 				update_guides(mousepos_floored)
-				print("going up")
 	
 	# building
 	if Input.is_action_just_pressed("build_state_switch"):
@@ -200,6 +198,7 @@ func move_state():
 	if Input.is_action_just_pressed("attack") and state == MOVE:
 		match weapon:
 			player_weapons.NEEDLE:
+				AudioManager.play_effect([AudioManager.effects.needle])
 				print("attack started")
 				$AttackTree.set("parameters/Seek/seek_position",0)
 				state = ATTACK
@@ -208,6 +207,7 @@ func move_state():
 				yield(get_tree().create_timer(.65), "timeout")
 				attack_animation_finished2()
 			player_weapons.NETGUN:
+				AudioManager.play_effect([AudioManager.effects.net])
 				print("attack started")
 				$NetgunTree.set("parameters/Seek/seek_position",0)
 				state = ATTACK
@@ -219,6 +219,7 @@ func move_state():
 				netgun_attack_animation_finished()
 				
 	elif Input.is_action_just_pressed("harvest") and state == MOVE:
+		AudioManager.play_effect([AudioManager.effects.needle])
 		print("harvest started")
 		state = ATTACK
 		weaponHitbox.harvesting_tool = true
@@ -231,13 +232,17 @@ func move_state():
 		state = HARVEST
 		harvest_check()
 
+var snow_footsteps = preload("res://Audio/Footsteps/snow_footsteps.wav")
+var ice_footsteps = preload("res://Audio/Footsteps/ground_footsteps.wav")
 func check_for_ice():
 	var grass_tilemap = get_node("../../Grass")
 	var playerPos = Vector2(grass_tilemap.world_to_map(global_position).x,grass_tilemap.world_to_map(global_position+Vector2(0,5)).y)
 	var playerPos2 = Vector2(grass_tilemap.world_to_map(global_position+Vector2(8,0)).x,grass_tilemap.world_to_map(global_position+Vector2(0,-2)).y)
 	if grass_tilemap.get_cell(playerPos.x,playerPos.y) == -1 or grass_tilemap.get_cell(playerPos2.x,playerPos2.y) == -1 :
+		footstepAudio.stream = ice_footsteps
 		return true
 	else:
+		footstepAudio.stream = snow_footsteps
 		return false
 
 func set_positions_of_animation_trees(target_velocity):
@@ -252,6 +257,16 @@ func set_positions_of_animation_trees(target_velocity):
 	$NetgunTree.set("parameters/NetgunAttack/blend_position",target_velocity)
 	$AttackTree.set("parameters/Attack/blend_position",target_velocity)
 	$DeathTree.set("parameters/blend_position",target_velocity)
+
+onready var footstepAudio = $FootstepAudio
+func play_footstep_sound():
+	var newPlayer = AudioStreamPlayer.new()
+	newPlayer.volume_db = footstepAudio.volume_db
+	newPlayer.pitch_scale = footstepAudio.pitch_scale
+	newPlayer.stream = footstepAudio.stream
+	add_child(newPlayer)
+	newPlayer.play()
+	newPlayer.connect("finished",newPlayer,"queue_free")
 	
 ## ATTACKING ##
 
@@ -273,7 +288,7 @@ func harvest_state():
 
 func harvest_check():
 	if not weaponHitbox.harvesting:
-		print("no target")
+		pass
 	else:
 		yield(get_tree().create_timer(weaponHitbox.harvest_wait_time), "timeout")
 	weaponHitbox.harvesting_tool = false
@@ -515,6 +530,7 @@ func build_state(_delta):
 	if Input.is_action_just_pressed("attack"):
 		var placing_block_location = Vector2(floor(mousepos.x/tile_size)*tile_size, ceil(mousepos.y/tile_size)*tile_size)
 		if can_afford_building():
+			AudioManager.play_effect([AudioManager.effects.placement1,AudioManager.effects.placement2,AudioManager.effects.placement3])
 			match current_building_type:
 				building_types.WALL:
 					if not current_building_type in planet_building_data:
@@ -638,6 +654,7 @@ func build_state(_delta):
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = []
 				if planet_building_data[current_building_type].has(mousepos_floored):
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					wall_tilemap.set_cell(mousepos_floored.x/tile_size,mousepos_floored.y/tile_size-1,-1)
 					wall_tilemap.update_bitmask_area(mousepos_floored/Vector2(tile_size,tile_size)-Vector2(0,1))
@@ -646,6 +663,7 @@ func build_state(_delta):
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = []
 				if planet_building_data[current_building_type].has(mousepos_floored):
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					floor_tilemap.set_cell(mousepos_floored.x/tile_size,mousepos_floored.y/tile_size-1,-1)
 					floor_tilemap.update_bitmask_area(mousepos_floored/Vector2(tile_size,tile_size)-Vector2(0,1))
@@ -654,6 +672,7 @@ func build_state(_delta):
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = {}
 				if planet_building_data[current_building_type].has(mousepos_floored):
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					planet_building_data[current_building_type][mousepos_floored] -= 1
 					var possible_landmines = get_tree().get_nodes_in_group("Landmines")
 					for candidate_landmine in possible_landmines:
@@ -664,6 +683,7 @@ func build_state(_delta):
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = {}
 				if planet_building_data[current_building_type].has(mousepos_floored):
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					var possible_caltrops = get_tree().get_nodes_in_group("Caltrops")
 					for candidate_caltrops in possible_caltrops:
@@ -674,6 +694,7 @@ func build_state(_delta):
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = {}
 				if planet_building_data[current_building_type].has(mousepos_floored):
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					var possible_lasers = get_tree().get_nodes_in_group("Lasers")
 					for candidate_lasers in possible_lasers:
@@ -684,6 +705,7 @@ func build_state(_delta):
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = []
 				if planet_building_data[current_building_type].has(mousepos_floored):
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					var possible_turrets = get_tree().get_nodes_in_group("Turrets")
 					for candidate_turrets in possible_turrets:
@@ -694,6 +716,7 @@ func build_state(_delta):
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = []
 				if planet_building_data[current_building_type].has(mousepos_floored):
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					var possible_capturers = get_tree().get_nodes_in_group("Capturers")
 					for candidate_capturers in possible_capturers:
@@ -706,6 +729,7 @@ func build_state(_delta):
 				if not building_types.CANNONTURRET in planet_building_data:
 						planet_building_data[building_types.CANNONTURRET] = []
 				if planet_building_data[current_building_type].has(mousepos_floored) and planet_building_data[building_types.CANNONTURRET].size() == 0:
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					planet_building_data[current_building_type].erase(mousepos_floored)
 					var possible_bases = get_tree().get_nodes_in_group("Cannon_Base")
 					for candidate_bases in possible_bases:
@@ -718,6 +742,7 @@ func build_state(_delta):
 				if not building_types.CANNONPOWER in planet_building_data:
 					planet_building_data[building_types.CANNONPOWER] = []
 				if planet_building_data[current_building_type].has(mousepos_floored):
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					if planet_building_data[building_types.CANNONPOWER].size() == 0:
 						planet_building_data[current_building_type].erase(mousepos_floored)
 						var possible_bases = get_tree().get_nodes_in_group("Cannon_Turret")
@@ -729,6 +754,7 @@ func build_state(_delta):
 				if not current_building_type in planet_building_data:
 						planet_building_data[current_building_type] = []
 				if planet_building_data[current_building_type].has(0) and ConstantsHolder.cannon_moveable:
+					AudioManager.play_effect([AudioManager.effects.breakage])
 					planet_building_data[current_building_type].erase(0)
 					var possible_bases = get_tree().get_nodes_in_group("Cannon_Power")
 					for candidate_bases in possible_bases:

@@ -15,6 +15,8 @@ onready var galaxy_size_var : float = ConstantsHolder.galaxy_size_var
 
 var Tinstance
 func _ready():
+	AudioManager.play_song([AudioManager.songs.delusional,AudioManager.songs.universe,AudioManager.songs.drifting],"galaxyMap")
+	AudioManager.stop_song("deepSpace")
 	if not trigger_ending:
 		var Tscene = preload("res://UIResources/TransitionScene.tscn")
 		Tinstance = Tscene.instance()
@@ -56,11 +58,14 @@ func start():
 	add_companyHQ()
 	update_ship()
 	camera.current = true
-	AudioManager.play_song(AudioManager.songs.)
 	if Tinstance:
 		Tinstance.emit_signal("load_complete")
 	if trigger_ending:
 		ending_scene()
+
+func _exit_tree():
+	print("STOPPING GALAXY MAP")
+	AudioManager.stop_song("galaxyMap")
 
 export var starsInside = []
 onready var rngMach = RandomNumberGenerator.new()

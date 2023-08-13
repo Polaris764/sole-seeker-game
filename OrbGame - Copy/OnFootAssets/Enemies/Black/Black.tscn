@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
+[ext_resource path="res://Audio/EnemySounds/black.wav" type="AudioStream" id=1]
 [ext_resource path="res://OnFootAssets/Stats.tscn" type="PackedScene" id=2]
 [ext_resource path="res://OnFootAssets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OnFootAssets/Enemies/WanderController.tscn" type="PackedScene" id=4]
@@ -132,6 +133,16 @@ shape = SubResource( 6 )
 visible = false
 position = Vector2( 0, -19 )
 shape = SubResource( 7 )
+
+[node name="blackAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
+max_distance = 150.0
+bus = "SoundEffects"
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0, -18.75 )
+scale = Vector2( 0.5, 0.375 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]

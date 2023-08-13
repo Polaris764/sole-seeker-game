@@ -15,6 +15,7 @@ func update_sprite(mine_count):
 
 func _on_Area2D_body_entered(_body):
 	yield(get_tree().create_timer(.2), "timeout")
+	AudioManager.play_effect([AudioManager.effects.mine],.5,global_position)
 	$Hitbox/CollisionShape2D.set_deferred("disabled",false)
 	$AnimatedSprite.visible = true
 	$AnimatedSprite.play("Explosion")

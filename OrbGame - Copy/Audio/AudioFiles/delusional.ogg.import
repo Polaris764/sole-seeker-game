@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/delusional.ogg-9a0dea673d4022429b5f568d96834ab9.oggstr"
+
+[deps]
+
+source_file="res://Audio/AudioFiles/delusional.ogg"
+dest_files=[ "res://.import/delusional.ogg-9a0dea673d4022429b5f568d96834ab9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://OnFootAssets/Player/Build/LaserWall.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/Player/Build/LaserWall.gd" type="Script" id=2]
 [ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://OnFootAssets/Assets/ColorChangeShader.tres" type="Material" id=4]
+[ext_resource path="res://Audio/SoundEffects/laserIdle.ogg" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 13.5, 4 )
@@ -75,6 +76,11 @@ collision_mask = 0
 position = Vector2( 8, 7 )
 rotation = 1.5708
 shape = SubResource( 6 )
+
+[node name="laserAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+max_distance = 150.0
+bus = "SoundEffects"
 
 [connection signal="damage_dealt" from="Hitbox" to="." method="_on_Hitbox_damage_dealt"]
 [connection signal="area_entered" from="Detector" to="." method="_on_Detector_area_entered"]

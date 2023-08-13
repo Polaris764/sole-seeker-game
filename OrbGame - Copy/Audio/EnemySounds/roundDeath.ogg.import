@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/roundDeath.ogg-a3bd316c7be4bacd7d76d99b2233ebe5.oggstr"
+
+[deps]
+
+source_file="res://Audio/EnemySounds/roundDeath.ogg"
+dest_files=[ "res://.import/roundDeath.ogg-a3bd316c7be4bacd7d76d99b2233ebe5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

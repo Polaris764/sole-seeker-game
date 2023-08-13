@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/blueIdle2.ogg-3f820001ef7fe094b044b4e25c46c754.oggstr"
+
+[deps]
+
+source_file="res://Audio/EnemySounds/blueIdle2.ogg"
+dest_files=[ "res://.import/blueIdle2.ogg-3f820001ef7fe094b044b4e25c46c754.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://OnFootAssets/InsideShip/InsideShip.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/InsideShip/FlightChair.png" type="Texture" id=2]
@@ -92,6 +92,10 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=3]
 radius = 26.0
 
+[sub_resource type="CapsuleShape2D" id=16]
+radius = 4.0
+height = 4.0
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 34, 36 )
 
@@ -169,7 +173,7 @@ frame = 3
 speed_scale = 2.0
 
 [node name="FlightChair" type="Node2D" parent="YSort"]
-position = Vector2( 88, 24 )
+position = Vector2( 88, 22 )
 script = ExtResource( 9 )
 
 [node name="Interactable" parent="YSort/FlightChair" instance=ExtResource( 6 )]
@@ -178,11 +182,22 @@ required_story_pos = 1
 optional_blacklist_pos = 8
 interaction_result = "Fly Ship"
 
+[node name="Area2D" parent="YSort/FlightChair/Interactable" index="0"]
+visible = false
+
 [node name="CollisionShape2D" parent="YSort/FlightChair/Interactable/Area2D" index="0"]
 shape = SubResource( 3 )
 
 [node name="Sprite" parent="YSort/FlightChair/Interactable" index="1"]
+position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="YSort/FlightChair"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/FlightChair/StaticBody2D"]
+position = Vector2( 0, -4 )
+rotation = 1.5708
+shape = SubResource( 16 )
 
 [node name="BloodDeposit" type="Node2D" parent="YSort"]
 position = Vector2( 38, 120 )
@@ -207,8 +222,12 @@ position = Vector2( -17, 18 )
 rotation = 1.5708
 shape = SubResource( 15 )
 
+[node name="Windshield" type="Sprite" parent="YSort"]
+position = Vector2( 88, -11 )
+texture = ExtResource( 15 )
+
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 85, 31 )
+position = Vector2( 58, 240 )
 isInRoom = true
 
 [node name="AnimationTree" parent="YSort/Player" index="2"]
@@ -223,10 +242,6 @@ cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 tile_data = PoolIntArray( -65532, 0, 1, -65531, 0, 196610, -65530, 0, 3, 3, 0, 1, 4, 0, 131075, 6, 0, 131073, 7, 0, 3, 65539, 0, 65536, 65543, 0, 65536, 131075, 0, 65536, 131079, 0, 65536, 196610, 0, 8, 196611, 0, 65543, 196615, 0, 65540, 196616, 0, 11, 262145, 0, 1, 262146, 0, 196613, 262147, 0, 196619, 262151, 0, 196616, 262152, 0, 196614, 262153, 0, 3, 327680, 0, 1, 327681, 0, 131075, 327689, 0, 131073, 327690, 0, 3, 393216, 0, 65536, 393226, 0, 65536, 458752, 0, 65536, 458762, 0, 65536, 524288, 0, 65536, 524298, 0, 65536, 589824, 0, 65536, 589834, 0, 65536, 655360, 0, 65536, 655370, 0, 65536, 720896, 0, 65536, 720906, 0, 65536, 786432, 0, 65536, 786442, 0, 65536, 851968, 0, 65536, 851978, 0, 65536, 917504, 0, 65536, 917514, 0, 65536, 983040, 0, 131073, 983041, 0, 196610, 983042, 0, 196610, 983043, 0, 196610, 983044, 0, 196610, 983045, 0, 196610, 983046, 0, 196610, 983047, 0, 196610, 983048, 0, 196610, 983049, 0, 196610, 983050, 0, 131075 )
-
-[node name="Windshield" type="Sprite" parent="."]
-position = Vector2( 88, -11 )
-texture = ExtResource( 15 )
 
 [node name="TransitionCover" type="CanvasLayer" parent="."]
 layer = 2

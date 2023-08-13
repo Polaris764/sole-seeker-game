@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/settled.ogg-6305bf014e965df413569e64c4318538.oggstr"
+
+[deps]
+
+source_file="res://Audio/AudioFiles/settled.ogg"
+dest_files=[ "res://.import/settled.ogg-6305bf014e965df413569e64c4318538.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

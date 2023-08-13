@@ -7,11 +7,15 @@ var third_layer_cap = .45
 var noiseImage
 
 func _ready():
+	AudioManager.play_song([AudioManager.songs.martian,AudioManager.songs.forest],"rust")
 	seed(GalaxySave.getLastPlanetClicked())
 	make_lowest_rust()
 	make_second_layer()
 	make_third_layer()
 	make_background()
+
+func _exit_tree():
+	AudioManager.stop_song("rust")
 
 func make_lowest_rust():
 	var crater_radii = [2,3,4,5,6,7,8]

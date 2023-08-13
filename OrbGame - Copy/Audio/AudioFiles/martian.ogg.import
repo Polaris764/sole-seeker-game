@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/martian.ogg-912b6c7db97c4584189febaeff3f8e63.oggstr"
+
+[deps]
+
+source_file="res://Audio/AudioFiles/martian.ogg"
+dest_files=[ "res://.import/martian.ogg-912b6c7db97c4584189febaeff3f8e63.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

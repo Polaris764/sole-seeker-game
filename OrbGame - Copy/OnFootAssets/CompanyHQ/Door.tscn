@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Door.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/Assets/Door.png" type="Texture" id=2]
+[ext_resource path="res://Audio/SoundEffects/slidingDoorOpen.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/SoundEffects/slidingDoorClose.wav" type="AudioStream" id=4]
 
 [node name="Door" type="Node2D"]
 script = ExtResource( 1 )
@@ -22,6 +24,17 @@ offset = Vector2( 0, -10 )
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+
+[node name="doorOpenAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 15.0
+pitch_scale = 0.8
+max_distance = 150.0
+bus = "SoundEffects"
+
+[node name="doorCloseAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+bus = "SoundEffects"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

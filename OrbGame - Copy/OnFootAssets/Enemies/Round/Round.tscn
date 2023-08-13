@@ -575,9 +575,18 @@ shape = SubResource( 4 )
 visible = false
 shape = SubResource( 1 )
 
+[node name="roundAudio" type="AudioStreamPlayer2D" parent="."]
+max_distance = 200.0
+bus = "SoundEffects"
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 3.8147e-06, 2.86102e-06 )
+scale = Vector2( 7.75, 8 )
+
 [connection signal="frame_changed" from="Body0/Eye0" to="Body0/Eye0" method="_on_Eye0_frame_changed"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="damage_dealt" from="Hitbox" to="." method="_on_Hitbox_damage_dealt"]
 
 [editable path="PlayerDetectionZone"]
 [editable path="SoftCollision"]

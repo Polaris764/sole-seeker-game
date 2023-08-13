@@ -11,6 +11,7 @@ var max_speed_unit
 export (int) var travel_distance_squared = 250000
 onready var speed_overlay = $FlightUIOverlay/Holder/VBoxContainer/SpeedLabel
 onready var overlay = $FlightUIOverlay
+onready var shipAudio = $shipAudio
 enum location {
 	Galaxy,
 	System,
@@ -37,6 +38,7 @@ func _ready():
 	else:
 		turn_divisor = 140
 		max_speed_unit = max_speed_in_lightseconds
+
 func _physics_process(delta):
 	if functional:
 		overlay.visible = true
@@ -56,6 +58,7 @@ func _physics_process(delta):
 
 		velocity += acc * delta
 		current_speed_var = clamp(velocity.length() + 50,0,speed)
+		shipAudio.pitch_scale = current_speed_var/500
 		rotation += rotation_dir * rotation_speed * delta
 		speed_particles.process_material.angle = -rotation_degrees
 

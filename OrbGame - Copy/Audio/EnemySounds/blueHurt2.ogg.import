@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/blueHurt2.ogg-735352203f4190599a16bfa747292c1a.oggstr"
+
+[deps]
+
+source_file="res://Audio/EnemySounds/blueHurt2.ogg"
+dest_files=[ "res://.import/blueHurt2.ogg-735352203f4190599a16bfa747292c1a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

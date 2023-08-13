@@ -10,6 +10,8 @@ onready var landed_cam = $Spaceship/LandedCam
 var visiting_controls = preload("res://MapUIs/General/FlightUIOverlay.tscn")
 
 func _ready():
+	AudioManager.play_song([AudioManager.songs.release],"station")
+	player.get_node("FootstepAudio").stream = load("res://Audio/Footsteps/tile_footsteps.wav")
 	if GalaxySave.game_data["shipPosition"][6]:
 		player.queue_free()
 		landed_cam.current = true
@@ -24,6 +26,8 @@ func _ready():
 		tween.interpolate_property(cover,"modulate:a",1,0,.5)
 		tween.start()
 
+func _exit_tree():
+	AudioManager.stop_song("station")
 func handle_story():
 	print("updating story")
 	storyPos = GalaxySave["game_data"]["storyProgression"]

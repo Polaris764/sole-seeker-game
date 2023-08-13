@@ -24,8 +24,12 @@ var ship_dir = [Vector2(2,0),Vector2(2,1),Vector2(2,-1),Vector2(2,-2),Vector2(2,
 				Vector2(6,0),Vector2(6,1),Vector2(6,-1),Vector2(6,-2),Vector2(6,-3),Vector2(6,-4)]
 
 func _ready():
+	AudioManager.play_song([AudioManager.songs.abound,AudioManager.songs.settled],"marsh")
 	seed(GalaxySave.getLastPlanetClicked())
 	make_map()
+
+func _exit_tree():
+	AudioManager.stop_song("marsh")
 	
 func make_map():
 	for x in range (-10, current_map_size.x+10):

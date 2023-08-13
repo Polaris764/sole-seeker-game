@@ -72,6 +72,10 @@ func _physics_process(_delta):
 	if playerDetectionZone.can_see_player():
 		if state == IDLE:
 			state = CHASE
+			if audio:
+				if not audio.playing:
+					audio.stream = audioTracks["idle"]
+					audio.play()
 			animator.play("Agro")
 			attackT.start(rand_range(attack_min,attack_max))
 	else:
@@ -86,6 +90,9 @@ func _on_AttackCountdown_timeout():
 
 func attack():
 	queued_attack = false
+	if audio:
+		audio.stream = audioTracks["attack"]
+		audio.play()
 	if global_position.x > player.global_position.x:
 		animator.play("AttackLeft")
 	else:
@@ -95,6 +102,9 @@ func attack():
 func attack_animation_ended():
 	if state == CHASE:
 		animator.play("Aggressive")
+		if audio:
+			audio.stream = audioTracks["idle"]
+			audio.play()
 	else:
 		animator.play_backwards("Agro")
 func agg_animation_ended():
@@ -111,7 +121,6 @@ var harvest_area = null
 func _on_Hurtbox_area_entered(area): # needle entered hitbox
 	if stats.health > 0: # if still alive
 		stats.health -= area.damage
-		print(stats.health)
 		hurtbox.create_hit_effect()
 	elif area.harvesting_tool == true: # harvest
 		area.harvesting = true
@@ -126,6 +135,7 @@ func _on_Stats_no_health():
 func death_animation():
 	state = DEAD
 	animator.stop()
+	audio.queue_free()
 	$Hitbox.queue_free()
 	var _tween = $Sprite/DeathTween
 	GalaxySave.game_data["individualKills"]["green"] += 1
@@ -148,3 +158,11 @@ var trapped_speeds = []
 signal organism_trapped
 func entity_trapped(_var1,_var2):
 	emit_signal("organism_trapped")
+
+# Audio #
+
+onready var audio = $purpleAudio
+var audioTracks = {
+"idle":preload("res://Audio/EnemySounds/greenIdle.wav"),
+"attack":preload("res://Audio/EnemySounds/greenAttack.wav")
+}

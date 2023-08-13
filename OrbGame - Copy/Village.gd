@@ -5,10 +5,13 @@ export var player : NodePath
 onready var playerNode = get_node(player)
 var bullet = preload("res://OnFootAssets/Village/VillageBullet.tscn")
 func _ready():
+	AudioManager.play_song([AudioManager.songs.rest],"village")
 	GalaxySave.game_data["shipPosition"][4] = ConstantsHolder.ship_locations.STATION
 	GalaxySave.game_data["shipPosition"][2] = -2
 	set_up_terrain()
 	start_events()
+func _exit_tree():
+	AudioManager.stop_song("village")
 onready var grass = $Grass
 onready var fenceLength = $YSort/FenceLength
 onready var fenceWidth = $YSort/FenceWidth
@@ -53,6 +56,7 @@ func _on_BulletTimer_timeout():
 
 func shoot_bullet():
 	var bullet_instance = bullet.instance()
+	AudioManager.play_effect([AudioManager.effects.turret])
 	add_child(bullet_instance)
 	bullet_instance.player = player
 	if playerNode.global_position.y > homing_bullets_line:

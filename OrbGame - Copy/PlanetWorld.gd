@@ -9,7 +9,7 @@ var environment_caps = Vector3(.4,.3,.04)
 var noiseImage
 
 func _ready():
-	
+	AudioManager.play_song([AudioManager.songs.array,AudioManager.songs.red,AudioManager.songs.rancor],"volcanic")
 	seed(GalaxySave.getLastPlanetClicked())
 	noise = OpenSimplexNoise.new()
 	noise.seed = randi()
@@ -21,6 +21,9 @@ func _ready():
 	make_grass_map()
 	make_background()
 	#make_road_map()
+
+func _exit_tree():
+	AudioManager.stop_song("volcanic")
 
 var lowestA = 1
 func make_grass_map():

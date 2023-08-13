@@ -26,9 +26,9 @@ func _physics_process(_delta):
 			if reloadTimer.is_stopped():
 				shoot()
 
+onready var audioPlayer = $turretAudio
 func shoot():
-	print("PEW")
-	
+	audioPlayer.play()
 	if BULLET:
 		var bullet: Node2D = BULLET.instance()
 		bullet.target = current_target.get_ref().global_position

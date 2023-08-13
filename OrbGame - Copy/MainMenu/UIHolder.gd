@@ -7,14 +7,14 @@ onready var newgameUI = $NewGameUI
 onready var loadsaveUI = $LoadSave
 
 func _ready():
-	AudioManager.play_song(AudioManager.songs.rancor)
+	AudioManager.play_song([AudioManager.songs.preparation],"mainMenu")
 	setup_custom_configs()
 	register_buttons()
 	change_screen(mainUI)
 	initialize_newGame_scene()
 
 func _exit_tree():
-	AudioManager.stop_song(AudioManager.songs.rancor)
+	AudioManager.stop_song("mainMenu")
 func register_buttons():
 	var buttons = get_tree().get_nodes_in_group("Buttons")
 	for button in buttons:
@@ -30,6 +30,7 @@ func change_screen(new_screen = null):
 		yield(current_screen.tween,"tween_all_completed")
 
 func on_button_pressed(name):
+	AudioManager.play_effect([AudioManager.effects.menuClick])
 	match name:
 		# Main Buttons
 		"LoadSaveButton":

@@ -2,6 +2,7 @@ extends Node2D
 
 onready var animator = $AnimationPlayer
 onready var zap_animator = $AnimatedSprite
+onready var aPlayer = $capturerAudio
 var target
 
 func _ready():
@@ -11,6 +12,7 @@ func _on_Range_body_entered(body):
 	target = body
 	zap_animator.visible = true
 	zap_animator.play("default")
+	aPlayer.play()
 
 func destroy_self():
 	var data = GalaxySave.get_planet_building_data()

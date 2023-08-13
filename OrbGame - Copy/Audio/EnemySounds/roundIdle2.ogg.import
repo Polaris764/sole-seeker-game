@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/roundIdle2.ogg-49d69cd593d96e5c44240f5520ae876d.oggstr"
+
+[deps]
+
+source_file="res://Audio/EnemySounds/roundIdle2.ogg"
+dest_files=[ "res://.import/roundIdle2.ogg-49d69cd593d96e5c44240f5520ae876d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

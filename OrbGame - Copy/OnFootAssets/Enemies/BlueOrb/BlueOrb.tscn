@@ -336,6 +336,12 @@ active = true
 parameters/playback = SubResource( 17 )
 parameters/Move/blend_position = Vector2( 0, 0 )
 
+[node name="blueAudio" type="AudioStreamPlayer2D" parent="."]
+max_distance = 150.0
+bus = "SoundEffects"
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="frame_changed" from="Sprite0" to="Sprite0" method="_on_Sprite0_frame_changed"]
 [connection signal="frame_changed" from="Sprite0/Sprite1" to="Sprite0/Sprite1" method="_on_Sprite0_frame_changed"]
 [connection signal="frame_changed" from="Sprite0/Sprite2" to="Sprite0/Sprite2" method="_on_Sprite0_frame_changed"]
@@ -347,6 +353,7 @@ parameters/Move/blend_position = Vector2( 0, 0 )
 [connection signal="frame_changed" from="Sprite0/Sprite8" to="Sprite0/Sprite8" method="_on_Sprite0_frame_changed"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="damage_dealt" from="Hitbox" to="." method="_on_Hitbox_damage_dealt"]
 
 [editable path="Hurtbox"]
 [editable path="PlayerDetectionZone"]

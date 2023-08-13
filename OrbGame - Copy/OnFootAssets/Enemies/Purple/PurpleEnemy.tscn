@@ -608,6 +608,10 @@ hframes = 2
 texture = ExtResource( 5 )
 hframes = 2
 
+[node name="purpleAudio" type="AudioStreamPlayer2D" parent="."]
+max_distance = 150.0
+bus = "SoundEffects"
+
 [connection signal="frame_changed" from="Sprite0" to="Sprite0" method="_on_Sprite0_frame_changed"]
 [connection signal="frame_changed" from="Sprite0/Sprite2" to="Sprite0/Sprite2" method="_on_Sprite0_frame_changed"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

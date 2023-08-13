@@ -73,6 +73,21 @@ func create_planet():
 		add_child(overlay)
 		overlay.get_node("Holder/VBoxContainer/SpeedLabel").text = ""
 	else:
+		var footsteps = player.get_node("FootstepAudio")
+		match chosen_planet_type:
+			WetWorld:
+				player.slipperyGround = true
+				footsteps.stream = load("res://Audio/Footsteps/wet_footsteps.wav")
+			MarshWorld:
+				footsteps.stream = load("res://Audio/Footsteps/grass_footsteps.wav")
+			VolcanicWorld:
+				footsteps.stream = load("res://Audio/Footsteps/rock_footsteps.wav")
+			DesertWorld:
+				footsteps.stream = load("res://Audio/Footsteps/sand_footsteps.wav")
+			RustWorld:
+				footsteps.stream = load("res://Audio/Footsteps/ground_footsteps.wav")
+			FrozenWorld:
+				footsteps.stream = load("res://Audio/Footsteps/snow_footsteps.wav")
 		player.global_position = ship_position + Vector2(83,37)
 		var locator = player.get_node("UI/LocationMarker")
 		locator.target_pos = ship_position
@@ -80,8 +95,6 @@ func create_planet():
 		cover.modulate.a = 1
 		tween.interpolate_property(cover,"modulate:a",1,0,.5)
 		tween.start()
-		if chosen_planet_type == WetWorld:
-			player.slipperyGround = true
 
 var red_enemy = preload("res://OnFootAssets/Enemies/RedOrb/RedOrb.tscn")
 var blue_enemy = preload("res://OnFootAssets/Enemies/BlueOrb/BlueOrb.tscn")
@@ -115,7 +128,10 @@ func spawn_red():
 		for unit in group_size:
 			var entity = red_enemy.instance()
 			entity.global_position = location
-			planet.get_node("YSort").add_child(entity)
+			if entity.get_node("VisibilityNotifier2D").is_on_screen():
+				entity.queue_free()
+			else:
+				planet.get_node("YSort").add_child(entity)
 func spawn_blue():
 	print("spawning blue")
 	var spawn_location_count = rng.randi_range(10,20)
@@ -123,7 +139,10 @@ func spawn_blue():
 		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
 		var entity = blue_enemy.instance()
 		entity.global_position = location
-		planet.get_node("YSort").add_child(entity)
+		if entity.get_node("VisibilityNotifier2D").is_on_screen():
+			entity.queue_free()
+		else:
+			planet.get_node("YSort").add_child(entity)
 func spawn_purple():
 	print("spawning purple")
 	var spawn_location_count = rng.randi_range(2,3)
@@ -131,7 +150,10 @@ func spawn_purple():
 		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
 		var entity = purple_enemy.instance()
 		entity.global_position = location
-		planet.get_node("YSort").add_child(entity)
+		if entity.get_node("VisibilityNotifier2D").is_on_screen():
+			entity.queue_free()
+		else:
+			planet.get_node("YSort").add_child(entity)
 func spawn_orange():
 	print("spawning orange")
 	var spawn_location_count = rng.randi_range(5,15)
@@ -139,17 +161,26 @@ func spawn_orange():
 		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
 		var entity = orange_enemy.instance()
 		entity.global_position = location
-		planet.get_node("YSort").add_child(entity)
+		if entity.get_node("VisibilityNotifier2D").is_on_screen():
+			entity.queue_free()
+		else:
+			planet.get_node("YSort").add_child(entity)
+var black_spawned = 0
 func spawn_black():
 	print("spawning black")
-	var spawn_location_count = rng.randi_range(10,20)
-	for spawn in spawn_location_count:
-		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
-		var group_size = rng.randi_range(8,16)
-		for unit in group_size:
-			var entity = black_enemy.instance()
-			entity.global_position = location
-			planet.get_node("YSort").add_child(entity)
+	if black_spawned < 2:
+		black_spawned += 1
+		var spawn_location_count = rng.randi_range(10,20)
+		for spawn in spawn_location_count:
+			var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
+			var group_size = rng.randi_range(8,16)
+			for unit in group_size:
+				var entity = black_enemy.instance()
+				entity.global_position = location
+				if entity.get_node("VisibilityNotifier2D").is_on_screen():
+					entity.queue_free()
+				else:
+					planet.get_node("YSort").add_child(entity)
 func spawn_green():
 	print("spawning green")
 	var spawn_location_count = rng.randi_range(30,40)
@@ -160,3 +191,16 @@ func spawn_green():
 			var entity = green_enemy.instance()
 			entity.global_position = location
 			planet.get_node("YSort").add_child(entity)
+func count_enemies():
+	var ysorter = planet.get_node("YSort")
+	var children = ysorter.get_children()
+	for i in children:
+		if "Black" in i.name:
+			children.erase(i)
+		elif not i is KinematicBody2D:
+			children.erase(i)
+	return children.size()-1
+
+func _on_SpawnTimer_timeout():
+	if count_enemies() < 45:
+		spawn_enemies()

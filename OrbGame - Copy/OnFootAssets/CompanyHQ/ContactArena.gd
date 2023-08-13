@@ -14,8 +14,11 @@ var contact_over = false
 
 var current_order
 func _ready():
+	AudioManager.play_song(AudioManager.songs.contact)
 	setup_organism()
 	create_order()
+func _exit_tree():
+	AudioManager.stop_song(AudioManager.songs.contact)
 
 func setup_organism():
 	var organism_scene = load(ConstantsHolder.name_to_scene[ConstantsHolder.file_to_name[contact_organism_file]])

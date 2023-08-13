@@ -7,6 +7,8 @@ onready var sprite = $Body/Sprite
 onready var tween = $Tween
 onready var static_body = $Body
 onready var area = $Area2D
+onready var openAudio = $doorOpenAudio
+onready var closeAudio = $doorCloseAudio
 var origin_pos = Vector2.ZERO
 var coll_origin_pos = Vector2.ZERO
 var dupe_origin_pos = Vector2.ZERO
@@ -32,6 +34,7 @@ func _on_Area2D_body_entered(body):
 
 func open():
 	if not locked:
+		openAudio.play(1.5)
 		tween.stop_all()
 		if orientation == "vertical":
 			tween.interpolate_property(self, "position", self.position, origin_pos + Vector2(0,56), 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
@@ -44,6 +47,8 @@ func open():
 		tween.start()
 
 func close():
+	if self.position != origin_pos:
+		closeAudio.play(2.5)
 	tween.stop_all()
 	tween.interpolate_property(self, "position", self.position, origin_pos + Vector2(0,0), 1)
 	tween.interpolate_property(dupe, "position", dupe.position, dupe_origin_pos + Vector2(0,0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN)

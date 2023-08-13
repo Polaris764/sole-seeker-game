@@ -77,6 +77,7 @@ func _on_AttackCountdown_timeout():
 func attack():
 	queued_attack = false
 	animator.play("Attack")
+	play_audio(["attack"])
 	attackT.start(rand_range(attack_min,attack_max))
 
 func attack_animation_ended():
@@ -105,6 +106,7 @@ func _on_Stats_no_health():
 func death_animation():
 	state = DEAD
 	animator.stop()
+	play_audio(["death"])
 	GalaxySave.game_data["individualKills"]["orange"] += 1
 
 func completed_harvest():
@@ -144,3 +146,21 @@ signal organism_trapped
 var trapped_speeds = []
 func entity_trapped(_one,_two):
 	emit_signal("organism_trapped")
+
+# Audio #
+
+onready var audio = $orangeAudio
+var audioTracks = {"attack":preload("res://Audio/EnemySounds/orangeSpit.wav"),
+"death":preload("res://Audio/EnemySounds/orangeDeath.wav"),
+"idle1":preload("res://Audio/EnemySounds/orangleIdle1.wav"),
+"idle2":preload("res://Audio/EnemySounds/orangeIdle2.wav")
+}
+func play_audio(tracks:Array):
+	if not audio.playing:
+		var track = tracks[randi()%tracks.size()]
+		audio.stream = audioTracks[track]
+		audio.play()
+onready var sTimer = $SoundTimer
+func _on_SoundTimer_timeout():
+	play_audio(["idle1","idle2"])
+	sTimer.start(rand_range(5,15))

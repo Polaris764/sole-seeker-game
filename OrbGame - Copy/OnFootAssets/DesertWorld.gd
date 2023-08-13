@@ -7,8 +7,12 @@ var astar_map
 onready var rng = RandomNumberGenerator.new()
 
 func _ready():
+	AudioManager.play_song([AudioManager.songs.will,AudioManager.songs.dry],"desert")
 	rng.seed = (GalaxySave.getLastPlanetClicked())
 	make_map()
+
+func _exit_tree():
+	AudioManager.stop_song("desert")
 
 func make_map():
 	

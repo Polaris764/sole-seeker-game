@@ -29,6 +29,7 @@ func _process(delta):
 
 func _on_Timer_timeout():
 	yield(get_tree().create_timer(.7), "timeout")
+	AudioManager.play_effect([AudioManager.effects.supersonic])
 	if direction:
 		speed = 150
 		JEffect.emitting = false

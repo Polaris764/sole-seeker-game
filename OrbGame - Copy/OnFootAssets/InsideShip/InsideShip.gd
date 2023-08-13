@@ -8,6 +8,8 @@ onready var cover = $TransitionCover/ColorRect
 onready var tween = $TransitionCover/Tween
 
 func _ready():
+	AudioManager.play_song([AudioManager.songs.storm],"insideShip")
+	player.get_node("FootstepAudio").stream = load("res://Audio/Footsteps/tile_footsteps.wav")
 	var storyPos = GalaxySave.game_data["storyProgression"]
 	respawner.get_node("Interactable").required_story_pos = 999
 	if storyPos < 5:
@@ -37,10 +39,14 @@ func _ready():
 			tween.start()
 	ConstantsHolder.leaving_map = true
 
+func _exit_tree():
+	AudioManager.stop_song("insideShip")
+
 func start_tour():
 	signalBus.emit_signal("display_announcement","ship_tour1")
 
 func respawn_player():
+	AudioManager.play_effect([AudioManager.effects.respawn])
 	player.set_positions_of_animation_trees(Vector2(0,1))
 	ConstantsHolder.respawning = false
 	player.add_collision_exception_with(respawner.get_node("StaticBody2D"))

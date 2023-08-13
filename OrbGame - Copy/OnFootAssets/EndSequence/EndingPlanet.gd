@@ -11,6 +11,7 @@ export var map_side_size = 100
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	AudioManager.play_song([AudioManager.songs.rest],"endPlanet")
 	set_up_terrain()
 	if GalaxySave.game_data["shipPosition"][6]:
 		player.queue_free()
@@ -19,6 +20,9 @@ func _ready():
 	else:
 		player.global_position = (spaceship.global_position + Vector2(83,37))
 		send_ship()
+
+func _exit_tree():
+	AudioManager.stop_song("endPlanet")
 func set_up_terrain():
 	for tileX in map_side_size:
 		for tileY in map_side_size:

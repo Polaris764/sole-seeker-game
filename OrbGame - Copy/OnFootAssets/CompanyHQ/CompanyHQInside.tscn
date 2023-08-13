@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://OnFootAssets/Assets/floor2.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=2]
@@ -23,6 +23,9 @@
 [ext_resource path="res://OnFootAssets/CompanyHQ/CaptureMachine.gd" type="Script" id=21]
 [ext_resource path="res://OnFootAssets/Assets/CaptureMachineResize.png" type="Texture" id=22]
 [ext_resource path="res://OnFootAssets/Assets/FuelMachine.png" type="Texture" id=23]
+[ext_resource path="res://Audio/SoundEffects/healMachine.wav" type="AudioStream" id=24]
+[ext_resource path="res://Audio/SoundEffects/pump.wav" type="AudioStream" id=25]
+[ext_resource path="res://OnFootAssets/CompanyHQ/hangerShield.png" type="Texture" id=26]
 
 [sub_resource type="TileSet" id=1]
 0/name = "floor2.png 0"
@@ -817,6 +820,9 @@ extents = Vector2( 33, 15 )
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 37, 32.5 )
 
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 124.5, 10 )
+
 [node name="CompanyHQInside" type="Node2D"]
 script = ExtResource( 9 )
 playerPath = NodePath("YSort/Player")
@@ -904,6 +910,11 @@ shape = SubResource( 20 )
 
 [node name="Position2D2" type="Position2D" parent="YSort/HealStation"]
 position = Vector2( 0, 7 )
+
+[node name="HealAudio" type="AudioStreamPlayer" parent="YSort/HealStation"]
+stream = ExtResource( 24 )
+pitch_scale = 0.93
+bus = "SoundEffects"
 
 [node name="TrainingBot" parent="YSort" instance=ExtResource( 16 )]
 position = Vector2( -83, -435 )
@@ -1100,6 +1111,13 @@ anims/RESET = SubResource( 30 )
 position = Vector2( -39, -6 )
 shape = SubResource( 31 )
 
+[node name="fuelAudio" type="AudioStreamPlayer2D" parent="YSort/FuelMachine"]
+position = Vector2( -40, -16 )
+stream = ExtResource( 25 )
+autoplay = true
+max_distance = 150.0
+bus = "SoundEffects"
+
 [node name="Shadow" type="Sprite" parent="."]
 position = Vector2( 80, -121 )
 rotation = -1.5708
@@ -1157,6 +1175,18 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Tween" type="Tween" parent="TransitionCover"]
+
+[node name="Shield" type="StaticBody2D" parent="."]
+position = Vector2( 0, -4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield"]
+visible = false
+position = Vector2( 80, 35 )
+shape = SubResource( 32 )
+
+[node name="Sprite" type="Sprite" parent="Shield"]
+position = Vector2( 80, -156 )
+texture = ExtResource( 26 )
 
 [connection signal="interacted_with" from="YSort/HealStation/Interactable" to="YSort/HealStation" method="_on_Interactable_interacted_with"]
 [connection signal="timeout" from="YSort/HealStation/HealTimer" to="YSort/HealStation" method="_on_HealTimer_timeout"]

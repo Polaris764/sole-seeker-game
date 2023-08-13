@@ -127,8 +127,6 @@ func set_enter_button_text(accessible):
 func get_system_type(first_star):
 	var type_to_use = first_star.system_type
 	var system_type_text : String = "System Type: Error"
-	print("SYSTEM TYPE: " + get_node("../SystemInfo/Control/Holder/StarName").text)
-	print(type_to_use)
 	if type_to_use.size() > 0:
 		system_type_text = "System Type: " + array_join(type_to_use)
 	else:

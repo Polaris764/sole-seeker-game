@@ -8,7 +8,11 @@ var wet_cap = .4
 # Generate high and low areas
 # seperate high area into mossy and clear
 
+onready var wetAudio = $wetAudio
+
 func _ready():
+	wetAudio.play()
+	AudioManager.play_song([AudioManager.songs.unto,AudioManager.songs.chant],"wet")
 	var rain = load("res://OnFootAssets/RainParticles.tscn").instance()
 	$YSort/Player/Camera2D.add_child(rain)
 	$Fog/Fog.rect_size = Vector2(16,16)*(map_size+Vector2(40,40))
@@ -19,6 +23,10 @@ func _ready():
 	make_lower_map()
 	make_upper_map()
 	refine_upper_map()
+
+func _exit_tree():
+	AudioManager.stop_song("wet")
+	wetAudio.stop()
 
 func make_lower_map():
 	for x in range(map_size.x):

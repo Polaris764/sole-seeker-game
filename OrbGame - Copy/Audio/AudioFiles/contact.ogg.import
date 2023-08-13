@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/contact.ogg-2f8102453bdc833f29d93046d257074f.oggstr"
+
+[deps]
+
+source_file="res://Audio/AudioFiles/contact.ogg"
+dest_files=[ "res://.import/contact.ogg-2f8102453bdc833f29d93046d257074f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

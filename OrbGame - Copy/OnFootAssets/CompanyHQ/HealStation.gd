@@ -9,7 +9,7 @@ onready var heal_pos = $Position2D
 onready var exit_pos = $Position2D2
 var process_starting = false
 onready var backup_cam = get_node("../../BackupCamera")
-
+onready var audioPlayer = $HealAudio
 func _ready():
 	sprite.frame = 0
 
@@ -26,13 +26,13 @@ func healing():
 	animationPlayer.play_backwards("DoorsOpen")
 	player.z_index = 1
 	sprite.z_index = 2
-	print("timestart")
+	audioPlayer.play()
 
 func _on_HealTimer_timeout():
-	print("timeout")
 	process_starting = false
 	animationPlayer.play("DoorsOpen")
 	PlayerStats.health = PlayerStats.max_health
+	audioPlayer.stop()
 
 func on_animation_end():
 	if not process_starting:

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/spaceship.ogg-bd7ce85a78df1cad36405f60404a347f.oggstr"
+
+[deps]
+
+source_file="res://Audio/SoundEffects/spaceship.ogg"
+dest_files=[ "res://.import/spaceship.ogg-bd7ce85a78df1cad36405f60404a347f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

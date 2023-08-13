@@ -158,13 +158,15 @@ func seek_player():
 
 func pick_random_state(state_list):
 	state_list.shuffle()
+	play_audio(["idle1","idle2"])
 	return state_list.pop_front()
 
 var harvest_area = null
 func _on_Hurtbox_area_entered(area): # needle entered hitbox
 	if stats.health > 0: # if still alive
 		stats.health -= area.damage
-		print(stats.health)
+		if stats.health > 0:
+			play_audio(["hurt1","hurt2"])
 		knockback = area.knockback_vector * 30
 		hurtbox.create_hit_effect()
 	elif area.harvesting_tool == true: # harvest
@@ -179,6 +181,7 @@ func _on_Stats_no_health():
 
 func death_animation():
 	state = DEAD
+	play_audio(["death"])
 	$Hitbox.queue_free()
 	GalaxySave.game_data["individualKills"]["purple"] += 1
 	$AnimationPlayer.play_backwards("Agro")
@@ -240,3 +243,23 @@ func entity_trapped(duration,speed):
 	add_child(timer)
 	timer.wait_time = duration
 	timer.start()
+
+# Audio #
+
+onready var audio = $roundAudio
+var audioTracks = {"agro":preload("res://Audio/EnemySounds/roundAggro.ogg"),
+"attack":preload("res://Audio/EnemySounds/roundAttack.ogg"),
+"death":preload("res://Audio/EnemySounds/roundDeath.ogg"),
+"hurt1":preload("res://Audio/EnemySounds/roundHurt1.wav"),
+"hurt2":preload("res://Audio/EnemySounds/roundHurt2.wav"),
+"idle1":preload("res://Audio/EnemySounds/roundIdle1.ogg"),
+"idle2":preload("res://Audio/EnemySounds/roundIdle2.ogg")
+}
+func play_audio(tracks:Array):
+	if not audio.playing:
+		var track = tracks[randi()%tracks.size()]
+		audio.stream = audioTracks[track]
+		audio.play()
+
+func _on_Hitbox_damage_dealt():
+	play_audio(["hurt1","hurt2"])

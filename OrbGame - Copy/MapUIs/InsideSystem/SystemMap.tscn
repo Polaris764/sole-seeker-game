@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://MapUIs/InsideSystem/Holder.gd" type="Script" id=1]
 [ext_resource path="res://MapUIs/InsideSystem/closeupStar.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://OnFootAssets/EndSequence/Clouds.tscn" type="PackedScene" id=9]
 [ext_resource path="res://OnFootAssets/Player/Build/Bullet.png" type="Texture" id=10]
 [ext_resource path="res://UIResources/TransitionScene.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Audio/SoundEffects/star.wav" type="AudioStream" id=12]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 8 )
@@ -170,6 +171,13 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="Holder/Star"]
+
+[node name="starAudio" type="AudioStreamPlayer2D" parent="Holder/Star"]
+stream = ExtResource( 12 )
+volume_db = 8.0
+autoplay = true
+max_distance = 200.0
+bus = "SoundEffects"
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 250, 250 )

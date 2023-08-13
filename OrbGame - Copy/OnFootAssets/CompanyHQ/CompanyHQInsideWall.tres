@@ -287,7 +287,7 @@ points = PoolVector2Array( 4, 46, 4, 42, 0, 42, 0, 34, 4, 34, 4, 30, 16, 30, 16,
 [resource]
 0/name = "StationWall.png 0"
 0/texture = ExtResource( 1 )
-0/tex_offset = Vector2( 0, -30 )
+0/tex_offset = Vector2( 0, -34 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 768, 736 )
 0/tile_mode = 1
@@ -300,7 +300,7 @@ points = PoolVector2Array( 4, 46, 4, 42, 0, 42, 0, 34, 4, 34, 4, 30, 16, 30, 16,
 0/autotile/navpoly_map = [  ]
 0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, -30 )
+0/occluder_offset = Vector2( 0, -34 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )

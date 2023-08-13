@@ -23,6 +23,7 @@ func _ready():
 		i.connect("pressed",self,"oButtonPressed",[i.name])
 
 func oButtonPressed(buttonName):
+	AudioManager.play_effect([AudioManager.effects.pauseClick])
 	oImage.texture = load(organism_images[buttonName])
 	oDesc.text = organism_descriptions[buttonName]
 	oStr.text = "Strengths: " + organism_strengths[buttonName]
@@ -33,6 +34,7 @@ func oButtonPressed(buttonName):
 	notif.hide()
 
 func _on_ReturnButton_pressed():
+	AudioManager.play_effect([AudioManager.effects.pauseClick])
 	oButtonHolder.show()
 	descHolder.hide()
 	notif.show()

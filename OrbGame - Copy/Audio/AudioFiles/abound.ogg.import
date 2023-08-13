@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/abound.ogg-e57fb24e88804baaa2f3a85f6197675d.oggstr"
+
+[deps]
+
+source_file="res://Audio/AudioFiles/abound.ogg"
+dest_files=[ "res://.import/abound.ogg-e57fb24e88804baaa2f3a85f6197675d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

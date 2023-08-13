@@ -17,6 +17,7 @@ func _ready():
 
 func activate(_value):
 	active = true
+	$RobotAudio.play()
 	velocity = Vector2(1,0)
 	if timer:
 		timer.start(initial_time)
@@ -59,6 +60,7 @@ func _on_Stats_no_health():
 	smoke_sprite.visible = true
 	smoke_sprite.play("default")
 	animator.queue_free()
+	$RobotAudio.stop()
 
 func entity_trapped(duration,_speed):
 	speed_of_travel = movement_speed_used*.02

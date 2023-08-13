@@ -154,6 +154,7 @@ func pick_random_state(state_list):
 func jump_started():
 	current_max_speed = MAX_SPEED
 	midjump = true
+	play_audio(["attack"])
 func jump_ended():
 	current_max_speed = 0
 	midjump = false
@@ -225,3 +226,15 @@ func _on_ExplodeSprite_animation_finished():
 
 func _on_Hitbox_damage_dealt():
 	$Hitbox.queue_free()
+
+# Audio #
+
+onready var audio = $blueAudio
+var audioTracks = {"jump":preload("res://Audio/EnemySounds/brownJump.ogg"),
+"attack":preload("res://Audio/EnemySounds/brownAttack.wav")
+}
+func play_audio(tracks:Array):
+	if not audio.playing:
+		var track = tracks[randi()%tracks.size()]
+		audio.stream = audioTracks[track]
+		audio.play()

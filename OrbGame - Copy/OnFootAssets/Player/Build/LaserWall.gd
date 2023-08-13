@@ -64,6 +64,7 @@ func set_items_to_alignment_and_status():
 			$Sprite.frame = 3
 
 func _on_Hitbox_damage_dealt():
+	AudioManager.play_effect([AudioManager.effects.laserZap],0,global_position)
 	self.active = false
 
 func laser_repaired():

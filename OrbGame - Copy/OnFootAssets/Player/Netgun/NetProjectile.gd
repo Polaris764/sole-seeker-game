@@ -40,8 +40,12 @@ func _on_Lifetime_timeout():
 	live = false
 	explode()
 
+var exploded = false
 func explode():
-	set_physics_process(false)
-	$NetSprite.visible = true
-	$ProjectileSprite.visible = false
-	#queue_free()
+	if not exploded:
+		exploded = true
+		AudioManager.play_effect([AudioManager.effects.unfurl],0,global_position)
+		set_physics_process(false)
+		$NetSprite.visible = true
+		$ProjectileSprite.visible = false
+		#queue_free()

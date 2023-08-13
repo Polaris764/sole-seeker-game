@@ -62,7 +62,7 @@ func load_data():
 		game_data = {
 			"galaxySeed": randi(),
 			"gameModifications": {"megasystems":false,"glassCannon":false,"speedDemon":false,"populationBoom":false,"agingGalaxy":false,"fuelEfficient":false},
-			"playerLocation": {"scene":"res://MapUIs/GalaxyMap/GalaxyMap.tscn","position":null},
+			"playerLocation": {"scene":"res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn","position":null},
 			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
@@ -160,6 +160,7 @@ func set_ship_speed(speed,entering_specific_area = false):
 			shipLocation.SPACEZOOMED:
 				var _change = get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
 			shipLocation.PLANET:
+				print("inside ship")
 				GalaxySave.game_data["shipPosition"][6] = false
 				var _change = get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
 			shipLocation.STATION:

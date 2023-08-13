@@ -79,9 +79,12 @@ func _ready():
 	if not trigger_end:
 		player.functional = true
 		transScene.emit_signal("load_complete")
+		AudioManager.play_song([AudioManager.songs.delusional,AudioManager.songs.universe,AudioManager.songs.drifting],"systemMap")
 	else:
 		transScene.queue_free()
 
+func _exit_tree():
+	AudioManager.stop_song("systemMap")
 # star handling
 var rng = RandomNumberGenerator.new()
 onready var flare_timer = $Star/FlareTimer
@@ -205,6 +208,7 @@ onready var sTween = get_node("../ShipTween")
 var planetTarget
 func _on_EnterButton_entering_planet():
 	player.functional = false
+	AudioManager.play_effect([AudioManager.effects.landing])
 	planetTarget = get_children()[GalaxySave.game_data["shipPosition"][7]].get_node("Planet/PlanetImage")
 	sTween.interpolate_property(player,"scale",player.scale,Vector2(.1,.1),2)
 	sTween.start()

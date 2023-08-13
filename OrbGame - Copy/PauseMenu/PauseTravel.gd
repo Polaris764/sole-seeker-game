@@ -82,7 +82,7 @@ func fill_bookmarks():
 
 onready var cImage = $VBoxContainer/Container/ViewportContainer/Viewport/CircleImage
 func circle_star(pos):
-	print("creating circle")
+	AudioManager.play_effect([AudioManager.effects.pauseClick])
 	var img  = Image.new()
 	img.create(1080,1080,false,Image.FORMAT_RGBA8)
 	img.lock()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://TrainingBot.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/SoftCollision.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hurtbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://OnFootAssets/CompanyHQ/TrainingBotSmoke.png" type="Texture" id=6]
 [ext_resource path="res://OnFootAssets/CompanyHQ/TrainingBotGlass.png" type="Texture" id=7]
+[ext_resource path="res://Audio/SoundEffects/robot.wav" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -350,6 +351,12 @@ frames = SubResource( 24 )
 [node name="Glass" type="AnimatedSprite" parent="."]
 frames = SubResource( 31 )
 flip_h = true
+
+[node name="RobotAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+pitch_scale = 0.5
+max_distance = 150.0
+bus = "SoundEffects"
 
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="MovementTimer" to="." method="_on_MovementTimer_timeout"]

@@ -8,11 +8,15 @@ var noiseImage
 
 func _ready():
 	$YSort/Player.frozenPlanet = true
+	AudioManager.play_song([AudioManager.songs.prey,AudioManager.songs.onwards],"frozen")
 	seed(GalaxySave.getLastPlanetClicked())
 	make_grass_map()
 	make_snow_map()
 	make_background()
 	get_node("..").ship_position = find_ship_pos()
+
+func _exit_tree():
+	AudioManager.stop_song("frozen")
 
 var lowestA = 1
 func make_grass_map():
