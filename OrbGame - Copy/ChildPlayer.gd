@@ -69,3 +69,13 @@ func health_changed(value):
 
 func _on_HealthTimer_timeout():
 	self.health = 3-health
+
+onready var footstepAudio = $FootstepAudio
+func play_footstep_sound():
+	var newPlayer = AudioStreamPlayer.new()
+	newPlayer.volume_db = footstepAudio.volume_db
+	newPlayer.pitch_scale = footstepAudio.pitch_scale
+	newPlayer.stream = footstepAudio.stream
+	add_child(newPlayer)
+	newPlayer.play()
+	newPlayer.connect("finished",newPlayer,"queue_free")

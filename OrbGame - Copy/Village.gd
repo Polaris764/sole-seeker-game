@@ -46,6 +46,7 @@ onready var bullet_positions = [$BulletOrigin1,$BulletOrigin2]
 func _on_BulletTimer_timeout():
 	$BulletTimer.start(randf()/2)
 	if event_stage > 1: # shooting has started
+		AudioManager.play_effect([AudioManager.effects.turret],0,null,-8)
 		shoot_bullet()
 		shoot_bullet()
 		shoot_bullet()
@@ -56,7 +57,6 @@ func _on_BulletTimer_timeout():
 
 func shoot_bullet():
 	var bullet_instance = bullet.instance()
-	AudioManager.play_effect([AudioManager.effects.turret])
 	add_child(bullet_instance)
 	bullet_instance.player = player
 	if playerNode.global_position.y > homing_bullets_line:
@@ -71,7 +71,7 @@ export var shooting_start_time = 30
 export var blackout_time = 30
 onready var event_timer = $EventTimer
 onready var playerCam = $ChildPlayerCamera
-onready var villagers = $Villagers.get_children()
+onready var villagers = get_tree().get_nodes_in_group("Villager")
 
 func start_events():
 	event_timer.start(shooting_start_time)
@@ -90,4 +90,3 @@ func _on_EventTimer_timeout():
 	elif event_stage == 2:
 		print("blackout")
 		var _change = get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")
-		

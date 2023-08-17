@@ -56,7 +56,13 @@ func update_story_from_atos():
 	var storyPos = GalaxySave.game_data["storyProgression"]
 	print("story position = ")
 	print(storyPos)
-	if storyPos == 2:
+	if storyPos == 0:
+		GalaxySave.game_data["storyProgression"] = 1
+		SignalBus.emit_signal("updated_story")
+	elif storyPos == 1:
+		GalaxySave.game_data["storyProgression"] = 2
+		SignalBus.emit_signal("updated_story")
+	elif storyPos == 2:
 		GalaxySave.game_data["storyProgression"] = 3
 		SignalBus.emit_signal("updated_story")
 	elif storyPos == 21:

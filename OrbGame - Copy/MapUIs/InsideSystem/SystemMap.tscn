@@ -7,14 +7,37 @@
 [ext_resource path="res://MapUIs/InsideSystem/PlanetInfoHolder.tscn" type="PackedScene" id=5]
 [ext_resource path="res://MapUIs/InsideSystem/GeneralSunParticleMaterial.tres" type="Material" id=6]
 [ext_resource path="res://MapUIs/InsideSystem/sunFlareMaterial.tres" type="Material" id=7]
-[ext_resource path="res://MapUIs/InsideSystem/ColorShaderScript.tres" type="Shader" id=8]
 [ext_resource path="res://OnFootAssets/EndSequence/Clouds.tscn" type="PackedScene" id=9]
 [ext_resource path="res://OnFootAssets/Player/Build/Bullet.png" type="Texture" id=10]
 [ext_resource path="res://UIResources/TransitionScene.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Audio/SoundEffects/star.wav" type="AudioStream" id=12]
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 8 )
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+
+// Which color you want to change
+uniform vec4 u_color_key : hint_color;
+// Which color to replace it with
+uniform vec4 u_replacement_color : hint_color;
+// How much tolerance for the replacement color (between 0 and 1)
+uniform float u_tolerance;
+
+void fragment() {
+    // Get color from the sprite texture at the current pixel we are rendering
+    vec4 original_color = texture(TEXTURE, UV);
+    vec3 col = original_color.rgb;
+    // Get a rough degree of difference between the texture color and the color key
+    vec3 diff3 = col - u_color_key.rgb;
+    float m = max(max(abs(diff3.r), abs(diff3.g)), abs(diff3.b));
+    // Change color of pixels below tolerance threshold, while keeping shades if any (a bit naive, there may better ways)
+    float brightness = length(col);
+    col = mix(col, u_replacement_color.rgb * brightness, step(m, u_tolerance));
+    // Assign final color for the pixel, and preserve transparency
+    COLOR = vec4(col.rgb, original_color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
 shader_param/u_color_key = Color( 0.72549, 0.0666667, 0.0823529, 1 )
 shader_param/u_replacement_color = Color( 0.152941, 1, 0.00392157, 1 )
 shader_param/u_tolerance = 0.4
@@ -138,7 +161,7 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="Star" type="Sprite" parent="Holder"]
-material = SubResource( 2 )
+material = SubResource( 10 )
 scale = Vector2( 5, 5 )
 texture = ExtResource( 2 )
 

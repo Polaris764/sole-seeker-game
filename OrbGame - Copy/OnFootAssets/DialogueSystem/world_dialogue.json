@@ -1,28 +1,61 @@
 {
-    "villager1": [
-        "Hello player."
+    "Villager1": [
+        "It's a beautiful day! Why don't you go run around a bit?",
+        "Maybe some of our friends could use a helping hand."
+    ],
+    "Villager2": [
+        "Hey, tell your father I could use some spare firewood for tonight.",
+        "I promise I'll return the favor sometime."
+    ],
+    "Villager3": [
+        "Watch out kid. I know you're still young but it's a dangerous world out there.",
+        "Unrelatedly, I like your shirt! You should bring me one like it some day."
+    ],
+    "Villager4": [
+        "You know, I've never seen any living thing outside of this village.",
+        "Makes me wonder why we have these walls in the first place."
+    ],
+    "Villager5": [
+        "I'm taking a gathering trip out in a little while.",
+        "I'll tell you all about it when we get back, I promise!"
+    ],
+    "Villager6": [
+        "We should plant some stuff inside of these walls. I'm tired of all this grass!",
+        "And a tree blocking my view of *that* house would be nice too...",
+        "Maybe you can help me with that once you're older."
+    ],
+    "Villager7": [
+        "Not now, I'm busy thinking."
+    ],
+    "atos0": [
+        "I'm pleased that you're awake. I am ATOS.",
+        "I watched your village's invasion from afar and managed to save you shortly after you blacked out.",
+        "It was a terrible tragedy. You have my condolences.",
+        "You may feel a bit different. I took the liberty of 'upgrading' your body.",
+        "Your new, permanent, suit will make you more durable than before.",
+        "Next time a village is invaded, you won't be sitting on the sidelines.",
+        "You may explore your new home. Find me when you are ready for more."
     ],
     "atos1": [
-        "Good morning Player.",
-        "Are you prepared for your first extrastation excursion today?",
-        "Leaving the station for the first time may seem big to you, but I assure you it is simply on stepping stone in your quest for vengeance.",
-        "Please warm up in the training room, then I will be honored to show you around your very own ship."
+        "The northmost room is your training room.",
+        "I have set up a bot for you to practice using your suit on."
     ],
     "atos2": [
         "Welcome again to your capability training.",
-        "I insist your body is ready before I allow you to enter the spaceship.",
+        "I insist your body is ready before I allow you to enter the spaceship I have provided for you.",
         "Your impending journey is dangerous. I care for your wellbeing."
     ],
     "atos3": [
-        "Are you prepared, Player?",
+        "Are you prepared?",
         "First, shoot the robot with your net launcher to immobilize it.",
-        "Next, stab the robot. Just as you have always done.",
-        "When it is incapacitated. You may harvest it."
+        "Next, stab the robot. The weapon is embedded in your suit.",
+        "When it is incapacitated. You may harvest it. Your weapon doubles as a syringe."
     ],
     "atos4": [
-        "Very well done Player.",
+        "Very well done.",
         "When you have mentally readied yourself, board your spaceship.",
-        "Remember your practices over the past years. Do not be overwhelmed at this experience."
+        "Stay strong. Think about saving your village.",
+        "Additionally: never attempt to visit white organisms."
     ],
     "atos5": [
         "Take this opportunity to get aquainted with your new permissions."
@@ -31,11 +64,12 @@
         "I have unlocked the exchange area for your use.",
         "You may purchase building supplies in this area, which can you can use on planets you explore.",
         "Purchasing items will add the items to your inventory, while removing corresponding essence amounts.",
-        "Despite any foreign bases you may build, you will always have a home here."
+        "Despite any foreign bases you may build, you will always have a home here.",
+        "Remember, you need me. To defeat whomever attacked your village."
     ],
     "atos12": [
         "You have been prepared to explore on your own.",
-        "Go and do not disappoint."
+        "Grow stronger so that you can defeat our enemies."
     ],
     "atos13": [
         "Welcome back. Please feel free to use all amenities at your disposal."
@@ -46,8 +80,8 @@
         "I will be waiting."
     ],
     "atos15": [
-        "I hope you are using your resources to their fullest potential.",
-        "Some of them can be hard to come by."
+        "White organisms are the only ones that pose a threat to my - our - power.",
+        "Don't fret. It won't stay that way."
     ],
     "atos16": [
         "I have big plans for you. Continue doing well."
@@ -68,8 +102,8 @@
     "atos23": [
         "Thank you for setting up my weapon of mass destruction.",
         "With it, I will be able to completely wipe out white organisms from existence.",
-        "First, you will need to visit one of the planets for yourself.",
-        "The mission cannot be complete without this vital step."
+        "Before activation, I need you to perform ground reconnaissance on one of their planets.",
+        "It is necessary for the plan to be fully executed, along with my enemies."
     ],
     "atos_stab": [
         "Your current order is to stab the organism."
@@ -84,11 +118,11 @@
         "Your current order is to scan the organism."
     ],
     "ending_dialogue": [
-        "Sapient lifeforms have been eradicated from the galaxy.",
-        "The cannon you built has proven very efficient at star destruction.",
-        "My competition for resources and space is no more.",
-        "Your assistance is appreciated.",
+        "Sophisticated lifeforms have been eradicated from the galaxy.",
+        "The cannon you built has proven very efficient at planet destruction.",
         "You will be remembered.",
+        "Once a threat. Now eliminated.",
+        "I hope you understand why this was necessary.",
         "Goodbye."
     ]
 }

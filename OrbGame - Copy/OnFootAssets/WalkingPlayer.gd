@@ -891,6 +891,7 @@ func on_death():
 		# respawn at respawner with effect
 		ConstantsHolder.respawning = true
 		PlayerStats.health = PlayerStats.max_health
+		yield(get_tree().create_timer(2.0), "timeout")
 		var _change = get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
 		GalaxySave.save_data()
 		

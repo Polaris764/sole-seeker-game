@@ -62,14 +62,14 @@ func load_data():
 		game_data = {
 			"galaxySeed": randi(),
 			"gameModifications": {"megasystems":false,"glassCannon":false,"speedDemon":false,"populationBoom":false,"agingGalaxy":false,"fuelEfficient":false},
-			"playerLocation": {"scene":"res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn","position":null},
+			"playerLocation": {"scene":"res://OnFootAssets/Village/Village.tscn","position":null},
 			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
-			"storedBuildings": {buildingTypes.WALL:10,buildingTypes.FLOOR:10,buildingTypes.TURRET:10,buildingTypes.CALTROPS:10,buildingTypes.LANDMINE:10,buildingTypes.LASER:10,buildingTypes.CAPTURER:10,buildingTypes.CANNONBASE:1,buildingTypes.CANNONTURRET:1,buildingTypes.CANNONPOWER:1},
+			"storedBuildings": {buildingTypes.WALL:0,buildingTypes.FLOOR:0,buildingTypes.TURRET:0,buildingTypes.CALTROPS:0,buildingTypes.LANDMINE:0,buildingTypes.LASER:0,buildingTypes.CAPTURER:0,buildingTypes.CANNONBASE:0,buildingTypes.CANNONTURRET:0,buildingTypes.CANNONPOWER:0},
 			"capturedEnemies": [],#["BlueOrb","BrownEnemy","Round"],
 			"shipPosition": [Vector2.ZERO,Vector2.ZERO,0,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
-			"storyProgression": 24,
+			"storyProgression": 0,
 			"totalKills" : 0,
 			"individualKills" : {"black":0,"blue":0,"brown":0,"orange":0,"green":0,"red":0,"purple":0},
 			"playerHealth" : PlayerStats.max_health,

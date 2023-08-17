@@ -1,24 +1,24 @@
 {
     "entered_training_room": [
-        "You've now entered the training room. I will close the doors behind you."
+        "ATOS: You've now entered the training room. I will close the doors behind you."
     ],
     "completed_tutorial": [
-        "Very good. You may enter your ship once you're ready."
+        "ATOS: Very good. You may enter your ship once you're ready."
     ],
     "ship_tour1": [
-        "This ship is now yours to command. I'll tell you about each area as you visit it."
+        "ATOS: This ship is now yours to command. I'll tell you about each area as you visit it."
     ],
     "ship_tour_deposit": [
-        "Deposit essence you've gathered planetside here. This provides safe storage, ensuring you won't lose it when you die."
+        "ATOS: Deposit essence you've gathered planetside here. This provides safe storage, ensuring you won't lose it when you die."
     ],
     "ship_tour_chair": [
-        "This is the chair you can use to pilot your ship. I will end the tour once you use it."
+        "ATOS: This is the chair you can use to pilot your ship. I will end the tour once you use it."
     ],
     "ship_tour_door": [
-        "Exit your ship through here. I'm sure you're familiar with doors."
+        "ATOS: Exit your ship through here. I'm sure you're familiar with doors."
     ],
     "ship_tour_respawner":[
-        "This machine will reconstruct your body back at full health upon death."
+        "ATOS: This machine will reconstruct your body back at full health upon death."
     ],
     "first_ship_powered": [
         "Ship: Ship powered. Increase speed to travel between star systems."
@@ -42,7 +42,7 @@
         "Ship: Speak to ATOS for further instruction."
     ],
     "request_capture1": [
-        "I need a live sample of an organism. Please fabricate a capturer at the Exchange Terminal and capture a blue organism. Naturally, I will reward you upon return."
+        "ATOS: I need a live sample of an organism. Please fabricate a capturer at the Exchange Terminal and capture a blue organism. Naturally, I will reward you upon return."
     ],
     "contact_order_stab": [
         "Current Order: Stab"
@@ -57,6 +57,6 @@
         "Current Order: Scan"
     ],
     "cannon_audience": [
-        "Come to a terminal. I have a plan to introduce you to."
+        "ATOS: Come to a terminal. I have a plan to introduce you to."
     ]
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://OnFootAssets/Village/Grass.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/Village/Fence.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://OnFootAssets/Village/Building1.png" type="Texture" id=11]
 [ext_resource path="res://OnFootAssets/Village/Roof2.png" type="Texture" id=12]
 [ext_resource path="res://OnFootAssets/Village/Roof1.png" type="Texture" id=13]
+[ext_resource path="res://OnFootAssets/Village/Villager.tscn" type="PackedScene" id=14]
 
 [sub_resource type="TileSet" id=28]
 0/name = "Grass.png 0"
@@ -971,6 +972,7 @@ position = Vector2( 537, 87 )
 parameters/playback = SubResource( 32 )
 
 [node name="Camera2D" parent="YSort/Player" index="3"]
+current = false
 zoom = Vector2( 5, 5 )
 
 [node name="Building5" type="Sprite" parent="YSort"]
@@ -1051,6 +1053,48 @@ interaction_result = "Inspect"
 position = Vector2( 1.5, -20 )
 shape = SubResource( 42 )
 
+[node name="Villager1" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 557, 196 )
+skin_color = Color( 0.776471, 0.52549, 0.258824, 1 )
+shirt_color = Color( 0.623529, 0.670588, 0.270588, 1 )
+pants_color = Color( 0.176471, 0.141176, 0.141176, 1 )
+shoes_color = Color( 0.176471, 0.137255, 0.137255, 1 )
+hair_color = Color( 0.0588235, 0.0588235, 0.0588235, 1 )
+hair_choice = 1
+destination1 = NodePath("../../Destinations/Destination3")
+destination2 = NodePath("../../Destinations/Destination5")
+
+[node name="Villager2" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 339, 175 )
+skin_color = Color( 0.878431, 0.67451, 0.411765, 1 )
+shirt_color = Color( 0.211765, 0.0666667, 0.231373, 1 )
+pants_color = Color( 0.541176, 0.639216, 0.67451, 1 )
+shoes_color = Color( 0.141176, 0.12549, 0.0156863, 1 )
+hair_color = Color( 0.298039, 0.286275, 0.156863, 1 )
+hair_choice = 2
+destination1 = NodePath("../../Destinations/Destination5")
+destination2 = NodePath("../../Destinations/Destination2")
+destination3 = NodePath("../../Destinations/Destination3")
+
+[node name="Villager3" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 659, 334 )
+skin_color = Color( 0.878431, 0.67451, 0.411765, 1 )
+shirt_color = Color( 0.113725, 0.219608, 0.0901961, 1 )
+pants_color = Color( 0.168627, 0.0588235, 0.0588235, 1 )
+hair_color = Color( 0.227451, 0.160784, 0.00784314, 1 )
+hair_choice = 3
+destination1 = NodePath("../../Destinations/Destination2")
+
+[node name="Villager4" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 258, 447 )
+skin_color = Color( 0.235294, 0.121569, 0.0862745, 1 )
+shirt_color = Color( 0.313726, 0.0470588, 0.0470588, 1 )
+pants_color = Color( 0.0980392, 0.0980392, 0.239216, 1 )
+hair_color = Color( 0.0901961, 0.0705882, 0.0705882, 1 )
+hair_choice = 3
+destination1 = NodePath("../../Destinations/Destination1")
+destination2 = NodePath("../../Destinations/Destination2")
+
 [node name="Shadow" type="Sprite" parent="."]
 position = Vector2( 1060.2, 466.6 )
 scale = Vector2( 0.9, 0.9 )
@@ -1086,6 +1130,23 @@ anims/CameraZoom = SubResource( 33 )
 anims/RESET = SubResource( 34 )
 
 [node name="Clouds" parent="." instance=ExtResource( 7 )]
+
+[node name="Destinations" type="Node2D" parent="."]
+
+[node name="Destination1" type="Position2D" parent="Destinations"]
+position = Vector2( 777, 582 )
+
+[node name="Destination2" type="Position2D" parent="Destinations"]
+position = Vector2( 1115, 586 )
+
+[node name="Destination3" type="Position2D" parent="Destinations"]
+position = Vector2( 1022, 598 )
+
+[node name="Destination4" type="Position2D" parent="Destinations"]
+position = Vector2( 1201, 589 )
+
+[node name="Destination5" type="Position2D" parent="Destinations"]
+position = Vector2( 1256, 687 )
 
 [connection signal="screen_exited" from="Spaceship/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="ShipTimer" to="." method="_on_ShipTimer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://OnFootAssets/Assets/floor2.png" type="Texture" id=1]
 [ext_resource path="res://OnFootAssets/WalkingPlayer.tscn" type="PackedScene" id=2]
@@ -776,6 +776,9 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 8.5, 4 )
 
+[sub_resource type="RectangleShape2D" id=33]
+extents = Vector2( 20, 4 )
+
 [sub_resource type="Animation" id=29]
 resource_name = "Pump"
 length = 0.8
@@ -951,7 +954,7 @@ parameters/playback = SubResource( 2 )
 current = false
 
 [node name="TrainingDoor" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( 112, -344 )
+position = Vector2( 112, -348 )
 locked = false
 
 [node name="Area2D" parent="YSort/TrainingDoor" index="1"]
@@ -966,11 +969,12 @@ position = Vector2( 0, 24 )
 shape = SubResource( 8 )
 
 [node name="InfirmaryDoor" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( 200, -64 )
+position = Vector2( 200, -68 )
 orientation = "vertical"
 locked = false
 
 [node name="Area2D" parent="YSort/InfirmaryDoor" index="1"]
+visible = false
 position = Vector2( -1, 17 )
 
 [node name="CollisionShape2D" parent="YSort/InfirmaryDoor/Area2D" index="0"]
@@ -982,11 +986,12 @@ shape = SubResource( 9 )
 frame = 1
 
 [node name="CollisionShape2D" parent="YSort/InfirmaryDoor/Body" index="1"]
+visible = false
 position = Vector2( 0, 48 )
 shape = SubResource( 10 )
 
 [node name="ShopDoor" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( 200, -320 )
+position = Vector2( 200, -324 )
 orientation = "vertical"
 locked = false
 
@@ -1003,7 +1008,7 @@ position = Vector2( 0, 48 )
 shape = SubResource( 12 )
 
 [node name="CommandDoor" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( 576, -200 )
+position = Vector2( 576, -204 )
 
 [node name="CollisionShape2D" parent="YSort/CommandDoor/Area2D" index="0"]
 shape = SubResource( 13 )
@@ -1013,7 +1018,7 @@ position = Vector2( 0, 24 )
 shape = SubResource( 14 )
 
 [node name="DormDoor" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( -40, -112 )
+position = Vector2( -40, -116 )
 orientation = "vertical"
 locked = false
 
@@ -1090,7 +1095,11 @@ position = Vector2( 0.5, 11 )
 shape = SubResource( 28 )
 
 [node name="ArenaDoor" parent="YSort" instance=ExtResource( 17 )]
-position = Vector2( 688, -136 )
+position = Vector2( 688, -140 )
+
+[node name="CollisionShape2D" parent="YSort/ArenaDoor/Body" index="1"]
+position = Vector2( 0, 24 )
+shape = SubResource( 33 )
 
 [node name="FuelMachine" type="Sprite" parent="YSort"]
 position = Vector2( 34, -168 )
@@ -1166,7 +1175,7 @@ position = Vector2( 15, 6.5 )
 shape = SubResource( 21 )
 
 [node name="TransitionCover" type="CanvasLayer" parent="."]
-layer = 2
+layer = 0
 
 [node name="ColorRect" type="ColorRect" parent="TransitionCover"]
 modulate = Color( 1, 1, 1, 0 )
@@ -1219,5 +1228,6 @@ texture = ExtResource( 26 )
 [editable path="YSort/DormDoor"]
 [editable path="YSort/ExchangeMachine/Interactable"]
 [editable path="YSort/CaptureMachine/Interactable"]
+[editable path="YSort/ArenaDoor"]
 [editable path="StoryProgressor"]
 [editable path="Cap1Progressor"]
