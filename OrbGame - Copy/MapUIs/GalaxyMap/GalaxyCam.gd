@@ -10,9 +10,9 @@ func _ready():
 
 func _physics_process(_delta):
 	var ship = get_node("../Player")
-	var ship_pos = ship.position
+	var ship_pos = ship.global_position
 	position = ship_pos.round() #lerp_overshoot_v(position,ship_pos,1,Vector2(1,1))
-	GalaxySave.game_data["shipPosition"][0] = global_position
+	GalaxySave.game_data["playerLocation"]["position"] = ship.global_position
 	#var scale := get_viewport_transform().get_scale()
 	#self.position = (position * scale).floor() / scale
 	zoom()

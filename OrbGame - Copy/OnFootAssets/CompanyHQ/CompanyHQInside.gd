@@ -17,6 +17,7 @@ func _ready():
 		landed_cam.current = true
 		var overlay = visiting_controls.instance()
 		add_child(overlay)
+		overlay.get_node("Holder/VBoxContainer/SpeedLabel").text = ""
 	else:
 		cover.modulate.a = 1
 		player.get_node("Camera2D").current = true

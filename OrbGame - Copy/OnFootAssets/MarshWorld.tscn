@@ -500,6 +500,7 @@ tile_set = ExtResource( 5 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
 cell_y_sort = true
+show_collision = true
 centered_textures = true
 format = 1
 

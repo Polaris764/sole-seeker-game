@@ -10,7 +10,6 @@
 
 [node name="NewGameUI" instance=ExtResource( 1 )]
 script = ExtResource( 7 )
-transition_duration = 1.0
 
 [node name="Title" parent="MarginContainer/MenuContainer" index="0"]
 text = "New Game"

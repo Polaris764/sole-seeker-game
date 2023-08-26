@@ -98,4 +98,4 @@ func get_system_type(system_table):
 		system_type_text = "System Type: Blue"
 	else:
 		system_type_text = "System Type: Uninhabited"
-	print(star_name)
+	#print(star_name)

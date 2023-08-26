@@ -7,7 +7,7 @@ var interation_button
 
 func _ready():
 	create_planet()
-	if GalaxySave.lastPlanetType:
+	if GalaxySave.game_data["planetInfo"]["lastPlanetType"]:
 		spawn_enemies()
 	ConstantsHolder.leaving_planet = true
 

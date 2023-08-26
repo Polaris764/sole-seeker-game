@@ -5,46 +5,48 @@ var SAVE_FILE = "save_file.save"
 var game_data = {}
 
 # holding star coordinates for galaxy map
-var lastStarClicked
-var lastStarClickedName
-var lastStarType
 func setLastStarClicked(starPos,starName,starType):
-	lastStarClicked = starPos.x
-	lastStarClickedName = starName
-	lastStarType = starType
+	game_data["starInfo"]["lastStar"] = starPos.x
+	game_data["starInfo"]["lastStarName"] = starName
+	game_data["starInfo"]["lastStarType"] = starType
 	game_data["shipPosition"][0] = starPos
 func getLastStarClicked():
-	return lastStarClicked
+	return game_data["starInfo"]["lastStar"]
 func getLastStarClickedName():
-	return lastStarClickedName
+	return game_data["starInfo"]["lastStarName"]
 func getLastStarType():
-	return lastStarType
+	return game_data["starInfo"]["lastStarType"]
 	
 # holding planet coordinates for galaxy map
-var lastPlanetClicked = 0
-var lastPlanetType
 func setLastPlanetClicked(starPos,planetPos,planetType=null):
 	game_data["shipPosition"][7] = planetPos
-	lastPlanetClicked = str(pow(starPos*planetPos,2)*cos(pow(starPos*planetPos,3))).hash()
-	lastPlanetType = planetType
+	game_data["planetInfo"]["lastPlanet"] = str(pow(starPos*planetPos,2)*cos(pow(starPos*planetPos,3))).hash()
+	game_data["planetInfo"]["lastPlanetType"] = planetType
 func getLastPlanetClicked():
-	return lastPlanetClicked
+	return game_data["planetInfo"]["lastPlanet"]
 func getLastPlanetType():
-	return lastPlanetType
+	return game_data["planetInfo"]["lastPlanetType"]
 
 # getting building data of planet
 var building_data = {} # all building data
 func set_building_data(data_table):
-	building_data[lastPlanetClicked] = data_table
+	building_data[game_data["planetInfo"]["lastPlanet"]] = data_table
 	game_data["buildingData"] = building_data
 func get_planet_building_data():
 	building_data = game_data["buildingData"]
-	if not game_data["buildingData"].has(lastPlanetClicked):
-		building_data[lastPlanetClicked] = {}
-	return building_data[lastPlanetClicked]
+	if not game_data["buildingData"].has(game_data["planetInfo"]["lastPlanet"]):
+		building_data[game_data["planetInfo"]["lastPlanet"]] = {}
+	return building_data[game_data["planetInfo"]["lastPlanet"]]
 
 # saving data
+var save_notif = preload("res://UIResources/SaveNotification.tscn")
 func save_data():
+	get_tree().root.add_child(save_notif.instance())
+	if get_tree().current_scene.filename != "res://MainMenu/UIHolder.tscn":
+		game_data["playerLocation"]["scene"] = get_tree().current_scene.filename
+	var playerInstance = get_tree().get_nodes_in_group("Player")
+	if playerInstance.size() > 0 and playerInstance[0].global_position:
+		game_data["playerLocation"]["position"] = playerInstance[0].global_position
 	var file = File.new()
 	file.open(SAVE_FILE_PATH + SAVE_FILE,File.WRITE)
 	file.store_var(game_data)
@@ -66,19 +68,21 @@ func load_data():
 			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
-			"storedBuildings": {buildingTypes.WALL:0,buildingTypes.FLOOR:0,buildingTypes.TURRET:0,buildingTypes.CALTROPS:0,buildingTypes.LANDMINE:0,buildingTypes.LASER:0,buildingTypes.CAPTURER:0,buildingTypes.CANNONBASE:0,buildingTypes.CANNONTURRET:0,buildingTypes.CANNONPOWER:0},
+			"storedBuildings": {buildingTypes.WALL:50,buildingTypes.FLOOR:50,buildingTypes.TURRET:50,buildingTypes.CALTROPS:50,buildingTypes.LANDMINE:50,buildingTypes.LASER:50,buildingTypes.CAPTURER:50,buildingTypes.CANNON_BASE:50,buildingTypes.CANNON_TURRET:50,buildingTypes.CANNON_POWER:50},
 			"capturedEnemies": [],#["BlueOrb","BrownEnemy","Round"],
 			"shipPosition": [Vector2.ZERO,Vector2.ZERO,0,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
-			"storyProgression": 0,
+			"storyProgression": 22,
 			"totalKills" : 0,
 			"individualKills" : {"black":0,"blue":0,"brown":0,"orange":0,"green":0,"red":0,"purple":0},
 			"playerHealth" : PlayerStats.max_health,
 			"enemiesContacted": [],
-			"cannonPartsBought":{buildingTypes.CANNONBASE:false,buildingTypes.CANNONTURRET:false,buildingTypes.CANNONPOWER:false},
+			"cannonPartsBought":{buildingTypes.CANNON_BASE:false,buildingTypes.CANNON_TURRET:false,buildingTypes.CANNON_POWER:false},
 			"cannonLocation": null,
 			"starsVisitedArray": [],
 			"starsVisitedDictionary": {},
-			"bookmarkedStars": {}
+			"bookmarkedStars": {},
+			"starInfo": {"lastStar":null,"lastStarName":null,"lastStarType":null},
+			"planetInfo": {"lastPlanet":0,"lastPlanetType":null}
 		}
 		save_data()
 	file.open(SAVE_FILE_PATH + SAVE_FILE,File.READ)
@@ -90,8 +94,10 @@ func start_game():
 	if GalaxySave.game_data["gameModifications"]["glassCannon"]:
 		PlayerStats.max_health = PlayerStats.max_health_glass
 	PlayerStats.health = game_data["playerHealth"]
-	var scene_tree = get_tree()
-	var _new_scene = scene_tree.change_scene(game_data["playerLocation"]["scene"])
+	var scene_tree = get_tree() 
+	var new_scene = scene_tree.change_scene(game_data["playerLocation"]["scene"])
+	if new_scene != OK:
+		print(new_scene)
 	yield(scene_tree,"node_added")
 	yield(scene_tree.current_scene,"ready")
 	var playerNode = scene_tree.get_nodes_in_group("Player")[0]
@@ -106,13 +112,13 @@ func set_ship_speed(speed,entering_specific_area = false):
 	var ship_position = game_data["shipPosition"][4]
 	if game_data["shipPosition"][2] > -2 and speed == -1 or game_data["shipPosition"][2] < 0 and speed == 1 or game_data["shipPosition"][2] == 0 and speed == -2 or game_data["shipPosition"][2] == -2 and speed == 2:
 		game_data["shipPosition"][2] = game_data["shipPosition"][2] + speed
-	print("NEW SPEED")
-	print("planet position" + str(game_data["shipPosition"][1]))
-	print("speed = " + str(game_data["shipPosition"][2]))
-	print("position = " + str(ConstantsHolder.ship_locations.keys()[game_data["shipPosition"][4]]))
-	print("last planet = " + str(lastPlanetClicked))
-	print("last star = " + str(lastStarClicked))
-	print(GalaxySave.game_data["shipPosition"][5])
+#	print("NEW SPEED")
+#	print("planet position" + str(game_data["shipPosition"][1]))
+#	print("speed = " + str(game_data["shipPosition"][2]))
+#	print("position = " + str(ConstantsHolder.ship_locations.keys()[game_data["shipPosition"][4]]))
+#	print("last planet = " + str(lastPlanetClicked))
+#	print("last star = " + str(lastStarClicked))
+#	print(GalaxySave.game_data["shipPosition"][5])
 	if speed == 1:
 		match ship_position:
 			shipLocation.PLANET:

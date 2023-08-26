@@ -38,6 +38,57 @@ margin_right = 984.0
 margin_bottom = 23.0
 text = "Restore Default Mapping"
 
+[node name="VolumeTitle" type="Label" parent="MarginContainer/MenuContainer" index="4" groups=["TransitionTarget"]]
+margin_right = 984.0
+margin_bottom = 23.0
+theme = ExtResource( 2 )
+text = "Game Volume"
+align = 1
+
+[node name="MusicHolder" type="Control" parent="MarginContainer/MenuContainer" index="5" groups=["TransitionTarget"]]
+margin_right = 984.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 984, 23 )
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/MenuContainer/MusicHolder" index="0"]
+margin_left = 366.0
+margin_right = 738.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 372, 23 )
+min_value = -40.0
+max_value = 0.0
+
+[node name="MusicLab" type="Label" parent="MarginContainer/MenuContainer/MusicHolder/MusicSlider" index="0"]
+margin_left = -120.0
+margin_right = -12.0
+margin_bottom = 23.0
+theme = ExtResource( 2 )
+text = "Music Volume"
+align = 2
+valign = 1
+
+[node name="SFXHolder" type="Control" parent="MarginContainer/MenuContainer" index="6" groups=["TransitionTarget"]]
+margin_right = 984.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 984, 23 )
+
+[node name="SFXSlider" type="HSlider" parent="MarginContainer/MenuContainer/SFXHolder" index="0"]
+margin_left = 366.0
+margin_right = 738.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 372, 23 )
+min_value = -40.0
+max_value = 0.0
+
+[node name="SFXLab" type="Label" parent="MarginContainer/MenuContainer/SFXHolder/SFXSlider" index="0"]
+margin_left = -120.0
+margin_right = -28.0
+margin_bottom = 23.0
+theme = ExtResource( 2 )
+text = "SFX Volume"
+align = 2
+valign = 1
+
 [node name="BackButtonHolder" type="Control" parent="MarginContainer" index="1"]
 margin_right = 984.0
 margin_bottom = 560.0
@@ -58,4 +109,8 @@ text = "Back"
 [connection signal="disappearing" from="." to="." method="_on_SettingsUI_disappearing"]
 [connection signal="timeout" from="MarginContainer/MenuContainer/ScrollContainer/CooldownTimer" to="." method="_on_CooldownTimer_timeout"]
 [connection signal="pressed" from="MarginContainer/MenuContainer/DefaultControls" to="." method="_on_DefaultControls_pressed"]
+[connection signal="drag_ended" from="MarginContainer/MenuContainer/MusicHolder/MusicSlider" to="." method="_on_MusicSlider_drag_ended"]
+[connection signal="drag_started" from="MarginContainer/MenuContainer/MusicHolder/MusicSlider" to="." method="_on_MusicSlider_drag_started"]
+[connection signal="drag_ended" from="MarginContainer/MenuContainer/SFXHolder/SFXSlider" to="." method="_on_SFXSlider_drag_ended"]
+[connection signal="drag_started" from="MarginContainer/MenuContainer/SFXHolder/SFXSlider" to="." method="_on_SFXSlider_drag_started"]
 [connection signal="pressed" from="MarginContainer/BackButtonHolder/BackButton" to="." method="_on_BackButton_pressed"]

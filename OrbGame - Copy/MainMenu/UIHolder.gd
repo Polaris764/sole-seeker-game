@@ -119,7 +119,9 @@ func setup_custom_configs():
 	if not file.file_exists(configs_file):
 		custom_configs = {
 			"default_controls":{},
-			"controls":{}
+			"controls":{},
+			"musicVolume":-10,
+			"SFXVolume":-10
 		}
 		for item in ConstantsHolder.customizable_controls:
 			if "scancode" in InputMap.get_action_list(item)[0]:

@@ -42,9 +42,9 @@ func _ready():
 	elif storyPos == 20:
 		GalaxySave.game_data["storyProgression"] = 21
 	elif storyPos == 22:
-		if not ConstantsHolder.building_types.CANNONPOWER in GalaxySave.game_data["buildingData"]:
-			GalaxySave.game_data["buildingData"][ConstantsHolder.building_types.CANNONPOWER] = []
-		if GalaxySave.game_data["buildingData"][ConstantsHolder.building_types.CANNONPOWER].size() > 0:
+		if not ConstantsHolder.building_types.CANNON_POWER in GalaxySave.game_data["buildingData"]:
+			GalaxySave.game_data["buildingData"][ConstantsHolder.building_types.CANNON_POWER] = []
+		if GalaxySave.game_data["buildingData"][ConstantsHolder.building_types.CANNON_POWER].size() > 0:
 			GalaxySave.game_data["storyProgression"] = 23
 
 func _on_IncreaseLabel_interacted_with():
@@ -57,6 +57,8 @@ func _on_IncreaseLabel_interacted_with():
 
 func _on_DecreaseLabel_interacted_with():
 	set_ship_rotation()
+	if GalaxySave.game_data["shipPosition"][4] != ConstantsHolder.ship_locations.PLANET:
+		GalaxySave.game_data["shipPosition"][0] = get_node("..").global_position
 	GalaxySave.set_ship_speed(-1)
 
 func set_ship_rotation():

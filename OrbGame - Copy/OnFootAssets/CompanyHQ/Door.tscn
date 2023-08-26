@@ -34,6 +34,7 @@ bus = "SoundEffects"
 
 [node name="doorCloseAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+max_distance = 150.0
 bus = "SoundEffects"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

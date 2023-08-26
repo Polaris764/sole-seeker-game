@@ -126,11 +126,10 @@ visible = false
 
 [node name="NewGameUI" parent="." instance=ExtResource( 4 )]
 visible = false
-transition_duration = 0.5
 
 [node name="LoadSave" parent="." instance=ExtResource( 5 )]
 visible = false
-transition_duration = 0.5
+transition_duration = 0.3
 
 [node name="GalaxyShader" type="CanvasLayer" parent="."]
 layer = -1

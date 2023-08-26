@@ -73,23 +73,18 @@ func laser_repaired():
 var disabled_for_player_passthrough = false setget set_sprite_color
 
 func set_sprite_color(value):
-	print("setting value")
 	disabled_for_player_passthrough = value
 	if value: #player in laser
 		$Sprite.use_parent_material = false
 		$Hitbox/CollisionShape2D.set_deferred("disabled",true)
-		print("damage disabled")
 	else: #player left laser
-		print("damage enabled")
 		$Sprite.use_parent_material = true
 		$Hitbox/CollisionShape2D.set_deferred("disabled",false)
 
 func _on_Detector_area_entered(area):
 	if area.is_in_group("PlayerHurtbox") and active:
-		print("player entered")
 		self.disabled_for_player_passthrough = true
 
 func _on_Detector_area_exited(area):
 	if area.is_in_group("PlayerHurtbox") and disabled_for_player_passthrough:
-		print("player left")
 		self.disabled_for_player_passthrough = false

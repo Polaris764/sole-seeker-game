@@ -80,13 +80,14 @@ func updatePlanetInfoPanel(seedUsed):
 	pPlanetImage.texture = planetImage
 	var rng = RandomNumberGenerator.new()
 	rng.seed = keyedSeed
-	for _i in range(systemTypeOptions.size()):
-		var picked = rng.randi()%(systemTypeOptions.size())
-		if not systemType.has(systemTypeOptions[picked]):
-			systemType.append(systemTypeOptions[picked])
-		#systemTypeOptions.remove(picked)
-	for _v in range(rng.randi_range(0,systemType.size())):
-		systemType.remove(rng.randi()%systemType.size())
+	systemType = systemTypeOptions.duplicate()
+#	for _i in range(systemTypeOptions.size()):
+#		var picked = rng.randi()%(systemTypeOptions.size())
+#		if not systemType.has(systemTypeOptions[picked]):
+#			systemType.append(systemTypeOptions[picked])
+#		#systemTypeOptions.remove(picked)
+#	for _v in range(rng.randi_range(0,systemType.size())):
+#		systemType.remove(rng.randi()%systemType.size())
 	if systemType.size() > 0:
 		pOrbTypes.text = "Planet Type: " + array_join(systemType)
 	else:

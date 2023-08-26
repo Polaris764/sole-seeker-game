@@ -11,6 +11,7 @@ script = ExtResource( 2 )
 
 [node name="AnnouncementLayer" parent="." instance=ExtResource( 3 )]
 scene_text_file = "res://OnFootAssets/DialogueSystem/world_announcements.json"
+announcement_duration = 15
 
 [node name="Holder" type="TextureRect" parent="."]
 margin_left = 374.9

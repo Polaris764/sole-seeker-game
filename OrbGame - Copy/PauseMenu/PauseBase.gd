@@ -22,5 +22,15 @@ func _on_Quit_pressed():
 	GalaxySave.save_data()
 	get_tree().quit()
 
+func _on_Save_pressed():
+	GalaxySave.save_data()
+
+var menuScene = "res://MainMenu/UIHolder.tscn"
+func _on_MainMenu_pressed():
+	get_tree().paused = false
+	var change = get_tree().change_scene(menuScene)
+	if change != OK:
+		print(change)
+
 func initialize(): # necessary placeholder function
 	pass

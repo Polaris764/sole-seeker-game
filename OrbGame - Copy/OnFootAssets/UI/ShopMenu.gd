@@ -10,11 +10,20 @@ onready var resources_list = $NinePatchRect/ResourceList
 
 var building_types = ConstantsHolder.building_types
 
-var buildings_dictionary = {building_types.WALL:{"red":4,"blue":2},building_types.FLOOR:{"red":0,"blue":0}}
+var buildings_dictionary = {
+	building_types.WALL:{"red":2,"blue":1,"purple":0,"orange":0,"brown":0,"green":0},
+	building_types.FLOOR:{"red":1,"blue":1,"purple":0,"orange":0,"brown":0,"green":0}}
 
-var defenses_dictionary = {building_types.LANDMINE:{"red":0,"blue":0},building_types.LASER:{"red":0,"blue":0},building_types.TURRET:{"red":0,"blue":0},building_types.CALTROPS:{"red":0,"blue":0}}
+var defenses_dictionary = {
+	building_types.LANDMINE:{"red":1,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
+	building_types.LASER:{"red":2,"blue":2,"purple":0,"orange":1,"brown":0,"green":1},
+	building_types.TURRET:{"red":1,"blue":1,"purple":1,"orange":0,"brown":1,"green":0},
+	building_types.CALTROPS:{"red":0,"blue":0,"purple":0,"orange":1,"brown":0,"green":1}}
 
-var cannon_dictionary = {building_types.CANNONBASE:{"red":0,"blue":0},building_types.CANNONTURRET:{"red":0,"blue":0},building_types.CANNONPOWER:{"red":0,"blue":0}}
+var cannon_dictionary = {
+	building_types.CANNON_BASE:{"red":0,"blue":7,"purple":1,"orange":2,"brown":5,"green":3},
+	building_types.CANNON_TURRET:{"red":1,"blue":5,"purple":2,"orange":0,"brown":0,"green":1},
+	building_types.CANNON_POWER:{"red":0,"blue":1,"purple":1,"orange":6,"brown":2,"green":0}}
 
 func _ready():
 	visible = false
@@ -54,8 +63,8 @@ func calibrate_options():
 			if player_resources[resource_type] < buildings_dictionary[resource][resource_type]:
 				affordable = false
 		if not affordable:
-			buildings_list.set_item_custom_fg_color(resource,Color(1,1,1,.5))
-	if GalaxySave.game_data["storyProgression"] >= 22:
+			buildings_list.set_item_custom_fg_color(buildings_list.get_item_count()-1,Color(1,1,1,.5))
+	if GalaxySave.game_data["storyProgression"] >= 22 or true:
 		for resource in cannon_dictionary:
 			if GalaxySave.game_data["cannonPartsBought"][resource] == false:
 				buildings_list.add_item(building_types.keys()[resource].capitalize() + ", Owned: " + str(GalaxySave.game_data["storedBuildings"][resource]))
@@ -68,18 +77,17 @@ func calibrate_options():
 				if player_resources[resource_type] < cannon_dictionary[resource][resource_type] or GalaxySave.game_data["cannonPartsBought"][resource] == true:
 					affordable = false
 			if not affordable:
-				print("setting resource" + str(resource))
-				buildings_list.set_item_custom_fg_color(resource,Color(1,1,1,.5))
+				buildings_list.set_item_custom_fg_color(buildings_list.get_item_count()-1,Color(1,1,1,.5))
 	for resource in defenses_dictionary:
 		defenses_list.add_item(building_types.keys()[resource].capitalize() + ", Owned: " + str(GalaxySave.game_data["storedBuildings"][resource]))
 		defenses_price_list.add_item("Price: " + dictionary_as_string(defenses_dictionary[resource]))
 		var affordable = true
-		var player_resources = GalaxySave.game_data["backpackBlood"]
+		var player_resources = complete_resources
 		for resource_type in ConstantsHolder.resource_types:
 			if player_resources[resource_type] < defenses_dictionary[resource][resource_type]:
 				affordable = false
 		if not affordable:
-			defenses_list.set_item_custom_fg_color(resource,Color(1,1,1,.5))
+			defenses_list.set_item_custom_fg_color(defenses_list.get_item_count()-1,Color(1,1,1,.5))
 	if selected_list == 1:
 		for item in selected_resource:
 			buildings_list.select(item)
@@ -186,6 +194,11 @@ func dictionary_as_string(dict):
 		else:
 			new_string += (", " + item.capitalize() + ": " + str(dict[item]))
 	return new_string
+
+func find_item_in_list(item,list):
+	for i in list.items:
+		if str(item).capitalize() in str(i):
+			return list.items.find(i)
 
 func _on_BuildingsList_gui_input(_event):
 	buildings_price_list.get_v_scroll().value = buildings_list.get_v_scroll().value

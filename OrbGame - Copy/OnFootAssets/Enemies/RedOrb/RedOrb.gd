@@ -147,7 +147,7 @@ func _on_Hurtbox_area_entered(area): # needle entered hitbox
 	if stats.health > 0: # if still alive
 		stats.health -= area.damage
 		if stats.health > 0:
-			play_audio(["redHurt1","redHurt2","redHurt3","redHurt4"])
+			play_audio(["hurt1","hurt2","hurt3","hurt4"])
 		knockback = area.knockback_vector * 30
 		hurtbox.create_hit_effect()
 	elif area.harvesting_tool == true: # harvest

@@ -2,13 +2,25 @@ extends "res://MainMenu/BaseMenu.gd"
 
 onready var mapping_holder = $MarginContainer/MenuContainer/ScrollContainer/ControlsContainer
 onready var button_base = preload("res://MainMenu/ControlsButton.tscn")
+onready var mSlide = $MarginContainer/MenuContainer/MusicHolder/MusicSlider
+onready var sSlide = $MarginContainer/MenuContainer/SFXHolder/SFXSlider
 
 var on_cooldown = false
 
 func _ready():
 	scrollBar.modulate.a = 0
+	uiHolder.connect("configs_updated",self,"set_sliders")
 	build_control_list()
 
+var slider_set = false
+func set_sliders():
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),uiHolder.custom_configs["musicVolume"])
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SoundEffects"),uiHolder.custom_configs["SFXVolume"])
+	if not slider_set:
+		slider_set = true
+		mSlide.value = uiHolder.custom_configs["musicVolume"]
+		sSlide.value = uiHolder.custom_configs["SFXVolume"]
+		
 var customizable_controls = ConstantsHolder.customizable_controls
 func build_control_list():
 	for item in get_tree().get_nodes_in_group("InputLabels"):
@@ -65,3 +77,27 @@ func _on_BackButton_pressed():
 
 func _on_CooldownTimer_timeout():
 	on_cooldown = false
+
+func _on_SFXSlider_drag_ended(_value_changed):
+	uiHolder.save_configs()
+
+func _on_MusicSlider_drag_ended(_value_changed):
+	uiHolder.save_configs()
+
+var mSliding = false
+var sSliding = false
+func _on_SFXSlider_drag_started():
+	sSliding = true
+func _on_MusicSlider_drag_started():
+	mSliding = true
+func _process(_delta):
+	if sSliding:
+		uiHolder.custom_configs["SFXVolume"] = sSlide.value
+		if sSlide.value < -35:
+			uiHolder.custom_configs["SFXVolume"] = -80
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SoundEffects"),uiHolder.custom_configs["SFXVolume"])
+	if mSliding:
+		uiHolder.custom_configs["musicVolume"] = mSlide.value
+		if mSlide.value < -35:
+			uiHolder.custom_configs["musicVolume"] = -80
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),uiHolder.custom_configs["musicVolume"])

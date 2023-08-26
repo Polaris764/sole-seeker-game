@@ -64,7 +64,6 @@ func start():
 		ending_scene()
 
 func _exit_tree():
-	print("STOPPING GALAXY MAP")
 	AudioManager.stop_song("galaxyMap")
 
 export var starsInside = []
@@ -72,8 +71,10 @@ onready var rngMach = RandomNumberGenerator.new()
 
 var stationInstance
 func add_companyHQ():
-	var stationRadius = pow(rngMach.randi_range(10,20),2)
-	var stationAngle = rngMach.randi_range(0,2*PI)
+	var rngMachStation = RandomNumberGenerator.new()
+	rngMachStation.seed = GalaxySave.game_data["galaxySeed"]
+	var stationRadius = pow(rngMachStation.randi_range(10,20),2)
+	var stationAngle = rngMachStation.randi_range(0,2*PI)
 	stationInstance = HQ.instance()
 	add_child(stationInstance)
 	stationInstance.global_position = Vector2(cos(stationAngle)*stationRadius,sin(stationAngle)*stationRadius)
@@ -188,7 +189,6 @@ func _process(_delta):
 				if normalized_CV == color or normalized_CV == "all":
 					collision.transparency = visible_transparency_float
 	if trigger_ending and Input.is_action_just_pressed("Interact"):
-		print("next line")
 		get_tree().set_input_as_handled()
 		SignalBus.emit_signal("display_dialogue","ending_dialogue")
 

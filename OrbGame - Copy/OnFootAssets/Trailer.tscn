@@ -1,30 +1,750 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=97 format=2]
 
-[ext_resource path="res://OnFootAssets/Player/PlayerSpritesheet.png" type="Texture" id=1]
-[ext_resource path="res://OnFootAssets/WalkingPlayer.gd" type="Script" id=2]
-[ext_resource path="res://OnFootAssets/Player/AttackSpritesheet.png" type="Texture" id=3]
-[ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hitbox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://OnFootAssets/Player/WeaponHitbox.gd" type="Script" id=5]
-[ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hurtbox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://OnFootAssets/Player/PlayerUI.tscn" type="PackedScene" id=7]
-[ext_resource path="res://OnFootAssets/InteractionButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://OnFootAssets/Player/Netgun/NetgunSpritesheet.png" type="Texture" id=9]
-[ext_resource path="res://OnFootAssets/UI/ShopMenu.tscn" type="PackedScene" id=10]
-[ext_resource path="res://OnFootAssets/UI/InventoryMenu.tscn" type="PackedScene" id=11]
-[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueInteractionArea.tscn" type="PackedScene" id=12]
-[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueLayer.tscn" type="PackedScene" id=13]
-[ext_resource path="res://OnFootAssets/DialogueSystem/AnnouncementLayer.tscn" type="PackedScene" id=14]
-[ext_resource path="res://OnFootAssets/UI/CapturedMenu.tscn" type="PackedScene" id=15]
-[ext_resource path="res://OnFootAssets/UI/LocationMarker.tscn" type="PackedScene" id=16]
-[ext_resource path="res://OnFootAssets/Assets/DeathAnimation.png" type="Texture" id=17]
-[ext_resource path="res://OnFootAssets/Assets/LegMask.png" type="Texture" id=18]
-[ext_resource path="res://OnFootAssets/Player/MaskingShader.tres" type="Shader" id=19]
-[ext_resource path="res://PauseMenu/PauseHolder.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Audio/Footsteps/grass_footsteps.wav" type="AudioStream" id=21]
-[ext_resource path="res://OnFootAssets/Player/WalkingPlayerTree.tres" type="AnimationNodeStateMachine" id=22]
+[ext_resource path="res://OnFootAssets/Assets/RustTileMap.png" type="Texture" id=1]
+[ext_resource path="res://OnFootAssets/Assets/UpperRustTileMap.png" type="Texture" id=2]
+[ext_resource path="res://OnFootAssets/Assets/RustLowerTiles.png" type="Texture" id=3]
+[ext_resource path="res://OnFootAssets/Player/MaskingShader.tres" type="Shader" id=4]
+[ext_resource path="res://OnFootAssets/Assets/DeathAnimation.png" type="Texture" id=5]
+[ext_resource path="res://OnFootAssets/Player/Netgun/NetgunSpritesheet.png" type="Texture" id=6]
+[ext_resource path="res://OnFootAssets/Assets/LegMask.png" type="Texture" id=7]
+[ext_resource path="res://Audio/Footsteps/grass_footsteps.wav" type="AudioStream" id=8]
+[ext_resource path="res://OnFootAssets/DialogueSystem/AnnouncementLayer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hurtbox.tscn" type="PackedScene" id=10]
+[ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hitbox.tscn" type="PackedScene" id=11]
+[ext_resource path="res://OnFootAssets/Player/WalkingPlayerTree.tres" type="AnimationNodeStateMachine" id=12]
+[ext_resource path="res://OnFootAssets/WalkingPlayer.gd" type="Script" id=13]
+[ext_resource path="res://OnFootAssets/Player/WeaponHitbox.gd" type="Script" id=14]
+[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueInteractionArea.tscn" type="PackedScene" id=15]
+[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueLayer.tscn" type="PackedScene" id=16]
+[ext_resource path="res://OnFootAssets/Player/AttackSpritesheet.png" type="Texture" id=17]
+[ext_resource path="res://OnFootAssets/Player/PlayerSpritesheet.png" type="Texture" id=18]
+
+[sub_resource type="TileSet" id=1]
+0/name = "RustLowerTiles.png 0"
+0/texture = ExtResource( 3 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "RustLowerTiles.png 1"
+1/texture = ExtResource( 3 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 16, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "RustLowerTiles.png 2"
+2/texture = ExtResource( 3 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 16, 16, 16 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "RustLowerTiles.png 3"
+3/texture = ExtResource( 3 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 16, 16, 16, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "RustLowerTiles.png 4"
+4/texture = ExtResource( 3 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 32, 16, 16 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "RustLowerTiles.png 5"
+5/texture = ExtResource( 3 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 16, 32, 16, 16 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+6/name = "RustLowerTiles.png 6"
+6/texture = ExtResource( 3 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 0, 48, 16, 16 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
+6/z_index = 0
+7/name = "RustLowerTiles.png 7"
+7/texture = ExtResource( 3 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 16, 64, 16, 16 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
+7/shapes = [  ]
+7/z_index = 0
+8/name = "RustLowerTiles.png 8"
+8/texture = ExtResource( 3 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 16, 48, 16, 16 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
+9/name = "RustLowerTiles.png 9"
+9/texture = ExtResource( 3 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 0, 64, 16, 16 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
+9/z_index = 0
+10/name = "RustLowerTiles.png 10"
+10/texture = ExtResource( 3 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 16, 80, 16, 16 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape_one_way = false
+10/shape_one_way_margin = 0.0
+10/shapes = [  ]
+10/z_index = 0
+11/name = "RustLowerTiles.png 11"
+11/texture = ExtResource( 3 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 0, 80, 16, 16 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
+11/shapes = [  ]
+11/z_index = 0
+12/name = "RustLowerTiles.png 12"
+12/texture = ExtResource( 3 )
+12/tex_offset = Vector2( 0, 0 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 16, 96, 16, 16 )
+12/tile_mode = 0
+12/occluder_offset = Vector2( 0, 0 )
+12/navigation_offset = Vector2( 0, 0 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape_one_way = false
+12/shape_one_way_margin = 0.0
+12/shapes = [  ]
+12/z_index = 0
+13/name = "RustLowerTiles.png 13"
+13/texture = ExtResource( 3 )
+13/tex_offset = Vector2( 0, 0 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 0, 96, 16, 16 )
+13/tile_mode = 0
+13/occluder_offset = Vector2( 0, 0 )
+13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape_one_way = false
+13/shape_one_way_margin = 0.0
+13/shapes = [  ]
+13/z_index = 0
+14/name = "RustLowerTiles.png 14"
+14/texture = ExtResource( 3 )
+14/tex_offset = Vector2( 0, 0 )
+14/modulate = Color( 1, 1, 1, 1 )
+14/region = Rect2( 0, 112, 16, 16 )
+14/tile_mode = 0
+14/occluder_offset = Vector2( 0, 0 )
+14/navigation_offset = Vector2( 0, 0 )
+14/shape_offset = Vector2( 0, 0 )
+14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+14/shape_one_way = false
+14/shape_one_way_margin = 0.0
+14/shapes = [  ]
+14/z_index = 0
+15/name = "RustLowerTiles.png 15"
+15/texture = ExtResource( 3 )
+15/tex_offset = Vector2( 0, 0 )
+15/modulate = Color( 1, 1, 1, 1 )
+15/region = Rect2( 16, 112, 16, 16 )
+15/tile_mode = 0
+15/occluder_offset = Vector2( 0, 0 )
+15/navigation_offset = Vector2( 0, 0 )
+15/shape_offset = Vector2( 0, 0 )
+15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+15/shape_one_way = false
+15/shape_one_way_margin = 0.0
+15/shapes = [  ]
+15/z_index = 0
+16/name = "RustLowerTiles.png 16"
+16/texture = ExtResource( 3 )
+16/tex_offset = Vector2( 0, 0 )
+16/modulate = Color( 1, 1, 1, 1 )
+16/region = Rect2( 0, 128, 16, 16 )
+16/tile_mode = 0
+16/occluder_offset = Vector2( 0, 0 )
+16/navigation_offset = Vector2( 0, 0 )
+16/shape_offset = Vector2( 0, 0 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+16/shape_one_way = false
+16/shape_one_way_margin = 0.0
+16/shapes = [  ]
+16/z_index = 0
+17/name = "RustLowerTiles.png 17"
+17/texture = ExtResource( 3 )
+17/tex_offset = Vector2( 0, 0 )
+17/modulate = Color( 1, 1, 1, 1 )
+17/region = Rect2( 16, 128, 16, 16 )
+17/tile_mode = 0
+17/occluder_offset = Vector2( 0, 0 )
+17/navigation_offset = Vector2( 0, 0 )
+17/shape_offset = Vector2( 0, 0 )
+17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+17/shape_one_way = false
+17/shape_one_way_margin = 0.0
+17/shapes = [  ]
+17/z_index = 0
+18/name = "RustLowerTiles.png 18"
+18/texture = ExtResource( 3 )
+18/tex_offset = Vector2( 0, 0 )
+18/modulate = Color( 1, 1, 1, 1 )
+18/region = Rect2( 0, 144, 16, 16 )
+18/tile_mode = 0
+18/occluder_offset = Vector2( 0, 0 )
+18/navigation_offset = Vector2( 0, 0 )
+18/shape_offset = Vector2( 0, 0 )
+18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+18/shape_one_way = false
+18/shape_one_way_margin = 0.0
+18/shapes = [  ]
+18/z_index = 0
+19/name = "RustLowerTiles.png 19"
+19/texture = ExtResource( 3 )
+19/tex_offset = Vector2( 0, 0 )
+19/modulate = Color( 1, 1, 1, 1 )
+19/region = Rect2( 16, 144, 16, 16 )
+19/tile_mode = 0
+19/occluder_offset = Vector2( 0, 0 )
+19/navigation_offset = Vector2( 0, 0 )
+19/shape_offset = Vector2( 0, 0 )
+19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+19/shape_one_way = false
+19/shape_one_way_margin = 0.0
+19/shapes = [  ]
+19/z_index = 0
+20/name = "RustLowerTiles.png 20"
+20/texture = ExtResource( 3 )
+20/tex_offset = Vector2( 0, 0 )
+20/modulate = Color( 1, 1, 1, 1 )
+20/region = Rect2( 0, 160, 16, 16 )
+20/tile_mode = 0
+20/occluder_offset = Vector2( 0, 0 )
+20/navigation_offset = Vector2( 0, 0 )
+20/shape_offset = Vector2( 0, 0 )
+20/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+20/shape_one_way = false
+20/shape_one_way_margin = 0.0
+20/shapes = [  ]
+20/z_index = 0
+21/name = "RustLowerTiles.png 21"
+21/texture = ExtResource( 3 )
+21/tex_offset = Vector2( 0, 0 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 16, 176, 16, 16 )
+21/tile_mode = 0
+21/occluder_offset = Vector2( 0, 0 )
+21/navigation_offset = Vector2( 0, 0 )
+21/shape_offset = Vector2( 0, 0 )
+21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape_one_way = false
+21/shape_one_way_margin = 0.0
+21/shapes = [  ]
+21/z_index = 0
+22/name = "RustLowerTiles.png 22"
+22/texture = ExtResource( 3 )
+22/tex_offset = Vector2( 0, 0 )
+22/modulate = Color( 1, 1, 1, 1 )
+22/region = Rect2( 16, 160, 16, 16 )
+22/tile_mode = 0
+22/occluder_offset = Vector2( 0, 0 )
+22/navigation_offset = Vector2( 0, 0 )
+22/shape_offset = Vector2( 0, 0 )
+22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+22/shape_one_way = false
+22/shape_one_way_margin = 0.0
+22/shapes = [  ]
+22/z_index = 0
+23/name = "RustLowerTiles.png 23"
+23/texture = ExtResource( 3 )
+23/tex_offset = Vector2( 0, 0 )
+23/modulate = Color( 1, 1, 1, 1 )
+23/region = Rect2( 0, 176, 16, 16 )
+23/tile_mode = 0
+23/occluder_offset = Vector2( 0, 0 )
+23/navigation_offset = Vector2( 0, 0 )
+23/shape_offset = Vector2( 0, 0 )
+23/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+23/shape_one_way = false
+23/shape_one_way_margin = 0.0
+23/shapes = [  ]
+23/z_index = 0
+24/name = "RustLowerTiles.png 24"
+24/texture = ExtResource( 3 )
+24/tex_offset = Vector2( 0, 0 )
+24/modulate = Color( 1, 1, 1, 1 )
+24/region = Rect2( 16, 192, 16, 16 )
+24/tile_mode = 0
+24/occluder_offset = Vector2( 0, 0 )
+24/navigation_offset = Vector2( 0, 0 )
+24/shape_offset = Vector2( 0, 0 )
+24/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+24/shape_one_way = false
+24/shape_one_way_margin = 0.0
+24/shapes = [  ]
+24/z_index = 0
+25/name = "RustLowerTiles.png 25"
+25/texture = ExtResource( 3 )
+25/tex_offset = Vector2( 0, 0 )
+25/modulate = Color( 1, 1, 1, 1 )
+25/region = Rect2( 0, 208, 16, 16 )
+25/tile_mode = 0
+25/occluder_offset = Vector2( 0, 0 )
+25/navigation_offset = Vector2( 0, 0 )
+25/shape_offset = Vector2( 0, 0 )
+25/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+25/shape_one_way = false
+25/shape_one_way_margin = 0.0
+25/shapes = [  ]
+25/z_index = 0
+26/name = "RustLowerTiles.png 26"
+26/texture = ExtResource( 3 )
+26/tex_offset = Vector2( 0, 0 )
+26/modulate = Color( 1, 1, 1, 1 )
+26/region = Rect2( 0, 192, 16, 16 )
+26/tile_mode = 0
+26/occluder_offset = Vector2( 0, 0 )
+26/navigation_offset = Vector2( 0, 0 )
+26/shape_offset = Vector2( 0, 0 )
+26/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+26/shape_one_way = false
+26/shape_one_way_margin = 0.0
+26/shapes = [  ]
+26/z_index = 0
+27/name = "RustLowerTiles.png 27"
+27/texture = ExtResource( 3 )
+27/tex_offset = Vector2( 0, 0 )
+27/modulate = Color( 1, 1, 1, 1 )
+27/region = Rect2( 16, 208, 16, 16 )
+27/tile_mode = 0
+27/occluder_offset = Vector2( 0, 0 )
+27/navigation_offset = Vector2( 0, 0 )
+27/shape_offset = Vector2( 0, 0 )
+27/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+27/shape_one_way = false
+27/shape_one_way_margin = 0.0
+27/shapes = [  ]
+27/z_index = 0
+28/name = "RustLowerTiles.png 28"
+28/texture = ExtResource( 3 )
+28/tex_offset = Vector2( 0, 0 )
+28/modulate = Color( 1, 1, 1, 1 )
+28/region = Rect2( 0, 224, 16, 16 )
+28/tile_mode = 0
+28/occluder_offset = Vector2( 0, 0 )
+28/navigation_offset = Vector2( 0, 0 )
+28/shape_offset = Vector2( 0, 0 )
+28/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+28/shape_one_way = false
+28/shape_one_way_margin = 0.0
+28/shapes = [  ]
+28/z_index = 0
+29/name = "RustLowerTiles.png 29"
+29/texture = ExtResource( 3 )
+29/tex_offset = Vector2( 0, 0 )
+29/modulate = Color( 1, 1, 1, 1 )
+29/region = Rect2( 16, 224, 16, 16 )
+29/tile_mode = 0
+29/occluder_offset = Vector2( 0, 0 )
+29/navigation_offset = Vector2( 0, 0 )
+29/shape_offset = Vector2( 0, 0 )
+29/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+29/shape_one_way = false
+29/shape_one_way_margin = 0.0
+29/shapes = [  ]
+29/z_index = 0
+30/name = "RustLowerTiles.png 30"
+30/texture = ExtResource( 3 )
+30/tex_offset = Vector2( 0, 0 )
+30/modulate = Color( 1, 1, 1, 1 )
+30/region = Rect2( 0, 240, 16, 16 )
+30/tile_mode = 0
+30/occluder_offset = Vector2( 0, 0 )
+30/navigation_offset = Vector2( 0, 0 )
+30/shape_offset = Vector2( 0, 0 )
+30/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+30/shape_one_way = false
+30/shape_one_way_margin = 0.0
+30/shapes = [  ]
+30/z_index = 0
+31/name = "RustLowerTiles.png 31"
+31/texture = ExtResource( 3 )
+31/tex_offset = Vector2( 0, 0 )
+31/modulate = Color( 1, 1, 1, 1 )
+31/region = Rect2( 16, 240, 16, 16 )
+31/tile_mode = 0
+31/occluder_offset = Vector2( 0, 0 )
+31/navigation_offset = Vector2( 0, 0 )
+31/shape_offset = Vector2( 0, 0 )
+31/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+31/shape_one_way = false
+31/shape_one_way_margin = 0.0
+31/shapes = [  ]
+31/z_index = 0
+32/name = "RustLowerTiles.png 32"
+32/texture = ExtResource( 3 )
+32/tex_offset = Vector2( 0, 0 )
+32/modulate = Color( 1, 1, 1, 1 )
+32/region = Rect2( 0, 256, 16, 16 )
+32/tile_mode = 0
+32/occluder_offset = Vector2( 0, 0 )
+32/navigation_offset = Vector2( 0, 0 )
+32/shape_offset = Vector2( 0, 0 )
+32/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+32/shape_one_way = false
+32/shape_one_way_margin = 0.0
+32/shapes = [  ]
+32/z_index = 0
+33/name = "RustLowerTiles.png 33"
+33/texture = ExtResource( 3 )
+33/tex_offset = Vector2( 0, 0 )
+33/modulate = Color( 1, 1, 1, 1 )
+33/region = Rect2( 16, 256, 16, 16 )
+33/tile_mode = 0
+33/occluder_offset = Vector2( 0, 0 )
+33/navigation_offset = Vector2( 0, 0 )
+33/shape_offset = Vector2( 0, 0 )
+33/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+33/shape_one_way = false
+33/shape_one_way_margin = 0.0
+33/shapes = [  ]
+33/z_index = 0
+34/name = "RustLowerTiles.png 34"
+34/texture = ExtResource( 3 )
+34/tex_offset = Vector2( 0, 0 )
+34/modulate = Color( 1, 1, 1, 1 )
+34/region = Rect2( 0, 272, 16, 16 )
+34/tile_mode = 0
+34/occluder_offset = Vector2( 0, 0 )
+34/navigation_offset = Vector2( 0, 0 )
+34/shape_offset = Vector2( 0, 0 )
+34/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+34/shape_one_way = false
+34/shape_one_way_margin = 0.0
+34/shapes = [  ]
+34/z_index = 0
+35/name = "RustLowerTiles.png 35"
+35/texture = ExtResource( 3 )
+35/tex_offset = Vector2( 0, 0 )
+35/modulate = Color( 1, 1, 1, 1 )
+35/region = Rect2( 16, 272, 16, 16 )
+35/tile_mode = 0
+35/occluder_offset = Vector2( 0, 0 )
+35/navigation_offset = Vector2( 0, 0 )
+35/shape_offset = Vector2( 0, 0 )
+35/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+35/shape_one_way = false
+35/shape_one_way_margin = 0.0
+35/shapes = [  ]
+35/z_index = 0
+36/name = "RustLowerTiles.png 36"
+36/texture = ExtResource( 3 )
+36/tex_offset = Vector2( 0, 0 )
+36/modulate = Color( 1, 1, 1, 1 )
+36/region = Rect2( 0, 288, 16, 16 )
+36/tile_mode = 0
+36/occluder_offset = Vector2( 0, 0 )
+36/navigation_offset = Vector2( 0, 0 )
+36/shape_offset = Vector2( 0, 0 )
+36/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+36/shape_one_way = false
+36/shape_one_way_margin = 0.0
+36/shapes = [  ]
+36/z_index = 0
+37/name = "RustLowerTiles.png 37"
+37/texture = ExtResource( 3 )
+37/tex_offset = Vector2( 0, 0 )
+37/modulate = Color( 1, 1, 1, 1 )
+37/region = Rect2( 16, 288, 16, 16 )
+37/tile_mode = 0
+37/occluder_offset = Vector2( 0, 0 )
+37/navigation_offset = Vector2( 0, 0 )
+37/shape_offset = Vector2( 0, 0 )
+37/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+37/shape_one_way = false
+37/shape_one_way_margin = 0.0
+37/shapes = [  ]
+37/z_index = 0
+38/name = "RustLowerTiles.png 38"
+38/texture = ExtResource( 3 )
+38/tex_offset = Vector2( 0, 0 )
+38/modulate = Color( 1, 1, 1, 1 )
+38/region = Rect2( 0, 304, 16, 16 )
+38/tile_mode = 0
+38/occluder_offset = Vector2( 0, 0 )
+38/navigation_offset = Vector2( 0, 0 )
+38/shape_offset = Vector2( 0, 0 )
+38/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+38/shape_one_way = false
+38/shape_one_way_margin = 0.0
+38/shapes = [  ]
+38/z_index = 0
+39/name = "RustLowerTiles.png 39"
+39/texture = ExtResource( 3 )
+39/tex_offset = Vector2( 0, 0 )
+39/modulate = Color( 1, 1, 1, 1 )
+39/region = Rect2( 16, 304, 16, 16 )
+39/tile_mode = 0
+39/occluder_offset = Vector2( 0, 0 )
+39/navigation_offset = Vector2( 0, 0 )
+39/shape_offset = Vector2( 0, 0 )
+39/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+39/shape_one_way = false
+39/shape_one_way_margin = 0.0
+39/shapes = [  ]
+39/z_index = 0
+40/name = "RustLowerTiles.png 40"
+40/texture = ExtResource( 3 )
+40/tex_offset = Vector2( 0, 0 )
+40/modulate = Color( 1, 1, 1, 1 )
+40/region = Rect2( 0, 320, 16, 16 )
+40/tile_mode = 0
+40/occluder_offset = Vector2( 0, 0 )
+40/navigation_offset = Vector2( 0, 0 )
+40/shape_offset = Vector2( 0, 0 )
+40/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+40/shape_one_way = false
+40/shape_one_way_margin = 0.0
+40/shapes = [  ]
+40/z_index = 0
+41/name = "RustLowerTiles.png 41"
+41/texture = ExtResource( 3 )
+41/tex_offset = Vector2( 0, 0 )
+41/modulate = Color( 1, 1, 1, 1 )
+41/region = Rect2( 16, 320, 16, 16 )
+41/tile_mode = 0
+41/occluder_offset = Vector2( 0, 0 )
+41/navigation_offset = Vector2( 0, 0 )
+41/shape_offset = Vector2( 0, 0 )
+41/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+41/shape_one_way = false
+41/shape_one_way_margin = 0.0
+41/shapes = [  ]
+41/z_index = 0
+42/name = "RustLowerTiles.png 42"
+42/texture = ExtResource( 3 )
+42/tex_offset = Vector2( 0, 0 )
+42/modulate = Color( 1, 1, 1, 1 )
+42/region = Rect2( 0, 336, 16, 16 )
+42/tile_mode = 0
+42/occluder_offset = Vector2( 0, 0 )
+42/navigation_offset = Vector2( 0, 0 )
+42/shape_offset = Vector2( 0, 0 )
+42/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+42/shape_one_way = false
+42/shape_one_way_margin = 0.0
+42/shapes = [  ]
+42/z_index = 0
+43/name = "RustLowerTiles.png 43"
+43/texture = ExtResource( 3 )
+43/tex_offset = Vector2( 0, 0 )
+43/modulate = Color( 1, 1, 1, 1 )
+43/region = Rect2( 16, 336, 16, 16 )
+43/tile_mode = 0
+43/occluder_offset = Vector2( 0, 0 )
+43/navigation_offset = Vector2( 0, 0 )
+43/shape_offset = Vector2( 0, 0 )
+43/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+43/shape_one_way = false
+43/shape_one_way_margin = 0.0
+43/shapes = [  ]
+43/z_index = 0
+44/name = "RustLowerTiles.png 44"
+44/texture = ExtResource( 3 )
+44/tex_offset = Vector2( 0, 0 )
+44/modulate = Color( 1, 1, 1, 1 )
+44/region = Rect2( 0, 352, 16, 16 )
+44/tile_mode = 0
+44/occluder_offset = Vector2( 0, 0 )
+44/navigation_offset = Vector2( 0, 0 )
+44/shape_offset = Vector2( 0, 0 )
+44/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+44/shape_one_way = false
+44/shape_one_way_margin = 0.0
+44/shapes = [  ]
+44/z_index = 0
+45/name = "RustLowerTiles.png 45"
+45/texture = ExtResource( 3 )
+45/tex_offset = Vector2( 0, 0 )
+45/modulate = Color( 1, 1, 1, 1 )
+45/region = Rect2( 16, 352, 16, 16 )
+45/tile_mode = 0
+45/occluder_offset = Vector2( 0, 0 )
+45/navigation_offset = Vector2( 0, 0 )
+45/shape_offset = Vector2( 0, 0 )
+45/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+45/shape_one_way = false
+45/shape_one_way_margin = 0.0
+45/shapes = [  ]
+45/z_index = 0
+46/name = "RustLowerTiles.png 46"
+46/texture = ExtResource( 3 )
+46/tex_offset = Vector2( 0, 0 )
+46/modulate = Color( 1, 1, 1, 1 )
+46/region = Rect2( 0, 368, 16, 16 )
+46/tile_mode = 0
+46/occluder_offset = Vector2( 0, 0 )
+46/navigation_offset = Vector2( 0, 0 )
+46/shape_offset = Vector2( 0, 0 )
+46/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+46/shape_one_way = false
+46/shape_one_way_margin = 0.0
+46/shapes = [  ]
+46/z_index = 0
+47/name = "RustLowerTiles.png 47"
+47/texture = ExtResource( 3 )
+47/tex_offset = Vector2( 0, 0 )
+47/modulate = Color( 1, 1, 1, 1 )
+47/region = Rect2( 16, 368, 16, 16 )
+47/tile_mode = 0
+47/occluder_offset = Vector2( 0, 0 )
+47/navigation_offset = Vector2( 0, 0 )
+47/shape_offset = Vector2( 0, 0 )
+47/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+47/shape_one_way = false
+47/shape_one_way_margin = 0.0
+47/shapes = [  ]
+47/z_index = 0
+
+[sub_resource type="TileSet" id=2]
+0/name = "RustTileMap.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 128, 64 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 0
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 64, Vector2( 0, 1 ), 257, Vector2( 0, 2 ), 4, Vector2( 1, 0 ), 260, Vector2( 1, 1 ), 324, Vector2( 1, 2 ), 5, Vector2( 1, 3 ), 256, Vector2( 2, 0 ), 321, Vector2( 2, 1 ), 325, Vector2( 2, 2 ), 261, Vector2( 2, 3 ), 68, Vector2( 3, 0 ), 320, Vector2( 3, 1 ), 69, Vector2( 3, 2 ), 65, Vector2( 3, 3 ), 1, Vector2( 4, 0 ), 325, Vector2( 4, 1 ), 325, Vector2( 4, 2 ), 325, Vector2( 4, 3 ), 325, Vector2( 5, 0 ), 325, Vector2( 5, 1 ), 325, Vector2( 5, 2 ), 325, Vector2( 5, 3 ), 325, Vector2( 6, 0 ), 325, Vector2( 6, 1 ), 325, Vector2( 6, 2 ), 325, Vector2( 6, 3 ), 325, Vector2( 7, 0 ), 325, Vector2( 7, 1 ), 325, Vector2( 7, 2 ), 325, Vector2( 7, 3 ), 325 ]
+0/autotile/icon_coordinate = Vector2( 0, 3 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=3]
+0/name = "UpperRustTileMap.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 128, 64 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 0
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 64, Vector2( 0, 1 ), 257, Vector2( 0, 2 ), 4, Vector2( 1, 0 ), 260, Vector2( 1, 1 ), 324, Vector2( 1, 2 ), 5, Vector2( 1, 3 ), 256, Vector2( 2, 0 ), 321, Vector2( 2, 1 ), 325, Vector2( 2, 2 ), 261, Vector2( 2, 3 ), 68, Vector2( 3, 0 ), 320, Vector2( 3, 1 ), 69, Vector2( 3, 2 ), 65, Vector2( 3, 3 ), 1, Vector2( 4, 0 ), 325, Vector2( 4, 1 ), 325, Vector2( 4, 2 ), 325, Vector2( 4, 3 ), 325, Vector2( 5, 0 ), 325, Vector2( 5, 1 ), 325, Vector2( 5, 2 ), 325, Vector2( 5, 3 ), 325, Vector2( 6, 0 ), 325, Vector2( 6, 1 ), 325, Vector2( 6, 2 ), 325, Vector2( 6, 3 ), 325, Vector2( 7, 0 ), 325, Vector2( 7, 1 ), 325, Vector2( 7, 2 ), 325, Vector2( 7, 3 ), 325 ]
+0/autotile/icon_coordinate = Vector2( 0, 3 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
 
 [sub_resource type="ShaderMaterial" id=160]
-shader = ExtResource( 19 )
+shader = ExtResource( 4 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "IdleDown"
@@ -634,7 +1354,7 @@ tracks/1/keys = {
 "values": [ Vector2( 7.5, -27.5 ), Vector2( 7.5, -28.5 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=171]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BackBufferCopy/Sprite:frame")
@@ -1117,7 +1837,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=172]
 resource_name = "RunRight"
 length = 0.6
 loop = true
@@ -1329,7 +2049,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=173]
 resource_name = "RunUp"
 length = 0.6
 loop = true
@@ -1537,7 +2257,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=16]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=174]
 
 [sub_resource type="AnimationNodeAnimation" id=63]
 animation = "AttackLeft"
@@ -2950,33 +3670,53 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
-[node name="Player" type="KinematicBody2D" groups=["Player"]]
+[node name="Node2D" type="Node2D"]
+
+[node name="LowerRust" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 196618, 0, 0, 196619, 16, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 16, 0, 262156, 16, 0, 262157, 16, 0, 262158, 0, 0, 262159, 0, 0, 327689, 0, 0, 327690, 16, 0, 327691, 16, 0, 327692, 0, 0, 327693, 16, 0, 327694, 16, 0, 327695, 0, 0, 393225, 0, 0, 393226, 9, 0, 393227, 16, 0, 393228, 16, 0, 393229, 16, 0, 393230, 16, 0, 393231, 0, 0, 458761, 0, 0, 458762, 16, 0, 458763, 16, 0, 458764, 11, 0, 458765, 16, 0, 458766, 16, 0, 458767, 0, 0, 524297, 0, 0, 524298, 16, 0, 524299, 16, 0, 524300, 16, 0, 524301, 16, 0, 524302, 0, 0, 524303, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 16, 0, 589837, 16, 0, 589838, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 983061, 0, 0, 983062, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 13, 0, 1048596, 13, 0, 1048597, 13, 0, 1048598, 0, 0, 1048599, 0, 0, 1114128, 0, 0, 1114129, 0, 0, 1114130, 13, 0, 1114131, 13, 0, 1114132, 13, 0, 1114133, 3, 0, 1114134, 13, 0, 1114135, 0, 0, 1114136, 0, 0, 1179664, 0, 0, 1179665, 13, 0, 1179666, 13, 0, 1179667, 8, 0, 1179668, 13, 0, 1179669, 16, 0, 1179670, 6, 0, 1179671, 13, 0, 1179672, 0, 0, 1245200, 0, 0, 1245201, 13, 0, 1245202, 1, 0, 1245203, 13, 0, 1245204, 13, 0, 1245205, 4, 0, 1245206, 5, 0, 1245207, 13, 0, 1245208, 0, 0, 1310736, 0, 0, 1310737, 13, 0, 1310738, 13, 0, 1310739, 13, 0, 1310740, 7, 0, 1310741, 13, 0, 1310742, 13, 0, 1310743, 13, 0, 1310744, 0, 0 )
+
+[node name="UpperRust" type="TileMap" parent="."]
+tile_set = SubResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -65536, 0, 196608, -65511, 0, 196608, 0, 0, 196609, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 3, 5, 0, 3, 6, 0, 3, 7, 0, 3, 8, 0, 3, 9, 0, 3, 10, 0, 3, 11, 0, 3, 12, 0, 3, 13, 0, 3, 14, 0, 3, 15, 0, 3, 16, 0, 3, 17, 0, 3, 18, 0, 3, 19, 0, 3, 20, 0, 3, 21, 0, 3, 22, 0, 3, 23, 0, 3, 24, 0, 3, 25, 0, 3, 26, 0, 3, 27, 0, 3, 28, 0, 3, 29, 0, 3, 30, 0, 3, 31, 0, 3, 32, 0, 3, 33, 0, 3, 34, 0, 0, 65536, 0, 1, 65537, 0, 4, 65538, 0, 65542, 65539, 0, 196615, 65540, 0, 65538, 65541, 0, 196612, 65542, 0, 65540, 65543, 0, 65540, 65544, 0, 65543, 65545, 0, 65540, 65546, 0, 196615, 65547, 0, 65540, 65548, 0, 131077, 65549, 0, 65542, 65550, 0, 131078, 65551, 0, 65543, 65552, 0, 196614, 65553, 0, 196612, 65554, 0, 65541, 65555, 0, 65542, 65556, 0, 196614, 65557, 0, 131077, 65558, 0, 196614, 65559, 0, 131076, 65560, 0, 131078, 65561, 0, 6, 65562, 0, 4, 65563, 0, 196613, 65564, 0, 196615, 65565, 0, 4, 65566, 0, 65538, 65567, 0, 7, 65568, 0, 131077, 65569, 0, 65538, 65570, 0, 131075, 131072, 0, 1, 131073, 0, 65540, 131074, 0, 131079, 131075, 0, 131078, 131076, 0, 196614, 131077, 0, 7, 131078, 0, 7, 131079, 0, 65540, 131080, 0, 196615, 131081, 0, 65542, 131082, 0, 131077, 131083, 0, 196615, 131084, 0, 131076, 131085, 0, 65538, 131086, 0, 65542, 131087, 0, 196614, 131088, 0, 6, 131089, 0, 131076, 131090, 0, 131077, 131091, 0, 196615, 131092, 0, 65542, 131093, 0, 7, 131094, 0, 65543, 131095, 0, 131077, 131096, 0, 131076, 131097, 0, 196614, 131098, 0, 4, 131099, 0, 196613, 131100, 0, 65538, 131101, 0, 131078, 131102, 0, 7, 131103, 0, 6, 131104, 0, 196613, 131105, 0, 196614, 131106, 0, 131075, 196608, 0, 1, 196609, 0, 196613, 196610, 0, 65541, 196611, 0, 5, 196612, 0, 196614, 196613, 0, 131079, 196614, 0, 131079, 196615, 0, 196614, 196616, 0, 196613, 196617, 0, 131078, 196618, 0, 65539, 196619, 0, 131073, 196620, 0, 131073, 196621, 0, 131073, 196622, 0, 131074, 196623, 0, 131079, 196624, 0, 65542, 196625, 0, 65541, 196626, 0, 131079, 196627, 0, 196612, 196628, 0, 131077, 196629, 0, 196612, 196630, 0, 65540, 196631, 0, 196615, 196632, 0, 4, 196633, 0, 6, 196634, 0, 65541, 196635, 0, 65542, 196636, 0, 7, 196637, 0, 196615, 196638, 0, 7, 196639, 0, 196615, 196640, 0, 5, 196641, 0, 7, 196642, 0, 131075, 262144, 0, 1, 262145, 0, 196615, 262146, 0, 65538, 262147, 0, 65538, 262148, 0, 65538, 262149, 0, 5, 262150, 0, 131078, 262151, 0, 196614, 262152, 0, 131076, 262153, 0, 65539, 262154, 0, 196611, 262158, 0, 131072, 262159, 0, 131074, 262160, 0, 5, 262161, 0, 131079, 262162, 0, 196614, 262163, 0, 196613, 262164, 0, 196615, 262165, 0, 4, 262166, 0, 6, 262167, 0, 131079, 262168, 0, 131076, 262169, 0, 131077, 262170, 0, 65540, 262171, 0, 131079, 262172, 0, 131077, 262173, 0, 7, 262174, 0, 5, 262175, 0, 65543, 262176, 0, 196613, 262177, 0, 196613, 262178, 0, 131075, 327680, 0, 1, 327681, 0, 65542, 327682, 0, 131078, 327683, 0, 5, 327684, 0, 65542, 327685, 0, 65543, 327686, 0, 6, 327687, 0, 7, 327688, 0, 7, 327689, 0, 131075, 327695, 0, 1, 327696, 0, 65540, 327697, 0, 196612, 327698, 0, 4, 327699, 0, 4, 327700, 0, 196613, 327701, 0, 65540, 327702, 0, 196615, 327703, 0, 65542, 327704, 0, 65543, 327705, 0, 131077, 327706, 0, 131077, 327707, 0, 196615, 327708, 0, 196612, 327709, 0, 196614, 327710, 0, 4, 327711, 0, 7, 327712, 0, 131078, 327713, 0, 196615, 327714, 0, 131075, 393216, 0, 1, 393217, 0, 131076, 393218, 0, 6, 393219, 0, 7, 393220, 0, 4, 393221, 0, 65543, 393222, 0, 65538, 393223, 0, 6, 393224, 0, 6, 393225, 0, 131075, 393231, 0, 1, 393232, 0, 4, 393233, 0, 65540, 393234, 0, 131078, 393235, 0, 196612, 393236, 0, 131079, 393237, 0, 4, 393238, 0, 65543, 393239, 0, 131077, 393240, 0, 131078, 393241, 0, 196612, 393242, 0, 5, 393243, 0, 196614, 393244, 0, 65538, 393245, 0, 196612, 393246, 0, 131077, 393247, 0, 196613, 393248, 0, 65543, 393249, 0, 196612, 393250, 0, 131075, 458752, 0, 1, 458753, 0, 6, 458754, 0, 65542, 458755, 0, 65541, 458756, 0, 131079, 458757, 0, 4, 458758, 0, 65542, 458759, 0, 196614, 458760, 0, 7, 458761, 0, 131075, 458767, 0, 1, 458768, 0, 65538, 458769, 0, 65541, 458770, 0, 196615, 458771, 0, 65542, 458772, 0, 65538, 458773, 0, 65540, 458774, 0, 65541, 458775, 0, 196613, 458776, 0, 5, 458777, 0, 65543, 458778, 0, 131078, 458779, 0, 196615, 458780, 0, 65538, 458781, 0, 65542, 458782, 0, 196612, 458783, 0, 4, 458784, 0, 4, 458785, 0, 196613, 458786, 0, 131075, 524288, 0, 1, 524289, 0, 196612, 524290, 0, 65541, 524291, 0, 196613, 524292, 0, 131077, 524293, 0, 5, 524294, 0, 65541, 524295, 0, 5, 524296, 0, 131078, 524297, 0, 2, 524298, 0, 0, 524302, 0, 196609, 524303, 0, 65537, 524304, 0, 131078, 524305, 0, 196614, 524306, 0, 196615, 524307, 0, 131077, 524308, 0, 65541, 524309, 0, 131079, 524310, 0, 131076, 524311, 0, 131077, 524312, 0, 131078, 524313, 0, 65538, 524314, 0, 131076, 524315, 0, 5, 524316, 0, 196612, 524317, 0, 196615, 524318, 0, 65538, 524319, 0, 7, 524320, 0, 7, 524321, 0, 4, 524322, 0, 131075, 589824, 0, 1, 589825, 0, 65538, 589826, 0, 131079, 589827, 0, 7, 589828, 0, 5, 589829, 0, 65541, 589830, 0, 65543, 589831, 0, 196612, 589832, 0, 65541, 589833, 0, 131079, 589834, 0, 2, 589835, 0, 3, 589836, 0, 3, 589837, 0, 3, 589838, 0, 65537, 589839, 0, 131077, 589840, 0, 196615, 589841, 0, 65543, 589842, 0, 131076, 589843, 0, 5, 589844, 0, 65538, 589845, 0, 65542, 589846, 0, 131077, 589847, 0, 196613, 589848, 0, 196612, 589849, 0, 131076, 589850, 0, 196614, 589851, 0, 196615, 589852, 0, 196612, 589853, 0, 131079, 589854, 0, 6, 589855, 0, 65538, 589856, 0, 196614, 589857, 0, 6, 589858, 0, 131075, 655360, 0, 1, 655361, 0, 196615, 655362, 0, 196613, 655363, 0, 5, 655364, 0, 196614, 655365, 0, 65538, 655366, 0, 131076, 655367, 0, 7, 655368, 0, 196615, 655369, 0, 7, 655370, 0, 131078, 655371, 0, 196614, 655372, 0, 131076, 655373, 0, 131079, 655374, 0, 7, 655375, 0, 7, 655376, 0, 131076, 655377, 0, 65540, 655378, 0, 65540, 655379, 0, 6, 655380, 0, 131078, 655381, 0, 5, 655382, 0, 65540, 655383, 0, 196615, 655384, 0, 4, 655385, 0, 65538, 655386, 0, 131078, 655387, 0, 131078, 655388, 0, 65540, 655389, 0, 131078, 655390, 0, 4, 655391, 0, 7, 655392, 0, 196612, 655393, 0, 131076, 655394, 0, 131075, 720896, 0, 1, 720897, 0, 65542, 720898, 0, 131079, 720899, 0, 6, 720900, 0, 131078, 720901, 0, 65543, 720902, 0, 65541, 720903, 0, 196613, 720904, 0, 196614, 720905, 0, 131079, 720906, 0, 196615, 720907, 0, 65538, 720908, 0, 65538, 720909, 0, 196615, 720910, 0, 131076, 720911, 0, 6, 720912, 0, 6, 720913, 0, 6, 720914, 0, 196615, 720915, 0, 6, 720916, 0, 196614, 720917, 0, 7, 720918, 0, 131078, 720919, 0, 7, 720920, 0, 196615, 720921, 0, 65538, 720922, 0, 5, 720923, 0, 196612, 720924, 0, 65540, 720925, 0, 131077, 720926, 0, 196615, 720927, 0, 196612, 720928, 0, 196613, 720929, 0, 196614, 720930, 0, 131075, 786432, 0, 1, 786433, 0, 131078, 786434, 0, 196615, 786435, 0, 65538, 786436, 0, 65541, 786437, 0, 65538, 786438, 0, 65538, 786439, 0, 131076, 786440, 0, 4, 786441, 0, 196615, 786442, 0, 65542, 786443, 0, 65540, 786444, 0, 131076, 786445, 0, 131078, 786446, 0, 131077, 786447, 0, 196613, 786448, 0, 65543, 786449, 0, 131076, 786450, 0, 65542, 786451, 0, 196615, 786452, 0, 196612, 786453, 0, 65543, 786454, 0, 5, 786455, 0, 65541, 786456, 0, 196614, 786457, 0, 65538, 786458, 0, 65540, 786459, 0, 6, 786460, 0, 131076, 786461, 0, 4, 786462, 0, 196612, 786463, 0, 65538, 786464, 0, 196614, 786465, 0, 7, 786466, 0, 131075, 851968, 0, 1, 851969, 0, 131077, 851970, 0, 65541, 851971, 0, 65541, 851972, 0, 196615, 851973, 0, 196614, 851974, 0, 196612, 851975, 0, 65538, 851976, 0, 65543, 851977, 0, 65538, 851978, 0, 131077, 851979, 0, 65538, 851980, 0, 7, 851981, 0, 65540, 851982, 0, 196615, 851983, 0, 196615, 851984, 0, 196615, 851985, 0, 196615, 851986, 0, 131078, 851987, 0, 196614, 851988, 0, 7, 851989, 0, 65542, 851990, 0, 131079, 851991, 0, 131076, 851992, 0, 196614, 851993, 0, 131076, 851994, 0, 4, 851995, 0, 65540, 851996, 0, 196615, 851997, 0, 131076, 851998, 0, 5, 851999, 0, 6, 852000, 0, 65542, 852001, 0, 65540, 852002, 0, 131075, 917504, 0, 1, 917505, 0, 196614, 917506, 0, 196613, 917507, 0, 131079, 917508, 0, 196614, 917509, 0, 6, 917510, 0, 131079, 917511, 0, 6, 917512, 0, 131076, 917513, 0, 6, 917514, 0, 131078, 917515, 0, 196615, 917516, 0, 196612, 917517, 0, 6, 917518, 0, 4, 917519, 0, 4, 917520, 0, 6, 917521, 0, 196615, 917522, 0, 131078, 917523, 0, 65543, 917524, 0, 131079, 917525, 0, 65540, 917526, 0, 131076, 917527, 0, 196615, 917528, 0, 6, 917529, 0, 131076, 917530, 0, 65543, 917531, 0, 131077, 917532, 0, 65543, 917533, 0, 196615, 917534, 0, 65542, 917535, 0, 131079, 917536, 0, 4, 917537, 0, 131076, 917538, 0, 131075, 983040, 0, 1, 983041, 0, 65538, 983042, 0, 131079, 983043, 0, 196614, 983044, 0, 196614, 983045, 0, 65543, 983046, 0, 131079, 983047, 0, 131077, 983048, 0, 65538, 983049, 0, 196613, 983050, 0, 131076, 983051, 0, 196615, 983052, 0, 65542, 983053, 0, 196613, 983054, 0, 65538, 983055, 0, 65541, 983056, 0, 196612, 983057, 0, 6, 983058, 0, 65539, 983059, 0, 131073, 983060, 0, 131073, 983061, 0, 131073, 983062, 0, 131074, 983063, 0, 65543, 983064, 0, 65542, 983065, 0, 196615, 983066, 0, 196612, 983067, 0, 131078, 983068, 0, 131076, 983069, 0, 65541, 983070, 0, 65542, 983071, 0, 131079, 983072, 0, 196615, 983073, 0, 131079, 983074, 0, 131075, 1114111, 0, 196608, 1048576, 0, 1, 1048577, 0, 65540, 1048578, 0, 65543, 1048579, 0, 196614, 1048580, 0, 6, 1048581, 0, 196613, 1048582, 0, 65540, 1048583, 0, 196615, 1048584, 0, 131077, 1048585, 0, 196615, 1048586, 0, 65542, 1048587, 0, 196615, 1048588, 0, 196612, 1048589, 0, 196613, 1048590, 0, 6, 1048591, 0, 196613, 1048592, 0, 65543, 1048593, 0, 65539, 1048594, 0, 196611, 1048598, 0, 131072, 1048599, 0, 131074, 1048600, 0, 65543, 1048601, 0, 7, 1048602, 0, 65540, 1048603, 0, 131079, 1048604, 0, 196615, 1048605, 0, 131077, 1048606, 0, 196614, 1048607, 0, 196614, 1048608, 0, 196614, 1048609, 0, 196612, 1048610, 0, 131075, 1114112, 0, 1, 1114113, 0, 131076, 1114114, 0, 65542, 1114115, 0, 196614, 1114116, 0, 65543, 1114117, 0, 7, 1114118, 0, 65543, 1114119, 0, 4, 1114120, 0, 4, 1114121, 0, 131077, 1114122, 0, 196614, 1114123, 0, 131078, 1114124, 0, 65540, 1114125, 0, 65542, 1114126, 0, 131079, 1114127, 0, 7, 1114128, 0, 65539, 1114129, 0, 196611, 1114135, 0, 131072, 1114136, 0, 131074, 1114137, 0, 6, 1114138, 0, 196614, 1114139, 0, 4, 1114140, 0, 4, 1114141, 0, 65543, 1114142, 0, 65541, 1114143, 0, 65541, 1114144, 0, 196613, 1114145, 0, 4, 1114146, 0, 131075, 1179648, 0, 1, 1179649, 0, 131076, 1179650, 0, 5, 1179651, 0, 196614, 1179652, 0, 196612, 1179653, 0, 65542, 1179654, 0, 65541, 1179655, 0, 65541, 1179656, 0, 65540, 1179657, 0, 131076, 1179658, 0, 6, 1179659, 0, 6, 1179660, 0, 65542, 1179661, 0, 65542, 1179662, 0, 65541, 1179663, 0, 196612, 1179664, 0, 131075, 1179667, 0, 196608, 1179668, 0, 196608, 1179672, 0, 1, 1179673, 0, 65540, 1179674, 0, 65541, 1179675, 0, 4, 1179676, 0, 65542, 1179677, 0, 4, 1179678, 0, 131078, 1179679, 0, 7, 1179680, 0, 65541, 1179681, 0, 5, 1179682, 0, 131075, 1245184, 0, 1, 1245185, 0, 65540, 1245186, 0, 65538, 1245187, 0, 65538, 1245188, 0, 131079, 1245189, 0, 131076, 1245190, 0, 65538, 1245191, 0, 131078, 1245192, 0, 65543, 1245193, 0, 131076, 1245194, 0, 65538, 1245195, 0, 131077, 1245196, 0, 65538, 1245197, 0, 65543, 1245198, 0, 131078, 1245199, 0, 65542, 1245200, 0, 131075, 1245202, 0, 196608, 1245208, 0, 1, 1245209, 0, 6, 1245210, 0, 7, 1245211, 0, 5, 1245212, 0, 65540, 1245213, 0, 196614, 1245214, 0, 65543, 1245215, 0, 131077, 1245216, 0, 7, 1245217, 0, 7, 1245218, 0, 131075, 1376255, 0, 196608, 1310720, 0, 131072, 1310721, 0, 131073, 1310722, 0, 131073, 1310723, 0, 131073, 1310724, 0, 131073, 1310725, 0, 131073, 1310726, 0, 131073, 1310727, 0, 131073, 1310728, 0, 131073, 1310729, 0, 131073, 1310730, 0, 131073, 1310731, 0, 131073, 1310732, 0, 131073, 1310733, 0, 131073, 1310734, 0, 131073, 1310735, 0, 131073, 1310736, 0, 196611, 1310738, 0, 196608, 1310744, 0, 131072, 1310745, 0, 131073, 1310746, 0, 131073, 1310747, 0, 131073, 1310748, 0, 131073, 1310749, 0, 131073, 1310750, 0, 131073, 1310751, 0, 131073, 1310752, 0, 131073, 1310753, 0, 131073, 1310754, 0, 196611 )
+
+[node name="UpperRust2" type="TileMap" parent="."]
+tile_set = SubResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -131055, 0, 196608, -131054, 0, 196608, -65518, 0, 196608, -65517, 0, 196608, 65560, 0, 196608, 131096, 0, 196608, 131097, 0, 196608, 196611, 0, 196608, 196612, 0, 196609, 196613, 0, 0, 196633, 0, 196608, 262148, 0, 1, 262149, 0, 2, 262150, 0, 0, 262171, 0, 196609, 262172, 0, 0, 327684, 0, 1, 327685, 0, 131079, 327686, 0, 131075, 327703, 0, 196609, 327704, 0, 3, 327705, 0, 3, 327706, 0, 3, 327707, 0, 65537, 327708, 0, 2, 327709, 0, 0, 393220, 0, 1, 393221, 0, 196614, 393222, 0, 131075, 393237, 0, 196609, 393238, 0, 3, 393239, 0, 65537, 393240, 0, 131076, 393241, 0, 196613, 393242, 0, 6, 393243, 0, 6, 393244, 0, 65538, 393245, 0, 2, 393246, 0, 0, 458756, 0, 1, 458757, 0, 65540, 458758, 0, 131075, 458771, 0, 196609, 458772, 0, 3, 458773, 0, 65537, 458774, 0, 131078, 458775, 0, 65541, 458776, 0, 65540, 458777, 0, 196614, 458778, 0, 131076, 458779, 0, 196615, 458780, 0, 65542, 458781, 0, 131077, 458782, 0, 131075, 524292, 0, 1, 524293, 0, 131077, 524294, 0, 2, 524295, 0, 0, 524306, 0, 196609, 524307, 0, 65537, 524308, 0, 5, 524309, 0, 131077, 524310, 0, 7, 524311, 0, 65542, 524312, 0, 131076, 524313, 0, 131077, 524314, 0, 196615, 524315, 0, 131077, 524316, 0, 196614, 524317, 0, 131077, 524318, 0, 131075, 589828, 0, 1, 589829, 0, 131079, 589830, 0, 6, 589831, 0, 131075, 589841, 0, 196609, 589842, 0, 65537, 589843, 0, 131076, 589844, 0, 196613, 589845, 0, 6, 589846, 0, 65542, 589847, 0, 6, 589848, 0, 196615, 589849, 0, 196615, 589850, 0, 6, 589851, 0, 196612, 589852, 0, 131078, 589853, 0, 6, 589854, 0, 131075, 655363, 0, 196609, 655364, 0, 65537, 655365, 0, 196613, 655366, 0, 5, 655367, 0, 2, 655368, 0, 0, 655377, 0, 1, 655378, 0, 196613, 655379, 0, 196615, 655380, 0, 196613, 655381, 0, 196615, 655382, 0, 65542, 655383, 0, 196612, 655384, 0, 6, 655385, 0, 65541, 655386, 0, 65538, 655387, 0, 131078, 655388, 0, 196615, 655389, 0, 131079, 655390, 0, 131075, 720899, 0, 1, 720900, 0, 6, 720901, 0, 196615, 720902, 0, 65542, 720903, 0, 65538, 720904, 0, 2, 720905, 0, 0, 720913, 0, 1, 720914, 0, 65541, 720915, 0, 196615, 720916, 0, 65540, 720917, 0, 7, 720918, 0, 131079, 720919, 0, 6, 720920, 0, 65541, 720921, 0, 131076, 720922, 0, 131078, 720923, 0, 6, 720924, 0, 131076, 720925, 0, 65539, 720926, 0, 196611, 786434, 0, 196609, 786435, 0, 65537, 786436, 0, 196613, 786437, 0, 196613, 786438, 0, 65540, 786439, 0, 5, 786440, 0, 131076, 786441, 0, 131075, 786449, 0, 1, 786450, 0, 5, 786451, 0, 131076, 786452, 0, 196613, 786453, 0, 131077, 786454, 0, 196613, 786455, 0, 196613, 786456, 0, 6, 786457, 0, 131078, 786458, 0, 7, 786459, 0, 65540, 786460, 0, 196615, 786461, 0, 131075, 851970, 0, 1, 851971, 0, 131076, 851972, 0, 65538, 851973, 0, 196612, 851974, 0, 7, 851975, 0, 65540, 851976, 0, 196612, 851977, 0, 131075, 851985, 0, 131072, 851986, 0, 131074, 851987, 0, 6, 851988, 0, 131076, 851989, 0, 131079, 851990, 0, 65538, 851991, 0, 196615, 851992, 0, 196615, 851993, 0, 7, 851994, 0, 65538, 851995, 0, 196615, 851996, 0, 65539, 851997, 0, 196611, 917506, 0, 1, 917507, 0, 65541, 917508, 0, 196612, 917509, 0, 196613, 917510, 0, 5, 917511, 0, 7, 917512, 0, 4, 917513, 0, 131075, 917522, 0, 131072, 917523, 0, 131074, 917524, 0, 196615, 917525, 0, 65540, 917526, 0, 131078, 917527, 0, 196612, 917528, 0, 65538, 917529, 0, 5, 917530, 0, 65539, 917531, 0, 131073, 917532, 0, 196611, 983042, 0, 131072, 983043, 0, 131074, 983044, 0, 131076, 983045, 0, 6, 983046, 0, 6, 983047, 0, 5, 983048, 0, 65539, 983049, 0, 196611, 983059, 0, 131072, 983060, 0, 131073, 983061, 0, 131073, 983062, 0, 131074, 983063, 0, 65542, 983064, 0, 196615, 983065, 0, 65539, 983066, 0, 196611, 1048579, 0, 1, 1048580, 0, 196612, 1048581, 0, 7, 1048582, 0, 196615, 1048583, 0, 4, 1048584, 0, 131075, 1048598, 0, 131072, 1048599, 0, 131073, 1048600, 0, 131073, 1048601, 0, 196611, 1114115, 0, 131072, 1114116, 0, 131074, 1114117, 0, 131078, 1114118, 0, 65542, 1114119, 0, 65539, 1114120, 0, 196611, 1179652, 0, 131072, 1179653, 0, 131073, 1179654, 0, 131073, 1179655, 0, 196611 )
+
+[node name="Player" type="KinematicBody2D" parent="." groups=["Player"]]
 position = Vector2( -2.38419e-07, -4.76837e-07 )
 scale = Vector2( 0.4, 0.4 )
 collision_layer = 2
-script = ExtResource( 2 )
+script = ExtResource( 13 )
 movementSpeed = 100
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="Player"]
 position = Vector2( -12.5, -12.5 )
 copy_mode = 2
 
-[node name="Sprite" type="Sprite" parent="BackBufferCopy"]
+[node name="Sprite" type="Sprite" parent="Player/BackBufferCopy"]
 light_mask = 2
 position = Vector2( 15, 12 )
-texture = ExtResource( 1 )
+texture = ExtResource( 18 )
 centered = false
 offset = Vector2( -15, -48 )
 hframes = 132
 vframes = 2
 
-[node name="LegMask" type="Sprite" parent="BackBufferCopy/Sprite"]
+[node name="LegMask" type="Sprite" parent="Player/BackBufferCopy/Sprite"]
 visible = false
 material = SubResource( 160 )
 position = Vector2( 0, 1 )
-texture = ExtResource( 18 )
+texture = ExtResource( 7 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 anims/IdleDown = SubResource( 4 )
 anims/IdleDownA = SubResource( 41 )
 anims/IdleDownG = SubResource( 128 )
@@ -2993,7 +3733,7 @@ anims/IdleUp = SubResource( 17 )
 anims/IdleUpA = SubResource( 44 )
 anims/IdleUpG = SubResource( 131 )
 anims/IdleUpN = SubResource( 82 )
-anims/RESET = SubResource( 2 )
+anims/RESET = SubResource( 171 )
 anims/RunDown = SubResource( 5 )
 anims/RunDownA = SubResource( 32 )
 anims/RunDownG = SubResource( 132 )
@@ -3002,19 +3742,19 @@ anims/RunLeft = SubResource( 6 )
 anims/RunLeftA = SubResource( 33 )
 anims/RunLeftG = SubResource( 133 )
 anims/RunLeftN = SubResource( 84 )
-anims/RunRight = SubResource( 1 )
+anims/RunRight = SubResource( 172 )
 anims/RunRightA = SubResource( 34 )
 anims/RunRightG = SubResource( 134 )
 anims/RunRightN = SubResource( 85 )
-anims/RunUp = SubResource( 3 )
+anims/RunUp = SubResource( 173 )
 anims/RunUpA = SubResource( 35 )
 anims/RunUpG = SubResource( 135 )
 anims/RunUpN = SubResource( 86 )
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = ExtResource( 22 )
+[node name="AnimationTree" type="AnimationTree" parent="Player"]
+tree_root = ExtResource( 12 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 16 )
+parameters/playback = SubResource( 174 )
 parameters/ArmlessIdle/blend_position = Vector2( 0, 0 )
 parameters/ArmlessRun/blend_position = Vector2( 0, 0 )
 parameters/AttackIdle/blend_position = Vector2( 0, 0 )
@@ -3024,10 +3764,10 @@ parameters/NetgunIdle/blend_position = Vector2( -0.82546, 0.832948 )
 parameters/NetgunRun/blend_position = Vector2( 0, 0 )
 parameters/Run/blend_position = Vector2( 0, 0 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 
-[node name="AttackTree" type="AnimationTree" parent="."]
+[node name="AttackTree" type="AnimationTree" parent="Player"]
 tree_root = SubResource( 69 )
 anim_player = NodePath("AttackPlayer")
 process_mode = 0
@@ -3035,7 +3775,7 @@ parameters/Attack/blend_position = Vector2( 0, 0 )
 parameters/Seek/seek_position = -1.0
 parameters/TimeScale/scale = 1.0
 
-[node name="AttackPlayer" type="AnimationPlayer" parent="AttackTree"]
+[node name="AttackPlayer" type="AnimationPlayer" parent="Player/AttackTree"]
 root_node = NodePath("../..")
 anims/AttackDown = SubResource( 27 )
 anims/AttackLeft = SubResource( 28 )
@@ -3043,143 +3783,119 @@ anims/AttackRight = SubResource( 29 )
 anims/AttackUp = SubResource( 30 )
 anims/RESET = SubResource( 31 )
 
-[node name="HitboxPivot" type="Position2D" parent="."]
+[node name="HitboxPivot" type="Position2D" parent="Player"]
 position = Vector2( 20, -15 )
 
-[node name="WeaponHitbox" parent="HitboxPivot" instance=ExtResource( 4 )]
+[node name="WeaponHitbox" parent="Player/HitboxPivot" instance=ExtResource( 11 )]
 visible = false
 position = Vector2( -14.5, 19 )
 rotation = 1.5708
 collision_mask = 8
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 damage = 2
 harvesting_tool = true
 
-[node name="CollisionShape2D" parent="HitboxPivot/WeaponHitbox" index="0"]
+[node name="CollisionShape2D" parent="Player/HitboxPivot/WeaponHitbox" index="0"]
 shape = SubResource( 50 )
 disabled = true
 
-[node name="AttackArm" type="Sprite" parent="HitboxPivot"]
+[node name="AttackArm" type="Sprite" parent="Player/HitboxPivot"]
 light_mask = 2
 position = Vector2( 8, 15 )
-texture = ExtResource( 3 )
+texture = ExtResource( 17 )
 offset = Vector2( 0, -2 )
 hframes = 22
 
-[node name="Netgun" type="Sprite" parent="HitboxPivot"]
+[node name="Netgun" type="Sprite" parent="Player/HitboxPivot"]
 light_mask = 2
 position = Vector2( 5, 7 )
-texture = ExtResource( 9 )
+texture = ExtResource( 6 )
 offset = Vector2( 0, -3 )
 hframes = 2
 vframes = 2
 frame = 1
 
-[node name="NetgunHitbox" parent="HitboxPivot" instance=ExtResource( 4 )]
+[node name="NetgunHitbox" parent="Player/HitboxPivot" instance=ExtResource( 11 )]
 visible = false
 collision_mask = 16
 
-[node name="CollisionShape2D" parent="HitboxPivot/NetgunHitbox" index="0"]
+[node name="CollisionShape2D" parent="Player/HitboxPivot/NetgunHitbox" index="0"]
 position = Vector2( -7.5, -40 )
 rotation = 1.5708
 shape = SubResource( 152 )
 
-[node name="NetProjectileOrigin" type="Position2D" parent="HitboxPivot"]
+[node name="NetProjectileOrigin" type="Position2D" parent="Player/HitboxPivot"]
 position = Vector2( -10, 12.5 )
 rotation = 3.14159
 
-[node name="Hurtbox" parent="." groups=["PlayerHurtbox"] instance=ExtResource( 6 )]
+[node name="Hurtbox" parent="Player" groups=["PlayerHurtbox"] instance=ExtResource( 10 )]
 visible = false
 position = Vector2( -12.5, -12.5 )
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+[node name="CollisionShape2D" parent="Player/Hurtbox" index="0"]
 position = Vector2( 13.5, -7 )
 shape = SubResource( 74 )
 
-[node name="InteractionButton" parent="." instance=ExtResource( 8 )]
-
-[node name="UI" type="CanvasLayer" parent="."]
-pause_mode = 2
-
-[node name="HealthUI" parent="UI" instance=ExtResource( 7 )]
-
-[node name="ShopMenu" parent="UI" instance=ExtResource( 10 )]
-visible = false
-
-[node name="InventoryMenu" parent="UI" instance=ExtResource( 11 )]
-visible = false
-
-[node name="LocationMarker" parent="UI" instance=ExtResource( 16 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 1024.0
-margin_bottom = 600.0
-
-[node name="CapturedMenu" parent="UI" instance=ExtResource( 15 )]
-visible = false
-
-[node name="NetgunTree" type="AnimationTree" parent="."]
+[node name="NetgunTree" type="AnimationTree" parent="Player"]
 tree_root = SubResource( 78 )
 anim_player = NodePath("NetgunPlayer")
 parameters/NetgunAttack/blend_position = Vector2( 0, 0 )
 parameters/Seek/seek_position = -1.0
 
-[node name="NetgunPlayer" type="AnimationPlayer" parent="NetgunTree"]
+[node name="NetgunPlayer" type="AnimationPlayer" parent="Player/NetgunTree"]
 anims/NetgunDown = SubResource( 87 )
 anims/NetgunLeft = SubResource( 88 )
 anims/NetgunRight = SubResource( 89 )
 anims/NetgunUp = SubResource( 90 )
 anims/RESET = SubResource( 91 )
 
-[node name="DialogueInteractionArea" parent="." instance=ExtResource( 12 )]
+[node name="DialogueInteractionArea" parent="Player" instance=ExtResource( 15 )]
 visible = false
 position = Vector2( -12.5, -12.5 )
 
-[node name="CollisionShape2D" parent="DialogueInteractionArea" index="0"]
+[node name="CollisionShape2D" parent="Player/DialogueInteractionArea" index="0"]
 position = Vector2( 13.75, -7.5 )
 shape = SubResource( 154 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2( 1.5, -5 )
 scale = Vector2( 1.594, 1.2 )
 shape = SubResource( 155 )
 
-[node name="AnnouncementLayer" parent="." instance=ExtResource( 14 )]
+[node name="AnnouncementLayer" parent="Player" instance=ExtResource( 9 )]
 scene_text_file = "res://OnFootAssets/DialogueSystem/world_announcements.json"
 
-[node name="DialogueLayers" parent="." instance=ExtResource( 13 )]
+[node name="DialogueLayers" parent="Player" instance=ExtResource( 16 )]
 
-[node name="DeathTree" type="AnimationTree" parent="."]
+[node name="DeathTree" type="AnimationTree" parent="Player"]
 tree_root = SubResource( 161 )
 anim_player = NodePath("DeathPlayer")
 parameters/blend_position = Vector2( 0, 0 )
 
-[node name="DeathPlayer" type="AnimationPlayer" parent="DeathTree"]
+[node name="DeathPlayer" type="AnimationPlayer" parent="Player/DeathTree"]
 anims/DeathDown = SubResource( 162 )
 anims/DeathLeft = SubResource( 163 )
 anims/DeathRight = SubResource( 164 )
 anims/DeathUp = SubResource( 165 )
 anims/RESET = SubResource( 166 )
 
-[node name="DeathSprite" type="Sprite" parent="."]
+[node name="DeathSprite" type="Sprite" parent="Player"]
 visible = false
 position = Vector2( 14, -11 )
-texture = ExtResource( 17 )
+texture = ExtResource( 5 )
 hframes = 3
 vframes = 4
 
-[node name="PauseHolder" parent="." instance=ExtResource( 20 )]
-
-[node name="FootstepAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 21 )
+[node name="FootstepAudio" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 8 )
 volume_db = -25.0
 bus = "SoundEffects"
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="area_entered" from="Player/Hurtbox" to="Player" method="_on_Hurtbox_area_entered"]
 
-[editable path="HitboxPivot/WeaponHitbox"]
-[editable path="HitboxPivot/NetgunHitbox"]
-[editable path="Hurtbox"]
-[editable path="DialogueInteractionArea"]
+[editable path="Player/HitboxPivot/WeaponHitbox"]
+[editable path="Player/HitboxPivot/NetgunHitbox"]
+[editable path="Player/Hurtbox"]
+[editable path="Player/DialogueInteractionArea"]

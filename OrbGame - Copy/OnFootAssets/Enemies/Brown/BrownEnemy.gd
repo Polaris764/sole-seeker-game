@@ -229,7 +229,7 @@ func _on_Hitbox_damage_dealt():
 
 # Audio #
 
-onready var audio = $blueAudio
+onready var audio = $brownAudio
 var audioTracks = {"jump":preload("res://Audio/EnemySounds/brownJump.ogg"),
 "attack":preload("res://Audio/EnemySounds/brownAttack.wav")
 }

@@ -36,11 +36,25 @@ margin_right = 229.0
 margin_bottom = 224.0
 text = "Organism Handbook"
 
+[node name="Save" parent="." instance=ExtResource( 2 )]
+margin_left = 92.0
+margin_top = 276.0
+margin_right = 183.0
+margin_bottom = 299.0
+text = "Save Game"
+
+[node name="MainMenu" parent="." instance=ExtResource( 2 )]
+margin_left = 94.0
+margin_top = 346.0
+margin_right = 178.0
+margin_bottom = 369.0
+text = "Main Menu"
+
 [node name="Quit" parent="." groups=["change_buttons"] instance=ExtResource( 2 )]
-margin_left = 61.0
-margin_top = 274.0
-margin_right = 223.0
-margin_bottom = 297.0
+margin_left = 59.0
+margin_top = 419.0
+margin_right = 221.0
+margin_bottom = 442.0
 text = "Quit"
 
 [node name="CloseButton" parent="." instance=ExtResource( 2 )]
@@ -67,5 +81,7 @@ valign = 1
 [connection signal="pressed" from="Inventory" to="." method="_on_Inventory_pressed"]
 [connection signal="pressed" from="TravelLogs" to="." method="_on_TravelLogs_pressed"]
 [connection signal="pressed" from="EnemyHandbook" to="." method="_on_EnemyHandbook_pressed"]
+[connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="MainMenu" to="." method="_on_MainMenu_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

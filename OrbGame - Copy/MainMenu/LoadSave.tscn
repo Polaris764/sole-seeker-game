@@ -7,7 +7,6 @@
 
 [node name="LoadSave" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-transition_duration = 1.0
 
 [node name="Title" parent="MarginContainer/MenuContainer" index="0"]
 text = "Load Save"

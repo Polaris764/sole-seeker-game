@@ -10,7 +10,6 @@ func _on_TextureButton_pressed():
 func growSprite(spriteName):
 	spriteName.set_scale(Vector2(2,2))
 func shrinkSprite(spriteName):
-	print("ahrinkinf")
 	$SizeTween.interpolate_property(spriteName, "rect_scale", Vector2(2,2), Vector2(1,1), .2, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$SizeTween.call_deferred("start")
 
@@ -54,7 +53,7 @@ func _on_Area2D_body_exited(_body):
 		) # hide info panel
 		$Tween.call_deferred("start")
 	elif i == 0:
-		print("updating")
+		#print("updating")
 		updateSystemInfoPanel(playerStarList[0].global_position)
 		growSprite(playerStarList[0].get_node("TextureButton"))
 	if texButton.get_scale().x > 1:
