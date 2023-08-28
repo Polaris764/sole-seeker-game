@@ -22,7 +22,6 @@ func set_health(value):
 		emit_signal("no_health")
 		if not is_player:
 			GalaxySave.game_data["totalKills"] += 1
-			GalaxySave.save_data()
 
 func _ready():
 	if not is_player:

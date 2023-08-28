@@ -33,8 +33,9 @@ func _ready():
 	if functional:
 		overlay.visible = true
 	if ship_speed == location.Galaxy:
-		turn_divisor = 70
-		max_speed_unit = max_speed_in_lightyears
+		turn_divisor = 70*2
+		max_speed_unit = max_speed_in_lightyears*2
+		speed *= 2
 	else:
 		turn_divisor = 140
 		max_speed_unit = max_speed_in_lightseconds

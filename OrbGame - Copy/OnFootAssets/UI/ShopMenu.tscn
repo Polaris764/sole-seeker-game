@@ -106,9 +106,12 @@ theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 4 )
 text = "Close"
 
+[connection signal="visibility_changed" from="." to="." method="_on_ShopMenu_visibility_changed"]
 [connection signal="gui_input" from="NinePatchRect/BuildingsList" to="." method="_on_BuildingsList_gui_input"]
 [connection signal="item_activated" from="NinePatchRect/BuildingsList" to="." method="_on_BuildingsList_item_activated"]
 [connection signal="item_selected" from="NinePatchRect/BuildingsList" to="." method="_on_BuildingsList_item_selected"]
 [connection signal="item_activated" from="NinePatchRect/DefensesList" to="." method="_on_DefensesList_item_activated"]
 [connection signal="item_selected" from="NinePatchRect/DefensesList" to="." method="_on_DefensesList_item_selected"]
+[connection signal="mouse_entered" from="NinePatchRect/CloseButton" to="." method="_on_CloseButton_mouse_entered"]
+[connection signal="mouse_exited" from="NinePatchRect/CloseButton" to="." method="_on_CloseButton_mouse_exited"]
 [connection signal="pressed" from="NinePatchRect/CloseButton" to="." method="_on_CloseButton_pressed"]

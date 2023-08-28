@@ -3,6 +3,7 @@ extends "res://PauseMenu/PauseBase.gd"
 onready var galaxy_image_holder = $VBoxContainer/Container/ViewportContainer/Viewport/GalaxyImage
 onready var loc_holder = $VBoxContainer/Container/StarsBox/VisitedBox/ScrollContainer/LocationHolder
 onready var circle_image_holder = $VBoxContainer/Container/ViewportContainer/Viewport/CircleImage
+onready var ship_image_holder = $VBoxContainer/Container/ViewportContainer/Viewport/ShipImage
 onready var viewportContainer = $VBoxContainer/Container/ViewportContainer
 onready var book_holder = $VBoxContainer/Container/StarsBox/BookmarkedBox/ScrollContainer/LocationHolder
 func _ready():
@@ -10,6 +11,7 @@ func _ready():
 func initialize():
 	fill_trip_log()
 	fill_bookmarks()
+	add_ship_image()
 
 func create_galaxy_image():
 	var img  = Image.new()
@@ -51,7 +53,11 @@ func fill_trip_log():
 		stars_added += 1
 		var star = log_array[i]
 		var button_instance = button_scene.instance()
-		button_instance.text = star
+		var star_position = log_dict[star]
+		var star_angle = rad2deg(Vector2(1,0).angle_to(star_position))
+		if star_angle < 0:
+			star_angle += 180
+		button_instance.text = star + " (" + str(stepify(Vector2.ZERO.distance_to(star_position),.01)) + ", " + str(stepify(star_angle,.01)) + "°)"
 		loc_holder.add_child(button_instance)
 		button_instance.connect("pressed",self,"circle_star",[log_dict[star]])
 		if stars_added >= 20:
@@ -67,11 +73,33 @@ func fill_bookmarks():
 		stars_added += 1
 		var star = book_array.keys()[i]
 		var button_instance = button_scene.instance()
-		button_instance.text = star
+		var star_position = book_array[star]
+		var star_angle = rad2deg(Vector2(1,0).angle_to(star_position))
+		if star_angle < 0:
+			star_angle += 180
+		button_instance.text = star + " (" + str(stepify(Vector2.ZERO.distance_to(star_position),.01)) + ", " + str(stepify(star_angle,.01)) + "°)"
 		book_holder.add_child(button_instance)
 		button_instance.connect("pressed",self,"circle_star",[book_array[star]])
 		if stars_added >= 20:
 			break
+
+func add_ship_image():
+	var img = Image.new()
+	img.create(1080,1080,false,Image.FORMAT_RGBA8)
+	img.lock()
+	var pos = GalaxySave.game_data["shipPosition"][0]
+	var ship_points = [Vector2(-4,-2),Vector2(-3,-2),Vector2(-2,-2),Vector2(-1,-2),Vector2(0,-2),Vector2(-3,-1),Vector2(-2,-1),Vector2(2,-1),
+	Vector2(-4,2),Vector2(-3,2),Vector2(-2,2),Vector2(-1,2),Vector2(0,2),Vector2(-3,1),Vector2(-2,1),Vector2(2,1),
+	Vector2(-1,0),Vector2(0,0),Vector2(1,0),Vector2(2,0),Vector2(3,0),Vector2(4,0)]
+	var ship_points2 = [Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1),Vector2(-1,1),Vector2(0,1),Vector2(1,1),Vector2(-4,0),Vector2(-3,0),Vector2(-2,0),]
+	for point in ship_points:
+		img.set_pixel(pos.x/100+540+point.x,pos.y/100+540+point.y,Color.darkblue)
+	for point in ship_points2:
+		img.set_pixel(pos.x/100+540+point.x,pos.y/100+540+point.y,Color.gray)
+	img.unlock()
+	var imgtex = ImageTexture.new()
+	imgtex.create_from_image(img)
+	ship_image_holder.texture = imgtex
 
 #func create_path():
 #	var stars = 9
@@ -110,16 +138,20 @@ func zoom():
 			galaxy_image_holder.rect_scale.y -= 0.2
 			circle_image_holder.rect_scale.x -= 0.2
 			circle_image_holder.rect_scale.y -= 0.2
+			ship_image_holder.rect_scale.x -= 0.2
+			ship_image_holder.rect_scale.y -= 0.2
 			#galaxy_image_holder.rect_pivot_offset = lerp(galaxy_image_holder.rect_pivot_offset,galaxy_image_holder.get_local_mouse_position(),.5)
 		if Input.is_action_just_released('zoom_in') and galaxy_image_holder.rect_scale.x < zoom_max and galaxy_image_holder.rect_scale.y < zoom_max:
 			galaxy_image_holder.rect_scale.x += 0.1
 			galaxy_image_holder.rect_scale.y += 0.1
 			circle_image_holder.rect_scale.x += 0.1
 			circle_image_holder.rect_scale.y += 0.1
+			ship_image_holder.rect_scale.x += 0.1
+			ship_image_holder.rect_scale.y += 0.1
 			var scale_factor = Vector2(1024,600)/get_viewport().size
-			print(galaxy_image_holder.get_local_mouse_position())
 			galaxy_image_holder.rect_pivot_offset = lerp(galaxy_image_holder.rect_pivot_offset,galaxy_image_holder.get_local_mouse_position()*scale_factor,.1)
 			circle_image_holder.rect_pivot_offset = lerp(circle_image_holder.rect_pivot_offset,circle_image_holder.get_local_mouse_position()*scale_factor,.1)
+			ship_image_holder.rect_pivot_offset = lerp(ship_image_holder.rect_pivot_offset,ship_image_holder.get_local_mouse_position()*scale_factor,.1)
 
 var mouse_location = false
 func _on_MouseDetection_mouse_entered():

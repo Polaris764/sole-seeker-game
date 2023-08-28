@@ -127,7 +127,7 @@ func spawn_red():
 		var group_size = rng.randi_range(2,4)
 		for unit in group_size:
 			var entity = red_enemy.instance()
-			entity.global_position = location
+			entity.global_position = reposition_location(location)
 			if entity.get_node("VisibilityNotifier2D").is_on_screen():
 				entity.queue_free()
 			else:
@@ -138,18 +138,18 @@ func spawn_blue():
 	for spawn in spawn_location_count:
 		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
 		var entity = blue_enemy.instance()
-		entity.global_position = location
+		entity.global_position = reposition_location(location)
 		if entity.get_node("VisibilityNotifier2D").is_on_screen():
 			entity.queue_free()
 		else:
 			planet.get_node("YSort").add_child(entity)
 func spawn_purple():
 	print("spawning purple")
-	var spawn_location_count = rng.randi_range(2,3)
+	var spawn_location_count = rng.randi_range(2,3)*10
 	for spawn in spawn_location_count:
 		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
 		var entity = purple_enemy.instance()
-		entity.global_position = location
+		entity.global_position = reposition_location(location)
 		if entity.get_node("VisibilityNotifier2D").is_on_screen():
 			entity.queue_free()
 		else:
@@ -160,7 +160,7 @@ func spawn_orange():
 	for spawn in spawn_location_count:
 		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
 		var entity = orange_enemy.instance()
-		entity.global_position = location
+		entity.global_position = reposition_location(location)
 		if entity.get_node("VisibilityNotifier2D").is_on_screen():
 			entity.queue_free()
 		else:
@@ -176,7 +176,7 @@ func spawn_black():
 			var group_size = rng.randi_range(8,16)
 			for unit in group_size:
 				var entity = black_enemy.instance()
-				entity.global_position = location
+				entity.global_position = reposition_location(location)
 				if entity.get_node("VisibilityNotifier2D").is_on_screen():
 					entity.queue_free()
 				else:
@@ -189,7 +189,7 @@ func spawn_green():
 		var group_size = rng.randi_range(8,16)
 		for unit in group_size:
 			var entity = green_enemy.instance()
-			entity.global_position = location
+			entity.global_position = reposition_location(location)
 			planet.get_node("YSort").add_child(entity)
 func count_enemies():
 	var ysorter = planet.get_node("YSort")
@@ -204,3 +204,14 @@ func count_enemies():
 func _on_SpawnTimer_timeout():
 	if count_enemies() < 45:
 		spawn_enemies()
+
+func reposition_location(location):
+	if location.x < 0:
+		location.x += 3200
+	elif location.x > 3200:
+		location.x -= 3200
+	if location.y < 0:
+		location.y += 3200
+	elif location.y > 3200:
+		location.y -= 3200
+	return location

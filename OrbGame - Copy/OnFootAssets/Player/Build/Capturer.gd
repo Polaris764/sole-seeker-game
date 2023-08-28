@@ -19,7 +19,6 @@ func destroy_self():
 	var current_building_type = ConstantsHolder.building_types.CAPTURER
 	data[current_building_type].erase(global_position)
 	GalaxySave.set_building_data(data)
-	GalaxySave.save_data()
 	queue_free()
 
 func _on_AnimatedSprite_animation_finished():

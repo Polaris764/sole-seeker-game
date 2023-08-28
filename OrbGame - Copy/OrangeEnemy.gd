@@ -43,6 +43,7 @@ onready var sprite = $Body0
 
 func _ready():
 	animator.play("Idle")
+	sprite.material = sprite.material.duplicate()
 	$SplurtCountdown.start(rand_range(.4,4))
 	set_sprite_distances()
 
@@ -112,11 +113,9 @@ func death_animation():
 func completed_harvest():
 	harvest_area.harvesting = false
 	GalaxySave.game_data["backpackBlood"]["orange"] += 1
-	print(GalaxySave.game_data["backpackBlood"])
-	GalaxySave.save_data()
-	for child in sprite.get_children():
-		if child is Sprite:
-			child.position *= Vector2(1/.8,1/.8)
+#	for child in sprite.get_children():
+#		if child is Sprite:
+#			child.position *= Vector2(1/.8,1/.8)
 
 func _on_SplurtCountdown_timeout():
 	if state != DEAD:

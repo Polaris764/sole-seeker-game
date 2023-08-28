@@ -30,3 +30,9 @@ func _on_CustomCheckbox_pressed():
 		$Box.texture = selected_texture
 	else:
 		$Box.texture = unselected_texture
+
+
+func _on_CustomCheckbox_mouse_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func _on_CustomCheckbox_mouse_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)

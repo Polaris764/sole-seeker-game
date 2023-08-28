@@ -12,6 +12,7 @@ var screen_edge = 1004
 
 func disappear():
 	emit_signal("disappearing")
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
 	var targets = get_tree().get_nodes_in_group("TransitionTarget")
 	for item in targets:
 #		if "disabled" in item:

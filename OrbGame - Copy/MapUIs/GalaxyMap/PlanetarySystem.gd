@@ -99,7 +99,7 @@ func set_enter_button_text(accessible):
 				relevantButtons.append(i.as_text())
 		enterButtonText.text = "Enter\n" + str(relevantButtons)
 	else:
-		enterButtonText.text = "Access Restricted"
+		enterButtonText.text = "Access "
 
 export var system_type : Array setget uniquify
 var system_type_dup
@@ -116,7 +116,7 @@ func get_system_type():
 		system_type_text = "System Type: Uninhabited"
 	if not constantsHolder.white_system_check(system_type):
 		set_enter_button_text(false)
-	elif not "red" in system_type_text and GalaxySave.game_data["storyProgression"] < 11:
+	elif not "red" in system_type_text and GalaxySave.game_data["storyProgression"] < 11 and not "Reciever" in system_type_text:
 		set_enter_button_text(false)
 	else:
 		set_enter_button_text(true)

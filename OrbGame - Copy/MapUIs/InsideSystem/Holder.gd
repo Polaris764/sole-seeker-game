@@ -16,8 +16,12 @@ func generatePlanetarySystem(seedUsed):
 	else:
 		planetAmount = ConstantsHolder.planetAmountOptions[randi() % ConstantsHolder.planetAmountOptions.size()]
 	player.travel_distance = 600+600*planetAmount
+	if player.travel_distance < 3600:
+		player.travel_distance = 3600
 	player.travel_distance_squared = pow(player.travel_distance,2)
-	starType = starAmountOptions[randi() % starAmountOptions.size()]
+	var typeRNG = RandomNumberGenerator.new()
+	typeRNG.seed = keyedSeed
+	starType = starAmountOptions[typeRNG.randi() % starAmountOptions.size()]
 	var particles = $Star/GeneralParticles
 	match starType:
 		1: #M d23b00
@@ -154,7 +158,9 @@ func update_info_panel():
 	var star_type
 	var star_temp
 	#var _planetAmount = planetAmountOptions[randi() % planetAmountOptions.size()]
-	star_type = starAmountOptions[randi() % starAmountOptions.size()]
+	var typeRNG = RandomNumberGenerator.new()
+	typeRNG.seed = keyedSeed
+	star_type = starAmountOptions[typeRNG.randi() % starAmountOptions.size()]
 	match star_type:
 		1:
 			star_type = "Class M Star"

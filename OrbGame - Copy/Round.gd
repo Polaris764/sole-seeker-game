@@ -45,6 +45,7 @@ func _ready():
 		if "Body" in item.name:
 			bodySprites.append(item)
 	sprite.scale = Vector2(1,1)
+	sprite.material = sprite.material.duplicate()
 	current_max_speed = MAX_SPEED
 	set_sprite_distances()
 
@@ -184,40 +185,13 @@ func death_animation():
 	play_audio(["death"])
 	$Hitbox.queue_free()
 	GalaxySave.game_data["individualKills"]["purple"] += 1
-	$AnimationPlayer.play_backwards("Agro")
-	var tween = sprite.get_node("DeathTween")
-	tween.interpolate_property(sprite, "offset",
-			sprite.offset, Vector2(0,0), 2,
-			Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	tween.start()
-	tween.interpolate_property($ShadowSprite0, "scale",
-			sprite.scale, Vector2(0,0), 2,
-			Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	tween.start()
-	tween.interpolate_property($Hurtbox/CollisionShape2D, "position",
-			$Hurtbox/CollisionShape2D.position, Vector2(0,0), 2,
-			Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	tween.start()
-	for child in sprite.get_children():
-		if child is Sprite:
-			tween = child.get_node("DeathTween")
-			tween.interpolate_property(child, "offset",
-					child.offset, Vector2(0,0), 2,
-					Tween.TRANS_LINEAR, Tween.EASE_OUT)
-			tween.start()
-	for child in $ShadowSprite0.get_children():
-		tween.interpolate_property(child, "scale",
-				sprite.scale, Vector2(0,0), 2,
-				Tween.TRANS_LINEAR, Tween.EASE_OUT)
-		tween.start()
 func completed_harvest():
 	harvest_area.harvesting = false
-	GalaxySave.game_data["backpackBlood"]["red"] += 1
-	print(GalaxySave.game_data["backpackBlood"])
-	GalaxySave.save_data()
-	for child in sprite.get_children():
-		if child is Sprite:
-			child.position *= Vector2(1/.8,1/.8)
+	visible = false
+	GalaxySave.game_data["backpackBlood"]["purple"] += 1
+#	for child in sprite.get_children():
+#		if child is Sprite:
+#			child.position *= Vector2(1/.8,1/.8)
 
 # Trapped Functions #
 

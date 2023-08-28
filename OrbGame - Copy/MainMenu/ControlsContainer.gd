@@ -24,3 +24,9 @@ func add_child(node, _choice = false):
 	.add_child(node)
 	node.rect_size.x = 984
 	position_children()
+
+
+func button_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func button_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)

@@ -155,10 +155,11 @@ func get_spawning_array():
 	return tilemap_table
 
 func _on_Player_teleported(direction):
-	var entities = $YSort.get_children()
-	entities.erase($YSort/Player)
-	direction *= map_side_size
-	direction *= 16
-	print("teleporting all entities")
-	for entity in entities:
-		entity.global_position += direction
+	pass
+#	var entities = $YSort.get_children()
+#	entities.erase($YSort/Player)
+#	direction *= map_side_size
+#	direction *= 16
+#	print("teleporting all entities")
+#	for entity in entities:
+#		entity.global_position += direction

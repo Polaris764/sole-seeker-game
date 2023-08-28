@@ -44,3 +44,9 @@ func update_ship_stats(companyStation):
 	else:
 		GalaxySave.set_ship_speed(-1,true)
 		GalaxySave.game_data["shipPosition"][3] = get_node("../../../../Player").rotation
+
+
+func _on_EnterButton_mouse_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func _on_EnterButton_mouse_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)

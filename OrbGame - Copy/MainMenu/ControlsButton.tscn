@@ -5,5 +5,6 @@
 
 [node name="ControlsButton" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+assigned_action = ""
 
 [connection signal="pressed" from="." to="." method="_on_ControlsButton_pressed"]

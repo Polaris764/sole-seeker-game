@@ -111,3 +111,29 @@ func _on_ContactButton_pressed():
 	close_self()
 	var _change = get_tree().change_scene("res://OnFootAssets/CompanyHQ/ContactArena.tscn")
 	# arena or something fun and unique, potentially new gameplay aspect
+
+
+func _on_CloseButton2_mouse_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func _on_CloseButton2_mouse_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
+
+
+func _on_TerminateButton_mouse_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func _on_TerminateButton_mouse_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
+
+
+func _on_ContactButton_mouse_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func _on_ContactButton_mouse_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
+
+
+func _on_CloseButton_mouse_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func _on_CloseButton_mouse_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
+func _on_CapturedMenu_visibility_changed():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)

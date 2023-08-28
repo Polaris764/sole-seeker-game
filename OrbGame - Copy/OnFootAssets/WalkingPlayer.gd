@@ -65,6 +65,7 @@ func _physics_process(delta):
 	if cutscene.size() == 0:
 		match state:
 			MOVE:
+				start_aTimer()
 				move_state()
 			ATTACK:
 				move_state()
@@ -74,11 +75,20 @@ func _physics_process(delta):
 					player_weapons.NETGUN:
 						attack_state_NETGUN(delta)
 			HARVEST:
+				start_aTimer()
 				harvest_state()
 			BUILD:
+				start_aTimer()
 				move_state()
 				build_state(delta)
 #	print(self.global_position)
+onready var attackTimer = $AttackTimer
+func start_aTimer():
+	attackTimer.start(2.1)
+func _on_AttackTimer_timeout():
+	if state == ATTACK:
+		print("Error: attack timed out")
+		harvest_end()
 
 ## MOVING ##
 
@@ -183,7 +193,6 @@ func move_state():
 	
 	# building
 	if Input.is_action_just_pressed("build_state_switch"):
-		print(state)
 		if not isInRoom or testWorld:
 			if state == MOVE:
 				state = BUILD
@@ -261,6 +270,7 @@ func play_footstep_sound():
 	newPlayer.volume_db = footstepAudio.volume_db
 	newPlayer.pitch_scale = footstepAudio.pitch_scale
 	newPlayer.stream = footstepAudio.stream
+	newPlayer.bus = "SoundEffects"
 	add_child(newPlayer)
 	newPlayer.play()
 	newPlayer.connect("finished",newPlayer,"queue_free")
@@ -275,7 +285,6 @@ func attack_state(_delta):
 			animationState.travel("AttackRun")
 
 func attack_animation_finished2():
-	print("attack finished")
 	$AttackTree.active = false
 	needle_attack_with_netgun_equipped = false
 	state = MOVE
@@ -290,11 +299,14 @@ func harvest_check():
 		yield(get_tree().create_timer(weaponHitbox.harvest_wait_time), "timeout")
 	weaponHitbox.harvesting_tool = false
 	play_animation($AttackTree)
+	finishing_harvest_attempt = true
 	state = ATTACK
 
+var finishing_harvest_attempt = false
 func harvest_end():
 	$AttackTree.active = false
 	needle_attack_with_netgun_equipped = false
+	finishing_harvest_attempt = false
 	state = MOVE
 
 func _on_Hurtbox_area_entered(area):
@@ -303,7 +315,6 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.start_invincibility(0.5)
 		hurtbox.create_hit_effect()
 		GalaxySave.game_data["playerHealth"] = stats.health
-		GalaxySave.save_data()
 
 func pause_animation(player,time_position):
 	player.set("parameters/TimeScale/scale",0)
@@ -326,7 +337,6 @@ func attack_state_NETGUN(_delta):
 			animationState.travel("AttackRun")
 
 func netgun_attack_animation_finished():
-	print("netgun attack finished")
 	$NetgunTree.active = false
 	state = MOVE
 
@@ -340,7 +350,6 @@ func fire_netgun_create_projectiles():
 		net_sprite.frame = rand_range(0,net_sprite.hframes)
 		get_parent().add_child(projectile)
 		projectile.start($HitboxPivot/NetProjectileOrigin.global_transform,body)
-		print("making net")
 
 ## Building ##
 
@@ -640,7 +649,6 @@ func build_state(_delta):
 							turret_placed_instance.call_deferred("add_child",cannon_power)
 							GalaxySave.game_data["cannonLocation"] = GalaxySave.game_data["shipPosition"][0]
 			GalaxySave.set_building_data(planet_building_data)
-			GalaxySave.save_data()
 				
 	if Input.is_action_just_pressed("harvest"):
 		match current_building_type:
@@ -756,7 +764,6 @@ func build_state(_delta):
 						GalaxySave.game_data["storedBuildings"][current_building_type] += 1
 			
 		GalaxySave.set_building_data(planet_building_data)
-		GalaxySave.save_data()
 func update_guides(mousepos_floored):
 	clear_all_guides()
 	if state == BUILD:
@@ -888,4 +895,3 @@ func on_death():
 		yield(get_tree().create_timer(2.0), "timeout")
 		var _change = get_tree().change_scene("res://OnFootAssets/InsideShip/InsideShip.tscn")
 		GalaxySave.save_data()
-		

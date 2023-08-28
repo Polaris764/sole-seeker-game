@@ -4,6 +4,7 @@ onready var menu_holder = get_node("..")
 
 func _on_CloseButton_pressed():
 	AudioManager.play_effect([AudioManager.effects.pauseClick])
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
 	menu_holder.change_scene()
 
 func _on_Inventory_pressed():

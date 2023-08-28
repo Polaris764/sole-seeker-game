@@ -15,6 +15,7 @@ func _ready():
 
 func _exit_tree():
 	AudioManager.stop_song("mainMenu")
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
 func register_buttons():
 	var buttons = get_tree().get_nodes_in_group("Buttons")
 	for button in buttons:

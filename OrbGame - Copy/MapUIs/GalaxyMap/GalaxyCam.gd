@@ -19,15 +19,19 @@ func _physics_process(_delta):
 
 export var zoom_max = 15
 export var zoom_min = .25
-	
+var zoom_per_scroll = 1
 func zoom():
 	if not ending:
+		if zoom.x < 4:
+			zoom_per_scroll = 1
+		else:
+			zoom_per_scroll = 4
 		if Input.is_action_just_released('zoom_out') and self.zoom.x < zoom_max and self.zoom.y < zoom_max:
-			self.zoom.x += 0.25
-			self.zoom.y += 0.25
+			self.zoom.x += 0.25*zoom_per_scroll
+			self.zoom.y += 0.25*zoom_per_scroll
 		if Input.is_action_just_released('zoom_in') and self.zoom.x > zoom_min and self.zoom.y > zoom_min:
-			self.zoom.x -= 0.25
-			self.zoom.y -= 0.25
+			self.zoom.x -= 0.25*zoom_per_scroll
+			self.zoom.y -= 0.25*zoom_per_scroll
 
 # lerp to overshot target, without overshooting
 static func lerp_overshoot(from: float, to: float, weight: float, overshoot: float) -> float:

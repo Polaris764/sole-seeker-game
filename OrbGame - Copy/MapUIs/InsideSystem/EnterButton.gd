@@ -49,3 +49,14 @@ func _on_BookmarkButton_pressed():
 		if GalaxySave.game_data["bookmarkedStars"].has(star):
 			GalaxySave.game_data["bookmarkedStars"].erase(star)
 		bookmarkable = true
+
+
+func _on_EnterButton_mouse_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func _on_EnterButton_mouse_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
+
+func _on_BookmarkButton_mouse_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func _on_BookmarkButton_mouse_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)

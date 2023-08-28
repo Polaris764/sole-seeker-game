@@ -64,7 +64,7 @@ func calibrate_options():
 				affordable = false
 		if not affordable:
 			buildings_list.set_item_custom_fg_color(buildings_list.get_item_count()-1,Color(1,1,1,.5))
-	if GalaxySave.game_data["storyProgression"] >= 22 or true:
+	if GalaxySave.game_data["storyProgression"] >= 22:
 		for resource in cannon_dictionary:
 			if GalaxySave.game_data["cannonPartsBought"][resource] == false:
 				buildings_list.add_item(building_types.keys()[resource].capitalize() + ", Owned: " + str(GalaxySave.game_data["storedBuildings"][resource]))
@@ -127,7 +127,6 @@ func _on_BuildingsList_item_activated(index):
 				GalaxySave.game_data["storedBlood"][resource_type] -= debt
 		if cannon_item:
 			GalaxySave.game_data["cannonPartsBought"][bought_item] = true
-		GalaxySave.save_data()
 		calibrate_options()
 
 func _on_DefensesList_item_activated(index):
@@ -149,7 +148,6 @@ func _on_DefensesList_item_activated(index):
 				var debt = price - player_resources1[resource_type]
 				GalaxySave.game_data["backpackBlood"][resource_type] = 0
 				GalaxySave.game_data["storedBlood"][resource_type] -= debt
-		GalaxySave.save_data()
 		calibrate_options()
 
 func _on_BuildingsList_item_selected(_index):
@@ -202,3 +200,12 @@ func find_item_in_list(item,list):
 
 func _on_BuildingsList_gui_input(_event):
 	buildings_price_list.get_v_scroll().value = buildings_list.get_v_scroll().value
+
+
+func _on_CloseButton_mouse_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func _on_CloseButton_mouse_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
+
+func _on_ShopMenu_visibility_changed():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)

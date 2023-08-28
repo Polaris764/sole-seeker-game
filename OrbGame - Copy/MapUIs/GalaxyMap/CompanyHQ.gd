@@ -77,7 +77,7 @@ func updateSystemInfoPanel():
 		degPos += 360
 	pStarCoords.text = String(self.global_position.distance_to(Vector2(0,0))) + ", " + String(degPos)+"°" #set star coordinates
 	pPlanetAmount.text = "Planet Count: N/A" #set planet amount
-	pSystemType.text = "System Type: Orb Reciever" #generate system type
+	pSystemType.text = "System Type: Reciever" #generate system type
 	
 onready var constantsHolder = get_node("/root/ConstantsHolder")
 func updateSystemInfoPanel2(starUsed):
@@ -131,9 +131,9 @@ func get_system_type(first_star):
 		system_type_text = "System Type: " + array_join(type_to_use)
 	else:
 		system_type_text = "System Type: Uninhabited"
-	if "white" and not ConstantsHolder.white_systems_visitable():
+	if not ConstantsHolder.white_system_check(system_type):
 		set_enter_button_text(false)
-	elif not "red" in system_type_text and GalaxySave.game_data["storyProgression"] < 11:
+	elif not "red" in system_type_text and GalaxySave.game_data["storyProgression"] < 11 and not "Reciever" in system_type_text:
 		set_enter_button_text(false)
 	else:
 		set_enter_button_text(true)

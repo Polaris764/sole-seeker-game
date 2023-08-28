@@ -21,7 +21,6 @@ func activity_set(status):
 		else:
 			building_info[ConstantsHolder.building_types.LASER][global_position][1] = false
 	GalaxySave.set_building_data(building_info)
-	GalaxySave.save_data()
 
 func alignment_set(alignment_set_to):
 	alignment_HV = alignment_set_to

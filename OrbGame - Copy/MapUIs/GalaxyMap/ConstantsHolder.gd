@@ -9,6 +9,9 @@ var galaxy_size_var = 6 #1.3
 var planetAmountOptions = [0,1,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8,9,9,10,11,12,13,14]
 var megaPlanetAmountOptions = [12,13,13,14,14,15,15,16,16,17,17,17,18,18,19,20]
 
+var mouseCursor1 = preload("res://UIResources/Cursor1.png")
+var mouseCursor2 = preload("res://UIResources/Cursor2.png")
+
 func white_systems_visitable():
 	var storyPos = GalaxySave.game_data["storyProgression"]
 	if storyPos >= 24:
@@ -58,9 +61,6 @@ func update_story_from_atos():
 	print(storyPos)
 	if storyPos == 0:
 		GalaxySave.game_data["storyProgression"] = 1
-		SignalBus.emit_signal("updated_story")
-	elif storyPos == 1:
-		GalaxySave.game_data["storyProgression"] = 2
 		SignalBus.emit_signal("updated_story")
 	elif storyPos == 2:
 		GalaxySave.game_data["storyProgression"] = 3

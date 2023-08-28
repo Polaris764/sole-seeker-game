@@ -18,8 +18,16 @@ func position_children():
 			item.rect_position.y += separation
 		previous_pos = item.rect_position.y
 		previous_height = item.rect_size.y
+		if "Button" in item.name:
+			item.connect("mouse_entered",self,"button_entered")
+			item.connect("mouse_exited",self,"button_exited")
 
 func add_child(node, _choice = false):
 	.add_child(node)
 	node.rect_size.x = 984
 	position_children()
+
+func button_entered():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor2)
+func button_exited():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)

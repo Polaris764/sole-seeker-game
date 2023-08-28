@@ -1124,7 +1124,7 @@ current_expression = 4
 player_node = NodePath("../../../Player")
 
 [node name="ATOSfront2" parent="YSort/AtosStands" instance=ExtResource( 11 )]
-position = Vector2( 35, -490 )
+position = Vector2( 45, -496 )
 
 [node name="Interactable" parent="YSort/AtosStands/ATOSfront2" index="0"]
 player_node = NodePath("../../../Player")
@@ -1251,7 +1251,6 @@ shape = SubResource( 10 )
 [node name="ShopDoor" parent="YSort" instance=ExtResource( 17 )]
 position = Vector2( 200, -324 )
 orientation = "vertical"
-locked = false
 
 [node name="CollisionShape2D" parent="YSort/ShopDoor/Area2D" index="0"]
 position = Vector2( 0, 23 )
@@ -1296,7 +1295,7 @@ position = Vector2( 0, 48 )
 shape = SubResource( 16 )
 
 [node name="ExchangeMachine" type="Node2D" parent="YSort"]
-position = Vector2( 264, -330 )
+position = Vector2( 266, -328 )
 script = ExtResource( 19 )
 player_node = NodePath("../Player")
 

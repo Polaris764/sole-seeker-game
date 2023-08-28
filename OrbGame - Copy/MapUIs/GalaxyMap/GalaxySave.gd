@@ -68,10 +68,10 @@ func load_data():
 			"backpackBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
-			"storedBuildings": {buildingTypes.WALL:50,buildingTypes.FLOOR:50,buildingTypes.TURRET:50,buildingTypes.CALTROPS:50,buildingTypes.LANDMINE:50,buildingTypes.LASER:50,buildingTypes.CAPTURER:50,buildingTypes.CANNON_BASE:50,buildingTypes.CANNON_TURRET:50,buildingTypes.CANNON_POWER:50},
+			"storedBuildings": {buildingTypes.WALL:0,buildingTypes.FLOOR:0,buildingTypes.TURRET:0,buildingTypes.CALTROPS:0,buildingTypes.LANDMINE:0,buildingTypes.LASER:0,buildingTypes.CAPTURER:0,buildingTypes.CANNON_BASE:0,buildingTypes.CANNON_TURRET:0,buildingTypes.CANNON_POWER:0},
 			"capturedEnemies": [],#["BlueOrb","BrownEnemy","Round"],
 			"shipPosition": [Vector2.ZERO,Vector2.ZERO,0,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
-			"storyProgression": 22,
+			"storyProgression": 0,
 			"totalKills" : 0,
 			"individualKills" : {"black":0,"blue":0,"brown":0,"orange":0,"green":0,"red":0,"purple":0},
 			"playerHealth" : PlayerStats.max_health,

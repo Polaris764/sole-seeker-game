@@ -130,8 +130,8 @@ func set_biome_collisions():
 			var cosine_length2_options = [4,6]
 			var sin_length_options = [7,9,11,13]
 			var point_count = 200
-			var circle_radius = rngMach.randi_range(300,1000)*galaxy_size_var
-			var variance_radius = rngMach.randi_range(350,650)*galaxy_size_var
+			var circle_radius = rngMach.randi_range(300,1000)*galaxy_size_var*2
+			var variance_radius = rngMach.randi_range(350,650)*galaxy_size_var*2
 			var cosine_length = cosine_length_options[rngMach.randi() % cosine_length_options.size()]
 			var cosine_length2 = cosine_length2_options[rngMach.randi() % cosine_length2_options.size()]
 			var sin_length = sin_length_options[rngMach.randi() % sin_length_options.size()]

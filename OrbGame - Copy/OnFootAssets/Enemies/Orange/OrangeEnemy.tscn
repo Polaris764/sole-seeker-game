@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://OrangeEnemy.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
@@ -6,9 +6,27 @@
 [ext_resource path="res://OnFootAssets/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://OnFootAssets/Enemies/Orange/Orange.png" type="Texture" id=5]
 [ext_resource path="res://OnFootAssets/Enemies/Orange/Body0.gd" type="Script" id=6]
+[ext_resource path="res://OnFootAssets/Assets/noiseTexture.png" type="Texture" id=7]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Burst"
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D dissolve_texture : hint_albedo;
+uniform float dissolve_value : hint_range(0,1);
+
+void fragment(){
+    vec4 main_texture = texture(TEXTURE, UV);
+    vec4 noise_texture = texture(dissolve_texture, UV);
+    main_texture.a *= floor(dissolve_value + min(1, noise_texture.x));
+    COLOR = main_texture;
+}"
+
+[sub_resource type="ShaderMaterial" id=44]
+shader = SubResource( 1 )
+shader_param/dissolve_value = 1.0
+shader_param/dissolve_texture = ExtResource( 7 )
+
+[sub_resource type="Animation" id=45]
 length = 1.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -601,31 +619,31 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "Harvest"
 length = 6.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body0:scale")
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.8 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 6 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "completed_harvest"
 } ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body0:material:shader_param/dissolve_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.75, 0.25 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -685,13 +703,25 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body0:material:shader_param/dissolve_value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="CapsuleShape2D" id=9]
 radius = 8.0
 height = 44.0
 
 [sub_resource type="CapsuleShape2D" id=10]
-radius = 11.0
+radius = 17.5
 height = 28.0
 
 [sub_resource type="CircleShape2D" id=11]
@@ -704,6 +734,7 @@ script = ExtResource( 1 )
 map_size = 200
 
 [node name="Body0" type="Sprite" parent="."]
+material = SubResource( 44 )
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -711,6 +742,7 @@ vframes = 2
 script = ExtResource( 6 )
 
 [node name="BaseL" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -718,12 +750,13 @@ vframes = 2
 frame = 10
 
 [node name="BaseLAnimator" type="AnimationPlayer" parent="Body0/BaseL"]
-anims/Burst = SubResource( 1 )
+anims/Burst = SubResource( 45 )
 anims/RESET = SubResource( 2 )
 
 [node name="DeathTween" type="Tween" parent="Body0"]
 
 [node name="BaseR" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -735,12 +768,14 @@ anims/Burst = SubResource( 3 )
 anims/RESET = SubResource( 4 )
 
 [node name="Body1" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 
 [node name="BaseL" type="Sprite" parent="Body0/Body1"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -754,6 +789,7 @@ anims/RESET = SubResource( 13 )
 [node name="DeathTween" type="Tween" parent="Body0/Body1"]
 
 [node name="BaseR" type="Sprite" parent="Body0/Body1"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -765,12 +801,14 @@ anims/Burst = SubResource( 14 )
 anims/RESET = SubResource( 15 )
 
 [node name="Body2" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 
 [node name="BaseL" type="Sprite" parent="Body0/Body2"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -784,6 +822,7 @@ anims/RESET = SubResource( 17 )
 [node name="DeathTween" type="Tween" parent="Body0/Body2"]
 
 [node name="BaseR" type="Sprite" parent="Body0/Body2"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -795,12 +834,14 @@ anims/Burst = SubResource( 18 )
 anims/RESET = SubResource( 19 )
 
 [node name="Body3" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 
 [node name="BaseL" type="Sprite" parent="Body0/Body3"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -814,6 +855,7 @@ anims/RESET = SubResource( 21 )
 [node name="DeathTween" type="Tween" parent="Body0/Body3"]
 
 [node name="BaseR" type="Sprite" parent="Body0/Body3"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -825,12 +867,14 @@ anims/Burst = SubResource( 22 )
 anims/RESET = SubResource( 23 )
 
 [node name="Body4" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 
 [node name="BaseL" type="Sprite" parent="Body0/Body4"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -844,6 +888,7 @@ anims/RESET = SubResource( 25 )
 [node name="DeathTween" type="Tween" parent="Body0/Body4"]
 
 [node name="BaseR" type="Sprite" parent="Body0/Body4"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -855,12 +900,14 @@ anims/Burst = SubResource( 26 )
 anims/RESET = SubResource( 27 )
 
 [node name="Body5" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 
 [node name="BaseL" type="Sprite" parent="Body0/Body5"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -874,6 +921,7 @@ anims/RESET = SubResource( 29 )
 [node name="DeathTween" type="Tween" parent="Body0/Body5"]
 
 [node name="BaseR" type="Sprite" parent="Body0/Body5"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -885,12 +933,14 @@ anims/Burst = SubResource( 30 )
 anims/RESET = SubResource( 31 )
 
 [node name="Body6" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 
 [node name="BaseL" type="Sprite" parent="Body0/Body6"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -904,6 +954,7 @@ anims/RESET = SubResource( 33 )
 [node name="DeathTween" type="Tween" parent="Body0/Body6"]
 
 [node name="BaseR" type="Sprite" parent="Body0/Body6"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -915,12 +966,14 @@ anims/Burst = SubResource( 34 )
 anims/RESET = SubResource( 35 )
 
 [node name="Body7" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 
 [node name="BaseL" type="Sprite" parent="Body0/Body7"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -934,6 +987,7 @@ anims/RESET = SubResource( 37 )
 [node name="DeathTween" type="Tween" parent="Body0/Body7"]
 
 [node name="BaseR" type="Sprite" parent="Body0/Body7"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -945,12 +999,14 @@ anims/Burst = SubResource( 38 )
 anims/RESET = SubResource( 39 )
 
 [node name="Body8" type="Sprite" parent="Body0"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
 vframes = 2
 
 [node name="BaseL" type="Sprite" parent="Body0/Body8"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -964,6 +1020,7 @@ anims/RESET = SubResource( 41 )
 [node name="DeathTween" type="Tween" parent="Body0/Body8"]
 
 [node name="BaseR" type="Sprite" parent="Body0/Body8"]
+use_parent_material = true
 texture = ExtResource( 5 )
 offset = Vector2( 0, -37 )
 hframes = 10
@@ -986,6 +1043,7 @@ rotation = 1.5708
 shape = SubResource( 9 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -7.5 )
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]

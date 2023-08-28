@@ -13,6 +13,7 @@ func play_song(song:Array,playlistName:String,start_pos = 0):
 		var audioplayer = AudioStreamPlayer.new()
 		audioplayer.bus = "Music"
 		audioplayer.pause_mode = Node.PAUSE_MODE_PROCESS
+		mute_ongoing_songs()
 		activePlaylists[playlistName] = audioplayer
 		audioplayer.stream = song_enum_pairs[song[rng.randi()%song.size()]]
 		audioplayer.connect("finished",self,"continue_playlist",[audioplayer,song])
@@ -28,6 +29,10 @@ func stop_song(playlistName:String):
 func continue_playlist(audioplayer,playlist):
 	audioplayer.stream = song_enum_pairs[playlist[rng.randi()%playlist.size()]]
 	audioplayer.play()
+
+func mute_ongoing_songs():
+	for item in activePlaylists:
+		activePlaylists[item].volume_db = -85
 
 func play_effect(effects:Array,startpos = 0,location=null,volume_mod = 0):
 	var audioplayer

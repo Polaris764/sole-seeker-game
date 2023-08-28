@@ -20,7 +20,7 @@ func _process(_delta):
 		sprite.set_global_position(half_size + Vector2(cos(vec.angle()),sin(vec.angle())).normalized() * nearest_edge *.8)
 
 func get_closest_edge_point(middle,angle):
-	var size = get_viewport().size
+	var size = get_viewport_rect().size
 	var x1 = 0
 	var x2 = size.x
 	var y1 = size.y
@@ -38,21 +38,21 @@ func get_closest_edge_point(middle,angle):
 
 func get_nearest_ship(origin_pos,center_ship):
 	var closest = center_ship
-	var closest_distance = (center_ship - origin_pos).length()
-	if (center_ship + Vector2(200*16,0) - origin_pos).length() < closest_distance:
+	var closest_distance = origin_pos.distance_squared_to(center_ship)
+	if origin_pos.distance_squared_to(center_ship + Vector2(200*16,0)) < closest_distance:
 		closest = center_ship + Vector2(200*16,0)
-	if (center_ship + Vector2(200*16,200*16) - origin_pos).length() < closest_distance:
-		closest = center_ship + Vector2(200*16,0)
-	if (center_ship + Vector2(0,200*16) - origin_pos).length() < closest_distance:
-		closest = center_ship + Vector2(200*16,0)
-	if (center_ship + Vector2(-200*16,200*16) - origin_pos).length() < closest_distance:
-		closest = center_ship + Vector2(200*16,0)
-	if (center_ship + Vector2(-200*16,0) - origin_pos).length() < closest_distance:
-		closest = center_ship + Vector2(200*16,0)
-	if (center_ship + Vector2(-200*16,-200*16) - origin_pos).length() < closest_distance:
-		closest = center_ship + Vector2(200*16,0)
-	if (center_ship + Vector2(0,-200*16) - origin_pos).length() < closest_distance:
-		closest = center_ship + Vector2(200*16,0)
-	if (center_ship + Vector2(200*16,-200*16) - origin_pos).length() < closest_distance:
-		closest = center_ship + Vector2(200*16,0)
+	if origin_pos.distance_squared_to(center_ship + Vector2(200*16,200*16)) < closest_distance:
+		closest = center_ship + Vector2(200*16,200*16)
+	if origin_pos.distance_squared_to(center_ship + Vector2(0,200*16)) < closest_distance:
+		closest = center_ship + Vector2(0,200*16)
+	if origin_pos.distance_squared_to(center_ship + Vector2(-200*16,200*16)) < closest_distance:
+		closest = center_ship + Vector2(-200*16,200*16)
+	if origin_pos.distance_squared_to(center_ship + Vector2(-200*16,0)) < closest_distance:
+		closest = center_ship + Vector2(-200*16,0)
+	if origin_pos.distance_squared_to(center_ship + Vector2(-200*16,-200*16)) < closest_distance:
+		closest = center_ship + Vector2(-200*16,-200*16)
+	if origin_pos.distance_squared_to(center_ship + Vector2(0,-200*16)) < closest_distance:
+		closest = center_ship + Vector2(0,-200*16)
+	if origin_pos.distance_squared_to(center_ship + Vector2(200*16,-200*16)) < closest_distance:
+		closest = center_ship + Vector2(200*16,-200*16)
 	return closest

@@ -76,6 +76,7 @@ func play_footstep_sound():
 	newPlayer.volume_db = footstepAudio.volume_db
 	newPlayer.pitch_scale = footstepAudio.pitch_scale
 	newPlayer.stream = footstepAudio.stream
+	newPlayer.bus = "SoundEffects"
 	add_child(newPlayer)
 	newPlayer.play()
 	newPlayer.connect("finished",newPlayer,"queue_free")

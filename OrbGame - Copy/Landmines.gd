@@ -29,6 +29,5 @@ func destroy_self():
 	var current_building_type = ConstantsHolder.building_types.LANDMINE
 	data[current_building_type].erase(global_position)
 	GalaxySave.set_building_data(data)
-	GalaxySave.save_data()
-	print("saved destruction")
+	#GalaxySave.save_data()
 	queue_free()

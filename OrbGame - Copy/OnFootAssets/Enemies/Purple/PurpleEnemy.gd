@@ -42,6 +42,7 @@ func _ready():
 	sprite.visible = false
 	sprite2.visible = false
 	sprite.scale = Vector2(1,1)
+	sprite.material = sprite.material.duplicate()
 	current_max_speed = MAX_SPEED
 	set_sprite_distances()
 
@@ -143,14 +144,12 @@ func death_animation():
 func completed_harvest():
 	harvest_area.harvesting = false
 	GalaxySave.game_data["backpackBlood"]["purple"] += 1
-	print(GalaxySave.game_data["backpackBlood"])
-	GalaxySave.save_data()
-	for child in sprite.get_children():
-		if child is Sprite:
-			child.position *= Vector2(1/.8,1/.8)
-	for child in sprite2.get_children():
-		if child is Sprite:
-			child.position *= Vector2(1/.8,1/.8)
+#	for child in sprite.get_children():
+#		if child is Sprite:
+#			child.position *= Vector2(1/.8,1/.8)
+#	for child in sprite2.get_children():
+#		if child is Sprite:
+#			child.position *= Vector2(1/.8,1/.8)
 
 # Trapped Functions #
 

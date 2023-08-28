@@ -1,4 +1,4 @@
-extends Button
+extends "res://MainMenu/UIButtonBase.gd"
 
 export var assigned_action : String setget set_button_text
 
@@ -12,17 +12,18 @@ func start_cooldown():
 	cooldownTimer.start(.25)
 
 func set_button_text(action):
-	assigned_action = action
-	var controls_list = []
-	for i in InputMap.get_action_list(action):
-		if i is InputEventKey:
-			controls_list.append(i.as_text())
-		elif i is InputEventMouseButton:
-			controls_list.append("Mouse Button " + str(i.button_index))
-		else:
-			print("not valid button for controls text")
-	text = customizable_controls[action] + " = " + str(controls_list)
-	selected = false
+	if action != "":
+		assigned_action = action
+		var controls_list = []
+		for i in InputMap.get_action_list(action):
+			if i is InputEventKey:
+				controls_list.append(i.as_text())
+			elif i is InputEventMouseButton:
+				controls_list.append("Mouse Button " + str(i.button_index))
+			else:
+				print("not valid button for controls text")
+		text = customizable_controls[action] + " = " + str(controls_list)
+		selected = false
 
 func _on_ControlsButton_pressed():
 	if not settingsMenu.on_cooldown:

@@ -2,7 +2,8 @@ extends VBoxContainer
 
 export var assigned_save : String setget setup_button
 onready var tween = $Tween
-onready var infobutton = $MoreInfoButton
+onready var infoHold = $InfoHold
+onready var infobutton = $InfoHold/MoreInfoButton
 onready var info1 = $SaveSeed
 onready var info2 = $SaveMods
 export var desired_position = 0
@@ -42,7 +43,7 @@ func setup_button(save):
 	if not hasMods:
 		info2x.text += "\nNone"
 var info_visible = false
-onready var timer = $MoreInfoButton/Timer
+onready var timer = $InfoHold/MoreInfoButton/Timer
 var on_cooldown = false
 func _on_MoreInfoButton_pressed():
 	if not on_cooldown:
@@ -54,9 +55,9 @@ func _on_MoreInfoButton_pressed():
 			tween.start()
 			tween.interpolate_property(info2,"modulate:a",info2.modulate.a,0,.25,Tween.TRANS_LINEAR,Tween.EASE_IN,.25)
 			tween.start()
-			tween.interpolate_property(info1,"rect_position:y",info1.rect_position.y,infobutton.rect_position.y,.25,Tween.TRANS_LINEAR)
+			tween.interpolate_property(info1,"rect_position:y",info1.rect_position.y,infoHold.rect_position.y,.25,Tween.TRANS_LINEAR)
 			tween.start()
-			tween.interpolate_property(info2,"rect_position:y",info2.rect_position.y,infobutton.rect_position.y,.25,Tween.TRANS_LINEAR,Tween.EASE_IN,.25)
+			tween.interpolate_property(info2,"rect_position:y",info2.rect_position.y,infoHold.rect_position.y,.25,Tween.TRANS_LINEAR,Tween.EASE_IN,.25)
 			tween.start()
 			info_visible = false
 		else:
@@ -65,9 +66,9 @@ func _on_MoreInfoButton_pressed():
 			tween.start()
 			tween.interpolate_property(info2,"modulate:a",info2.modulate.a,1,.25,Tween.TRANS_LINEAR)
 			tween.start()
-			tween.interpolate_property(info1,"rect_position:y",infobutton.rect_position.y,81+27,.25,Tween.TRANS_LINEAR,Tween.EASE_IN,.25)
+			tween.interpolate_property(info1,"rect_position:y",infoHold.rect_position.y,81+27,.25,Tween.TRANS_LINEAR,Tween.EASE_IN,.25)
 			tween.start()
-			tween.interpolate_property(info2,"rect_position:y",infobutton.rect_position.y,108+27,.25,Tween.TRANS_LINEAR)
+			tween.interpolate_property(info2,"rect_position:y",infoHold.rect_position.y,108+27,.25,Tween.TRANS_LINEAR)
 			tween.start()
 			info_visible = true
 func _on_Timer_timeout():
@@ -78,8 +79,8 @@ func _on_LoadButton_pressed():
 	mainUI.start_game(assigned_save)
 
 var delete_state = false
-onready var delete_button = $DeleteButton
-onready var dTimer = $DeleteButton/DeleteTimer
+onready var delete_button = $DeleteHold/DeleteButton
+onready var dTimer = $DeleteHold/DeleteButton/DeleteTimer
 func _on_DeleteButton_pressed():
 	if not delete_state:
 		delete_state = true

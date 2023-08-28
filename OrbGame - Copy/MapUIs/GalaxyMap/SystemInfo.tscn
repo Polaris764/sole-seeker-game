@@ -13,7 +13,6 @@
 layer = 2
 
 [node name="Control" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 margin_right = 224.0
 margin_bottom = 244.0
 
@@ -23,12 +22,24 @@ margin_right = 237.0
 margin_bottom = 234.0
 
 [node name="Background" type="TextureRect" parent="Control/Holder"]
+visible = false
 margin_left = -31.0
 margin_top = -4.0
 margin_right = 763.0
 margin_bottom = 1119.0
 rect_scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
+
+[node name="Background2" type="NinePatchRect" parent="Control/Holder"]
+margin_left = -31.0
+margin_top = -4.0
+margin_right = 763.0
+margin_bottom = 1219.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+patch_margin_top = 200
+patch_margin_right = 188
+patch_margin_bottom = 599
 
 [node name="StarImage" type="TextureRect" parent="Control/Holder"]
 anchor_left = 0.5
@@ -90,9 +101,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -110.0
+margin_left = -100.0
 margin_top = 82.0
-margin_right = 110.0
+margin_right = 100.0
 margin_bottom = 105.0
 custom_fonts/font = ExtResource( 7 )
 text = "System Type: Green/Red"
@@ -106,8 +117,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -61.5
+margin_top = 50.0
 margin_right = 351.5
-margin_bottom = 207.0
+margin_bottom = 257.0
 rect_scale = Vector2( 0.3, 0.3 )
 texture_normal = ExtResource( 4 )
 expand = true
@@ -126,4 +138,6 @@ valign = 1
 autowrap = true
 uppercase = true
 
+[connection signal="mouse_entered" from="Control/Holder/EnterButton" to="Control/Holder/EnterButton" method="_on_EnterButton_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Holder/EnterButton" to="Control/Holder/EnterButton" method="_on_EnterButton_mouse_exited"]
 [connection signal="pressed" from="Control/Holder/EnterButton" to="Control/Holder/EnterButton" method="_on_EnterButton_pressed"]

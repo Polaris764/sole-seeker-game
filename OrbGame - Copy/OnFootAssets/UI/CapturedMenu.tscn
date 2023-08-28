@@ -151,7 +151,16 @@ margin_bottom = 339.0
 theme = ExtResource( 4 )
 text = "Close"
 
+[connection signal="visibility_changed" from="." to="." method="_on_CapturedMenu_visibility_changed"]
+[connection signal="mouse_entered" from="TextureRect/CloseButton" to="." method="_on_CloseButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/CloseButton" to="." method="_on_CloseButton_mouse_exited"]
 [connection signal="pressed" from="TextureRect/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="mouse_entered" from="OrganismMenu/ContactButton" to="." method="_on_ContactButton_mouse_entered"]
+[connection signal="mouse_exited" from="OrganismMenu/ContactButton" to="." method="_on_ContactButton_mouse_exited"]
 [connection signal="pressed" from="OrganismMenu/ContactButton" to="." method="_on_ContactButton_pressed"]
+[connection signal="mouse_entered" from="OrganismMenu/TerminateButton" to="." method="_on_TerminateButton_mouse_entered"]
+[connection signal="mouse_exited" from="OrganismMenu/TerminateButton" to="." method="_on_TerminateButton_mouse_exited"]
 [connection signal="pressed" from="OrganismMenu/TerminateButton" to="." method="_on_TerminateButton_pressed"]
+[connection signal="mouse_entered" from="OrganismMenu/CloseButton2" to="." method="_on_CloseButton2_mouse_entered"]
+[connection signal="mouse_exited" from="OrganismMenu/CloseButton2" to="." method="_on_CloseButton2_mouse_exited"]
 [connection signal="pressed" from="OrganismMenu/CloseButton2" to="." method="_on_CloseButton2_pressed"]
