@@ -22,18 +22,23 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+margin_left = -100.0
 margin_top = -225.0
 margin_right = 488.0
-margin_bottom = -25.0
+margin_bottom = -75.0
+rect_min_size = Vector2( 588, 150 )
 rect_pivot_offset = Vector2( 488, 200 )
 theme = ExtResource( 3 )
 
 [node name="BuildingsList2" type="ItemList" parent="NinePatchRect"]
 anchor_left = 0.5
 anchor_right = 0.5
+margin_left = -100.0
 margin_top = 225.0
 margin_right = 488.0
 margin_bottom = 331.0
+rect_min_size = Vector2( 588, 106 )
+rect_pivot_offset = Vector2( 1022, 566 )
 theme = ExtResource( 3 )
 
 [node name="BuildingsList" type="ItemList" parent="NinePatchRect"]
@@ -43,6 +48,7 @@ margin_left = -488.0
 margin_top = 225.0
 margin_right = 488.0
 margin_bottom = 331.0
+rect_min_size = Vector2( 976, 106 )
 theme = ExtResource( 3 )
 
 [node name="ShopTitle" type="Label" parent="NinePatchRect"]
@@ -90,6 +96,7 @@ margin_left = -488.0
 margin_top = -225.0
 margin_right = 488.0
 margin_bottom = -25.0
+rect_min_size = Vector2( 976, 200 )
 rect_pivot_offset = Vector2( 488, 200 )
 theme = ExtResource( 3 )
 

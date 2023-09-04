@@ -105,18 +105,18 @@ text = "Red Orb"
 autowrap = true
 
 [node name="ContactButton" type="Button" parent="OrganismMenu"]
-margin_left = 131.0
+margin_left = 126.0
 margin_top = 276.0
-margin_right = 271.0
-margin_bottom = 296.0
+margin_right = 266.0
+margin_bottom = 301.0
 theme = ExtResource( 4 )
 text = "Contact"
 
 [node name="TerminateButton" type="Button" parent="OrganismMenu"]
-margin_left = 271.0
+margin_left = 276.0
 margin_top = 276.0
-margin_right = 411.0
-margin_bottom = 296.0
+margin_right = 416.0
+margin_bottom = 301.0
 theme = ExtResource( 4 )
 text = "Terminate"
 
@@ -127,9 +127,10 @@ margin_right = 693.0
 margin_bottom = 225.0
 rect_min_size = Vector2( 281, 145 )
 expand = true
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="CurrentCapLabel" type="Label" parent="OrganismMenu"]
+visible = false
 margin_left = 417.0
 margin_top = 250.0
 margin_right = 698.0
@@ -137,6 +138,7 @@ margin_bottom = 275.0
 valign = 1
 
 [node name="TotalKillLabel" type="Label" parent="OrganismMenu"]
+visible = false
 margin_left = 417.0
 margin_top = 275.0
 margin_right = 698.0
@@ -155,6 +157,7 @@ text = "Close"
 [connection signal="mouse_entered" from="TextureRect/CloseButton" to="." method="_on_CloseButton_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect/CloseButton" to="." method="_on_CloseButton_mouse_exited"]
 [connection signal="pressed" from="TextureRect/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="visibility_changed" from="OrganismMenu" to="." method="_on_OrganismMenu_visibility_changed"]
 [connection signal="mouse_entered" from="OrganismMenu/ContactButton" to="." method="_on_ContactButton_mouse_entered"]
 [connection signal="mouse_exited" from="OrganismMenu/ContactButton" to="." method="_on_ContactButton_mouse_exited"]
 [connection signal="pressed" from="OrganismMenu/ContactButton" to="." method="_on_ContactButton_pressed"]

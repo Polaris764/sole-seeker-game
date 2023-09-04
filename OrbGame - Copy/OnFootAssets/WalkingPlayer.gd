@@ -296,6 +296,7 @@ func harvest_check():
 	if not weaponHitbox.harvesting:
 		pass
 	else:
+		AudioManager.play_effect([AudioManager.effects.harvest],15.4-weaponHitbox.harvest_wait_time)
 		yield(get_tree().create_timer(weaponHitbox.harvest_wait_time), "timeout")
 	weaponHitbox.harvesting_tool = false
 	play_animation($AttackTree)

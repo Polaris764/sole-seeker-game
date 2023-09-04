@@ -42,9 +42,7 @@ func _ready():
 	elif storyPos == 20:
 		GalaxySave.game_data["storyProgression"] = 21
 	elif storyPos == 22:
-		if not ConstantsHolder.building_types.CANNON_POWER in GalaxySave.game_data["buildingData"]:
-			GalaxySave.game_data["buildingData"][ConstantsHolder.building_types.CANNON_POWER] = []
-		if GalaxySave.game_data["buildingData"][ConstantsHolder.building_types.CANNON_POWER].size() > 0:
+		if GalaxySave.game_data["cannonLocation"]:
 			GalaxySave.game_data["storyProgression"] = 23
 
 func _on_IncreaseLabel_interacted_with():

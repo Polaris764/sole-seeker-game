@@ -7,17 +7,24 @@ onready var player = $YSort/Player
 onready var ysorter = $YSort
 onready var spaceship = $Spaceship
 onready var ship_shadow = $Shadow
+var visiting_controls = preload("res://MapUIs/General/FlightUIOverlay.tscn")
 export var map_side_size = 100
 var rng = RandomNumberGenerator.new()
-
+var ship_view = false
 func _ready():
 	AudioManager.play_song([AudioManager.songs.rest],"endPlanet")
 	set_up_terrain()
 	if GalaxySave.game_data["shipPosition"][6]:
+		ConstantsHolder.saving_disabled = false
+		ship_view = true
 		player.queue_free()
 		$VisitingCamera.global_position = spaceship.global_position
 		$VisitingCamera.current = true
+		var overlay = visiting_controls.instance()
+		add_child(overlay)
+		overlay.get_node("Holder/VBoxContainer/SpeedLabel").text = ""
 	else:
+		ConstantsHolder.saving_disabled = true
 		player.global_position = (spaceship.global_position + Vector2(83,37))
 		send_ship()
 
@@ -56,6 +63,9 @@ func rand_bool():
 
 onready var tween = $Tween
 func send_ship():
+	var villagers = get_tree().get_nodes_in_group("Villager")
+	for i in villagers:
+		i.panicking = true
 	player.add_cutscene(name)
 	tween.interpolate_property(spaceship,"scale",spaceship.scale,Vector2(1.5,1.5),3)
 	tween.start()
@@ -64,13 +74,12 @@ func send_ship():
 	tween.interpolate_property(ship_shadow,"scale",ship_shadow.scale,Vector2(0,0),6)
 	tween.start()
 	$ShipTimer.start()
-	print("ship leaving")
 func _on_ShipTimer_timeout():
 	tween.interpolate_property(ship_shadow,"global_position",ship_shadow.global_position,ship_shadow.global_position+Vector2(25*16,0),5)
 func _on_VisibilityNotifier2D_screen_exited():
-	spaceship.queue_free()
-	player.remove_cutscene(name)
-	print("ship end")
+	if not ship_view:
+		spaceship.queue_free()
+		player.remove_cutscene(name)
 
 onready var playerCam = $YSort/Player/Camera2D
 onready var animator = $AnimationPlayer

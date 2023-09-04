@@ -97,6 +97,8 @@ func updatePlanetInfoPanel(seedUsed):
 	var planetTypes = ["Marsh","Volcanic","Desert","Wet","Rust","Frozen"]
 	var chosen_planet_type = planetTypes[rng.randi() % planetTypes.size()]
 	pPlanetBiome.text = "Biome: " + chosen_planet_type
+	if systemType.has("white"):
+		pPlanetBiome.text = "Biome: Grass"
 
 func array_join(arr, separator = ", "):
 	var output = "";
@@ -131,6 +133,8 @@ func create_texture():
 	rng.seed = keyedSeed
 	var planetTypes = ["Marsh","Volcanic","Desert","Wet","Rust","Frozen"]
 	var chosen_planet_type = planetTypes[rng.randi() % planetTypes.size()]
+	if GalaxySave.getLastStarType().has("white"):
+		chosen_planet_type = "White"
 	rng.seed = keyedSeed
 	noise.seed = rng.randi()
 	noise.octaves = 6
@@ -246,6 +250,19 @@ func create_texture():
 							img.set_pixel(x, y, Color("4f5d4f"))
 						else:
 							img.set_pixel(x, y, Color("717a71"))
+					img.unlock()
+			var texture = ImageTexture.new()
+			texture.create_from_image(img)
+			$Planet/PlanetImage.texture = texture
+		"White":
+			var img_texture = load("res://MapUIs/InsideSystem/WhiteThumbnail.png")
+			var img = img_texture.get_data()
+			for y in img.get_size().y:
+				for x in img.get_size().x:
+					img.lock()
+					var height = noise.get_noise_2d(x, y) * 60.0  # MODIFY HERE FOR HEIGHT CHANGES
+					if height > 13.0:
+						img.set_pixel(x, y, Color("306207"))
 					img.unlock()
 			var texture = ImageTexture.new()
 			texture.create_from_image(img)

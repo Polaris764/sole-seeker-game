@@ -29,3 +29,6 @@ func change_scene(new_scene = null):
 		current_scene.hide()
 		current_scene = null
 		get_tree().paused = false
+
+func _on_PauseHolder_visibility_changed():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)

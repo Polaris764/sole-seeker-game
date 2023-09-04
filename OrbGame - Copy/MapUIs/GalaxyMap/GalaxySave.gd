@@ -55,6 +55,7 @@ func save_data():
 onready var buildingTypes = ConstantsHolder.building_types
 onready var shipLocation = ConstantsHolder.ship_locations
 func load_data():
+	ConstantsHolder.reset_variables()
 	var directory = Directory.new()
 	if not directory.dir_exists(SAVE_FILE_PATH):
 		directory.make_dir(SAVE_FILE_PATH)

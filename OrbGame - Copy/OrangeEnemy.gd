@@ -111,6 +111,7 @@ func death_animation():
 	GalaxySave.game_data["individualKills"]["orange"] += 1
 
 func completed_harvest():
+	$CollisionShape2D.queue_free()
 	harvest_area.harvesting = false
 	GalaxySave.game_data["backpackBlood"]["orange"] += 1
 #	for child in sprite.get_children():

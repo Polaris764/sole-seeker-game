@@ -972,7 +972,6 @@ position = Vector2( 537, 87 )
 parameters/playback = SubResource( 32 )
 
 [node name="Camera2D" parent="YSort/Player" index="3"]
-current = false
 zoom = Vector2( 5, 5 )
 
 [node name="Building5" type="Sprite" parent="YSort"]
@@ -1121,7 +1120,7 @@ wait_time = 4.0
 one_shot = true
 
 [node name="LaserTimer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 20.0
 one_shot = true
 autostart = true
 
@@ -1137,7 +1136,7 @@ anims/RESET = SubResource( 34 )
 position = Vector2( 777, 582 )
 
 [node name="Destination2" type="Position2D" parent="Destinations"]
-position = Vector2( 1115, 586 )
+position = Vector2( 1163, 585 )
 
 [node name="Destination3" type="Position2D" parent="Destinations"]
 position = Vector2( 1022, 598 )

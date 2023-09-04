@@ -33,6 +33,7 @@ func oButtonPressed(buttonName):
 	oButtonHolder.hide()
 	descHolder.show()
 	notif.hide()
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
 
 func _on_ReturnButton_pressed():
 	AudioManager.play_effect([AudioManager.effects.pauseClick])

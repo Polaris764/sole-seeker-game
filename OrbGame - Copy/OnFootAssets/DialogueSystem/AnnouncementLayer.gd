@@ -39,6 +39,7 @@ func finish():
 	in_progress = false
 	
 func on_display_announcement(text_key):
+	AudioManager.play_effect([AudioManager.effects.announcement])
 	timer.start(announcement_duration)
 #	if in_progress:
 #		pass

@@ -216,6 +216,7 @@ func entity_trapped(duration,speed):
 
 func _on_Hitbox_area_entered(_area):
 	current_max_speed = 0
+	stats.health = 0
 	sprite.visible = false
 	$ExplodeSprite.visible = true
 	$ExplodeSprite.play("default")

@@ -23,6 +23,7 @@ func play_song(song:Array,playlistName:String,start_pos = 0):
 func stop_song(playlistName:String):
 	if activePlaylists.has(playlistName):
 		var audioplayer = activePlaylists[playlistName]
+		audioplayer.volume_db = -85
 		audioplayer.queue_free()
 		activePlaylists.erase(playlistName)
 
@@ -31,7 +32,9 @@ func continue_playlist(audioplayer,playlist):
 	audioplayer.play()
 
 func mute_ongoing_songs():
+#	print(activePlaylists)
 	for item in activePlaylists:
+		print("muting song")
 		activePlaylists[item].volume_db = -85
 
 func play_effect(effects:Array,startpos = 0,location=null,volume_mod = 0):
@@ -82,11 +85,14 @@ var song_enum_pairs = {
 	songs.will:preload("res://Audio/AudioFiles/will.ogg")
 }
 
-enum effects {breakage,cannon,landing,healMachine,laserZap,menuClick,mine,needle,net,pauseClick,placement1,placement2,placement3,rain,respawn,shipLift,supersonic,turret,unfurl}
+enum effects {announcement,breakage,cannon,dialogue,landing,harvest,healMachine,laserZap,menuClick,mine,needle,net,pauseClick,placement1,placement2,placement3,rain,respawn,shipEnter,shipLeft,supersonic,turret,unfurl}
 var effect_enum_pairs = {
+	effects.announcement:preload("res://Audio/SoundEffects/announcement.wav"),
 	effects.breakage:preload("res://Audio/SoundEffects/break.ogg"),
 	effects.cannon:preload("res://Audio/SoundEffects/cannon.ogg"),
+	effects.dialogue:preload("res://Audio/SoundEffects/dialogue.wav"),
 	effects.landing:preload("res://Audio/SoundEffects/landing.ogg"),
+	effects.harvest:preload("res://Audio/SoundEffects/harvest.wav"),
 	effects.healMachine:preload("res://Audio/SoundEffects/healMachine.wav"),
 	effects.laserZap:preload("res://Audio/SoundEffects/laserZap.wav"),
 	effects.menuClick:preload("res://Audio/SoundEffects/menuClick.wav"),
@@ -98,7 +104,8 @@ var effect_enum_pairs = {
 	effects.placement2:preload("res://Audio/SoundEffects/placement2.wav"),
 	effects.placement3:preload("res://Audio/SoundEffects/placement3.wav"),
 	effects.respawn:preload("res://Audio/SoundEffects/respawn.wav"),
-	effects.shipLift:preload("res://Audio/SoundEffects/shipLift.wav"),
+	effects.shipEnter:preload("res://Audio/SoundEffects/shipDoor.wav"),
+	effects.shipLeft:preload("res://Audio/SoundEffects/shipLift.wav"),
 	effects.supersonic:preload("res://Audio/SoundEffects/supersonic.wav"),
 	effects.turret:preload("res://Audio/SoundEffects/turret.wav"),
 	effects.unfurl:preload("res://Audio/SoundEffects/unfurl.wav")

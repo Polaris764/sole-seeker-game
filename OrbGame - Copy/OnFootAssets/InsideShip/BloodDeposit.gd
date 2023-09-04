@@ -4,6 +4,7 @@ extends Node2D
 func _ready():
 	pass#print(GalaxySave.game_data["backpackBlood"])
 func _on_Interactable_interacted_with():
+	$Deposit.play()
 	for child in GalaxySave.game_data["backpackBlood"]:
 		GalaxySave.game_data["storedBlood"][child] += GalaxySave.game_data["backpackBlood"][child]
 		GalaxySave.game_data["backpackBlood"][child] = 0

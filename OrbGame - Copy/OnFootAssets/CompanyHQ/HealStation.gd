@@ -10,8 +10,13 @@ onready var exit_pos = $Position2D2
 var process_starting = false
 onready var backup_cam = get_node("../../BackupCamera")
 onready var audioPlayer = $HealAudio
+var has_healed = false
 func _ready():
-	sprite.frame = 0
+	if GalaxySave.game_data["storyProgression"] == 0:
+		sprite.frame = 0
+	else:
+		sprite.frame = 4
+	
 
 func _on_Interactable_interacted_with():
 	healing()
@@ -23,7 +28,8 @@ func healing():
 	backup_cam.global_position = player.global_position
 	backup_cam.current = true
 	player.global_position = heal_pos.global_position
-	animationPlayer.play_backwards("DoorsOpen")
+	if GalaxySave.game_data["storyProgression"] != 0 or has_healed:
+		animationPlayer.play_backwards("DoorsOpen")
 	player.z_index = 1
 	sprite.z_index = 2
 	audioPlayer.play()
@@ -33,6 +39,7 @@ func _on_HealTimer_timeout():
 	animationPlayer.play("DoorsOpen")
 	PlayerStats.health = PlayerStats.max_health
 	audioPlayer.stop()
+	has_healed = true
 
 func on_animation_end():
 	if not process_starting:

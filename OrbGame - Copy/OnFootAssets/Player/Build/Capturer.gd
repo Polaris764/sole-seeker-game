@@ -24,9 +24,12 @@ func destroy_self():
 func _on_AnimatedSprite_animation_finished():
 	if target:
 		var captured_enemes_list = GalaxySave.game_data["capturedEnemies"]
-		captured_enemes_list.append(target.name)
+		captured_enemes_list.append(default_name(target.name))
 		target.queue_free()
 	destroy_self()
+
+func default_name(modded_name):
+	return str(modded_name.replace("@", "").replace(str(int(modded_name)), ""))
 
 # Needs to:
 # - remove orb

@@ -20,11 +20,13 @@ func _on_EnemyHandbook_pressed():
 	menu_holder.change_scene(menu_holder.enemy_handbook)
 
 func _on_Quit_pressed():
-	GalaxySave.save_data()
+	if not ConstantsHolder.saving_disabled:
+		GalaxySave.save_data()
 	get_tree().quit()
 
 func _on_Save_pressed():
-	GalaxySave.save_data()
+	if not ConstantsHolder.saving_disabled:
+		GalaxySave.save_data()
 
 var menuScene = "res://MainMenu/UIHolder.tscn"
 func _on_MainMenu_pressed():
@@ -35,3 +37,7 @@ func _on_MainMenu_pressed():
 
 func initialize(): # necessary placeholder function
 	pass
+
+func _ready():
+	if ConstantsHolder.saving_disabled:
+		$Save.disabled = true

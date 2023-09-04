@@ -21,8 +21,6 @@ func custom_interaction():
 			relevantButtons.append(i.as_text())
 	get_node("../YSort/Player/InteractionButton").updateButton(relevantButtons,"Exit Ship",self,"Interact")
 
-onready var tween = get_node("../TransitionCover/Tween")
-onready var cover = get_node("../TransitionCover/ColorRect")
 func interacted():
 	var ship_location = GalaxySave.game_data["shipPosition"][7]
 	tween.interpolate_property(cover,"modulate:a",0,1,.5)
@@ -32,3 +30,13 @@ func interacted():
 		var _change = get_tree().change_scene(station_scene)
 	else:
 		var _change = get_tree().change_scene(planet_scene)
+
+var tween
+var cover
+func _ready():
+	if get_parent().name != "YSort":
+		tween = get_node("../TransitionCover/Tween")
+		cover = get_node("../TransitionCover/ColorRect")
+	else:
+		tween = get_node("../../TransitionCover/Tween")
+		cover = get_node("../../TransitionCover/ColorRect")

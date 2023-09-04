@@ -48,59 +48,58 @@ map_size = 200
 [node name="Sprite0" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -20 )
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="DeathTween" type="Tween" parent="Sprite0"]
 
 [node name="Sprite1" type="AnimatedSprite" parent="Sprite0"]
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="DeathTween" type="Tween" parent="Sprite0/Sprite1"]
 
 [node name="Sprite2" type="AnimatedSprite" parent="Sprite0"]
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="DeathTween" type="Tween" parent="Sprite0/Sprite2"]
 
 [node name="Sprite3" type="AnimatedSprite" parent="Sprite0"]
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="DeathTween" type="Tween" parent="Sprite0/Sprite3"]
 
 [node name="Sprite4" type="AnimatedSprite" parent="Sprite0"]
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="DeathTween" type="Tween" parent="Sprite0/Sprite4"]
 
 [node name="Sprite5" type="AnimatedSprite" parent="Sprite0"]
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="DeathTween" type="Tween" parent="Sprite0/Sprite5"]
 
 [node name="Sprite6" type="AnimatedSprite" parent="Sprite0"]
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="DeathTween" type="Tween" parent="Sprite0/Sprite6"]
 
 [node name="Sprite7" type="AnimatedSprite" parent="Sprite0"]
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="DeathTween" type="Tween" parent="Sprite0/Sprite7"]
 
 [node name="Sprite8" type="AnimatedSprite" parent="Sprite0"]
 frames = SubResource( 3 )
+frame = 1
 playing = true
 
 [node name="DeathTween" type="Tween" parent="Sprite0/Sprite8"]

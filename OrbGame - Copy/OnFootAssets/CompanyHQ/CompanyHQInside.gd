@@ -38,6 +38,9 @@ func handle_story():
 		GalaxySave.game_data["shipPosition"][0] = get_station_position()
 		healStation.healing()
 		$BackupCamera.global_position = healStation.get_node("Position2D2").global_position
+		$YSort/TrainingDoor.locked = true
+	elif storyPos == 1:
+		$YSort/TrainingDoor.locked = false
 	elif storyPos == 2:
 		$YSort/TrainingDoor.locked = true
 	elif storyPos == 3:

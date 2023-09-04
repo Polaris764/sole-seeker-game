@@ -48,6 +48,9 @@ func calibrate_inventory():
 			"Round":
 				itemName = "Purple"
 				itemIcon = "res://OnFootAssets/UI/CapturedComponents/RoundThumbnail.png"
+		if itemIcon == "":
+			push_warning("Captured Organism file not found.")
+			print(item)
 		button.organism_type = itemName
 		button.organism_icon = itemIcon
 		captured_grid.add_child(button)
@@ -61,21 +64,19 @@ func clear_buttons():
 var clicked_type
 func button_clicked(origin_node):
 	clicked_type = origin_node.organism_type
-	organism_menu.get_node("NameLabel").text = clicked_type
 	var info_text
-	if GalaxySave.game_data["enemiesContacted"].find(ConstantsHolder.name_to_file[clicked_type]) != -1:
-		info_text = ConstantsHolder.organism_descriptions[clicked_type]
-	else:
-		info_text = ConstantsHolder.no_organism_description
-	organism_menu.get_node("InfoLabel").text = info_text
 	var amount_of_type_captured = 0
 	var organism_file_name = name_to_file[clicked_type]
 	for organism in GalaxySave.game_data["capturedEnemies"]:
 		if organism == organism_file_name:
 			amount_of_type_captured += 1
-	organism_menu.get_node("CurrentCapLabel").text = "Current of organism captured: " + str(amount_of_type_captured)
-	organism_menu.get_node("TotalKillLabel").text = "Total of organism killed: " + str(GalaxySave.game_data["individualKills"][clicked_type.to_lower()])
 	var texture = load(origin_node.organism_icon)
+	if GalaxySave.game_data["enemiesContacted"].find(ConstantsHolder.name_to_file[clicked_type]) != -1:
+		info_text = "Current of organism captured: " + str(amount_of_type_captured) + "\n" + "Total of organism killed: " + str(GalaxySave.game_data["individualKills"][clicked_type.to_lower()])
+	else:
+		info_text = ConstantsHolder.no_organism_description
+	organism_menu.get_node("NameLabel").text = clicked_type
+	organism_menu.get_node("InfoLabel").text = info_text
 	organism_menu.get_node("EnemyView").texture = texture
 	organism_menu.visible = true
 	close_button.visible = false
@@ -102,7 +103,7 @@ func _on_TerminateButton_pressed():
 		
 func close_info_box():
 	organism_menu.visible = false
-	close_button.visible = false
+	close_button.visible = true
 
 func _on_ContactButton_pressed():
 	ConstantsHolder.contact_organism = name_to_file[clicked_type]
@@ -136,4 +137,8 @@ func _on_CloseButton_mouse_entered():
 func _on_CloseButton_mouse_exited():
 	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
 func _on_CapturedMenu_visibility_changed():
+	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)
+
+
+func _on_OrganismMenu_visibility_changed():
 	Input.set_custom_mouse_cursor(ConstantsHolder.mouseCursor1)

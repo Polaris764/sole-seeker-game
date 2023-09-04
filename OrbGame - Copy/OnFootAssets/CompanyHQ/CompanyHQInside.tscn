@@ -1295,7 +1295,7 @@ position = Vector2( 0, 48 )
 shape = SubResource( 16 )
 
 [node name="ExchangeMachine" type="Node2D" parent="YSort"]
-position = Vector2( 266, -328 )
+position = Vector2( 266, -332 )
 script = ExtResource( 19 )
 player_node = NodePath("../Player")
 

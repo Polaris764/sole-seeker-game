@@ -56,6 +56,12 @@
     "contact_order_scan": [
         "Current Order: Scan"
     ],
+    "contact_order_shower": [
+        "Current Order: Shower"
+    ],
+    "contact_ended": [
+        "ATOS: The organism is dead. Continued testing is no longer necessary for now."
+    ],
     "cannon_audience": [
         "ATOS: Come to a terminal. I have a plan to introduce you to."
     ]

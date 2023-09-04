@@ -493,6 +493,7 @@ collision_layer = 17
 script = ExtResource( 7 )
 MAX_SPEED = 0
 PERSISTANCE = 0
+map_size = 200
 
 [node name="Sprite0" type="Sprite" parent="."]
 material = SubResource( 11 )
@@ -652,12 +653,16 @@ hframes = 2
 max_distance = 150.0
 bus = "SoundEffects"
 
+[node name="Whip" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="frame_changed" from="Sprite0" to="Sprite0" method="_on_Sprite0_frame_changed"]
 [connection signal="frame_changed" from="Sprite0/Sprite2" to="Sprite0/Sprite2" method="_on_Sprite0_frame_changed"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="AttackCountdown" to="." method="_on_AttackCountdown_timeout"]
 [connection signal="frame_changed" from="Sprite2" to="Sprite2" method="_on_Sprite2_frame_changed"]
+[connection signal="timeout" from="Whip" to="." method="_on_Whip_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="PlayerDetectionZone"]

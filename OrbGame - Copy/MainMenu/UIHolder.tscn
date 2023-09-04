@@ -129,7 +129,6 @@ visible = false
 
 [node name="LoadSave" parent="." instance=ExtResource( 5 )]
 visible = false
-transition_duration = 0.3
 
 [node name="GalaxyShader" type="CanvasLayer" parent="."]
 layer = -1

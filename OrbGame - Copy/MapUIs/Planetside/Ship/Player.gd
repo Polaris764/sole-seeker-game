@@ -59,7 +59,7 @@ func _physics_process(delta):
 
 		velocity += acc * delta
 		current_speed_var = clamp(velocity.length() + 50,0,speed)
-		shipAudio.pitch_scale = current_speed_var/500
+		shipAudio.pitch_scale = current_speed_var/250
 		rotation += rotation_dir * rotation_speed * delta
 		speed_particles.process_material.angle = -rotation_degrees
 

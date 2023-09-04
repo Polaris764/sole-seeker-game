@@ -14,4 +14,6 @@ expand = true
 stretch_mode = 5
 script = ExtResource( 1 )
 
+[connection signal="mouse_entered" from="." to="." method="_on_CapturedButton_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_CapturedButton_mouse_exited"]
 [connection signal="pressed" from="." to="." method="_on_CapturedButton_pressed"]

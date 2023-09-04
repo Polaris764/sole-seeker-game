@@ -215,7 +215,7 @@ func get_spawning_array():
 	tilemap_table.append_array($UpperRust2.get_used_cells())
 	return tilemap_table
 
-func _on_Player_teleported(direction):
+func _on_Player_teleported(_direction):
 	pass
 #	var entities = $YSort.get_children()
 #	entities.erase($YSort/Player)

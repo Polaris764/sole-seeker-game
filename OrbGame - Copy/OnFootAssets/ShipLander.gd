@@ -73,6 +73,7 @@ func create_planet():
 		add_child(overlay)
 		overlay.get_node("Holder/VBoxContainer/SpeedLabel").text = ""
 	else:
+		AudioManager.play_effect([AudioManager.effects.shipLeft])
 		var footsteps = player.get_node("FootstepAudio")
 		match chosen_planet_type:
 			WetWorld:
@@ -186,11 +187,9 @@ func spawn_green():
 	var spawn_location_count = rng.randi_range(30,40)
 	for spawn in spawn_location_count:
 		var location = spawning_array[rng.randi()%spawning_array.size()] * Vector2(16,16) + Vector2(8,8)
-		var group_size = rng.randi_range(8,16)
-		for unit in group_size:
-			var entity = green_enemy.instance()
-			entity.global_position = reposition_location(location)
-			planet.get_node("YSort").add_child(entity)
+		var entity = green_enemy.instance()
+		entity.global_position = reposition_location(location)
+		planet.get_node("YSort").add_child(entity)
 func count_enemies():
 	var ysorter = planet.get_node("YSort")
 	var children = ysorter.get_children()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://OnFootAssets/InsideShip/InsideShip.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/InsideShip/FlightChair.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://OnFootAssets/InsideShip/ShipDoor.png" type="Texture" id=14]
 [ext_resource path="res://OnFootAssets/InsideShip/Windshield.png" type="Texture" id=15]
 [ext_resource path="res://OnFootAssets/CompanyHQ/ShadowTileMap.png" type="Texture" id=16]
+[ext_resource path="res://Audio/SoundEffects/Deposit.wav" type="AudioStream" id=17]
 
 [sub_resource type="TileSet" id=14]
 0/name = "ShipTilemap.png 0"
@@ -477,6 +478,11 @@ texture = ExtResource( 7 )
 position = Vector2( -17, 18 )
 rotation = 1.5708
 shape = SubResource( 15 )
+
+[node name="Deposit" type="AudioStreamPlayer2D" parent="YSort/BloodDeposit"]
+stream = ExtResource( 17 )
+max_distance = 150.0
+bus = "SoundEffects"
 
 [node name="Windshield" type="Sprite" parent="YSort"]
 position = Vector2( 88, -11 )

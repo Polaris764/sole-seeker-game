@@ -8,3 +8,6 @@ rect_min_size = Vector2( 125, 125 )
 expand = true
 stretch_mode = 5
 script = ExtResource( 1 )
+
+[connection signal="mouse_entered" from="." to="." method="_on_OrganismButton_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_OrganismButton_mouse_exited"]

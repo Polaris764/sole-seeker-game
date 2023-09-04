@@ -49,6 +49,7 @@ func _on_Hurtbox_area_entered(area): # needle entered hitbox
 		knockback = area.knockback_vector * 30
 		hurtbox.create_hit_effect()
 	elif area.harvesting_tool == true: # harvest
+		$BreakAudio.play()
 		area.harvesting = true
 		area.harvest_wait_time = stats.harvest_duration
 		harvest_area = area

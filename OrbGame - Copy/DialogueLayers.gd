@@ -24,6 +24,7 @@ func load_scene_text():
 
 func show_text():
 	text_label.text = selected_text.pop_front()
+	AudioManager.play_effect([AudioManager.effects.dialogue])
 
 func next_line():
 	if selected_text.size() > 0:

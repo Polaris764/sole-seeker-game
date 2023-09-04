@@ -18,6 +18,8 @@ func set_max_health(value):
 func set_health(value):
 	health = value
 	emit_signal("health_changed",health)
+	if is_player and GalaxySave.game_data.has("playerHealth"):
+		GalaxySave.game_data["playerHealth"] = value
 	if health <= 0:
 		emit_signal("no_health")
 		if not is_player:
@@ -26,3 +28,5 @@ func set_health(value):
 func _ready():
 	if not is_player:
 		self.health = max_health
+	elif GalaxySave.game_data.has("playerHealth"):
+		self.health = GalaxySave.game_data["playerHealth"]

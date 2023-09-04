@@ -34,6 +34,7 @@ func _ready():
 			player.global_position = $YSort/FlightChair.global_position
 		else:
 			player.global_position = $Door.global_position
+			AudioManager.play_effect([AudioManager.effects.shipEnter])
 			cover.modulate.a = 1
 			tween.interpolate_property(cover,"modulate:a",1,0,.5)
 			tween.start()

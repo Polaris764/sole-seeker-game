@@ -106,16 +106,24 @@
         "It is necessary for the plan to be fully executed, along with my enemies."
     ],
     "atos_stab": [
+        "Complete orders until the organism is dead. Each order will yield to you additional rewards.",
         "Your current order is to stab the organism."
     ],
     "atos_reverse_direction": [
+        "Complete orders until the organism is dead. Each order will yield to you additional rewards.",
         "Your current order is to reverse the direction of the organism."
     ],
     "atos_trap": [
+        "Complete orders until the organism is dead. Each order will yield to you additional rewards.",
         "Your current order is to trap the organism."
     ],
     "atos_scan": [
+        "Complete orders until the organism is dead. Each order will yield to you additional rewards.",
         "Your current order is to scan the organism."
+    ],
+    "atos_shower": [
+        "Complete orders until the organism is dead. Each order will yield to you additional rewards.",
+        "Your current order is to shower the organism."
     ],
     "ending_dialogue": [
         "Sophisticated lifeforms have been eradicated from the galaxy.",

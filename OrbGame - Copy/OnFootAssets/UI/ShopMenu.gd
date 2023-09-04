@@ -18,12 +18,20 @@ var defenses_dictionary = {
 	building_types.LANDMINE:{"red":1,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 	building_types.LASER:{"red":2,"blue":2,"purple":0,"orange":1,"brown":0,"green":1},
 	building_types.TURRET:{"red":1,"blue":1,"purple":1,"orange":0,"brown":1,"green":0},
-	building_types.CALTROPS:{"red":0,"blue":0,"purple":0,"orange":1,"brown":0,"green":1}}
+	building_types.CALTROPS:{"red":0,"blue":0,"purple":0,"orange":1,"brown":0,"green":1},
+	building_types.CAPTURER:{"red":0,"blue":2,"purple":1,"orange":0,"brown":0,"green":2}}
 
+var capturer_dictionary = {
+	building_types.CAPTURER:{"red":0,"blue":2,"purple":1,"orange":0,"brown":0,"green":2}
+}
 var cannon_dictionary = {
-	building_types.CANNON_BASE:{"red":0,"blue":7,"purple":1,"orange":2,"brown":5,"green":3},
-	building_types.CANNON_TURRET:{"red":1,"blue":5,"purple":2,"orange":0,"brown":0,"green":1},
-	building_types.CANNON_POWER:{"red":0,"blue":1,"purple":1,"orange":6,"brown":2,"green":0}}
+	building_types.CANNON_BASE:{"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
+	building_types.CANNON_TURRET:{"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
+	building_types.CANNON_POWER:{"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0}}
+#var cannon_dictionary = {
+#	building_types.CANNON_BASE:{"red":0,"blue":20,"purple":10,"orange":20,"brown":15,"green":25},
+#	building_types.CANNON_TURRET:{"red":35,"blue":20,"purple":40,"orange":0,"brown":0,"green":10},
+#	building_types.CANNON_POWER:{"red":10,"blue":2,"purple":0,"orange":16,"brown":16,"green":0}}
 
 func _ready():
 	visible = false
@@ -64,6 +72,17 @@ func calibrate_options():
 				affordable = false
 		if not affordable:
 			buildings_list.set_item_custom_fg_color(buildings_list.get_item_count()-1,Color(1,1,1,.5))
+#	if GalaxySave.game_data["storyProgression"] >= 14:
+#		for resource in capturer_dictionary:
+#			defenses_list.add_item(building_types.keys()[resource].capitalize() + ", Owned: " + str(GalaxySave.game_data["storedBuildings"][resource]))
+#			defenses_price_list.add_item("Price: " + dictionary_as_string(capturer_dictionary[resource]))
+#			var affordable = true
+#			var player_resources = complete_resources
+#			for resource_type in ConstantsHolder.resource_types:
+#				if player_resources[resource_type] < capturer_dictionary[resource][resource_type]:
+#					affordable = false
+#			if not affordable:
+#				defenses_list.set_item_custom_fg_color(defenses_list.get_item_count()-1,Color(1,1,1,.5))
 	if GalaxySave.game_data["storyProgression"] >= 22:
 		for resource in cannon_dictionary:
 			if GalaxySave.game_data["cannonPartsBought"][resource] == false:
@@ -114,6 +133,9 @@ func _on_BuildingsList_item_activated(index):
 		resource_dictionary_to_use = buildings_dictionary
 	for resource_type in ConstantsHolder.resource_types:
 		if player_resources[resource_type] < resource_dictionary_to_use[bought_item][resource_type]:
+			affordable = false
+	if cannon_item:
+		if GalaxySave.game_data["cannonPartsBought"][bought_item] == true:
 			affordable = false
 	if affordable:
 		GalaxySave.game_data["storedBuildings"][bought_item] += 1

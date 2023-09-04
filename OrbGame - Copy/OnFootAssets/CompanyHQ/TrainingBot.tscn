@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://TrainingBot.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/Hitboxes-Hurtboxes/SoftCollision.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://OnFootAssets/CompanyHQ/TrainingBotSmoke.png" type="Texture" id=6]
 [ext_resource path="res://OnFootAssets/CompanyHQ/TrainingBotGlass.png" type="Texture" id=7]
 [ext_resource path="res://Audio/SoundEffects/robot.wav" type="AudioStream" id=8]
+[ext_resource path="res://Audio/SoundEffects/robotBreak.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -355,6 +356,11 @@ flip_h = true
 [node name="RobotAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
 pitch_scale = 0.5
+max_distance = 150.0
+bus = "SoundEffects"
+
+[node name="BreakAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
 max_distance = 150.0
 bus = "SoundEffects"
 

@@ -14,6 +14,7 @@ export var biomes_collisions = {"blue":[],"red":[],"orange":[],"purple":[],"blac
 onready var galaxy_size_var : float = ConstantsHolder.galaxy_size_var
 
 var Tinstance
+var coverInstance
 func _ready():
 	AudioManager.play_song([AudioManager.songs.delusional,AudioManager.songs.universe,AudioManager.songs.drifting],"galaxyMap")
 	AudioManager.stop_song("deepSpace")
@@ -21,6 +22,10 @@ func _ready():
 		var Tscene = preload("res://UIResources/TransitionScene.tscn")
 		Tinstance = Tscene.instance()
 		get_node("/root").add_child(Tinstance)
+	else:
+		var cScene = preload("res://MapUIs/Theme/GalaxyBackground.tscn")
+		coverInstance = cScene.instance()
+		get_node("/root").add_child(coverInstance)
 	start()
 
 func start():
@@ -210,7 +215,7 @@ func ending_scene():
 	tween.interpolate_property(laserInstance,"modulate:a",0,1,15,Tween.TRANS_EXPO)
 	tween.start()
 	#print(white_array)
-	var cannonPos = Vector2(200,500)#GalaxySave.game_data["cannonLocation"]
+	var cannonPos = GalaxySave.game_data["cannonLocation"]
 	var rng = RandomNumberGenerator.new()
 	var laserTarget = rng.randi_range(0,white_array.size()-1)
 	var laserArray = [cannonPos,white_array[laserTarget-2],white_array[laserTarget+2]]
@@ -228,8 +233,11 @@ func ending_scene():
 	add_child(dialogue_instance)
 	SignalBus.emit_signal("display_dialogue","ending_dialogue")
 	dialogue_instance.get_node("Background").connect("visibility_changed",self,"monologue_over")
+	if coverInstance:
+		coverInstance.queue_free()
 
 func monologue_over():
+	print("monologue over")
 	tween.interpolate_property($Fader/ColorRect,"modulate:a",0,1,2)
 	tween.start()
 	yield(tween,"tween_completed")

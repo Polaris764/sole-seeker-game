@@ -76,7 +76,7 @@ func get_spawning_array():
 	var tilemap_table = $Rock.get_used_cells()
 	return tilemap_table
 
-func _on_Player_teleported(direction):
+func _on_Player_teleported(_direction):
 	pass
 #	var entities = $YSort.get_children()
 #	entities.erase($YSort/Player)

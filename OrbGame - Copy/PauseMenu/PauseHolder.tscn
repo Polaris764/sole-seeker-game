@@ -19,3 +19,5 @@ visible = false
 
 [node name="PauseHandbook" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[connection signal="visibility_changed" from="." to="." method="_on_PauseHolder_visibility_changed"]

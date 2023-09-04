@@ -41,18 +41,26 @@ func get_nearest_ship(origin_pos,center_ship):
 	var closest_distance = origin_pos.distance_squared_to(center_ship)
 	if origin_pos.distance_squared_to(center_ship + Vector2(200*16,0)) < closest_distance:
 		closest = center_ship + Vector2(200*16,0)
+		closest_distance = origin_pos.distance_squared_to(closest)
 	if origin_pos.distance_squared_to(center_ship + Vector2(200*16,200*16)) < closest_distance:
 		closest = center_ship + Vector2(200*16,200*16)
+		closest_distance = origin_pos.distance_squared_to(closest)
 	if origin_pos.distance_squared_to(center_ship + Vector2(0,200*16)) < closest_distance:
 		closest = center_ship + Vector2(0,200*16)
+		closest_distance = origin_pos.distance_squared_to(closest)
 	if origin_pos.distance_squared_to(center_ship + Vector2(-200*16,200*16)) < closest_distance:
 		closest = center_ship + Vector2(-200*16,200*16)
+		closest_distance = origin_pos.distance_squared_to(closest)
 	if origin_pos.distance_squared_to(center_ship + Vector2(-200*16,0)) < closest_distance:
 		closest = center_ship + Vector2(-200*16,0)
+		closest_distance = origin_pos.distance_squared_to(closest)
 	if origin_pos.distance_squared_to(center_ship + Vector2(-200*16,-200*16)) < closest_distance:
 		closest = center_ship + Vector2(-200*16,-200*16)
+		closest_distance = origin_pos.distance_squared_to(closest)
 	if origin_pos.distance_squared_to(center_ship + Vector2(0,-200*16)) < closest_distance:
 		closest = center_ship + Vector2(0,-200*16)
+		closest_distance = origin_pos.distance_squared_to(closest)
 	if origin_pos.distance_squared_to(center_ship + Vector2(200*16,-200*16)) < closest_distance:
 		closest = center_ship + Vector2(200*16,-200*16)
+		closest_distance = origin_pos.distance_squared_to(closest)
 	return closest

@@ -73,7 +73,7 @@ func _physics_process(_delta):
 	if playerDetectionZone.can_see_player():
 		if state == IDLE:
 			state = CHASE
-			if audio:
+			if has_node("purpleAudio"):
 				if not audio.playing:
 					audio.stream = audioTracks["idle"]
 					audio.play()
@@ -91,9 +91,8 @@ func _on_AttackCountdown_timeout():
 
 func attack():
 	queued_attack = false
-	if audio:
-		audio.stream = audioTracks["attack"]
-		audio.play()
+	if has_node("purpleAudio"):
+		whip_sound()
 	if global_position.x > player.global_position.x:
 		animator.play("AttackLeft")
 	else:
@@ -103,7 +102,7 @@ func attack():
 func attack_animation_ended():
 	if state == CHASE:
 		animator.play("Aggressive")
-		if audio:
+		if has_node("purpleAudio"):
 			audio.stream = audioTracks["idle"]
 			audio.play()
 	else:
@@ -138,12 +137,14 @@ func death_animation():
 	animator.stop()
 	audio.queue_free()
 	$Hitbox.queue_free()
-	var _tween = $Sprite/DeathTween
+	var _tween = $Sprite0/DeathTween
+	set_physics_process(false)
 	GalaxySave.game_data["individualKills"]["green"] += 1
 
 func completed_harvest():
+	$CollisionShape2D.queue_free()
 	harvest_area.harvesting = false
-	GalaxySave.game_data["backpackBlood"]["purple"] += 1
+	GalaxySave.game_data["backpackBlood"]["green"] += 1
 #	for child in sprite.get_children():
 #		if child is Sprite:
 #			child.position *= Vector2(1/.8,1/.8)
@@ -165,3 +166,11 @@ var audioTracks = {
 "idle":preload("res://Audio/EnemySounds/greenIdle.wav"),
 "attack":preload("res://Audio/EnemySounds/greenAttack.wav")
 }
+
+func whip_sound():
+	$Whip.start(.9)
+
+func _on_Whip_timeout():
+	if has_node("purpleAudio"):
+		audio.stream = audioTracks["attack"]
+		audio.play()

@@ -127,34 +127,37 @@ func circle_star(pos):
 
 func _physics_process(_delta):
 	zoom()
+func _input(event):
+	if mouse_location:
+		if event is InputEventMouseMotion and Input.is_action_pressed("attack"):
+			mapCam.position -= event.relative / (mapCam.zoom*2)
+		else:
+			zoom()
 
-export var zoom_max : float = 6
-export var zoom_min = .7
-	
+export var zoom_max : float = 3.7
+export var zoom_min : float = .5
+onready var viewport = $VBoxContainer/Container/ViewportContainer/Viewport
+onready var mapCam = $VBoxContainer/Container/ViewportContainer/Viewport/Camera2D
 func zoom():
 	if mouse_location and visible:
-		if Input.is_action_just_released('zoom_out') and galaxy_image_holder.rect_scale.x > zoom_min and galaxy_image_holder.rect_scale.y > zoom_min:
-			galaxy_image_holder.rect_scale.x -= 0.2
-			galaxy_image_holder.rect_scale.y -= 0.2
-			circle_image_holder.rect_scale.x -= 0.2
-			circle_image_holder.rect_scale.y -= 0.2
-			ship_image_holder.rect_scale.x -= 0.2
-			ship_image_holder.rect_scale.y -= 0.2
-			#galaxy_image_holder.rect_pivot_offset = lerp(galaxy_image_holder.rect_pivot_offset,galaxy_image_holder.get_local_mouse_position(),.5)
-		if Input.is_action_just_released('zoom_in') and galaxy_image_holder.rect_scale.x < zoom_max and galaxy_image_holder.rect_scale.y < zoom_max:
-			galaxy_image_holder.rect_scale.x += 0.1
-			galaxy_image_holder.rect_scale.y += 0.1
-			circle_image_holder.rect_scale.x += 0.1
-			circle_image_holder.rect_scale.y += 0.1
-			ship_image_holder.rect_scale.x += 0.1
-			ship_image_holder.rect_scale.y += 0.1
-			var scale_factor = Vector2(1024,600)/get_viewport().size
-			galaxy_image_holder.rect_pivot_offset = lerp(galaxy_image_holder.rect_pivot_offset,galaxy_image_holder.get_local_mouse_position()*scale_factor,.1)
-			circle_image_holder.rect_pivot_offset = lerp(circle_image_holder.rect_pivot_offset,circle_image_holder.get_local_mouse_position()*scale_factor,.1)
-			ship_image_holder.rect_pivot_offset = lerp(ship_image_holder.rect_pivot_offset,ship_image_holder.get_local_mouse_position()*scale_factor,.1)
-
+		if Input.is_action_just_released('zoom_out') and mapCam.zoom.x < zoom_max:
+			mapCam.zoom += Vector2(.2,.2)
+		if Input.is_action_just_released('zoom_in') and mapCam.zoom.x > zoom_min:
+			mapCam.zoom -= Vector2(.2,.2)
 var mouse_location = false
+onready var mDetection = $VBoxContainer/Container/MouseDetection
 func _on_MouseDetection_mouse_entered():
 	mouse_location = true
 func _on_MouseDetection_mouse_exited():
 	mouse_location = false
+
+#func get_mouse_pos():
+#	var p = mDetection.get_local_mouse_position()
+#	var p_offsetted = p/mDetection.rect_size - Vector2(.5,.5)
+#	var cam_view_size = viewport.size * mapCam.zoom
+#	var desired_cam_movement = cam_view_size * p_offsetted
+#	mapCam.position = desired_cam_movement + mapCam.position
+#	print("cam offset target" + str(desired_cam_movement))
+#	print("current cam position" + str(mapCam.position))
+#	print("project cam position" + str(mapCam.position+desired_cam_movement))
+#	return p
