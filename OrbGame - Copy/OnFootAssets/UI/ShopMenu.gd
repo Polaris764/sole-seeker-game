@@ -25,13 +25,9 @@ var capturer_dictionary = {
 	building_types.CAPTURER:{"red":0,"blue":2,"purple":1,"orange":0,"brown":0,"green":2}
 }
 var cannon_dictionary = {
-	building_types.CANNON_BASE:{"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
-	building_types.CANNON_TURRET:{"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
-	building_types.CANNON_POWER:{"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0}}
-#var cannon_dictionary = {
-#	building_types.CANNON_BASE:{"red":0,"blue":20,"purple":10,"orange":20,"brown":15,"green":25},
-#	building_types.CANNON_TURRET:{"red":35,"blue":20,"purple":40,"orange":0,"brown":0,"green":10},
-#	building_types.CANNON_POWER:{"red":10,"blue":2,"purple":0,"orange":16,"brown":16,"green":0}}
+	building_types.CANNON_BASE:{"red":0,"blue":20,"purple":10,"orange":20,"brown":15,"green":25},
+	building_types.CANNON_TURRET:{"red":35,"blue":20,"purple":40,"orange":0,"brown":0,"green":10},
+	building_types.CANNON_POWER:{"red":10,"blue":2,"purple":0,"orange":16,"brown":16,"green":0}}
 
 func _ready():
 	visible = false

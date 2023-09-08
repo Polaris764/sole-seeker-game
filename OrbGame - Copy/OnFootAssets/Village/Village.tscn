@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Village.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/Village/Grass.png" type="Texture" id=2]
@@ -248,23 +248,11 @@ extents = Vector2( 32, 10 )
 [sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 32, 12.25 )
 
-[sub_resource type="RectangleShape2D" id=43]
-extents = Vector2( 39.5, 27.5 )
-
-[sub_resource type="RectangleShape2D" id=44]
-extents = Vector2( 39.5, 27.5 )
-
 [sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 16, 10 )
 
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 20, 10.5 )
-
-[sub_resource type="RectangleShape2D" id=38]
-extents = Vector2( 24, 23.5 )
-
-[sub_resource type="RectangleShape2D" id=39]
-extents = Vector2( 24, 23.5 )
 
 [sub_resource type="RectangleShape2D" id=40]
 extents = Vector2( 42.5, 29 )
@@ -272,17 +260,8 @@ extents = Vector2( 42.5, 29 )
 [sub_resource type="RectangleShape2D" id=41]
 extents = Vector2( 42.5, 29 )
 
-[sub_resource type="RectangleShape2D" id=37]
-extents = Vector2( 43.5, 31.5 )
-
 [sub_resource type="RectangleShape2D" id=42]
 extents = Vector2( 43.5, 31.5 )
-
-[sub_resource type="RectangleShape2D" id=34]
-extents = Vector2( 42.5, 32 )
-
-[sub_resource type="RectangleShape2D" id=35]
-extents = Vector2( 42.5, 32 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=50]
 
@@ -881,39 +860,25 @@ extents = Vector2( 14.5, 3.5 )
 [sub_resource type="RectangleShape2D" id=49]
 extents = Vector2( 4.5, 4 )
 
-[sub_resource type="CapsuleShape2D" id=51]
-radius = 15.0
-height = 40.0
+[sub_resource type="AnimationNodeStateMachinePlayback" id=51]
 
-[sub_resource type="CapsuleShape2D" id=52]
-radius = 15.0
-height = 40.0
+[sub_resource type="AnimationNodeStateMachinePlayback" id=52]
 
-[sub_resource type="CapsuleShape2D" id=53]
-radius = 15.0
-height = 40.0
+[sub_resource type="AnimationNodeStateMachinePlayback" id=53]
 
-[sub_resource type="CapsuleShape2D" id=54]
-radius = 15.0
-height = 40.0
+[sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
-[sub_resource type="CapsuleShape2D" id=55]
-radius = 15.0
-height = 40.0
+[sub_resource type="AnimationNodeStateMachinePlayback" id=55]
 
-[sub_resource type="CapsuleShape2D" id=56]
-radius = 15.0
-height = 40.0
+[sub_resource type="AnimationNodeStateMachinePlayback" id=56]
 
-[sub_resource type="CapsuleShape2D" id=57]
-radius = 15.0
-height = 40.0
+[sub_resource type="AnimationNodeStateMachinePlayback" id=57]
 
 [node name="Village" type="Node2D"]
 script = ExtResource( 1 )
 player = NodePath("YSort/Player")
-shooting_start_time = 0
-blackout_time = 0
+shooting_start_time = 18
+blackout_time = 20
 
 [node name="BulletOrigin1" type="Position2D" parent="."]
 position = Vector2( 2, 729 )
@@ -960,21 +925,6 @@ collision_mask = 3
 position = Vector2( 0, -11 )
 shape = SubResource( 30 )
 
-[node name="Interactable" parent="YSort/Building5" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Inspect"
-
-[node name="CollisionShape2D" parent="YSort/Building5/Interactable/Area2D" index="0"]
-position = Vector2( 0.5, -19.5 )
-shape = SubResource( 43 )
-
-[node name="DialogueArea" parent="YSort/Building5" instance=ExtResource( 11 )]
-dialogue_key = "house5"
-
-[node name="CollisionShape2D" parent="YSort/Building5/DialogueArea" index="0"]
-position = Vector2( 0.5, -19.5 )
-shape = SubResource( 44 )
-
 [node name="Building3" type="Sprite" parent="YSort"]
 position = Vector2( 343, 254 )
 texture = ExtResource( 7 )
@@ -993,21 +943,6 @@ shape = SubResource( 29 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Building3/StaticBody2D"]
 position = Vector2( -1, -8.5 )
 shape = SubResource( 31 )
-
-[node name="Interactable" parent="YSort/Building3" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Inspect"
-
-[node name="CollisionShape2D" parent="YSort/Building3/Interactable/Area2D" index="0"]
-position = Vector2( 1, -15.5 )
-shape = SubResource( 38 )
-
-[node name="DialogueArea" parent="YSort/Building3" instance=ExtResource( 11 )]
-dialogue_key = "house3"
-
-[node name="CollisionShape2D" parent="YSort/Building3/DialogueArea" index="0"]
-position = Vector2( 1, -15.5 )
-shape = SubResource( 39 )
 
 [node name="Building4" type="Sprite" parent="YSort"]
 position = Vector2( 394, 127 )
@@ -1072,14 +1007,6 @@ collision_mask = 3
 position = Vector2( 0, -12 )
 shape = SubResource( 30 )
 
-[node name="Interactable" parent="YSort/Building2" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Inspect"
-
-[node name="CollisionShape2D" parent="YSort/Building2/Interactable/Area2D" index="0"]
-position = Vector2( 0.5, -20.5 )
-shape = SubResource( 37 )
-
 [node name="DialogueArea" parent="YSort/Building2" instance=ExtResource( 11 )]
 dialogue_key = "house2"
 
@@ -1111,21 +1038,6 @@ collision_mask = 3
 position = Vector2( 1, -10.25 )
 shape = SubResource( 30 )
 
-[node name="DialogueArea" parent="YSort/Building1" instance=ExtResource( 11 )]
-dialogue_key = "house1"
-
-[node name="CollisionShape2D" parent="YSort/Building1/DialogueArea" index="0"]
-position = Vector2( 1.5, -20 )
-shape = SubResource( 34 )
-
-[node name="Interactable" parent="YSort/Building1" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Inspect"
-
-[node name="CollisionShape2D" parent="YSort/Building1/Interactable/Area2D" index="0"]
-position = Vector2( 1.5, -20 )
-shape = SubResource( 35 )
-
 [node name="Player" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 270, 510 )
 backward_slowdown_multiplier_val = 0.5
@@ -1133,11 +1045,11 @@ backward_slowdown_multiplier_val = 0.5
 [node name="AnimationTree" parent="YSort/Player" index="2"]
 parameters/StateMachine/playback = SubResource( 50 )
 
-[node name="CanvasLayer" parent="YSort/Player" index="5"]
+[node name="DialogueInteractionArea" parent="YSort/Player" index="7"]
 visible = false
 
-[node name="DialogueLayer" parent="YSort/Player" index="8"]
-visible = false
+[node name="FootstepAudio" parent="YSort/Player" index="10"]
+volume_db = -20.0
 
 [node name="TLCorner" type="Sprite" parent="YSort"]
 position = Vector2( 0, -9 )
@@ -1251,13 +1163,11 @@ destination2 = NodePath("../../Destinations/Destination9")
 destination3 = NodePath("../../Destinations/Destination10")
 destination4 = NodePath("../../Destinations/Destination6")
 
-[node name="Interactable" parent="YSort/Villager1" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Talk"
+[node name="AnimationTree" parent="YSort/Villager1" index="8"]
+parameters/playback = SubResource( 51 )
 
-[node name="CollisionShape2D" parent="YSort/Villager1/Interactable/Area2D" index="0"]
-position = Vector2( 2.5, -22.5 )
-shape = SubResource( 51 )
+[node name="Interactable" parent="YSort/Villager1" index="11"]
+player_node = NodePath("../../Player")
 
 [node name="Villager2" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 404, 357 )
@@ -1269,13 +1179,11 @@ hair_choice = 2
 destination1 = NodePath("../../Destinations/Destination7")
 destination2 = NodePath("../../Destinations/Destination10")
 
-[node name="Interactable" parent="YSort/Villager2" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Talk"
+[node name="AnimationTree" parent="YSort/Villager2" index="8"]
+parameters/playback = SubResource( 52 )
 
-[node name="CollisionShape2D" parent="YSort/Villager2/Interactable/Area2D" index="0"]
-position = Vector2( 2.5, -22.5 )
-shape = SubResource( 52 )
+[node name="Interactable" parent="YSort/Villager2" index="11"]
+player_node = NodePath("../../Player")
 
 [node name="Villager3" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 52, 442 )
@@ -1290,13 +1198,11 @@ destination2 = NodePath("../../Destinations/Destination3")
 destination3 = NodePath("../../Destinations/Destination2")
 destination4 = NodePath("../../Destinations/Destination6")
 
-[node name="Interactable" parent="YSort/Villager3" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Talk"
+[node name="AnimationTree" parent="YSort/Villager3" index="8"]
+parameters/playback = SubResource( 53 )
 
-[node name="CollisionShape2D" parent="YSort/Villager3/Interactable/Area2D" index="0"]
-position = Vector2( 2.5, -22.5 )
-shape = SubResource( 53 )
+[node name="Interactable" parent="YSort/Villager3" index="11"]
+player_node = NodePath("../../Player")
 
 [node name="Villager4" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 84, 235 )
@@ -1309,13 +1215,11 @@ hair_choice = 3
 destination1 = NodePath("../../Destinations/Destination9")
 destination2 = NodePath("../../Destinations/Destination4")
 
-[node name="Interactable" parent="YSort/Villager4" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Talk"
+[node name="AnimationTree" parent="YSort/Villager4" index="8"]
+parameters/playback = SubResource( 54 )
 
-[node name="CollisionShape2D" parent="YSort/Villager4/Interactable/Area2D" index="0"]
-position = Vector2( 2.5, -22.5 )
-shape = SubResource( 54 )
+[node name="Interactable" parent="YSort/Villager4" index="11"]
+player_node = NodePath("../../Player")
 
 [node name="Villager5" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 254, 268 )
@@ -1329,13 +1233,11 @@ destination1 = NodePath("../../Destinations/Destination6")
 destination2 = NodePath("../../Destinations/Destination9")
 destination3 = NodePath("../../Destinations/Destination3")
 
-[node name="Interactable" parent="YSort/Villager5" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Talk"
+[node name="AnimationTree" parent="YSort/Villager5" index="8"]
+parameters/playback = SubResource( 55 )
 
-[node name="CollisionShape2D" parent="YSort/Villager5/Interactable/Area2D" index="0"]
-position = Vector2( 2.5, -22.5 )
-shape = SubResource( 55 )
+[node name="Interactable" parent="YSort/Villager5" index="11"]
+player_node = NodePath("../../Player")
 
 [node name="Villager6" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 433, 189 )
@@ -1347,13 +1249,11 @@ hair_color = Color( 0.356863, 0.415686, 0.27451, 1 )
 hair_choice = 2
 destination1 = NodePath("../../Destinations/Destination5")
 
-[node name="Interactable" parent="YSort/Villager6" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Talk"
+[node name="AnimationTree" parent="YSort/Villager6" index="8"]
+parameters/playback = SubResource( 56 )
 
-[node name="CollisionShape2D" parent="YSort/Villager6/Interactable/Area2D" index="0"]
-position = Vector2( 2.5, -22.5 )
-shape = SubResource( 56 )
+[node name="Interactable" parent="YSort/Villager6" index="11"]
+player_node = NodePath("../../Player")
 
 [node name="Villager7" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 228, 149 )
@@ -1367,13 +1267,11 @@ destination1 = NodePath("../../Destinations/Destination7")
 destination2 = NodePath("../../Destinations/Destination10")
 destination3 = NodePath("../../Destinations/Destination8")
 
-[node name="Interactable" parent="YSort/Villager7" instance=ExtResource( 12 )]
-player_node = NodePath("../../Player")
-interaction_result = "Talk"
+[node name="AnimationTree" parent="YSort/Villager7" index="8"]
+parameters/playback = SubResource( 57 )
 
-[node name="CollisionShape2D" parent="YSort/Villager7/Interactable/Area2D" index="0"]
-position = Vector2( 2.5, -22.5 )
-shape = SubResource( 57 )
+[node name="Interactable" parent="YSort/Villager7" index="11"]
+player_node = NodePath("../../Player")
 
 [node name="ChildPlayerCamera" type="Camera2D" parent="."]
 current = true
@@ -1416,32 +1314,39 @@ position = Vector2( 165, 266 )
 
 [connection signal="timeout" from="BulletTimer" to="." method="_on_BulletTimer_timeout"]
 [connection signal="timeout" from="EventTimer" to="." method="_on_EventTimer_timeout"]
-[connection signal="interacted_with" from="YSort/Villager1/Interactable" to="YSort/Villager1" method="_on_Interactable_interacted_with"]
-[connection signal="interacted_with" from="YSort/Villager2/Interactable" to="YSort/Villager2" method="_on_Interactable_interacted_with"]
-[connection signal="interacted_with" from="YSort/Villager3/Interactable" to="YSort/Villager3" method="_on_Interactable_interacted_with"]
-[connection signal="interacted_with" from="YSort/Villager4/Interactable" to="YSort/Villager4" method="_on_Interactable_interacted_with"]
-[connection signal="interacted_with" from="YSort/Villager5/Interactable" to="YSort/Villager5" method="_on_Interactable_interacted_with"]
-[connection signal="interacted_with" from="YSort/Villager6/Interactable" to="YSort/Villager6" method="_on_Interactable_interacted_with"]
-[connection signal="interacted_with" from="YSort/Villager7/Interactable" to="YSort/Villager7" method="_on_Interactable_interacted_with"]
 
-[editable path="YSort/Building5/Interactable"]
-[editable path="YSort/Building5/DialogueArea"]
-[editable path="YSort/Building3/Interactable"]
-[editable path="YSort/Building3/DialogueArea"]
 [editable path="YSort/Building4/DialogueArea"]
 [editable path="YSort/Building4/Interactable"]
-[editable path="YSort/Building2/Interactable"]
 [editable path="YSort/Building2/DialogueArea"]
-[editable path="YSort/Building1/DialogueArea"]
-[editable path="YSort/Building1/Interactable"]
 [editable path="YSort/Player"]
 [editable path="YSort/Player/CanvasLayer/HealthUI"]
 [editable path="YSort/Player/SoftCollision"]
 [editable path="YSort/Player/DialogueInteractionArea"]
+[editable path="YSort/Villager1"]
+[editable path="YSort/Villager1/SoftCollision"]
+[editable path="YSort/Villager1/DialogueArea"]
 [editable path="YSort/Villager1/Interactable"]
+[editable path="YSort/Villager2"]
+[editable path="YSort/Villager2/SoftCollision"]
+[editable path="YSort/Villager2/DialogueArea"]
 [editable path="YSort/Villager2/Interactable"]
+[editable path="YSort/Villager3"]
+[editable path="YSort/Villager3/SoftCollision"]
+[editable path="YSort/Villager3/DialogueArea"]
 [editable path="YSort/Villager3/Interactable"]
+[editable path="YSort/Villager4"]
+[editable path="YSort/Villager4/SoftCollision"]
+[editable path="YSort/Villager4/DialogueArea"]
 [editable path="YSort/Villager4/Interactable"]
+[editable path="YSort/Villager5"]
+[editable path="YSort/Villager5/SoftCollision"]
+[editable path="YSort/Villager5/DialogueArea"]
 [editable path="YSort/Villager5/Interactable"]
+[editable path="YSort/Villager6"]
+[editable path="YSort/Villager6/SoftCollision"]
+[editable path="YSort/Villager6/DialogueArea"]
 [editable path="YSort/Villager6/Interactable"]
+[editable path="YSort/Villager7"]
+[editable path="YSort/Villager7/SoftCollision"]
+[editable path="YSort/Villager7/DialogueArea"]
 [editable path="YSort/Villager7/Interactable"]

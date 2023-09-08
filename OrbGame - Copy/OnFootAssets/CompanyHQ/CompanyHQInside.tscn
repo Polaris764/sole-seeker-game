@@ -26,6 +26,7 @@
 [ext_resource path="res://Audio/SoundEffects/healMachine.wav" type="AudioStream" id=24]
 [ext_resource path="res://Audio/SoundEffects/pump.wav" type="AudioStream" id=25]
 [ext_resource path="res://OnFootAssets/CompanyHQ/hangerShield.png" type="Texture" id=26]
+[ext_resource path="res://OnFootAssets/InsideShip/SpaceshipV2.png" type="Texture" id=27]
 [ext_resource path="res://OnFootAssets/CompanyHQ/ShadowTileMap.png" type="Texture" id=28]
 [ext_resource path="res://OnFootAssets/Player/Build/Bullet.png" type="Texture" id=29]
 
@@ -1065,9 +1066,6 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 23.5, 5.5 )
 
-[sub_resource type="StreamTexture" id=4]
-load_path = "res://.import/SpaceshipV2.png-7dd47954bb43bd6b4ae8a4031f1f1d20.stex"
-
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 33, 15 )
 
@@ -1398,11 +1396,12 @@ offset = Vector2( -8, 4 )
 position = Vector2( 80, -121 )
 rotation = -1.5708
 scale = Vector2( 0.9, 0.9 )
-texture = SubResource( 4 )
+texture = ExtResource( 27 )
 
 [node name="shipShape" type="Area2D" parent="Spaceship"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spaceship/shipShape"]
+visible = false
 position = Vector2( -56.6667, -16.6667 )
 polygon = PoolVector2Array( -70, -21.5, -6.66667, -34.4444, 27.7778, -44.4444, 121.111, -13.3333, 185.556, 18.8889, 28.8889, 77.7778, -70, 53.3333, -7.77778, 40, -8.88889, -10 )
 

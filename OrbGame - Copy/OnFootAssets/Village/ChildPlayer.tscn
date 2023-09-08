@@ -302,7 +302,7 @@ nodes/StateMachine/position = Vector2( -386.945, 101.961 )
 nodes/TimeScale/node = SubResource( 40 )
 nodes/TimeScale/position = Vector2( -20, 120 )
 nodes/output/position = Vector2( 380, 100 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "StateMachine" ]
+node_connections = [ "TimeScale", 0, "StateMachine", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=42]
 
@@ -314,7 +314,7 @@ radius = 5.0
 height = 5.0
 
 [sub_resource type="RectangleShape2D" id=26]
-extents = Vector2( 20, 27.5 )
+extents = Vector2( 17.5, 27.5 )
 
 [node name="ChildPlayer" type="KinematicBody2D" groups=["Player"]]
 scale = Vector2( 0.4, 0.4 )
@@ -370,11 +370,10 @@ position = Vector2( 0, 10 )
 shape = SubResource( 25 )
 
 [node name="DialogueInteractionArea" parent="." instance=ExtResource( 5 )]
-visible = false
 position = Vector2( 0, -19 )
 
 [node name="CollisionShape2D" parent="DialogueInteractionArea" index="0"]
-position = Vector2( 0, -1 )
+position = Vector2( 5.96046e-07, -1 )
 scale = Vector2( 0.999999, 0.999999 )
 shape = SubResource( 26 )
 

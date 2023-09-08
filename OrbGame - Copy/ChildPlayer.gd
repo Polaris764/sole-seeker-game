@@ -65,7 +65,7 @@ func health_changed(value):
 	elif health == 1:
 		$CanvasLayer/HealthUI/HeartUIStage1.visible = true
 	else:
-		pass
+		get_parent().get_parent().blackout()
 
 func _on_HealthTimer_timeout():
 	self.health = 3-health

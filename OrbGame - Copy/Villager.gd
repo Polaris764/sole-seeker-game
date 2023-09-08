@@ -5,6 +5,7 @@ onready var soft_collision = $SoftCollision
 export var panicking = false setget set_panic
 onready var animationTree = $AnimationTree
 onready var aState = animationTree.get("parameters/playback")
+onready var dialogue_area = $DialogueArea
 export var health = 1 setget check_health
 
 export var skin_color : Color
@@ -26,6 +27,7 @@ var destination_table = []
 
 func _ready():
 	set_colors()
+	dialogue_area.dialogue_key = name
 	if destination1:
 		NodeD1 = get_node(destination1)
 		destination_table.append(NodeD1)
@@ -42,11 +44,14 @@ func set_panic(value):
 	panicking = value
 	if value == true and state == IDLE:
 		state = PANIC
+		dialogue_area.dialogue_key = name + "P"
 
 func check_health(value):
 	health += value
 	if health < 1:
 		state = DEAD
+		dialogue_area.monitoring = false
+		$Interactable.optional_blacklist_pos = 0
 
 enum{
 	IDLE,
@@ -103,7 +108,6 @@ func dead(_delta):
 		animationTree.active = false
 		tween.interpolate_property(self,"rotation",0,rand_choice(-PI/2,PI/2),.4)
 		tween.start()
-		print("started " + str(name))
 
 func set_colors():
 	var skin = $SkinSprite
@@ -142,4 +146,4 @@ func rand_choice(option1,option2):
 		return option2
 
 func _on_Interactable_interacted_with():
-	SignalBus.emit_signal("display_dialogue",name)
+	pass

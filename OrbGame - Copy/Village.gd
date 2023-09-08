@@ -88,5 +88,8 @@ func _on_EventTimer_timeout():
 		playerCam.add_trauma(.4)
 		destroy_fence()
 	elif event_stage == 2:
-		print("blackout")
-		var _change = get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")
+		blackout()
+
+func blackout():
+	print("blackout")
+	var _change = get_tree().change_scene("res://OnFootAssets/CompanyHQ/CompanyHQInside.tscn")

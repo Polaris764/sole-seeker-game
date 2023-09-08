@@ -1,6 +1,9 @@
 {
+    "house4": [
+        "My house. It looks like any other one in the village, but I love it just the same."
+    ],
     "Villager1": [
-        "It's a beautiful day! Why don't you go run around a bit?",
+        "It's a beautiful day, son. Why don't you go run around a bit?",
         "Maybe some of our friends could use a helping hand."
     ],
     "Villager2": [
@@ -26,6 +29,27 @@
     ],
     "Villager7": [
         "Not now, I'm busy thinking."
+    ],
+    "Villager1P": [
+        "Whatever happens to us, remember who you are!"
+    ],
+    "Villager2P": [
+        "They're here!"
+    ],
+    "Villager3P": [
+        "Oh, they look so scary!"
+    ],
+    "Villager4P": [
+        "I always knew we needed to upgrade our walls!"
+    ],
+    "Villager5P": [
+        "Save yourself!"
+    ],
+    "Villager6P": [
+        "Go hide!"
+    ],
+    "Villager7P": [
+        "We don't stand a chance, not yet."
     ],
     "atos0": [
         "I'm pleased that you're awake. I am ATOS.",
@@ -58,7 +82,7 @@
         "Additionally: never attempt to visit white organisms."
     ],
     "atos5": [
-        "Take this opportunity to get aquainted with your new permissions."
+        "Take this opportunity to get aquainted with our surroundings. We have much do to in the future."
     ],
     "atos11": [
         "I have unlocked the exchange area for your use.",

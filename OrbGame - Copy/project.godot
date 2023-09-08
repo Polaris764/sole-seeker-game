@@ -14,22 +14,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Interactable/Interactable.gd"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamAPI",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_api.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamApps",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_apps.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamCallback",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_callback.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamFriends",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_friends.gdns"
@@ -44,47 +44,47 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_id.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamLeaderboard",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_leaderboard.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamLeaderboardEntries",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_leaderboard_entries.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamLeaderboardEntry",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_leaderboard_entry.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamLeaderboardFindResult",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_find_leaderboard_result.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamLeaderboardScoreUploaded",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_leaderboard_uploaded.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamLeaderboardScoresDownloaded",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_leaderboard_scores_downloaded.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamUser",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_user.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamUserStats",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_user_stats.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "SteamUtils",
 "language": "NativeScript",
 "path": "res://addons/steam_api/steam_utils.gdns"
@@ -116,9 +116,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Orb"
+config/name="Sole Seeker"
 run/main_scene="res://MainMenu/UIHolder.tscn"
-config/icon="res://icon.png"
+config/icon="res://GameWindowIcon.png"
+config/windows_native_icon="res://DesktopIcon.ico"
 
 [autoload]
 
@@ -135,6 +136,7 @@ Steam="*res://addons/steam_api/steam_i.gd"
 window/vsync/vsync_via_compositor=true
 mouse_cursor/custom_image="res://UIResources/Cursor1.png"
 window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 

@@ -31,7 +31,7 @@ func change_screen(new_screen = null):
 		yield(current_screen.tween,"tween_all_completed")
 
 func on_button_pressed(name):
-	AudioManager.play_effect([AudioManager.effects.menuClick])
+	AudioManager.play_effect([AudioManager.effects.menuClick],0,null,10)
 	match name:
 		# Main Buttons
 		"LoadSaveButton":

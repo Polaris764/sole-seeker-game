@@ -51,7 +51,7 @@ func save_data():
 	file.open(SAVE_FILE_PATH + SAVE_FILE,File.WRITE)
 	file.store_var(game_data)
 	file.close()
-
+	
 onready var buildingTypes = ConstantsHolder.building_types
 onready var shipLocation = ConstantsHolder.ship_locations
 func load_data():
@@ -70,7 +70,7 @@ func load_data():
 			"storedBlood": {"red":0,"blue":0,"purple":0,"orange":0,"brown":0,"green":0},
 			"buildingData": {},
 			"storedBuildings": {buildingTypes.WALL:0,buildingTypes.FLOOR:0,buildingTypes.TURRET:0,buildingTypes.CALTROPS:0,buildingTypes.LANDMINE:0,buildingTypes.LASER:0,buildingTypes.CAPTURER:0,buildingTypes.CANNON_BASE:0,buildingTypes.CANNON_TURRET:0,buildingTypes.CANNON_POWER:0},
-			"capturedEnemies": [],#["BlueOrb","BrownEnemy","Round"],
+			"capturedEnemies": [],#["BlueOrb","BrownEnemy","Round","RedOrb"],
 			"shipPosition": [Vector2.ZERO,Vector2.ZERO,0,0,shipLocation.STATION,false,false,0], #galaxy position, system position, ship speed, ship rotation, ship location, is in system, just landed on planet, lastplanet
 			"storyProgression": 0,
 			"totalKills" : 0,

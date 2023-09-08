@@ -35,6 +35,7 @@ onready var wander_controller = $WanderController
 onready var sprite = $Sprite0
 
 func _ready():
+	sprite.speed_scale = rand_range(.95,1.05)
 	sprite.scale = Vector2(1,1)
 	current_max_speed = MAX_SPEED
 	set_sprite_distances()

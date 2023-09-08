@@ -1,12 +1,14 @@
 extends Node2D
 export var CompanyStation = true
 var system_type : Array
+onready var size_tween = $SizeTween
+onready var tween = $Tween
 
 func growSprite(spriteName):
 	spriteName.set_scale(Vector2(2,2))
 func shrinkSprite(spriteName):
-	$SizeTween.interpolate_property(spriteName, "rect_scale", Vector2(2,2), Vector2(1,1), .2, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	$SizeTween.start()
+	size_tween.interpolate_property(spriteName, "rect_scale", Vector2(2,2), Vector2(1,1), .2, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	size_tween.call_deferred("start")
 	
 
 
@@ -19,8 +21,8 @@ func _on_Area2D_body_entered(_body): # when station is entered by ship
 		growSprite(texButton) # grow station image on map
 		updateSystemInfoPanel() # set HQ info
 		if playerStarList.size() == 1: # if the list size is only one star
-			$Tween.stop_all()
-			$Tween.interpolate_property(
+			tween.stop_all()
+			tween.interpolate_property(
 				get_node("../SystemInfo/Control"),
 				'modulate:a',
 				get_node("../SystemInfo/Control").get_modulate().a,
@@ -29,7 +31,7 @@ func _on_Area2D_body_entered(_body): # when station is entered by ship
 				Tween.TRANS_SINE,
 				Tween.EASE_OUT
 			) # show info panel
-			$Tween.start()
+			tween.call_deferred("start")
 
 
 onready var texButton = $TextureButton
@@ -40,8 +42,8 @@ func _on_Area2D_body_exited(_body): # when ship exits station
 		playerStarList.remove(i)
 		get_parent().starsInside = playerStarList
 	if playerStarList.size() == 0:
-		$Tween.stop_all()
-		$Tween.interpolate_property(
+		tween.stop_all()
+		tween.interpolate_property(
 			get_node("../SystemInfo/Control"),
 			'modulate:a',
 			get_node("../SystemInfo/Control").get_modulate().a,
@@ -50,7 +52,7 @@ func _on_Area2D_body_exited(_body): # when ship exits station
 			Tween.TRANS_SINE,
 			Tween.EASE_OUT
 		) # hide info panel
-		$Tween.start()
+		tween.call_deferred("start")
 	elif i == 0:
 		updateSystemInfoPanel2(playerStarList[0])
 		growSprite(playerStarList[0].get_node("TextureButton"))

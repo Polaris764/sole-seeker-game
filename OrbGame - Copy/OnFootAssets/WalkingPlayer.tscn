@@ -1577,7 +1577,7 @@ nodes/Seek/position = Vector2( 80, 160 )
 nodes/TimeScale/node = SubResource( 75 )
 nodes/TimeScale/position = Vector2( 280, 160 )
 nodes/output/position = Vector2( 520, 180 )
-node_connections = [ "Seek", 0, "Attack", "TimeScale", 0, "Seek", "output", 0, "TimeScale" ]
+node_connections = [ "TimeScale", 0, "Seek", "Seek", 0, "Attack", "output", 0, "TimeScale" ]
 
 [sub_resource type="Animation" id=27]
 resource_name = "AttackDown"
@@ -3174,7 +3174,7 @@ vframes = 4
 
 [node name="FootstepAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 21 )
-volume_db = -25.0
+volume_db = -15.0
 bus = "SoundEffects"
 
 [node name="AttackTimer" type="Timer" parent="."]

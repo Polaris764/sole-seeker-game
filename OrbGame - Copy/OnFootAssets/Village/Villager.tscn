@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Villager.gd" type="Script" id=1]
 [ext_resource path="res://OnFootAssets/Village/VillagerHair2.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://OnFootAssets/Village/VillagerShirt.png" type="Texture" id=5]
 [ext_resource path="res://OnFootAssets/Village/VillagerSkin.png" type="Texture" id=6]
 [ext_resource path="res://OnFootAssets/Village/VillagerShoes.png" type="Texture" id=7]
+[ext_resource path="res://OnFootAssets/Interactable.tscn" type="PackedScene" id=8]
+[ext_resource path="res://OnFootAssets/DialogueSystem/DialogueArea.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Shader" id=50]
 code = "shader_type canvas_item;
@@ -162,7 +164,7 @@ shader_param/u_tolerance = 0.3
 height = 26.0
 
 [sub_resource type="CapsuleShape2D" id=61]
-height = 26.0
+height = 25.0
 
 [sub_resource type="CapsuleShape2D" id=62]
 radius = 7.5
@@ -816,6 +818,12 @@ tracks/4/keys = {
 "values": [ 20, 21, 22, 23, 24, 25 ]
 }
 
+[sub_resource type="CapsuleShape2D" id=83]
+radius = 27.5
+
+[sub_resource type="CapsuleShape2D" id=84]
+radius = 27.5
+
 [node name="Villager" type="KinematicBody2D" groups=["Villager"]]
 scale = Vector2( 0.4, 0.4 )
 collision_layer = 3
@@ -859,14 +867,14 @@ frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0, 1 )
+position = Vector2( 2.5, -25 )
 shape = SubResource( 60 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 3.5, -20 )
+position = Vector2( 2.5, -25 )
 shape = SubResource( 61 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 3 )]
@@ -897,4 +905,19 @@ anims/walkUp = SubResource( 36 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="DialogueArea" parent="." instance=ExtResource( 9 )]
+
+[node name="CollisionShape2D" parent="DialogueArea" index="0"]
+position = Vector2( 2.5, -25 )
+shape = SubResource( 83 )
+
+[node name="Interactable" parent="." instance=ExtResource( 8 )]
+interaction_result = "Talk"
+
+[node name="CollisionShape2D" parent="Interactable/Area2D" index="0"]
+position = Vector2( 2.5, -25 )
+shape = SubResource( 84 )
+
 [editable path="SoftCollision"]
+[editable path="DialogueArea"]
+[editable path="Interactable"]
